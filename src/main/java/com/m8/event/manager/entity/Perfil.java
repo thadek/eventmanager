@@ -1,12 +1,9 @@
 package com.m8.event.manager.entity;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Data
@@ -31,13 +28,11 @@ public class Perfil implements Serializable {
 
    @OneToOne
    private Usuario usuario;
+   
+   @OneToOne
+   private Foto foto;
+   
+   
 
-   private MultipartFile foto;
-//   @Lob
-//   @Column(name="imagen")
-//   Private byte[] imagen;
-
-
-
-
+ 
 }
