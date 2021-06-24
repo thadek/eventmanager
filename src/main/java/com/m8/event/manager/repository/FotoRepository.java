@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.m8.event.manager.repositorios;
+package com.m8.event.manager.repository;
 
 import com.m8.event.manager.entity.Categoria;
 import com.m8.event.manager.entity.Foto;

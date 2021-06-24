@@ -1,5 +1,5 @@
 
-package com.m8.event.manager.repositorios;
+package com.m8.event.manager.repository;
 
 import com.m8.event.manager.entity.Perfil;
 import java.util.Date;

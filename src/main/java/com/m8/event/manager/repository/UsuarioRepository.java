@@ -1,8 +1,8 @@
 
-package com.m8.event.manager.repositorios;
+package com.m8.event.manager.repository;
 
 import com.m8.event.manager.entity.Perfil;
-import com.m8.event.manager.entity.Rol;
+import com.m8.event.manager.entity.Usuario;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface RolRepository extends JpaRepository<Rol, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, String>{
     
-       
-    public List<Rol> findByRol (String nombreRol);
+    List<Usuario> findByUsuario (String username);
+    
 }

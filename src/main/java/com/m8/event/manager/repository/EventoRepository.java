@@ -1,8 +1,6 @@
 
-package com.m8.event.manager.repositorios;
+package com.m8.event.manager.repository;
 
-import com.m8.event.manager.entity.Categoria;
-import com.m8.event.manager.entity.Estado;
 import com.m8.event.manager.entity.Evento;
 import java.util.Date;
 import java.util.List;
