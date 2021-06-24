@@ -1,5 +1,6 @@
 package com.m8.event.manager.entity;
 
+import com.m8.event.manager.enumeration.Modalidad;
 import lombok.Data;
 
 import javax.persistence.*;
