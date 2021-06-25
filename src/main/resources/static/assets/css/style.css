@@ -1,0 +1,34 @@
+body{
+    background-color: rgb(43, 38, 38);
+    
+}
+
+#login-desp{
+    position: absolute;
+    padding:30%;
+    border-radius:20px;
+    
+    
+}
+
+#navbar-1{
+    border-radius:20px;
+    font-size:large;
+    /*arreglar flex-wrap*/
+}
+
+#logo{
+    width:70px;
+    height:70px;
+    margin:10px;
+}
+
+nav{
+    height:90px;
+    
+    
+}
+.brand-logo{
+    padding-left:20px!important;
+    padding-right:20px!important;
+}
