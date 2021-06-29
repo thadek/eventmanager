@@ -15,7 +15,7 @@ public class PortalController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/")
+    @GetMapping
     public ModelAndView index() {
         return new ModelAndView("index");
     }
