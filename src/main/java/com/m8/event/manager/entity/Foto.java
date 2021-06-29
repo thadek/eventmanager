@@ -31,18 +31,5 @@ public class Foto {
     
     @Lob @Basic(fetch = FetchType.LAZY)
     private byte [] contenido;
-
-    
-
-    
-
-    
-    
-
-    
-    
-            
-    
-    
-    
+   
 }

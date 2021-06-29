@@ -38,9 +38,10 @@ public class UsuarioService implements UserDetailsService {
     private RolService rolService;
 
     @Transactional
-    public void crearUsuario(String username, String password, Integer idRol) throws ErrorServicio {
+    public void crearUsuario(String username, String password, String password2,
+            Integer idRol) throws ErrorServicio {
 
-        validarDatos(username, password);
+        validarDatos(username, password, password2);
 
         Usuario usuario = new Usuario();
 
@@ -64,9 +65,10 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Transactional
-    public void modificarUsuario(String username, String password, Integer idRol) throws ErrorServicio {
+    public void modificarUsuario(String username, String password, String password2, 
+            Integer idRol) throws ErrorServicio {
 
-        validarDatos(username, password);
+        validarDatos(username, password, password2);
 
         Optional<Usuario> respuesta = usuarioRepository.findById(username);
 
@@ -117,8 +119,7 @@ public class UsuarioService implements UserDetailsService {
 //        }
 //
 //    }
-    
-    private void validarDatos(String username, String password) throws ErrorServicio {
+    private void validarDatos(String username, String password, String password2) throws ErrorServicio {
 
         if (username == null || username.isEmpty()) {
             throw new ErrorServicio("Debe ingresar su username");
@@ -127,6 +128,15 @@ public class UsuarioService implements UserDetailsService {
         if (password == null || password.isEmpty() || password.length() < 6) {
             throw new ErrorServicio("La contraseña no puede ser nula ni tener menos "
                     + "de 6 caracteres.");
+        }
+
+        if (password2 == null || password2.isEmpty() || password2.length() < 6) {
+            throw new ErrorServicio("La contraseña no puede ser nula ni tener menos "
+                    + "de 6 caracteres.");
+        }
+
+        if (!password.equals(password2)) {
+            throw new ErrorServicio("Las contraseñas deben ser iguales.");
         }
 
     }

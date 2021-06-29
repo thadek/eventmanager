@@ -54,7 +54,7 @@ public class UsuarioController {
             mav.addObject("mensaje", flashmap.get("usuarioCreado"));
             mav.addObject("error", flashmap.get("error"));
             usuario.setUsername((String) flashmap.get("username"));
-            usuario.setPassword((String) flashmap.get("password"));
+            usuario.setPassword((String) flashmap.get("password"));            
         }
 
         mav.addObject("usuario", usuario);
@@ -65,9 +65,10 @@ public class UsuarioController {
     public RedirectView registrar(RedirectAttributes attributes,
             @RequestParam String username,
             @RequestParam String password,
+            @RequestParam String password2,
             @RequestParam(value = "rol", required = false) Integer idRol) {
         try {
-            usuarioService.crearUsuario(username, password, idRol);
+            usuarioService.crearUsuario(username, password, password2, idRol);
             attributes.addFlashAttribute("registroExitoso", "El Usuario fue creado con éxito.");
         } catch (ErrorServicio e) {
             attributes.addFlashAttribute("error", e.getMessage());
@@ -76,7 +77,7 @@ public class UsuarioController {
             attributes.addFlashAttribute("password", password);
             return new RedirectView("/usuarios-formulario");
         }
-        return new RedirectView("/login");
+        return new RedirectView("/login?register=ok");
     }
 
     @GetMapping("/modificar/{username}")
@@ -111,9 +112,10 @@ public class UsuarioController {
     public RedirectView modificarUsuario(RedirectAttributes attributes,
             @RequestParam String username,
             @RequestParam String password,
+            @RequestParam String password2,
             @RequestParam(value = "rol", required = false) Integer idRol) {
         try {
-            usuarioService.modificarUsuario(username, password, idRol);
+            usuarioService.modificarUsuario(username, password, password2, idRol);
             attributes.addFlashAttribute("usuarioModificado", "El Usuario fue modificado con éxito.");
         } catch (ErrorServicio e) {
             attributes.addFlashAttribute("error", e.getMessage());
