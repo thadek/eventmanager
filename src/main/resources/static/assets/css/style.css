@@ -1,34 +1,112 @@
+:root {
+    --primary-color:rgb(117, 108, 108);
+    --secondary-color:  #212529;
+    --back-color: rgb(43, 38, 38);
+  }
+
+
 body{
-    background-color: rgb(43, 38, 38);
-    
+    background-color: var(--back-color); 
+    color: var(--primary-color);
 }
 
 #login-desp{
     position: absolute;
     padding:30%;
     border-radius:20px;
-    
-    
 }
 
 #navbar-1{
     border-radius:20px;
     font-size:large;
-    /*arreglar flex-wrap*/
 }
 
 #logo{
     width:70px;
     height:70px;
-    margin:10px;
 }
 
 nav{
     height:90px;
-    
-    
 }
+
+.dropdown-item {
+    color: var(--primary-color)!important;
+}
+
 .brand-logo{
     padding-left:20px!important;
     padding-right:20px!important;
 }
+
+
+
+/* footer */
+
+footer {
+    position: fixed;
+    width: -webkit-fill-available;
+    bottom: 0;
+    padding: 0.5em;
+    border-radius:20px;
+    
+}
+
+.copyright {
+  padding: 28px 0;
+  margin-top: 55px;
+  background-color: var(--secondary-color); 
+  border-radius:20px;
+  background-color: #f8f9fa!important;
+}
+
+.copyright span, .copyright a {
+    color: #878787;
+    -webkit-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear; 
+}
+
+.copyright a:hover {
+    color:#FA6742; 
+    text-decoration: none;
+    text-emphasis: bold;
+}
+
+.copyright-menu ul {
+  text-align: right;
+  margin: 0; 
+}
+
+.copyright-menu li {
+  display: inline-block;
+  padding-left: 10px; 
+}
+
+.back-to-top {
+  position: relative;
+  z-index: 2; 
+}
+
+.back-to-top .btn-dark {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    padding: 0;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2e2e2e;
+    border-color: #2e2e2e;
+    display: none;
+    z-index: 999;
+    -webkit-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear; 
+}
+
+.back-to-top .btn-dark:hover {
+      cursor: pointer;
+      background: #FA6742;
+      border-color: #FA6742; 
+    }
