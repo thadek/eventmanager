@@ -15,6 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FotoRepository extends JpaRepository<Foto, String> {
     
-    public List<Foto> findByFoto (String nombre);
+//    public List<Foto> findByFoto (String nombre);
     
 }

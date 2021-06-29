@@ -2,6 +2,7 @@
 package com.m8.event.manager.repository;
 
 import com.m8.event.manager.entity.Evento;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,7 +21,9 @@ public interface EventoRepository extends JpaRepository<Evento,Integer> {
     @Query("SELECT e FROM Evento e WHERE e.modalidad= :modalidad")
     public List<Evento> buscarPorModalidad (@Param("modalidad") String modalidad);
     
-//    List<EventoRepository> findByFecha (Date fecha); VER QUE DEVUELVE...
-    public List<Evento> findByFecha (Date fecha);
+    
+//     List<EventoRepository> findByFecha (Date fecha); 
+  
+    public List<Evento> findByFechaInicio (LocalDate fechaInicio);  
     
 }

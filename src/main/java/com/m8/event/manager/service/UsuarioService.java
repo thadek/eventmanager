@@ -48,7 +48,7 @@ public class UsuarioService implements UserDetailsService {
         usuario.setPassword(encoder.encode(password));
 
         if (idRol == null) {
-            usuario.setRol(rolRepository.findByRol("ALUMNO"));
+            usuario.setRol((Rol) rolRepository.buscarPorRol("ALUMNO"));
         } else {
 
             if (rolRepository.findById(idRol).isPresent()) {
@@ -78,7 +78,7 @@ public class UsuarioService implements UserDetailsService {
             usuario.setPassword(encoder.encode(password));
 
             if (idRol == null) {
-                usuario.setRol(rolRepository.findByRol("ALUMNO"));
+                usuario.setRol((Rol) rolRepository.buscarPorRol("ALUMNO"));
             } else {
 
                 if (rolRepository.findById(idRol).isPresent()) {
