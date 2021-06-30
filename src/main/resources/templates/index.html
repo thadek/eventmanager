@@ -17,8 +17,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
     crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/static/assets/css/style.css" type="text/css">
+  <link rel="stylesheet" th:href="@{/assets/css/style.css}" type="text/css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 
 
   <title>Index</title>
@@ -28,82 +29,7 @@
 
   <!-- header -->
   <header>
-    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light m-3 p-1 sticky-top" id="navbar-1">
-
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-          <img src="/static/assets/images/logo.png" alt="logo" id="logo"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav me-auto">
-            <a class="nav-link" aria-current="page">Inicio</a>
-
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false"> ¿Quienes Somos? </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Instructores</a></li>
-                <li><a class="dropdown-item" href="#">Espacio</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Contactanos</a></li>
-              </ul>
-            </li>
-            <a class="nav-link" th:href="#">Blog</a>
-          </div>
-
-          <!-- Botoncito Cuenta -->
-          <div class="navbar navbar-nav ms-auto">
-
-
-            <!-- DROP EVENTOS -->
-            <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false"> Eventos </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Inscripciones</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Clases</a></li>
-                <li><a class="dropdown-item" href="#">Talleres</a></li>
-                <li><a class="dropdown-item" href="#">Presencial</a></li>
-                <li><a class="dropdown-item" href="#">Virtual</a></li>
-              </ul>
-            </li>
-
-
-
-
-            <a class="nav-link"><button class="btn btn-outline-dark" id="sesion" data-bs-toggle="dropdown"><i
-                  class="bi-person" aria-label="account"></i> </button></a>
-
-            <a class="nav-link"><button class="btn btn-outline-dark"><i class="bi-file-check"></i> </button></a>
-
-            <div class="dropdown-menu dropleft" id="login-desp" style="display:none;">
-
-              <div class="container-flex">
-                <div th:if='${session.usuariosession!=null}'><a class="btn btn-primary" th:href="@{/logout}">Cerrar
-                    Sesión</a>
-                </div>
-              </div>
-              <form class="form-horizontal" method="post" accept-charset="UTF-8" id="logon2">
-                <label><img th:src="@{/assets/img/logo2.png}" style=" margin:10px; margin-right:50px;">
-                  <H2>Iniciar Sesión</h2>
-                </label>
-                <input class="form-control login" type="text" name="username" placeholder="Usuario"><br>
-                <input class="form-control login" type="password" name="password" placeholder="Password"><br>
-                <button class="btn btn-primary" type="submit">Conectar</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <nav th:replace="static :: navbar"></nav>
   </header>
 
 
@@ -118,46 +44,9 @@
 
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-  <footer>
-
-    <div class="copyright">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <span>Copyright © 2021, EGG-M8</span>
-          </div>
-          <!-- End Col -->
-          <div class="col-md-6">
-            <div class="copyright-menu">
-              <ul>
-                <li>
-                  <a href="#">Inicio</a>
-                </li>
-                <li>
-                  <a href="#">Política de Privacidad</a>
-                </li>
-                <li>
-                  <a href="#">Contactanos</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <!-- End col -->
-        </div>
-        <!-- End Row -->
-      </div>
-      <!-- End Copyright Container -->
-    </div>
-    <!-- End Copyright -->
-    <!-- Back to top -->
-    <div id="back-to-top" class="back-to-top">
-      <button class="btn btn-dark" title="Back to Top" style="display: block;">
-        <i class="fa fa-angle-up"></i>
-      </button>
-    </div>
-    <!-- End Back to top -->
-  </footer>
+  
+  <!--Footer -->
+  <footer th:replace="static :: footer"></footer>
 
 
 
@@ -166,6 +55,40 @@
 
 </body>
 
+<script>
+  (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  let forms = document.querySelectorAll('.needs-validation')
+  
+  // Loop over them and prevent submission
+  
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      //Hago validaciones
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+          
+        } 
+
+        //Si se valida el formulario muestra linea cargando sin recargar la página (stopPropagation)
+        if (form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+          
+                      
+        }                                
+                       
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+
+</script>
 
 
 

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light m-3 p-1 sticky-top" id="navbar-1">
+
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img th:src="@{/assets/images/logo.png}" alt="logo" id="logo"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav me-auto">
+              <a class="nav-link" aria-current="page">Inicio</a>
+  
+  
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false"> ¿Quienes Somos? </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Instructores</a></li>
+                  <li><a class="dropdown-item" href="#">Espacio</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="#">Contactanos</a></li>
+                </ul>
+              </li>
+              <a class="nav-link" href="#">Blog</a>
+            </div>
+  
+            <!-- Apartado de cuenta, eventos -->
+            <div class="navbar navbar-nav ms-auto">
+  
+  
+              <!-- DROP EVENTOS -->
+              <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false"> Eventos </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Inscripciones</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="#">Clases</a></li>
+                  <li><a class="dropdown-item" href="#">Talleres</a></li>
+                  <li><a class="dropdown-item" href="#">Presencial</a></li>
+                  <li><a class="dropdown-item" href="#">Virtual</a></li>
+                </ul>
+              </li>
+  
+  
+  
+  <!--boton usuario-->
+              <button class="btn btn-outline-dark" id="sesion"  data-bs-toggle="dropdown"><i
+                    class="bi-person" aria-label="account"></i> </button>
+  <!--boton gestion admin-->
+              <a class="nav-link"><button class="btn btn-outline-dark" ><i class="bi-file-check"></i> Gestion</button></a>
+  
+              
+            <div class="dropdown-menu dropleft" id="login-desp">
+                <div class="container-flex">
+                    <div th:if='${session.usuariosession!=null}'>
+                        <h4 th:text="${'Bienvenido  @ '+session.usuariosession.username}"></h4><a class="btn btn-primary"
+                            th:href="@{/logout}">Cerrar Sesión</a>
+                    </div>
+                </div>
+                <form class="form-horizontal needs-validation" novalidate th:if='${session.usuariosession==null}' th:action="@{/perform_login}" method="post"
+                    accept-charset="UTF-8" id="logon2">
+                    <label>
+                        <h2>Iniciar Sesión</h2>
+                    </label>
+                    <input class="form-control login" type="text" name="username" placeholder="Usuario"><br>
+                    <input class="form-control login" type="password" name="password" placeholder="Password"><br>
+                    <button class="btn btn-primary" type="submit" id="submit-boton">Conectar</button>
+                </form>
+            
+            
+            </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <footer th:fragment="footer"> 
+
+        <div class="copyright">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <span>Copyright © 2021, EGG-M8</span>
+              </div>
+              <!-- End Col -->
+              <div class="col-md-6">
+                <div class="copyright-menu">
+                  <ul>
+                    <li>
+                      <a href="#">Inicio</a>
+                    </li>
+                    <li>
+                      <a href="#">Política de Privacidad</a>
+                    </li>
+                    <li>
+                      <a href="#">Contactanos</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- End col -->
+            </div>
+            <!-- End Row -->
+          </div>
+          <!-- End Copyright Container -->
+        </div>
+        <!-- End Copyright -->
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+          <button class="btn btn-dark" title="Back to Top" style="display: block;">
+            <i class="fa fa-angle-up"></i>
+          </button>
+        </div>
+        <!-- End Back to top -->
+      </footer>
+     
+
+
+</body>
+
+</html>
