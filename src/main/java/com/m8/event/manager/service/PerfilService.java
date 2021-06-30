@@ -8,9 +8,9 @@ import com.m8.event.manager.repository.PerfilRepository;
 import com.m8.event.manager.repository.UsuarioRepository;
 import java.time.LocalDate;
 import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -24,8 +24,7 @@ public class PerfilService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-
-    @Autowired
+    
     FotoService fotoService;
 
     @Transactional
