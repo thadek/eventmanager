@@ -13,36 +13,31 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-/** @author Agustin */
-
-
+/**
+ * @author Agustin
+ */
 @Service
 public class PerfilService {
-    
-    
-    
+
     @Autowired
     private PerfilRepository perfilRepository;
-            
+
     @Autowired
     private UsuarioRepository usuarioRepository;
-    
-        
-    @Autowired FotoService fotoService;
+
+    @Autowired
+    FotoService fotoService;
 
     @Transactional
     public void agregarPerfil(String username, MultipartFile archivo, String email, String nombre,
             String apellido, String tel, LocalDate fechaNac, String descripcion) throws ErrorServicio {
 
         Usuario usuario = usuarioRepository.findByUsername(username);
-        
-        
-        
+
         validar(nombre);
-        
+
         Perfil perfil = new Perfil();
-        
-        
+
         perfil.setEmail(email);
         perfil.setNombre(nombre);
         perfil.setApellido(apellido);
@@ -50,13 +45,11 @@ public class PerfilService {
         perfil.setTel(tel);
         perfil.setFechaNac(fechaNac);
         perfil.setDescripcion(descripcion);
-                
+
         Foto foto = fotoService.guardar(archivo);
         perfil.setFoto(foto);
 
         perfilRepository.save(perfil);
-          
-        
 
     }
 
@@ -65,28 +58,27 @@ public class PerfilService {
             String apellido, String tel, LocalDate fechaNac, String descripcion) throws ErrorServicio {
 
         validar(nombre);
-                
+
         Optional<Perfil> respuesta = perfilRepository.findById(id);
         if (respuesta.isPresent()) {
 
             Perfil perfil = respuesta.get();
-            
+
             perfil.setEmail(email);
             perfil.setNombre(nombre);
             perfil.setApellido(apellido);
             perfil.setTel(tel);
             perfil.setFechaNac(fechaNac);
             perfil.setDescripcion(descripcion);
-                
-                   
+
             String idFoto = null;
-            if(perfil.getFoto() != null){
-            idFoto = perfil.getFoto().getId();
+            if (perfil.getFoto() != null) {
+                idFoto = perfil.getFoto().getId();
             }
-            
+
             Foto foto = fotoService.actualizar(idFoto, archivo);
             perfil.setFoto(foto);
-            
+
             perfilRepository.save(perfil);
         } else {
 
@@ -94,20 +86,14 @@ public class PerfilService {
         }
     }
 
-    
-    
-    public void validar(String nombre)throws ErrorServicio{
-    
-        if (nombre == null || nombre.isEmpty()){
-            
-            throw new ErrorServicio("El nombre no puede ser nulo");
-            
-        
-        }
-        
-             
-        
-    }
+    public void validar(String nombre) throws ErrorServicio {
 
+        if (nombre == null || nombre.isEmpty()) {
+
+            throw new ErrorServicio("El nombre no puede ser nulo");
+
+        }
+
+    }
 
 }
