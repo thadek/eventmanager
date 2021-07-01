@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><script th:src="@{assets/js/anime.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/assets/css/login.css}" type="text/css">
+</head>
+
+<body>
+<div class="content">
+    
+
+<div class="cuadrito">
+     <div class="button-container">
+
+        <button class="button" onclick="materialClick(event)">
+            <div class="circle animate"></div><span class="sign-in">Iniciar Sesión</span>
+            <div class="loader"></div>
+        </button>
+    </div>
+    <div class="controls">
+        <div class="icon">
+
+            <img th:src="@{assets/images/logo.png}" class="logo">
+
+        </div>
+        <form class="formulario-login" name="formulario" novalidate th:action="@{/logincheck}" method="post">
+            <div class="inputs">
+                <svg class="login" xmlns="http://www.w3.org/2000/svg" width="44" height="40" viewBox="0 0 44 40">
+                    <g stroke="#fff" fill="none" stroke-width="3.538" transform="translate(0 -1012.362)">
+                        <ellipse ry="8.09" rx="8.244" cy="1022.221" cx="21.555" stroke-linecap="round" />
+                        <path
+                            d="M1.858 1046.4c-.79 4.74 3.805 4.11 3.805 4.11H37.88s4.846.936 4.312-3.854c-.533-4.79-6.076-10.937-20.04-11.043-13.964-.106-19.504 6.047-20.294 10.786z" />
+                    </g>
+                </svg>
+                <input class="input" name="username">
+                <svg class="lock" xmlns="http://www.w3.org/2000/svg" width="44" height="46" viewBox="0 0 44 46">
+                    <g transform="translate(-28.15 -974.678)" stroke="#fff" fill="none" stroke-width="3.509">
+                        <rect ry="3.136" y="995.18" x="29.903" height="23.743" width="40.491" stroke-linecap="round" />
+                        <path d="M49.386 1004.406v4.788" stroke-linecap="round" />
+                        <path d="M37.073 994.83s-1.39-18.398 12.97-18.398c14.36 0 12.207 18.397 12.207 18.397" />
+                    </g>
+                </svg>
+                <input class="input" type="password" name="password">
+                <a class="subtitulo" th:href="@{/register}">
+                    <p>¿Sin cuenta? Registrate</p>
+                </a>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+   
+</div>
+
+</div>
+
+
+</div>
+
+</body>
+
+
+
+
+
+<script>
+    var bg;
+var bg2;
+var topc;
+var content;
+var controls;
+var circle;
+var bc;
+var button;
+var signIn;
+var loader;
+var x;
+var y;
+
+function materialClick(event) {
+  bg = document.querySelector('.bg');
+  bg2 = document.querySelector('.bg2');
+  topc = document.querySelector('.top');
+  content = document.querySelector('.content');
+  controls = document.querySelector('.controls');
+  circle = document.querySelector('.circle');
+  bc = document.querySelector('.button-container');
+  button = document.querySelector('.button');
+  signIn = document.querySelector('.sign-in');
+  loader = document.querySelector('.loader');
+  x = event.offsetX - circle.offsetWidth / 2;
+  y = event.offsetY - circle.offsetHeight / 2;
+  
+  circle.classList.remove('animate');
+  circle.style.left = x + 'px';
+  circle.style.top = y + 'px';
+  bc.style.zIndex = -1;
+  setTimeout(function() {
+    circle.classList.add('animate');
+    button.classList.add('animate');
+    signIn.classList.add('animate');
+    loader.classList.add('animate');
+    setTimeout(function() {
+      loader.classList.add('animateOut');
+    }, 1000);
+    
+    setTimeout(function() {
+      document.formulario.submit();
+    }, 2000);
+  }, 50);
+}
+</script>
+
+</html>

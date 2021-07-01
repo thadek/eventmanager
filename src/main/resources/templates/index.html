@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 
 
-  <title>Index</title>
+  <title th:text="${title}"></title>
 </head>
 
 <body>
@@ -75,12 +75,12 @@
         } 
 
         //Si se valida el formulario muestra linea cargando sin recargar la página (stopPropagation)
-        if (form.checkValidity()) {
+       /* if (form.checkValidity()) {
           event.preventDefault()
           event.stopPropagation()
           
                       
-        }                                
+        }     */                           
                        
         form.classList.add('was-validated')
       }, false)
