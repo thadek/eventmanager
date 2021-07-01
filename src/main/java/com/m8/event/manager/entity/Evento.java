@@ -29,7 +29,7 @@ public class Evento implements Serializable {
 
     private LocalDate fechaFin;
 
-    private List<Dia> dias;
+    private List<Dia> dias; 
 
     private LocalTime hora;
 
