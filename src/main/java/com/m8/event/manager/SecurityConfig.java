@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers("/assets/css/*", "/assets/images/*", "/js/*", "/", "/usuarios/crear").permitAll()
+                    .antMatchers("/assets/css/*", "/assets/images/*","/assets/media/*", "/js/*", "/*").permitAll()
                     .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .loginProcessingUrl("/logincheck")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/home")
+                        .defaultSuccessUrl("/")
                         .permitAll()                
                 .and()
                     .logout()

@@ -3,6 +3,7 @@ package com.m8.event.manager.controller;
 import com.m8.event.manager.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +18,17 @@ public class PortalController {
 
     @GetMapping
     public ModelAndView index() {
-        return new ModelAndView("index");
+        ModelAndView mav = new ModelAndView("index");
+        mav.addObject("title","Inicio - EventManager ");
+        return mav;
+    }
+
+
+    @GetMapping("/register")
+    public ModelAndView register(){
+        ModelAndView mav = new ModelAndView("register");
+        mav.addObject("title", "Registrarse - EventManager");
+        return mav;
     }
 
     @GetMapping("/login")
@@ -31,6 +42,8 @@ public class PortalController {
         }
         return new ModelAndView("login");
     }
+
+
 
 ////    Forma Seba
 //    @GetMapping("/login")

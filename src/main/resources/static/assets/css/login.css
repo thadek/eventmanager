@@ -1,0 +1,236 @@
+body {
+    margin: 0;
+    background-image: url(/assets/images/wallpaper-login.jpg);
+    background-blend-mode: darken;
+    background-repeat:no-repeat;
+    background-color:rgba(0, 0, 0,.50);
+  }
+
+
+
+  @media screen and (max-width: 900px){
+    body{
+      background-size:auto;
+    }
+  }
+
+  @media screen and (min-width: 1400px){
+    body{
+      background-size:cover;
+    }
+  }
+  
+  .main {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    height: 700px;
+    margin: 0 auto;
+    max-width: 400px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+
+
+.subtitulo{
+    
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align:center;
+}
+
+
+
+.login {
+    left: 0;
+    opacity: .4;
+    position: absolute;
+    top: -10px;
+    width: 20px;
+  }
+
+.what {
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    margin-left: 20px;
+  }
+  
+  .title {
+    color: #777;
+  }
+  
+  .sub {
+    color: #c3c3c3;
+    font-size: 12px;
+    margin-top: 7px;
+  }
+  
+  
+
+  
+  .content {
+    margin: 0 auto;
+    max-width: 400px;
+  }
+  
+  .content.removed {
+    display: none;
+  }
+  
+  
+  .controls.hidden {
+    visibility: hidden;
+  }
+  
+  .icon {
+    height: 400px;
+    margin: 0 auto;
+    width: 200px;
+  }
+  
+  .bar {
+    background-color: white;
+    width: 30px;
+  }
+  
+  
+  
+  .logo {
+    
+    height: 220px;
+    transform: translateX(10px) translateY(55px) rotate(0deg);
+  }
+  
+  .inputs {
+    position: relative;
+    margin: 0 50px;
+  }
+  
+  
+  
+  .lock {
+    left: 0;
+    opacity: .4;
+    position: absolute;
+    top: 52px;
+    width: 20px;
+  }
+  
+  .input {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid white;
+    box-sizing: border-box;
+    color: white;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 30px;
+    outline: none !important;
+    opacity: .6;
+    padding-bottom: 15px;
+    padding-left: 50px;
+    width: 100%;
+  }
+  
+  .button-container {
+    height: 100%;
+    left: 0;
+    margin: 0 auto;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    
+  }
+  
+  .button {
+    
+    background-color: #F73D71;
+    border: 0;
+    border-radius: 28px;
+    display: block;
+    font-size: 16px;
+    height: 56px;
+    margin: 0 auto;
+    max-width: 300px;
+    outline: none !important;
+    overflow: hidden;
+    position: relative;
+    top: 560px;
+    transition: box-shadow 150ms;
+    width: 100%;
+  }
+  
+  .button:active {
+    box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .button.animate {
+    opacity: 0;
+    transform: translateY(-150px) scale(20);
+    transition: width 250ms 200ms, transform 350ms 1350ms, opacity 350ms 1550ms;
+    width: 56px;
+  }
+  
+  .circle {
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 40px;
+    height: 80px;
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    width: 80px;
+  }
+  
+  .circle.animate {
+    transform: scale(3);
+    opacity: 0;
+    transition: transform 200ms linear, opacity 200ms linear;
+  }
+  
+  .sign-in {
+    color: white;
+    opacity: 0.6;
+  }
+  
+  .sign-in.animate {
+    opacity: 0;
+    transition: opacity 150ms 200ms;
+  }
+  
+  .loader {
+    animation: spin 320ms linear infinite;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    border-right: 3px solid white;
+    border-top: 3px solid white;
+    height: 28px;
+    left: calc(50% - 17px);
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 10px;
+    width: 28px;
+  }
+  
+  .loader.animate {
+    opacity: 0.6;
+    transition: opacity 150ms 350ms;
+  }
+  
+  .loader.animateOut {
+    opacity: 0;
+    transition: opacity 350ms;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

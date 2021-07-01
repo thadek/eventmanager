@@ -25,7 +25,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@RequestMapping("/usuarios")
+@RequestMapping("/adm/usuarios")
 public class UsuarioController {
 
     @Autowired
