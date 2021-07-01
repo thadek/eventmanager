@@ -10,9 +10,9 @@ import javax.persistence.OneToOne;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-/** @author Agustin */
-
-
+/**
+ * @author Agustin
+ */
 @Entity
 @Data
 public class Foto {
@@ -21,15 +21,15 @@ public class Foto {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     private String nombre;
     private String mime;
-    
+
     @OneToOne
     private Perfil perfil;
-    
-    
-    @Lob @Basic(fetch = FetchType.LAZY)
-    private byte [] contenido;
-   
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] contenido;
+
 }
