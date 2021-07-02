@@ -31,8 +31,5 @@ public class Perfil implements Serializable {
    
    @OneToOne
    private Foto foto;
-   
-   
 
- 
 }
