@@ -1,96 +1,136 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="semantic.min.css">
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
-    </script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-    crossorigin="anonymous"></script>
-  <link rel="stylesheet" th:href="@{/assets/css/style.css}" type="text/css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-
-
-  <title th:text="${title}"></title>
+<head><script th:src="@{assets/js/anime.min.js}"></script>
+  <link rel="stylesheet" th:href="@{/assets/css/login.css}" type="text/css">
 </head>
 
 <body>
 
-  <!-- header -->
-  <header>
-    <nav th:replace="static :: navbar"></nav>
-  </header>
+<section>
+
+  <!--creaciones-->
+  <div th:if="${registroExitoso != null}" class="alert alert-success" th:text="${registroExitoso}"></div>
+  <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
+
+</section>
 
 
-  <main>
-
-    <form class=""></form>
+<div class="content">
 
 
+  <div class="cuadrito-register">
+    <div class="button-container">
 
-  </main>
+      <button class="button" onclick="materialClick(event)">
+        <div class="circle animate"></div><span class="sign-in">Registrarse</span>
+        <div class="loader"></div>
+      </button>
+    </div>
+    <div class="controls">
+      <div class="icon-register">
+
+        <img th:src="@{assets/images/logo.png}" class="logo">
+
+      </div>
+      <form class="formulario-login" name="formulario" novalidate th:action="@{/register}" method="post">
+        <div class="inputs">
+          <svg class="login" xmlns="http://www.w3.org/2000/svg" width="44" height="40" viewBox="0 0 44 40">
+            <g stroke="#fff" fill="none" stroke-width="3.538" transform="translate(0 -1012.362)">
+              <ellipse ry="8.09" rx="8.244" cy="1022.221" cx="21.555" stroke-linecap="round" />
+              <path
+                      d="M1.858 1046.4c-.79 4.74 3.805 4.11 3.805 4.11H37.88s4.846.936 4.312-3.854c-.533-4.79-6.076-10.937-20.04-11.043-13.964-.106-19.504 6.047-20.294 10.786z" />
+            </g>
+          </svg>
+          <input class="input" name="username" placeholder="Nombre de Usuario">
+          <svg class="lock" xmlns="http://www.w3.org/2000/svg" width="44" height="46" viewBox="0 0 44 46">
+            <g transform="translate(-28.15 -974.678)" stroke="#fff" fill="none" stroke-width="3.509">
+              <rect ry="3.136" y="995.18" x="29.903" height="23.743" width="40.491" stroke-linecap="round" />
+              <path d="M49.386 1004.406v4.788" stroke-linecap="round" />
+              <path d="M37.073 994.83s-1.39-18.398 12.97-18.398c14.36 0 12.207 18.397 12.207 18.397" />
+            </g>
+          </svg>
+          <input class="input" type="password" name="password" placeholder="Contraseña">
+
+          <svg class="lock2" xmlns="http://www.w3.org/2000/svg" width="44" height="46" viewBox="0 0 44 52">
+            <g transform="translate(-28.15 -974.678)" stroke="#fff" fill="none" stroke-width="3.509">
+              <rect ry="3.136" y="995.18" x="29.903" height="23.743" width="40.491" stroke-linecap="round" />
+              <path d="M49.386 1004.406v4.788" stroke-linecap="round" />
+              <path d="M37.073 994.83s-1.39-18.398 12.97-18.398c14.36 0 12.207 18.397 12.207 18.397" />
+            </g>
+          </svg>
+          <input class="input" type="password" name="password2" placeholder="Repetí tu contraseña">
 
 
 
+        </div>
 
 
-  
-  <!--Footer -->
-  <footer th:replace="static :: footer"></footer>
+      </form>
+
+      <a class="subtitulo" th:href="@{/login}">
+        <p>¿Ya tenés cuenta? Logueate</p>
+      </a>
+
+    </div>
+  </div>
 
 
-
+</div>
 
 
 
 </body>
 
+
+
+
+
 <script>
-  (function () {
-  'use strict'
+    var bg;
+var bg2;
+var topc;
+var content;
+var controls;
+var circle;
+var bc;
+var button;
+var signIn;
+var loader;
+var x;
+var y;
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  let forms = document.querySelectorAll('.needs-validation')
-  
-  // Loop over them and prevent submission
-  
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      //Hago validaciones
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-          
-        } 
+function materialClick(event) {
+  bg = document.querySelector('.bg');
+  bg2 = document.querySelector('.bg2');
+  topc = document.querySelector('.top');
+  content = document.querySelector('.content');
+  controls = document.querySelector('.controls');
+  circle = document.querySelector('.circle');
+  bc = document.querySelector('.button-container');
+  button = document.querySelector('.button');
+  signIn = document.querySelector('.sign-in');
+  loader = document.querySelector('.loader');
+  x = event.offsetX - circle.offsetWidth / 2;
+  y = event.offsetY - circle.offsetHeight / 2;
 
-        //Si se valida el formulario muestra linea cargando sin recargar la página (stopPropagation)
-       /* if (form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-          
-                      
-        }     */                           
-                       
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
+  circle.classList.remove('animate');
+  circle.style.left = x + 'px';
+  circle.style.top = y + 'px';
+  bc.style.zIndex = -1;
+  setTimeout(function() {
+    circle.classList.add('animate');
+    button.classList.add('animate');
+    signIn.classList.add('animate');
+    loader.classList.add('animate');
+    setTimeout(function() {
+      loader.classList.add('animateOut');
+    }, 1000);
 
-
+    setTimeout(function() {
+      document.formulario.submit();
+    }, 2000);
+  }, 50);
+}
 </script>
-
-
 
 </html>

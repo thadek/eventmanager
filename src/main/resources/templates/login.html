@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head><script th:src="@{assets/js/anime.min.js}"></script>
+<head>
+    <script th:src="@{assets/js/anime.min.js}"></script>
     <link rel="stylesheet" th:href="@{/assets/css/login.css}" type="text/css">
 </head>
 
@@ -10,12 +11,12 @@
 
 <div class="cuadrito">
      <div class="button-container">
-
         <button class="button" onclick="materialClick(event)">
             <div class="circle animate"></div><span class="sign-in">Iniciar Sesión</span>
             <div class="loader"></div>
         </button>
     </div>
+
     <div class="controls">
         <div class="icon">
 
@@ -31,7 +32,8 @@
                             d="M1.858 1046.4c-.79 4.74 3.805 4.11 3.805 4.11H37.88s4.846.936 4.312-3.854c-.533-4.79-6.076-10.937-20.04-11.043-13.964-.106-19.504 6.047-20.294 10.786z" />
                     </g>
                 </svg>
-                <input class="input" name="username">
+
+                <input class="input" name="username" placeholder="Usuario" autofocus="">
                 <svg class="lock" xmlns="http://www.w3.org/2000/svg" width="44" height="46" viewBox="0 0 44 46">
                     <g transform="translate(-28.15 -974.678)" stroke="#fff" fill="none" stroke-width="3.509">
                         <rect ry="3.136" y="995.18" x="29.903" height="23.743" width="40.491" stroke-linecap="round" />
@@ -39,7 +41,7 @@
                         <path d="M37.073 994.83s-1.39-18.398 12.97-18.398c14.36 0 12.207 18.397 12.207 18.397" />
                     </g>
                 </svg>
-                <input class="input" type="password" name="password">
+                <input class="input" type="password" name="password" placeholder="Contraseña">
                 <a class="subtitulo" th:href="@{/register}">
                     <p>¿Sin cuenta? Registrate</p>
                 </a>

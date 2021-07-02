@@ -61,6 +61,7 @@ public class UsuarioController {
         return mav;
     }
 
+    //llevo este controlador a portalcontroller
     @PostMapping("/crear")
     public RedirectView registrar(RedirectAttributes attributes,
             @RequestParam String username,
