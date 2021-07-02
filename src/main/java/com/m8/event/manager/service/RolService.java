@@ -45,6 +45,9 @@ public class RolService {
 
     }
 
+
+
+
     private void validarDatos(String nombre) throws ErrorServicio {
 
         if (nombre == null || nombre.isEmpty()) {
