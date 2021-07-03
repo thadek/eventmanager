@@ -1,6 +1,6 @@
 package com.m8.event.manager.service;
 
-import com.m8.event.manager.entity.Foto;
+
 import com.m8.event.manager.entity.Perfil;
 import com.m8.event.manager.entity.Usuario;
 import com.m8.event.manager.error.ErrorServicio;
@@ -11,7 +11,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+
 
 /**
  * @author Agustin
@@ -25,10 +25,10 @@ public class PerfilService {
     @Autowired
     private UsuarioRepository usuarioRepository;
     
-    FotoService fotoService;
+
 
     @Transactional
-    public void agregarPerfil(String username, MultipartFile archivo, String email, String nombre,
+    public void agregarPerfil(String username, String fotoURL, String email, String nombre,
             String apellido, String tel, LocalDate fechaNac, String descripcion) throws ErrorServicio {
 
         Usuario usuario = usuarioRepository.findByUsername(username);
@@ -45,15 +45,15 @@ public class PerfilService {
         perfil.setFechaNac(fechaNac);
         perfil.setDescripcion(descripcion);
 
-        Foto foto = fotoService.guardar(archivo);
-        perfil.setFoto(foto);
+
+        perfil.setFotoURL(fotoURL);
 
         perfilRepository.save(perfil);
 
     }
 
     @Transactional
-    public void modificar(Integer id, String username, MultipartFile archivo, String email, String nombre,
+    public void modificar(Integer id, String username, String fotoURL, String email, String nombre,
             String apellido, String tel, LocalDate fechaNac, String descripcion) throws ErrorServicio {
 
         validar(nombre);
@@ -69,14 +69,7 @@ public class PerfilService {
             perfil.setTel(tel);
             perfil.setFechaNac(fechaNac);
             perfil.setDescripcion(descripcion);
-
-            String idFoto = null;
-            if (perfil.getFoto() != null) {
-                idFoto = perfil.getFoto().getId();
-            }
-
-            Foto foto = fotoService.actualizar(idFoto, archivo);
-            perfil.setFoto(foto);
+            perfil.setFotoURL(fotoURL);
 
             perfilRepository.save(perfil);
         } else {
@@ -91,6 +84,17 @@ public class PerfilService {
 
             throw new ErrorServicio("El nombre no puede ser nulo");
 
+        }
+
+    }
+
+    public Perfil obtenerPerfil (Integer idPerfil) throws ErrorServicio{
+
+        //Obtengo el perfil a traves de su id
+        try{
+            return perfilRepository.findById(idPerfil).get();
+        }catch(Exception e){
+            throw new ErrorServicio("No existe el perfil con ese id");
         }
 
     }
