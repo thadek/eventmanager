@@ -19,11 +19,27 @@ form label h2{
     color:#fff;
 }
 
+
+table thead{
+    background-color:rgb(116, 106, 91);
+    color:white;
+}
 /*.btn-primary{
     background: transparent;  
     width:100%;
     
 }*/
+
+.navadm{
+    background-color: #f8f9fa;
+    border-radius: 20px;
+}
+
+
+#btn-rol{
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
 
 #submit-boton {
     position: relative;

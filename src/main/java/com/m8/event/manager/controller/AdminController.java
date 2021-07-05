@@ -16,4 +16,12 @@ public class AdminController {
         return mav;
     }
 
+
+    @GetMapping("/roles")
+    public ModelAndView verRoles(){
+        ModelAndView mav = new ModelAndView("rol");
+        mav.addObject("title","Roles de Usuario - EventManager ");
+        return mav;
+    }
+
 }

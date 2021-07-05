@@ -14,21 +14,22 @@ public class RolService {
     @Autowired
     private RolRepository rolRepository;
 
+
+    /* @Gabi: Adapté el service de Rol para manejarlo por REST */
+
     @Transactional
-    public void crearRol(String nombre) throws ErrorServicio {
+    public Rol crearRol(String nombre) throws ErrorServicio {
 
         validarDatos(nombre);
-
         Rol rol = new Rol();
-
         rol.setNombreRol(nombre);
 
-        rolRepository.save(rol);
+        return rolRepository.save(rol);
 
     }
 
     @Transactional
-    public void modificarRol(String nombre, Integer idRol) throws ErrorServicio {
+    public Rol modificarRol(String nombre, Integer idRol) throws ErrorServicio {
 
         validarDatos(nombre);
 
@@ -39,11 +40,19 @@ public class RolService {
 
             rol.setNombreRol(nombre);
 
-            rolRepository.save(rol);
+            return rolRepository.save(rol);
 
+        }else{
+            return null;
         }
 
+
     }
+
+
+
+
+
 
 
 
