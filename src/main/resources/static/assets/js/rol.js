@@ -14,18 +14,12 @@ function togglers(){
     )}
 
 
-
-
-
-
-
-
 const mostrarDatos = (data) => {
     //console.log(data)
     let body =''
     for(let i=0; i<data.length; i++){
      body += `<tr><td>${data[i].idRol}</td><td>${data[i].nombreRol}</td> <td>
-    <button class="btn btn-outline-success" onclick=mostrarEditarRol('${data[i].idRol}','${data[i].nombreRol}') >Editar</button> <button class="btn btn-outline-danger" onclick="document.getElementById('idRolConfirmar').innerHTML=${data[i].idRol}" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button>
+    <button class="btn btn-outline-success" onclick=mostrarEditarRol('${data[i].idRol}','${data[i].nombreRol}') ><i class="bi bi-pencil-square"></i> Editar</button> <button class="btn btn-outline-danger" onclick="document.getElementById('idRolConfirmar').innerHTML=${data[i].idRol}" data-bs-toggle="modal" data-bs-target="#modalEliminar"> <i class="bi bi-trash"></i> Eliminar</button>
      </td></tr>`
     }
 
@@ -44,10 +38,10 @@ function eliminar(id){
     let url = 'http://localhost:8080/api/roles/eliminar'
     let bodyReq = {idRol:id};
     bodyReq = JSON.stringify(bodyReq);
-    console.log(bodyReq)
+   
     
     fetch(url,{
-        method:'post', headers:{
+        method:'delete', headers:{
             'Content-Type': 'application/json'
         }, body:bodyReq
     }).then(respuesta => respuesta.json()).then(d=>{actualizar();
