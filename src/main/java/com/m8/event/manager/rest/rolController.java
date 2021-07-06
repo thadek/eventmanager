@@ -51,23 +51,21 @@ public class rolController {
 
 
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modificar")
     public HashMap modificarRol(@RequestBody Rol rol)  {
         HashMap<String, String> map = new HashMap<>();
         try{
-
             rs.modificarRol(rol.getNombreRol(),rol.getIdRol());
             map.put("respuesta","Rol modificado correctamente.");
             return map;
         }catch(ErrorServicio e){
             map.put("respuesta","Error al modificar:"+e.getMessage());
-
             return map;
         }
-
-
     }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/eliminar")
     public HashMap eliminarRol(@RequestBody Rol rol) {
@@ -80,8 +78,6 @@ public class rolController {
             map.put("respuesta","Error al eliminar, ¿Este rol tiene usuarios asignados?");
             return map;
         }
-
     }
-
-
+    
 }

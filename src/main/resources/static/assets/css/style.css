@@ -94,6 +94,17 @@ table thead{
     margin-bottom: .5rem;
 }
 
+
+/*Botón mostrar/ocultar -> arreglo posición*/
+.btn-outline-primary {
+    display: block;
+    height: auto;
+    margin-top: 7rem;
+    color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+
 /*
 #submit-boton {
     position: relative;

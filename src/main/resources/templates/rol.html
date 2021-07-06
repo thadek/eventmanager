@@ -14,10 +14,10 @@
   <main>
 
 
-<div class="container-flex lg p-1 m-3 " id="main">
+<div class="container-flex p-1 m-3 " id="main">
     <button class="btn btn-outline-primary" id="togglerSeccion" >Mostrar/Ocultar</button>
-    
- 
+
+
     <div class="row p-2" id="containerRol">
       <div class="col-4 ps-0" >
 <div class ="navadm ms-0 col-12">
@@ -30,10 +30,10 @@
             <input class="form-control" id="nombre-nuevo-rol" type="text" name="nombre"/>
           </div>
           <br>
-          <button type="button" id="btn-crear-rol" class="btn btn-outline-dark" onclick=guardarNuevoRol()>Crear Rol</button>   
-                         
+          <button type="button" id="btn-crear-rol" class="btn btn-outline-dark" onclick=guardarNuevoRol()>Crear Rol</button>
+
         </form>
-        
+
       </div>
     </div>
     <div class="card" id="editarRol" style="display:none;" >
@@ -41,37 +41,37 @@
         <form>
           <div class="form-group">
             <label for="nombre">ID</label>
-            <input class="form-control" id="formEditRolId" type="text"  readonly/>
+            <input class="form-control" id="formEditRolId" type="text"  readonly />
           </div>
           <div class="form-group">
             <label for="nombre">Nombre del Rol</label>
             <input class="form-control" id="formEditRolnombre" type="text" name="nombre_rol"/>
           </div>
           <br>
-          <button type="button" id="btn-editar-rol" onclick=editarRol() class="btn btn-outline-dark">Guardar</button>   
-                         
+          <button type="button" id="btn-editar-rol" onclick=editarRol() class="btn btn-outline-dark">Guardar</button>
+
         </form>
-        
+
       </div>
     </div>
 </div>
-          
-          
+
+
       </div>
-      
+
    <div class="navadm col-8" >
-       
+
   <table class="table table-bordered table-striped ">
- 
-    <button type="button" id="btn-rol" class="btn btn-outline-dark" onclick=nuevoRol()><div class=" bi bi-plus-circle-fill"><br>Nuevo</div></button> 
-    
-    <button type="button" id="btn-rol" class="btn btn-outline-dark" onclick=actualizar()><div class=" bi bi-arrow-clockwise"><br> Actualizar</div></button> 
-   
+
+    <button type="button" id="btn-rol" class="btn btn-outline-dark" onclick=nuevoRol()><div class=" bi bi-plus-circle-fill"><br>Nuevo</div></button>
+
+    <button type="button" id="btn-rol" class="btn btn-outline-dark" onclick=actualizar()><div class=" bi bi-arrow-clockwise"><br> Actualizar</div></button>
+
     <thead>
       <tr>
         <div class="progress" id="cargando" style="margin:0; display:none;" >
           <div class="indeterminate"></div>
-        
+
     </div>
         <th>ID</th>
         <th>Nombre Rol</th>
@@ -83,11 +83,11 @@
 
       </div>
     </div>
-    
-    
+
+
 </div>
-    
- 
+
+
 
 <!--Modal Eliminar-->
 <div class="modal fade" tabindex="-1" id="modalEliminar">
@@ -103,7 +103,7 @@
         <p><strong>¿Seguro? No se pueden deshacer los cambios de eliminación.</strong></p>
       </div>
       <div class="modal-footer">
-        
+
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">ERA MENTIRA, VOLVER!</button>
         <button type="button" class="btn btn-outline-danger"  data-bs-dismiss="modal" onclick="eliminar(document.getElementById('idRolConfirmar').innerHTML)">BORRAR</button>
       </div>
@@ -115,7 +115,7 @@
 <div style="position: relative; min-height: 300px;">
 <div class="toast fade align-items-center text-white bg-dark border-0" style="position: absolute; top: 0; right: 0;" id="notificacion" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="d-flex">
-    <div class="toast-body" id="mensaje-notif">      
+    <div class="toast-body" id="mensaje-notif">
     </div>
     <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
   </div>
@@ -133,7 +133,7 @@
 
 <script th:src="@{/assets/js/rol.js}">
 
- 
+
 </script>
 
 </html>
