@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="headers :: principal">
+
+<body>
+
+  <!-- header -->
+  <header>
+    <nav th:replace="static :: navbar"></nav>
+  </header>
+
+
+  <main>
+
+
+<div class="container-flex p-1 m-3 " id="main">
+    <button class="btn btn-outline-primary" id="togglerSeccion" >Mostrar/Ocultar</button>
+    
+ 
+    <div class="row p-2" id="containerRol">
+      <div class="col-4 ps-0" >
+<div class =" navadm ms-0 col-12">
+    <h5 class="card-header" id="titulo-form">Crear Rol</h5>
+    <div class="card" id="crearRol">
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="nombre">Nombre del Rol</label>
+            <input class="form-control" id="nombre-nuevo-rol" type="text" name="nombre"/>
+          </div>
+          <br>
+          <button type="button" id="btn-crear-rol" class="btn btn-outline-dark" onclick=guardarNuevoRol()>Crear Rol</button>   
+                         
+        </form>
+        
+      </div>
+    </div>
+    <div class="card" id="editarRol" style="display:none;" >
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="nombre">ID</label>
+            <input class="form-control" id="formEditRolId" type="text"  readonly/>
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre del Rol</label>
+            <input class="form-control" id="formEditRolnombre" type="text" name="nombre_rol"/>
+          </div>
+          <br>
+          <button type="button" id="btn-editar-rol" onclick=editarRol() class="btn btn-outline-dark">Guardar</button>   
+                         
+        </form>
+        
+      </div>
+    </div>
+</div>
+          
+          
+      </div>
+      
+   <div class="navadm col-8" >
+       
+  <table class="table table-bordered table-striped ">
+ 
+    <button type="button" id="btn-rol" class="btn btn-outline-dark" onclick=nuevoRol()><div class=" bi bi-plus-circle-fill"><br>Nuevo</div></button> 
+    
+    <button type="button" id="btn-rol" class="btn btn-outline-dark" onclick=actualizar()><div class=" bi bi-arrow-clockwise"><br> Actualizar</div></button> 
+   
+    <thead>
+      <tr>
+        <div class="progress" id="cargando" style="margin:0; display:none;" >
+          <div class="indeterminate"></div>
+        
+    </div>
+        <th>ID</th>
+        <th>Nombre Rol</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="datos"></tbody>
+  </table>
+
+      </div>
+    </div>
+    
+    
+</div>
+    
+ 
+
+<!--Modal Eliminar-->
+<div class="modal fade" tabindex="-1" id="modalEliminar">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Eliminar Rol </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!--NO TOCAR, tiene vinculación con JS-->
+        <p id="idRolConfirmar" style="display:none;"></p>
+        <p><strong>¿Seguro? No se pueden deshacer los cambios de eliminación.</strong></p>
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">ERA MENTIRA, VOLVER!</button>
+        <button type="button" class="btn btn-outline-danger"  data-bs-dismiss="modal" onclick="eliminar(document.getElementById('idRolConfirmar').innerHTML)">BORRAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Notificacion-->
+<div style="position: relative; min-height: 300px;">
+<div class="toast fade align-items-center text-white bg-dark border-0" style="position: absolute; top: 0; right: 0;" id="notificacion" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body" id="mensaje-notif">      
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+</div>
+
+  </main>
+
+  <!--Footer -->
+  <footer th:replace="static :: footer"></footer>
+
+</body>
+
+<div th:replace="headers :: js"></div>
+
+<script th:src="@{/assets/js/rol.js}">
+
+ 
+</script>
+
+</html>
