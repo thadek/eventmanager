@@ -40,10 +40,12 @@ body {
 }
 
 .subtitulo{
-    
-    color:white;
+    margin-top: 7px;
+    margin-bottom: 2rem;
     font-family:Arial, Helvetica, sans-serif;
     text-align:center;
+    color: #c3c3c3;
+    font-size: 12px;
 }
 
 
@@ -70,13 +72,7 @@ body {
   .title {
     color: #777;
   }
-  
-  .subtitulo {
-    color: #c3c3c3;
-    font-size: 12px;
-    margin-top: 7px;
-    margin-bottom: 2rem;
-  }
+
 
   
   .content {
