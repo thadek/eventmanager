@@ -1,7 +1,7 @@
 :root {
     --primary-color:rgb(117, 108, 108);
     --secondary-color:  #212529;
-    /* --back-color: rgb(43, 38, 38); */
+   /* --back-color: rgb(43, 38, 38); */
     --back-color: rgb(245, 238, 238);
    
         --green: #27ae60;
@@ -34,6 +34,19 @@ form label h2{
     color:#fff;
 }
 
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div#login-desp h4 {
+    padding-bottom: 2rem;
+}
+
+ #submit-boton, a.btn-primary{
+    background: var(--back-color);
+
 
 table thead{
     background-color:rgb(116, 106, 91);
@@ -41,9 +54,27 @@ table thead{
 }
 /*.btn-primary{
     background: transparent;  
+
     width:100%;
-    
-}*/
+    border-radius: 3rem;
+    cursor: pointer;
+    border: 2px var(--primary-color);
+    color: rgba(0,0,0,.55);
+    margin: 3px;
+}
+
+#submit-boton:hover, a.btn-primary:hover{
+
+    background: rgb(110, 103, 112);
+    border-radius: 3rem;
+    cursor: pointer;
+    transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+    border: 2px var(--back-color);
+    color: white;
+
+
+}
+/*
 
 .splide__slide img {
 	width : 100%;
@@ -62,6 +93,7 @@ table thead{
     margin-bottom: .5rem;
 }
 
+
 #submit-boton {
     position: relative;
     width: 100%;
@@ -72,32 +104,28 @@ table thead{
     border-radius: 3rem;
     cursor: pointer;
     overflow: hidden;
-    transition: width 0.3s 0.15s, font-size 0.1s 0.15s;}
-    
-    #submit-boton::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-left: -1.5rem;
-      margin-top: -1.5rem;
-      width: 3rem;
-      height: 3rem;
-      border: 2px dotted #fff;
-      border-radius: 50%;
-      border-left: none;
-      border-bottom: none;
-      transition: opacity 0.1s 0.4s;
-      opacity: 0;
-    }
+    transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+}
 
-/*
-.btn-primary:hover{
-
-background:transparent;
+#submit-boton::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -1.5rem;
+    margin-top: -1.5rem;
+    width: 3rem;
+    height: 3rem;
+    border: 2px dotted #fff;
+    border-radius: 50%;
+    border-left: none;
+    border-bottom: none;
+    transition: opacity 0.1s 0.4s;
+    opacity: 0;
+}
+*/
 
 
-}*/
 
 
 
@@ -210,8 +238,8 @@ background:transparent;
     opacity: 89%;
 }
 #login-desp{
-    background: linear-gradient(rgba(245, 162, 107,1),rgba(175, 123, 224,1));
-
+    color: rgba(0,0,0,.55);
+    background-color: #f8f9fa!important;
     position: absolute;
     padding:5%;
     border-radius:20px;

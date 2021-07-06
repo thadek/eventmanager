@@ -60,32 +60,35 @@
                     class="bi-person" aria-label="account"></i> </button>
   <!--boton gestion admin-->
               <a class="nav-link"><button class="btn btn-outline-dark" ><i class="bi-file-check"></i> Gestion</button></a>
-  
-              
+
+
             <div class="dropdown-menu dropleft" id="login-desp">
-                <div class="container-flex">
-                    <div th:if='${session.usuarioSession!=null}'>
-                        <h4 th:text="${'Bienvenido  @ '+session.usuarioSession.username}"></h4><a class="btn btn-primary"
-                            th:href="@{/logout}">Cerrar Sesión</a>
-                            
+
+
+              <div class="container-flex">
+                  <div th:if='${session.usuarioSession!=null}'>
+                        <h4 th:text="${'Bienvenido  @ '+session.usuarioSession.username}"></h4>
+
+                    <a class="btn btn-primary" href="#">Perfil</a>
+                    <a class="btn btn-primary" th:href="@{/logout}">Cerrar Sesión</a>
+
                     </div>
                 </div>
                 <form class="form-horizontal needs-validation" novalidate th:if='${session.usuarioSession==null}' th:action="@{/logincheck}" method="post"
                     accept-charset="UTF-8" id="logon2">
                     <label>
-                        <h2>Iniciar Sesión</h2>
+                        <h4>Iniciar Sesión</h4>
                     </label>
+
                     <input class="form-control login" type="text" name="username" placeholder="Usuario" required><br>
                     <input class="form-control login" type="password" name="password" placeholder="Password" required><br>
-                    <button class="btn btn-primary" type="submit" id="submit-boton">Conectar</button>
+                    <button class="btn btn-primary" type="submit" id="submit-boton">Iniciar Sesión</button>
                 </form>
-            
-            
             </div>
             </div>
           </div>
         </div>
-      </nav>
+    </nav>
 
       <footer th:fragment="footer"> 
 
