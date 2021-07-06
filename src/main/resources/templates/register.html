@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+
   
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
@@ -11,11 +12,10 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" th:href="@{/assets/css/login.css}" type="text/css">
+
 </head>
 
 <body>
-
-
 
 
 <div class="content">
@@ -63,6 +63,9 @@
           </svg>
           <input class="input" type="password" name="password2" placeholder="Repetí tu contraseña">
 
+          <a class="subtitulo" th:href="@{/login}">
+            <p>¿Ya tenés cuenta? Logueate</p>
+          </a>
 
 
 
@@ -71,19 +74,17 @@
 
       </form>
 
-      <a class="subtitulo" th:href="@{/login}">
-        <p>¿Ya tenés cuenta? Logueate</p>
-      </a>
-<section>
-<div class="container-flex" id="alerta">
-  
-    <div th:if="${registroExitoso != null}" class="alert alert-success" th:text="${registroExitoso}"></div>
-  <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
-  
-  
-</div>
-  <!--creaciones-->
-  
+
+      <section>
+
+        <div class="container-flex" id="alerta">
+          <!--creaciones-->
+          <div th:if="${registroExitoso != null}" class="alert alert-success" th:text="${registroExitoso}"></div>
+          <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
+        </div>
+
+      </section>
+
 
 </section>
     </div>
