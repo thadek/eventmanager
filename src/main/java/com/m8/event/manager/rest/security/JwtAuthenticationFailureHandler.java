@@ -35,7 +35,7 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
 		return "{\"timestamp\": " + date + ", "
 				+ "\"status\": " + statusErrorResponse.value() + ", "
 				+ "\"error\": \"Unauthorized\", "
-				+ "\"message\": \"Authentication failed: bad credentials\", "
-				+ "\"path\": \"/login\"}";
+				+ "\"message\": \"Fallo la autenticación: Error en credenciales. (Bad Credentials)\", "
+				+ "\"path\": \"/api/iniciarsesion\"}";
 	}
 }

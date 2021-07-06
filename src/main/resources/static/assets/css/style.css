@@ -45,14 +45,15 @@ div#login-desp h4 {
 }
 
  #submit-boton, a.btn-primary{
-    background: var(--back-color);
+    background: var(--back-color);}
 
 
 table thead{
     background-color:rgb(116, 106, 91);
     color:white;
 }
-/*.btn-primary{
+
+.btn-primary{
     background: transparent;  
 
     width:100%;
@@ -250,7 +251,8 @@ table thead{
     border-radius:20px;
     border: 1px solid rgba(148, 124, 151, 0.15);
     font-size:large;
-    position:fixed;
+    max-width:600px;
+    position:absolute;
 }
 
 #logo{

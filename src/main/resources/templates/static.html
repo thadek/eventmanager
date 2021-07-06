@@ -59,7 +59,7 @@
               <button class="btn btn-outline-dark" id="sesion"  data-bs-toggle="dropdown"><i
                     class="bi-person" aria-label="account"></i> </button>
   <!--boton gestion admin-->
-              <a class="nav-link"><button class="btn btn-outline-dark" ><i class="bi-file-check"></i> Gestion</button></a>
+              <a class="nav-link" sec:authorize="hasRole('ROLE_USER_ADMIN')" th:href="@{/adm}"><button class="btn btn-outline-dark" ><i class="bi-file-check"></i> Gestion</button></a>
 
 
             <div class="dropdown-menu dropleft" id="login-desp">

@@ -80,8 +80,9 @@ public class MultipleSecurityConfig {
 
 
             http    .antMatcher("/api/**")
+                  //SI QUIERO MANEJARME SIN LAS COOKIES DEL NAVEGADOR, AGREGAR ESTA LINEA  .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests()
-                    .antMatchers("/login").permitAll()
+                    .antMatchers("/api/iniciarsesion").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .csrf().disable()
@@ -109,17 +110,7 @@ public class MultipleSecurityConfig {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);*/
         }
 
-
-
-
-
-
-
-
-
-
     }
-
 
 
 
@@ -161,6 +152,7 @@ public class MultipleSecurityConfig {
                     .and()
                     .exceptionHandling().accessDeniedPage("/error-403")
                     .and()
+
                     .csrf().disable();
         }
 
