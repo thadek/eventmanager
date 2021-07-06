@@ -13,11 +13,6 @@
         --black: black;
         --blue: #36485f;
         --lightgray: #f1f1f1;
-      
-
-
-
-
   }
 
 html, body {
@@ -45,13 +40,18 @@ div#login-desp h4 {
 }
 
  #submit-boton, a.btn-primary{
+
     background: var(--back-color);}
+
 
 
 table thead{
     background-color:rgb(116, 106, 91);
     color:white;
 }
+
+
+/*@tana*/
 
 .btn-primary{
     background: transparent;  
