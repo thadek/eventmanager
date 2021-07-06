@@ -3,6 +3,21 @@
     --secondary-color:  #212529;
     /* --back-color: rgb(43, 38, 38); */
     --back-color: rgb(245, 238, 238);
+   
+        --green: #27ae60;
+        --lightblue: #3498db;
+        --gray: #95a5a6;
+        --red: #e74c3c;
+        --orange: #f1c40f;
+        --white: white;
+        --black: black;
+        --blue: #36485f;
+        --lightgray: #f1f1f1;
+      
+
+
+
+
   }
 
 html, body {
@@ -29,6 +44,12 @@ table thead{
     width:100%;
     
 }*/
+
+.splide__slide img {
+	width : 100%;
+	height: auto;
+}
+
 
 .navadm{
     background-color: #f8f9fa;
@@ -78,6 +99,104 @@ background:transparent;
 
 }*/
 
+
+
+/*--------Header adm----------*/
+.adm-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    padding-left: 15px;
+    margin: 0 auto;
+    background: var(--blue);
+    font-size: 20px;
+  font-family: sans-serif;
+  padding: 0 10px;
+  color: var(--white);
+    
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  a, 
+  button {
+    color: inherit;  
+  }
+  
+  a {
+    text-decoration: none;
+  }
+
+  .adm-bar ul,
+  .adm-bar button {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.adm-bar button {
+    padding: 8px;
+    overflow: hidden;
+    transition: filter 0.25s;
+    
+  }
+   
+  .adm-bar li:nth-child(1) button {
+    background: var(--green);
+    
+  }
+   
+  .adm-bar li:nth-child(2) button {
+    background: var(--lightblue);
+    
+  }
+   
+  .adm-bar li:nth-child(3) button {
+    background: var(--gray);
+    
+  }
+   
+  .adm-bar li:nth-child(4) button {
+    background: var(--red);
+    
+  }
+   
+  .adm-bar li:nth-child(5) button {
+    background: var(--orange);
+    
+  }
+   
+  .adm-bar button:hover {
+    filter: brightness(110%);
+  }
+
+  .adm-bar button {
+    fill: var(--white);
+  }
+   
+  .adm-bar button span {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease-out;
+  }
+   
+  .adm-bar button:hover span {
+    margin-left: 15px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+  /*-------Fin adm bar--------*/
+
 #logon2{
     font-family:Arial, Helvetica, sans-serif;
     text-align:center;    
@@ -103,6 +222,7 @@ background:transparent;
     border-radius:20px;
     border: 1px solid rgba(148, 124, 151, 0.15);
     font-size:large;
+    position:fixed;
 }
 
 #logo{

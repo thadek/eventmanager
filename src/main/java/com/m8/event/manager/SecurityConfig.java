@@ -1,6 +1,6 @@
 package com.m8.event.manager;
 
-
+/*
 import com.m8.event.manager.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -57,3 +57,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+*/
