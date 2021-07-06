@@ -39,9 +39,10 @@ div#login-desp h4 {
     padding-bottom: 2rem;
 }
 
- #submit-boton, a.btn-primary{
+#submit-boton, a.btn-primary{
 
-    background: var(--back-color);}
+   background: var(--back-color);
+}
 
 
 
@@ -54,8 +55,7 @@ table thead{
 /*@tana*/
 
 .btn-primary{
-    background: transparent;  
-
+    background: transparent;
     width:100%;
     border-radius: 3rem;
     cursor: pointer;
@@ -72,10 +72,10 @@ table thead{
     transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
     border: 2px var(--back-color);
     color: white;
-
-
 }
-/*
+
+
+/*splide*/
 
 .splide__slide img {
 	width : 100%;
@@ -94,7 +94,7 @@ table thead{
     margin-bottom: .5rem;
 }
 
-
+/*
 #submit-boton {
     position: relative;
     width: 100%;
@@ -125,6 +125,7 @@ table thead{
     opacity: 0;
 }
 */
+/*fin splide*/
 
 
 
@@ -248,10 +249,12 @@ table thead{
 }
 
 #navbar-1{
+    display: inline-block;
+    width: -webkit-fill-available;
     border-radius:20px;
     border: 1px solid rgba(148, 124, 151, 0.15);
     font-size:large;
-    max-width:600px;
+   /* max-width:600px;*/
     position:absolute;
 }
 
@@ -268,6 +271,8 @@ nav{
 .btn-outline-dark {
     color: var(--primary-color);
     border-color: var(--back-color);
+    width: fit-content;
+    align-self: flex-end;
 }
 
 .btn-outline-dark:hover {
