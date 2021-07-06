@@ -75,6 +75,7 @@ body {
     color: #c3c3c3;
     font-size: 12px;
     margin-top: 7px;
+    margin-bottom: 2rem;
   }
 
   
@@ -241,6 +242,10 @@ body {
   .loader.animate {
     opacity: 0.6;
     transition: opacity 150ms 350ms;
+  }
+
+  #alerta{
+   padding-top:6rem;
   }
   
   .loader.animateOut {

@@ -2,10 +2,7 @@ package com.m8.event.manager.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,6 +11,7 @@ import java.util.List;
 public class Rol implements Serializable {
 
    @Id
+   @GeneratedValue(strategy= GenerationType.IDENTITY)
    private Integer idRol;
 
    @Column (unique = true)
