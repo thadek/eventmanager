@@ -69,6 +69,14 @@ public class PortalController {
 
 
 
+    @GetMapping("/perfil")
+    public ModelAndView perfil(){
+        ModelAndView mav = new ModelAndView("perfil");
+        mav.addObject("title","Perfil de Usuario - EventManager ");
+        return mav;
+    }
+
+
 ////    Forma Seba
 //    @GetMapping("/login")
 //    public String login(@RequestParam(required = false) String error, 

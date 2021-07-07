@@ -69,7 +69,7 @@
                   <div th:if='${session.usuarioSession!=null}'>
                         <h4 th:text="${'Bienvenido  @ '+session.usuarioSession.username}"></h4>
 
-                    <a class="btn btn-primary" href="#">Perfil</a>
+                    <a class="btn btn-primary" th:href="@{/perfil}">Perfil</a>
                     <a class="btn btn-primary" th:href="@{/logout}">Cerrar Sesión</a>
 
                     </div>

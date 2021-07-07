@@ -1,47 +1,45 @@
-verRoles();
-togglers();
+verPerfil($("#usuario").attr("value"));
 
-function togglers(){
-
-
-    $('#togglerSeccion').click(function(){
-         
-        $('#containerRol').fadeToggle(150);
-    
-
-}
-    )}
 
 
 const mostrarDatos = (data) => {
-    //console.log(data)
-    let body =''
-    for(let i=0; i<data.length; i++){
-     body += `<tr><td>${data[i].idRol}</td><td>${data[i].nombreRol}</td> <td>
-    <button class="btn btn-outline-success" onclick=mostrarEditarRol('${data[i].idRol}','${data[i].nombreRol}') >
-    <i class="bi bi-pencil-square"></i> Editar</button>
-    <button class="btn btn-outline-danger" onclick="document.getElementById('idRolConfirmar').innerHTML=${data[i].idRol}" data-bs-toggle="modal" data-bs-target="#modalEliminar">
-    <i class="bi bi-trash"></i> Eliminar</button>
-     </td></tr>`
-    }
-
-    document.getElementById('datos').innerHTML = body;
+    var perfil = data;
+    console.log(perfil);
+    document.getElementById('nombrePerfil').innerHTML = perfil.nombre + " " + perfil.apellido;
+    document.getElementById('email').innerHTML = perfil.email;
+    document.getElementById('tel').innerHTML = perfil.tel;
+    document.getElementById('fechaNac').innerHTML = perfil.fechaNac;
+    document.getElementById('descripcionPerfil').innerHTML = perfil.descripcion;
+    document.getElementById('fotoPerfil').src=perfil.fotoURL;
 }
-function verRoles(){
-    let url = 'http://localhost:8080/api/roles/ver';
+
+function noExistePerfil (){
+    document.getElementById('cardPerfil').style.opacity = 0.2;
+    $("#noPerfil").show();
+}
+
+function verPerfil(username){
+    let url = `http://localhost:8080/api/perfil/ver/${username}`;
  fetch(url)
 .then(respuesta=>respuesta.json())
-.then(datos=>mostrarDatos(datos))
-.catch(error=>console.log(error))
+.then(datos=>{
+    if(datos){
+        mostrarDatos(datos);        
+    } else {
 
-}
+    }
+})
+.catch(error=>noExistePerfil()
+
+
+)}
 
 function eliminar(id){
     let url = 'http://localhost:8080/api/roles/eliminar'
     let bodyReq = {idRol:id};
     bodyReq = JSON.stringify(bodyReq);
-   
-    
+
+
     fetch(url,{
         method:'delete', headers:{
             'Content-Type': 'application/json'
@@ -62,8 +60,8 @@ function actualizar(){
 }
 
 
-function editarRol(){   
-    let bodyReq = {idRol: document.getElementById('formEditRolId').value, 
+function editarRol(){
+    let bodyReq = {idRol: document.getElementById('formEditRolId').value,
     nombreRol:document.getElementById('formEditRolnombre').value };
     bodyReq = JSON.stringify(bodyReq);
     let url = 'http://localhost:8080/api/roles/modificar'
@@ -76,7 +74,7 @@ function editarRol(){
         $('#mensaje-notif').html(d.respuesta);
         $('#notificacion').toast('show');
     }).catch()
-    
+
 
 }
 
@@ -105,10 +103,10 @@ function nuevoRol(){
 function mostrarEditarRol(id, nombre){
 
     $('#crearRol').hide();
-    $('#editarRol').fadeIn(); 
+    $('#editarRol').fadeIn();
     document.getElementById('titulo-form').innerHTML = 'Modificar Rol';
      document.getElementById('formEditRolId').value = id;
      document.getElementById('formEditRolnombre').value = nombre;
-    
+
 }
 

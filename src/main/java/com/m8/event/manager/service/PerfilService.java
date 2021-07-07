@@ -28,7 +28,7 @@ public class PerfilService {
 
 
     @Transactional
-    public void agregarPerfil(String username, String fotoURL, String email, String nombre,
+    public Perfil agregarPerfil(String username, String fotoURL, String email, String nombre,
             String apellido, String tel, LocalDate fechaNac, String descripcion) throws ErrorServicio {
 
         Usuario usuario = usuarioRepository.findByUsername(username);
@@ -48,13 +48,13 @@ public class PerfilService {
 
         perfil.setFotoURL(fotoURL);
 
-        perfilRepository.save(perfil);
+        return perfilRepository.save(perfil);
+
 
     }
 
     @Transactional
-    public void modificar(Integer id, String username, String fotoURL, String email, String nombre,
-            String apellido, String tel, LocalDate fechaNac, String descripcion) throws ErrorServicio {
+    public void modificar (Integer id, String fotoURL, String email, String nombre, String apellido, String tel, LocalDate fechaNac, String descripcion) throws ErrorServicio {
 
         validar(nombre);
 
@@ -73,7 +73,6 @@ public class PerfilService {
 
             perfilRepository.save(perfil);
         } else {
-
             throw new ErrorServicio("No existe un perfil con el Id solicitado");
         }
     }
