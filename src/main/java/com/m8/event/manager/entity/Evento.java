@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -45,7 +46,7 @@ public class Evento implements Serializable {
     private List<Inscripcion> inscripciones;
 
     @ManyToOne
-    private Usuario facilitador;
+    private Perfil facilitador;
 
     private String descripcion;
 

@@ -1,12 +1,14 @@
 package com.m8.event.manager.service;
 
 import com.m8.event.manager.entity.Evento;
+import com.m8.event.manager.entity.Perfil;
 import com.m8.event.manager.entity.Subcategoria;
 import com.m8.event.manager.entity.Usuario;
 import com.m8.event.manager.enumeration.Dia;
 import com.m8.event.manager.enumeration.Modalidad;
 import com.m8.event.manager.error.ErrorServicio;
 import com.m8.event.manager.repository.EventoRepository;
+import com.m8.event.manager.repository.PerfilRepository;
 import com.m8.event.manager.repository.SubcategoriaRepository;
 import com.m8.event.manager.repository.UsuarioRepository;
 import java.time.LocalDate;
@@ -29,26 +31,29 @@ public class EventoService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    PerfilRepository perfilRepository;
+    
     @Transactional
     public void crearEvento(String nombre, Integer idSubcategoria,
             Modalidad modalidad, LocalDate fechaInicio, LocalDate fechaFin,
             List<Dia> dias, LocalTime hora, Integer duracion, Integer cupoPresencial,
-            Integer cupoVirtual, Integer valor, String facilitador,
+            Integer cupoVirtual, Integer valor, String emailFacilitador,
             String descripcion) throws ErrorServicio {
 
         boolean crear = true;
 
         validarDatos(crear, nombre, idSubcategoria, modalidad, fechaInicio, fechaFin,
-                hora, duracion, cupoPresencial, cupoVirtual, valor, facilitador,
+                hora, duracion, cupoPresencial, cupoVirtual, valor, emailFacilitador,
                 descripcion);
 
         Optional<Subcategoria> respuesta1 = subcategoriaRepository.findById(idSubcategoria);
-        Optional<Usuario> respuesta2 = usuarioRepository.findById(facilitador);
+        Perfil facilitador = perfilRepository.findByEmail(emailFacilitador);
 
         if (!respuesta1.isPresent()) {
             throw new ErrorServicio("No existe esa sucategoría en la base de datos.");
         }
-        if (!respuesta2.isPresent()) {
+        if (facilitador == null) {
             throw new ErrorServicio("No existe ese facilitador en la base de datos.");
         }
 
@@ -58,8 +63,8 @@ public class EventoService {
         evento.setSubcategoria(respuesta1.get());
         evento.setModalidad(modalidad);
         evento.setFechaInicio(fechaInicio);
-        evento.setFechaFin(fechaFin); //Consultar qué pasa si fechaFin es null
-        evento.setDias(dias);//Consultar qué pasa si la lista viene vacía o null
+        evento.setFechaFin(fechaFin);
+        evento.setDias(dias);
         evento.setHora(hora);
         evento.setDuracion(duracion);
 
@@ -77,7 +82,7 @@ public class EventoService {
         }
 
         evento.setValor(valor);
-        evento.setFacilitador(respuesta2.get());
+        evento.setFacilitador(facilitador);
         evento.setDescripcion(descripcion);
 
         eventoRepository.save(evento);
@@ -88,18 +93,18 @@ public class EventoService {
     public void modificarEvento(Integer id, String nombre, Integer idSubcategoria,
             Modalidad modalidad, LocalDate fechaInicio, LocalDate fechaFin,
             List<Dia> dias, LocalTime hora, Integer duracion, Integer cupoPresencial,
-            Integer cupoVirtual, Integer valor, String facilitador,
+            Integer cupoVirtual, Integer valor, String emailFacilitador,
             String descripcion) throws ErrorServicio {
 
         boolean crear = false;
 
         validarDatos(crear, nombre, idSubcategoria, modalidad, fechaInicio, fechaFin,
-                hora, duracion, cupoPresencial, cupoVirtual, valor, facilitador,
+                hora, duracion, cupoPresencial, cupoVirtual, valor, emailFacilitador,
                 descripcion);
 
         Optional<Evento> respuesta = eventoRepository.findById(id);
         Optional<Subcategoria> respuesta1 = subcategoriaRepository.findById(idSubcategoria);
-        Optional<Usuario> respuesta2 = usuarioRepository.findById(facilitador);
+        Perfil facilitador = perfilRepository.findByEmail(emailFacilitador);
 
         if (respuesta.isPresent()) {
             throw new ErrorServicio("No se encontró el evento en la base de datos.");
@@ -107,7 +112,7 @@ public class EventoService {
         if (!respuesta1.isPresent()) {
             throw new ErrorServicio("No existe esa sucategoría en la base de datos.");
         }
-        if (!respuesta2.isPresent()) {
+        if (facilitador == null) {
             throw new ErrorServicio("No existe ese facilitador en la base de datos.");
         }
 
@@ -136,7 +141,7 @@ public class EventoService {
         }
 
         evento.setValor(valor);
-        evento.setFacilitador(respuesta2.get());
+        evento.setFacilitador(facilitador);
         evento.setDescripcion(descripcion);
 
         eventoRepository.save(evento);
@@ -157,7 +162,7 @@ public class EventoService {
             throw new ErrorServicio("El nombre del evento no puede ser nulo");
         }
 
-        return eventoRepository.buscarPorNombre(nombre);
+        return eventoRepository.buscarPorNombre("%" + nombre + "%");
     }
     
     @Transactional
@@ -177,15 +182,15 @@ public class EventoService {
     }
     
     @Transactional
-    public List<Evento> buscarEventoPorFacilitador(String facilitador) throws ErrorServicio {
+    public List<Evento> buscarEventoPorFacilitador(String emailFacilitador) throws ErrorServicio {
 
-        if (facilitador == null || facilitador.isEmpty()) {
+        if (emailFacilitador == null || emailFacilitador.isEmpty()) {
             throw new ErrorServicio("El facilitador del evento no puede ser nulo");
         }
         
-        Optional<Usuario> respuesta2 = usuarioRepository.findById(facilitador);
+        Perfil facilitador = perfilRepository.findByEmail(emailFacilitador);
 
-        return eventoRepository.buscarPorFacilitador(facilitador);
+        return eventoRepository.buscarPorFacilitador(emailFacilitador);
     }
     
     @Transactional
@@ -232,7 +237,7 @@ public class EventoService {
     public void validarDatos(boolean crear, String nombre, Integer idSubcategoria,
             Modalidad modalidad, LocalDate fechaInicio, LocalDate fechaFin,
             LocalTime hora, Integer duracion, Integer cupoPresencial,
-            Integer cupoVirtual, Integer valor, String facilitador,
+            Integer cupoVirtual, Integer valor, String emailFacilitador,
             String descripcion) throws ErrorServicio {
 
         if (nombre == null || nombre.isEmpty()) {
@@ -305,7 +310,7 @@ public class EventoService {
             throw new ErrorServicio("Si el evento es gratuito, debe colocar '0'.");
         }
 
-        if (facilitador == null || facilitador.isEmpty()) {
+        if (emailFacilitador == null || emailFacilitador.isEmpty()) {
             throw new ErrorServicio("Debe indicar el facilitador del evento.");
         }
 
