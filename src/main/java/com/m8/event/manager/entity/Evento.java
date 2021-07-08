@@ -30,7 +30,10 @@ public class Evento implements Serializable {
 
     private LocalDate fechaFin;
 
-    private List<Dia> dias; 
+    @ElementCollection(targetClass = Dia.class)
+    @CollectionTable
+    @Enumerated(EnumType.STRING)
+    private List<Dia> dias;
 
     private LocalTime hora;
 
