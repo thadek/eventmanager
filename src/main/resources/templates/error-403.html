@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:insert="headers :: principal"></head>
+
+
+<body class="background" id="error">
+<main>
+    <div>
+        <h1>ERROR 403</h1>
+        <h3>Para ver esta página necesitas autorización</h3>
+
+        <ul>
+            <li>
+                <a class="subtitulo"
+                   th:href="@{/login}">
+                    <p>¿Ya tenés cuenta?<br>Logueate</p>
+                </a>
+            </li>
+            <li>
+                <a class="subtitulo"
+                   th:href="@{/}">
+                    <p>Volver al Inicio</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</main>
+
+</body>
+
+</html>

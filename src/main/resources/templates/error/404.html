@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:insert="headers :: principal"></head>
+
+
+<body class="background" id="error" style="background-image: url(/assets/images/error-404.jpg);">
+<main>
+    <div>
+        <h1>ERROR 404</h1>
+        <h3>Esta página no existe</h3>
+
+        <ul>
+            <li>
+                <a class="subtitulo"
+                   th:href="@{/login}">
+                    <p>¿Ya tenés cuenta?<br>Logueate</p>
+                </a>
+            </li>
+            <li>
+                <a class="subtitulo"
+                   th:href="@{/}">
+                    <p>Volver al Inicio</p>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</main>
+
+</body>
+
+</html>

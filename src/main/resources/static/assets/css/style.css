@@ -469,3 +469,62 @@ footer {
     -ms-transform: translateY(-10%);
     transform: translateY(-50%);
 }
+
+
+/* PÁGINAS DE ERROR */
+ body#error {
+    background-image: url(/assets/images/error-403.jpg);
+    background-color: transparent;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+body#error main {
+    margin: 0 auto;
+}
+
+body#error div {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding:20px;
+    border-radius:20px;
+}
+
+body#error div h1{
+    font-size: 7rem;
+}
+
+body#error div h1, body#error div h3{
+    margin-top: 10px;
+    margin-bottom:5px;
+    text-align: center;
+    color: rgb(111, 17, 133);
+    text-shadow: 2px 2px 2px gray;
+}
+
+body#error div ul{
+    padding-left: 0;
+    text-align: center;
+}
+
+body#error div ul li{
+    display: inline;
+    color: black;
+    padding-left: 7px;
+    padding-right: 7px
+}
+
+body#error div ul li a{
+    display: inline-flex;
+    padding: 1rem;
+}
+
+body#error div ul li a:hover{
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    border-radius: 20px;
+}
+/* FIN PAGINAS ERROR */
+
+
