@@ -11,7 +11,7 @@ import java.util.List;
 public class Subcategoria implements Serializable {
 
    @Id
-   @GeneratedValue (strategy = GenerationType.IDENTITY)
+   @GeneratedValue (strategy= GenerationType.IDENTITY)
    private Integer idSubcategoria;
 
    private String nombre;

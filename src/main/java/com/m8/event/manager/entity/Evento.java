@@ -1,53 +1,53 @@
 package com.m8.event.manager.entity;
 
-import com.m8.event.manager.enumeration.Dia;
 import com.m8.event.manager.enumeration.Modalidad;
 import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
 public class Evento implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+   @Id
+   @GeneratedValue (strategy= GenerationType.IDENTITY)
+   private Integer id;
 
-    private String nombre;
+   private String nombre;
 
-    @ManyToOne
-    private Subcategoria subcategoria;
+   @ManyToOne
+   private Subcategoria subcategoria;
 
-    @Enumerated(EnumType.STRING)
-    private Modalidad modalidad;
+   @Enumerated(EnumType.STRING)
+   private Modalidad modalidad;
 
-    private LocalDate fechaInicio; //sacamos temporal y agregamos anotación en main
+   private LocalDate fechaInicio; //sacamos temporal y agregamos anotación en main
 
-    private LocalDate fechaFin;
+   private LocalDate fechaFin;
 
-    private List<Dia> dias; 
+   private LocalTime hora;
 
-    private LocalTime hora;
+   private Integer duracion;
 
-    private Integer duracion;
+   private Integer cupoPresencial;
 
-    private Integer cupoPresencial;
+   private Integer cupoVirtual;
 
-    private Integer cupoVirtual;
+   private Integer valor;
 
-    private Integer valor;
+   @OneToMany (mappedBy = "evento")
+   private List<Inscripcion> inscripciones;
 
-    @OneToMany(mappedBy = "evento")
-    private List<Inscripcion> inscripciones;
+   @ManyToOne
+   private Usuario facilitador;
 
-    @ManyToOne
-    private Perfil facilitador;
+   private String descripcion;
 
-    private String descripcion;
+
 
 }
