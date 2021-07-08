@@ -55,7 +55,7 @@ table thead{
 /*@tana*/
 
 .btn-primary{
-    background: transparent;
+    background: var(--back-color);
     width:100%;
     border-radius: 3rem;
     cursor: pointer;
@@ -420,7 +420,6 @@ footer {
  
 }
 
-/*PERFIL*/
 
 #cardPerfil {
     border-radius: 20px;
