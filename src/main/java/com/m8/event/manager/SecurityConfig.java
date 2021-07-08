@@ -1,6 +1,6 @@
 package com.m8.event.manager;
 
-
+/*
 import com.m8.event.manager.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers("/assets/css/*", "/assets/images/*", "/js/*", "/", "/usuarios/crear").permitAll()
+                    .antMatchers("/assets/css/*", "/assets/images/*","/assets/media/*", "/assets/js/**", "/*", "/api/**","/adm/**").permitAll()
                     .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .loginProcessingUrl("/logincheck")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/home")
+                        .defaultSuccessUrl("/")
                         .permitAll()                
                 .and()
                     .logout()
@@ -57,3 +57,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+*/

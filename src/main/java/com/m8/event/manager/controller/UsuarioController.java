@@ -25,7 +25,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@RequestMapping("/usuarios")
+@RequestMapping("/adm/usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -61,6 +61,7 @@ public class UsuarioController {
         return mav;
     }
 
+    //llevo este controlador a portalcontroller
     @PostMapping("/crear")
     public RedirectView registrar(RedirectAttributes attributes,
             @RequestParam String username,

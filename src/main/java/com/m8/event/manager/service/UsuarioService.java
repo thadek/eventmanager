@@ -49,7 +49,7 @@ public class UsuarioService implements UserDetailsService {
         usuario.setPassword(encoder.encode(password));
 
         if (idRol == null) {
-            usuario.setRol((Rol) rolRepository.buscarPorRol("ALUMNO"));
+            usuario.setRol(rolRepository.buscarPorRol("ALUMNO"));
         } else {
 
             if (rolRepository.findById(idRol).isPresent()) {

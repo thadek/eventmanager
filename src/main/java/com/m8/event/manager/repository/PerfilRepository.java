@@ -4,6 +4,8 @@ package com.m8.event.manager.repository;
 import com.m8.event.manager.entity.Perfil;
 import java.util.Date;
 import java.util.List;
+
+import com.m8.event.manager.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,5 +24,7 @@ public interface PerfilRepository extends JpaRepository<Perfil, Integer>{
     public List<Perfil> findByFechaNac (Date fechaNac);
     
     public Perfil findByEmail (String email);   
+    
+    public Perfil findByUsuario(Usuario usuario);
     
 }

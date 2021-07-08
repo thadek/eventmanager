@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public interface RolRepository extends JpaRepository<Rol, Integer> {
     
     @Query("SELECT r FROM Rol r WHERE r.nombreRol= :nombreRol")
-    public List<Rol> buscarPorRol (@Param("nombreRol")String nombreRol);
-           
+    public Rol buscarPorRol (@Param("nombreRol")String nombreRol);
+
 //    public Rol findByRol (String nombreRol);
 }

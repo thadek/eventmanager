@@ -28,11 +28,7 @@ public class Perfil implements Serializable {
 
    @OneToOne
    private Usuario usuario;
-   
-   @OneToOne
-   private Foto foto;
-   
-   
+  
+   private String fotoURL;
 
- 
 }
