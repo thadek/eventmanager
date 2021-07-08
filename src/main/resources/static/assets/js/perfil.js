@@ -1,4 +1,8 @@
-verPerfil($("#usuario").attr("value"));
+try{
+   verPerfil($("#usuario").attr("value")); 
+}catch(e){
+   
+}
 cargarFotito();
 var usuarioCargado = false;
 
@@ -7,7 +11,7 @@ const mostrarDatos = (data) => {
     $('#contenido').show();
     let perfil = data; 
     usuarioCargado=true;
-    guardarDatos(perfil);
+    listenerGuardar(perfil);
     //console.log(perfil);
     //Mostrar datos normal
     document.getElementById('nombrePerfil').innerHTML = perfil.nombre + " " + perfil.apellido;
@@ -35,7 +39,9 @@ function noExistePerfil (){
 }
 
 function verPerfil(username){
+$('#contenido').hide();
 $('#cargando-card').show();
+
 
     let url = `http://localhost:8080/api/perfil/ver/${username}`;
  fetch(url)
@@ -87,9 +93,11 @@ function cargarFotito(){
     const fotoinput = document.getElementById("inputFoto")
         const img = document.getElementById("fotoPerfilEdit")      
         fotoinput.addEventListener("change", ev => {
-            const formdata = new FormData()
+            const formdata = new FormData()       
+            //Si pongo algo, hago, sino no hago nada
+            if(ev.target.files[0]){
             $('#cargando').show();
-            formdata.append("image", ev.target.files[0])
+                formdata.append("image", ev.target.files[0])
             fetch("https://api.imgur.com/3/image/", {
                 method: "post",
                 headers: {
@@ -100,6 +108,10 @@ function cargarFotito(){
                 $('#cargando').hide();
                 img.src = data.data.link               
             })
+            }else{
+                return;
+            }
+            
         })
 }
 
@@ -108,11 +120,19 @@ function nuevoPerfil(){
     $("#contenido").hide(100);
     $("#btnCancelar").hide();
     $("#formulario-edit").show(100);
+
     document.getElementById('tituloForm').innerHTML = 'Crear Perfil';
     document.getElementById('cardPerfil').style.opacity = 1;
+    crearPerfilNuevo($("#usuario").attr("value"));
 }
 
-function guardarDatos(perfil){
+function actualizar(){
+    verPerfil($("#usuario").attr("value")); 
+    $("#formulario-edit").hide(100);
+    $("#contenido").show(100);
+}
+
+function listenerGuardar(perfil){
 
     //Evaluo si guardar nuevo perfil o modificar existente
     
@@ -132,21 +152,36 @@ function guardarDatos(perfil){
            perfilModificado.descripcion = document.getElementById('descripcionInput').value;
            perfilModificado.fotoURL = document.getElementById('fotoPerfilEdit').src;
 
-           console.log(perfilModificado);
+           //Si hay cambios, guardo, sino no hago nada
+          if(!(JSON.stringify(perfilModificado)===JSON.stringify(perfilSinModificar))){
+             
+             modificarDatos(perfilModificado);
+             
+          }else{        
+              cancelar();
+          }
 
-
-       } else {
-           console.log("CrearPerfil")
-           crearPerfilNuevo();
-       }
+       } 
 
    })
+ 
+function modificarDatos(perfil){
+    let bodyReq = JSON.stringify(perfil);   
+    let url = `http://localhost:8080/api/perfil/modificar/${perfil.usuario.username}`
+    fetch(url,{
+        method:'post', headers:{
+            'Content-Type': 'application/json'
+        }, body:bodyReq
+    }).then(respuesta => respuesta.json()).then(d=>{actualizar();
+        console.log(d);
+        $('#mensaje-notif').html(d.respuesta);
+        $('#notificacion').toast('show');
+    }).catch()
+}
    
- function crearPerfilNuevo(){
- let perfil = JSON.parse(`{"idPerfil":1,"email":"alumno@alumno.eventmanager.net","nombre":"alumno","apellido":"alumno","tel":"29914184","fechaNac":"1991-01-27","descripcion":"Test alumno","usuario":{"username":"alumno","password":"$2a$10$Vpu8tP.LUQ5aIBY7.CXn2uUzR5SJeeYYmzcJkX/M8xs6fASJXbxQC","rol":{"idRol":3,"nombreRol":"ALUMNO"}},"fotoURL":"https://i.imgur.com/ykaX36T.jpg"}`);
-console.log(perfil);
 
- }
+
+ 
 
 
 
@@ -154,6 +189,59 @@ console.log(perfil);
    
 }
 
+function crearPerfilNuevo(username){
 
+    let perfilTemplate = JSON.parse(`{"email":"ejemplo","nombre":"ejemplo","apellido":"ejemplo","tel":"000","fechaNac":"1991-01-27","descripcion":"ejemplo","usuario":{"username":"${username}"},"fotoURL":"https://i.imgur.com/tRLkAZB.png"}`);
+    const perfilSinModificar = JSON.parse(JSON.stringify(perfilTemplate)); 
+    //Guardo la variable que va a cambiar y compararse
+    let perfilModificado = JSON.parse(JSON.stringify(perfilTemplate));
+   
+    
+    const btnGuardar = document.getElementById('btnGuardar');
+    btnGuardar.addEventListener('click',function(){
+
+   // console.log(perfilModificado.nombre)
+   perfilModificado.nombre = document.getElementById('nombreInput').value;
+   perfilModificado.apellido = document.getElementById('apellidoInput').value;
+   perfilModificado.email = document.getElementById('emailInput').value;
+   perfilModificado.tel = document.getElementById('telInput').value;
+   perfilModificado.fechaNac = document.getElementById('fechaInput').value;
+   perfilModificado.descripcion = document.getElementById('descripcionInput').value;
+   perfilModificado.fotoURL = document.getElementById('fotoPerfilEdit').src;
+
+
+    if(perfilModificado.nombre!="ejemplo" && perfilModificado.nombre){
+        //Si pasa esta validación, persistir al backend.
+        guardarPerfilNuevo(perfilModificado);
+    }else{
+        alert("nombre es un campo requerido.");
+    }
+
+    })
+
+    function guardarPerfilNuevo(perfil){
+            let bodyReq = JSON.stringify(perfil);   
+            let url = `http://localhost:8080/api/perfil/crear/${perfil.usuario.username}`
+            fetch(url,{
+                method:'post', headers:{
+                    'Content-Type': 'application/json'
+                }, body:bodyReq
+            }).then(respuesta => respuesta.json()).then(d=>{
+                actualizar();
+                $("#btnCancelar").show();         
+                $('#mensaje-notif').html(d.respuesta);
+                $('#notificacion').toast('show');
+            }).catch()
+        
+
+
+
+    }
+
+
+   
+
+   
+}
 
 

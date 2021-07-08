@@ -47,9 +47,9 @@ public class perfilController {
    }
 
 
-   @PreAuthorize ("hasRole('ROLE_ADMIN')")
-   @PostMapping ("/crear")
-   public HashMap crearPerfil (@RequestBody Perfil nuevoPerfil) {
+   @PreAuthorize ("#username==authentication.principal.username")
+   @PostMapping ("/crear/{username}")
+   public HashMap crearPerfil (@PathVariable ("username") String username,@RequestBody Perfil nuevoPerfil) {
       HashMap<String, String> respuesta = new HashMap<> ();
       try {
          Perfil p = ps.agregarPerfil (nuevoPerfil.getUsuario ().getUsername (), nuevoPerfil.getFotoURL (),
@@ -67,9 +67,9 @@ public class perfilController {
 
    }
 
-   @PreAuthorize ("hasRole('ROLE_ADMIN')")
-   @PostMapping ("/modificar")
-   public HashMap modificarPerfil (@RequestBody Perfil p) {
+   @PreAuthorize ("#username==authentication.principal.username")
+   @PostMapping ("/modificar/{username}")
+   public HashMap modificarPerfil (@PathVariable ("username") String username, @RequestBody Perfil p ) {
       HashMap<String, String> map = new HashMap<> ();
       try {
          ps.modificar (p.getIdPerfil (), p.getFotoURL (), p.getEmail (), p.getNombre (), p.getApellido (),
@@ -82,7 +82,7 @@ public class perfilController {
       }
    }
 
-   @PreAuthorize ("hasRole('ROLE_ADMIN')")
+   @PreAuthorize ("hasRole('ADMIN')")
    @DeleteMapping ("/eliminar")
    public HashMap eliminarPerfil (@RequestBody Perfil p) {
       HashMap<String, String> map = new HashMap<> ();
