@@ -34,7 +34,7 @@ public class perfilController {
 
 
    //Este id referencia la ID de usuario no al ID de perfil. La notación preauthorize de este método SOLO VALIDA SI EL USUARIO SOLICITANTE ES EL MISMO QUE SE PIDE, ES DECIR UN USUARIO SÓLO PUEDE VER SU PROPIO PERFIL.
-   @PreAuthorize ("#username==authentication.principal.username")
+   @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')")
    @GetMapping ("/ver/{username}")
    public Perfil verPerfil (@PathVariable ("username") String username) {
       Usuario u = new Usuario ();
@@ -47,7 +47,26 @@ public class perfilController {
    }
 
 
-   @PreAuthorize ("#username==authentication.principal.username")
+
+   @GetMapping("/ver/foto/{username}")
+   public HashMap verFotoPerfil(@PathVariable("username")String username){
+      HashMap<String, String> respuesta = new HashMap<> ();
+
+      Usuario u = new Usuario ();
+      u.setUsername (username);
+      try{
+           respuesta.put("foto",pr.findByUsuario(u).getFotoURL());
+           return respuesta;
+      }catch(Exception e){
+         respuesta.put("foto","https://i.imgur.com/tRLkAZB.png");
+         respuesta.put("Error","no hay foto asignada a ese usuario o no existe");
+         return respuesta;
+      }
+
+   }
+
+
+   @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')")
    @PostMapping ("/crear/{username}")
    public HashMap crearPerfil (@PathVariable ("username") String username,@RequestBody Perfil nuevoPerfil) {
       HashMap<String, String> respuesta = new HashMap<> ();
@@ -67,7 +86,7 @@ public class perfilController {
 
    }
 
-   @PreAuthorize ("#username==authentication.principal.username")
+   @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')"  )
    @PostMapping ("/modificar/{username}")
    public HashMap modificarPerfil (@PathVariable ("username") String username, @RequestBody Perfil p ) {
       HashMap<String, String> map = new HashMap<> ();

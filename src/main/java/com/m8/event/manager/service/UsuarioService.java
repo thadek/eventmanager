@@ -38,7 +38,7 @@ public class UsuarioService implements UserDetailsService {
     private RolService rolService;
 
     @Transactional
-    public void crearUsuario(String username, String password, String password2,
+    public Usuario crearUsuario(String username, String password, String password2,
             Integer idRol) throws ErrorServicio {
 
         validarDatos(username, password, password2);
@@ -60,7 +60,7 @@ public class UsuarioService implements UserDetailsService {
             }
         }
 
-        usuarioRepository.save(usuario);
+        return usuarioRepository.save(usuario);
 
     }
 
@@ -99,26 +99,7 @@ public class UsuarioService implements UserDetailsService {
 
     }
 
-    @Transactional
-    public List<Usuario> verTodosLosUsuarios() throws ErrorServicio {
 
-        return usuarioRepository.findAll();
-
-    }
-
-//    @Transactional
-//    public void eliminarUsuarioPorDoc(Long documento) throws ErrorServicio {
-//
-//        Optional<Usuario> respuesta = ur.findById(documento);
-//        if (respuesta.isPresent()) {
-//
-//            ur.deleteById(documento);
-//
-//        } else {
-//            throw new ErrorServicio("No hay ningún usuario con ese número de documento");
-//        }
-//
-//    }
     private void validarDatos(String username, String password, String password2) throws ErrorServicio {
 
         if (username == null || username.isEmpty()) {

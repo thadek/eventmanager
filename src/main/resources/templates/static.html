@@ -66,9 +66,10 @@
 
 
               <div class="container-flex">
-                  <div th:if='${session.usuarioSession!=null}'>
-                        <h4 th:text="${'Bienvenido  @ '+session.usuarioSession.username}"></h4>
-
+                  <div id="desplegableuser" th:if='${session.usuarioSession!=null}' >
+                    <img src="https://i.imgur.com/IS9Jydi.jpg" class="card-img-top" alt="portada card">        
+                    <img src="https://i.imgur.com/tRLkAZB.png" id="photoUser" class= "rounded-circle">
+                    <h4 id="usdatos"th:text="${session.usuarioSession.username}"></h4>
                     <a class="btn btn-primary" th:href="@{/perfil}">Perfil</a>
                     <a class="btn btn-primary" th:href="@{/logout}">Cerrar Sesión</a>
 
