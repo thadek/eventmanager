@@ -18,8 +18,9 @@
 
 
     <div class="container-flex p-3 m-9">
-
-
+<div class="row">
+  <div class="col-lg-0 col-md-0"  ></div>
+  <div class="col-lg-6 col-md-12" >
 
       <div class="card mb-3" id="cardPerfil">
 
@@ -96,44 +97,64 @@
           <input class="card-text form-control" id="descripcionInput" type="text" ></input>
 
           <button class="btn btn-tana" id="btnCancelar" onclick=cancelar()>Cancelar </button>
-          <button class="btn btn-tana" id="btnGuardar">Guardar </button>
+          <button class="btn btn-tana" id="btnGuardar" onclick=guardarButton()>Guardar </button>
         </div>
 
-        <div class="card-body" id="contenido" style="display:none;">
+
+
+        <div class="card-body" id="contenido" style="display:none; ">
         
+          
           <!--fotoPerfil Circulo-->
           <img src="https://i.imgur.com/tRLkAZB.png" class="rounded-circle" id="fotoPerfil" alt="foto perfil usuario">
 
-          <h5 class="card-title" id="nombrePerfil">Tu nombre</h5>
-          
+<div class="row">
 
-          
-          
+  <div class="col-lg-12">
+    <h2 class="card-title" id="nombrePerfil">Tu nombre</h5> 
+      <p class="card-text" id="descripcionPerfil"></p>
+      <br>
+  </div>
+  
+  <div class="col-lg-6">
 
-
-
-          <label for="email">Email: </label>
+          <label for="email"><strong>Email:</strong> </label>
           <p id="email"></p>
 
 
-          <label for="tel">Teléfono: </label>
+          <label for="tel"><strong>Teléfono:</strong> </label>
           <p id="tel"></p>
+  </div>
+  <div class="col-lg-6">
 
-
-          
-          <label for="fechaNac">Fecha de nacimiento: </label>
+          <label for="fechaNac"><strong>Fecha de nacimiento: </strong></label>
           <p id="fechaNac"></p>
 
 
 
-          <label for="usuario">Usuario: </label>
+          <label for="usuario"><strong>Usuario:</strong> </label>
           <div th:if='${session.usuarioSession != null}'>
             <p th:text="${session.usuarioSession.username}" id="usuario" th:value="${session.usuarioSession.username}">
             </p>
           </div>
+  </div>
+</div>
 
-          <label for="descripcion">Descripción: </label><br>
-          <p class="card-text" id="descripcionPerfil"></p>
+
+
+          
+          
+
+          
+          
+
+
+
+
+
+          
+
+          
          
           <button class="btn btn-tana" id="btnEditar" onclick=actualizarPerfilButton()>Editar Perfil</button>
          
@@ -148,6 +169,12 @@
         </div>
       </div>
 
+  </div>
+  
+</div>
+
+
+    
 
     </div>
     </div>
@@ -180,9 +207,9 @@
     </div>
 
     <!--Notificacion-->
-    <div style="position: relative; min-height: 300px;">
+    <div style="position: relative; min-height: 150px;">
       <div class="toast fade align-items-center text-white bg-dark border-0"
-        style="position: absolute; top: 0; right: 0;" id="notificacion" role="alert" aria-live="assertive"
+        style="position:absolute; top: 0; right: 0;" id="notificacion" role="alert" aria-live="assertive"
         aria-atomic="true">
         <div class="d-flex">
           <div class="toast-body" id="mensaje-notif">

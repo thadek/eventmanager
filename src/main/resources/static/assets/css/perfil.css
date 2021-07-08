@@ -2,7 +2,7 @@
 
 .btn-tana{
     background: var(--back-color);
-    width:10%;
+    width:25%;
     border-radius: 3rem;
     cursor: pointer;
     border: 2px var(--primary-color);
