@@ -19,7 +19,7 @@ public class Inscripcion implements Serializable {
    private Evento evento;
 
    @ManyToOne
-   private Usuario alumno;
+   private Perfil alumno;
 
    @Enumerated(EnumType.STRING)
    private Estado estado;

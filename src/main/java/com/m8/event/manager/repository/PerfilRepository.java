@@ -23,7 +23,7 @@ public interface PerfilRepository extends JpaRepository<Perfil, Integer>{
     
     public List<Perfil> findByFechaNac (Date fechaNac);
     
-    public List<Perfil> findByEmail (String email);
+    public Perfil findByEmail (String email);   
     
     public Perfil findByUsuario(Usuario usuario);
     
