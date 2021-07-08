@@ -1,0 +1,89 @@
+/*PERFIL*/
+
+.btn-tana{
+    background: var(--back-color);
+    width:10%;
+    border-radius: 3rem;
+    cursor: pointer;
+    border: 2px var(--primary-color);
+    color: rgba(0,0,0,.55);
+    margin: 3px;
+}
+
+.btn-tana:hover{
+    background: rgb(110, 103, 112);
+    border-radius: 3rem;
+    cursor: pointer;
+    transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+    border: 2px var(--back-color);
+    color: white;
+}
+
+
+#formulario-edit{
+    display:none;
+}
+
+
+#cardPerfil {
+    border-radius: 20px;
+    margin-top: 7rem;
+}
+
+
+.card-img-top{
+    height:200px;
+    width:auto;
+}
+
+#cardPerfil img {
+     border-top-right-radius: 20px;
+     border-top-left-radius: 20px;
+}
+
+#cardPerfil .rounded-circle {
+    width: 250px;
+    height: 250px;
+    /*margin: 0 auto;*/
+    border: 2px black;
+    margin-top: -120px;
+    margin-bottom: 30px
+}
+
+
+#noPerfil {
+  display: none;
+  color: var(--primary-color);
+  margin: 0 auto;
+  padding: 5px;
+  position:relative;
+  max-width: 400px;
+  z-index:1000;
+}
+
+
+#noPerfil .centrado {
+    margin: 0;
+    padding: 10px;
+    position: absolute;
+    border: 2px solid red;
+    border-radius: 20px;
+    top: -4500%;
+    -ms-transform: translateY(-10%);
+    transform: translateY(-50%);
+}
+
+
+@media screen and (max-width: 792px){
+    #contenido{
+       text-align:center;
+    }
+
+    #formulario-edit{
+        text-align:center;
+    }
+ 
+    .btn-tana{
+        width:100%;
+    }
+}

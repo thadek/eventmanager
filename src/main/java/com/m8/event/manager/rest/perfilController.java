@@ -1,6 +1,8 @@
-package com.m8.event.manager.rest.security;
+package com.m8.event.manager.rest;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.m8.event.manager.entity.Perfil;
 import com.m8.event.manager.entity.Rol;
 import com.m8.event.manager.entity.Usuario;
@@ -31,7 +33,7 @@ public class perfilController {
    private UsuarioRepository ur;
 
 
-   //Este id referencia la ID de usuario no al ID de perfil
+   //Este id referencia la ID de usuario no al ID de perfil. La notación preauthorize de este método SOLO VALIDA SI EL USUARIO SOLICITANTE ES EL MISMO QUE SE PIDE, ES DECIR UN USUARIO SÓLO PUEDE VER SU PROPIO PERFIL.
    @PreAuthorize ("#username==authentication.principal.username")
    @GetMapping ("/ver/{username}")
    public Perfil verPerfil (@PathVariable ("username") String username) {

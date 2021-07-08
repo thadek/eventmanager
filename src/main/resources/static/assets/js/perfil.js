@@ -1,38 +1,52 @@
 verPerfil($("#usuario").attr("value"));
-
-
+cargarFotito();
+var usuarioCargado = false;
 
 const mostrarDatos = (data) => {
-    var perfil = data;
-    console.log(perfil);
+    $('#cargando-card').hide();
+    $('#contenido').show();
+    let perfil = data; 
+    usuarioCargado=true;
+    guardarDatos(perfil);
+    //console.log(perfil);
+    //Mostrar datos normal
     document.getElementById('nombrePerfil').innerHTML = perfil.nombre + " " + perfil.apellido;
     document.getElementById('email').innerHTML = perfil.email;
     document.getElementById('tel').innerHTML = perfil.tel;
     document.getElementById('fechaNac').innerHTML = perfil.fechaNac;
     document.getElementById('descripcionPerfil').innerHTML = perfil.descripcion;
     document.getElementById('fotoPerfil').src=perfil.fotoURL;
+
+    //Mostrar datos para edición
+    document.getElementById('nombreInput').value = perfil.nombre;
+    document.getElementById('apellidoInput').value= perfil.apellido
+    document.getElementById('emailInput').value = perfil.email;
+    document.getElementById('telInput').value = perfil.tel;
+    document.getElementById('fechaInput').value = perfil.fechaNac;
+    document.getElementById('descripcionInput').value = perfil.descripcion;
+    document.getElementById('fotoPerfilEdit').src=perfil.fotoURL;
 }
 
 function noExistePerfil (){
+    $('#cargando-card').hide();
+    $('#contenido').show();
     document.getElementById('cardPerfil').style.opacity = 0.2;
     $("#noPerfil").show();
 }
 
 function verPerfil(username){
+$('#cargando-card').show();
+
     let url = `http://localhost:8080/api/perfil/ver/${username}`;
  fetch(url)
 .then(respuesta=>respuesta.json())
 .then(datos=>{
-    if(datos){
-        mostrarDatos(datos);        
-    } else {
-
-    }
+    if(datos){     
+        setTimeout(function(){mostrarDatos(datos);},400);
+                
+    } 
 })
-.catch(error=>noExistePerfil()
-
-
-)}
+.catch(error=>noExistePerfil())}
 
 function eliminar(id){
     let url = 'http://localhost:8080/api/roles/eliminar'
@@ -52,61 +66,94 @@ function eliminar(id){
 }
 
 
+function cancelar(){
+    $("#formulario-edit").hide();
+    $("#contenido").show(); 
+}
 
-function actualizar(){
-    $('#cargando').show(500).delay(500);
-    $('#cargando').hide(500).delay(600);
-    verRoles();
+function actualizarPerfilButton(){
+
+  $("#contenido").hide(100);
+  $("#formulario-edit").show(100);
+    document.getElementById('nombrePerfil');   
+    document.getElementById('email')
+    document.getElementById('tel')
+    document.getElementById('fechaNac')
+    document.getElementById('descripcionPerfil')
+    document.getElementById('fotoPerfil')
+}
+
+function cargarFotito(){
+    const fotoinput = document.getElementById("inputFoto")
+        const img = document.getElementById("fotoPerfilEdit")      
+        fotoinput.addEventListener("change", ev => {
+            const formdata = new FormData()
+            $('#cargando').show();
+            formdata.append("image", ev.target.files[0])
+            fetch("https://api.imgur.com/3/image/", {
+                method: "post",
+                headers: {
+                    Authorization: "Client-ID e03bb4be3d61985"
+                },
+                body: formdata
+            }).then(data => data.json()).then(data => {
+                $('#cargando').hide();
+                img.src = data.data.link               
+            })
+        })
+}
+
+function nuevoPerfil(){
+    $("#noPerfil").hide();
+    $("#contenido").hide(100);
+    $("#btnCancelar").hide();
+    $("#formulario-edit").show(100);
+    document.getElementById('tituloForm').innerHTML = 'Crear Perfil';
+    document.getElementById('cardPerfil').style.opacity = 1;
+}
+
+function guardarDatos(perfil){
+
+    //Evaluo si guardar nuevo perfil o modificar existente
+    
+      //Guardo el perfil sin modificar
+   const perfilSinModificar = JSON.parse(JSON.stringify(perfil)); 
+   //Guardo la variable que va a cambiar y compararse
+   let perfilModificado = JSON.parse(JSON.stringify(perfil));
+
+   const btnGuardar = document.getElementById('btnGuardar');
+   btnGuardar.addEventListener('click',function(){
+       if (usuarioCargado){
+           perfilModificado.nombre = document.getElementById('nombreInput').value;
+           perfilModificado.apellido = document.getElementById('apellidoInput').value;
+           perfilModificado.email = document.getElementById('emailInput').value;
+           perfilModificado.tel = document.getElementById('telInput').value;
+           perfilModificado.fechaNac = document.getElementById('fechaInput').value;
+           perfilModificado.descripcion = document.getElementById('descripcionInput').value;
+           perfilModificado.fotoURL = document.getElementById('fotoPerfilEdit').src;
+
+           console.log(perfilModificado);
+
+
+       } else {
+           console.log("CrearPerfil")
+           crearPerfilNuevo();
+       }
+
+   })
+   
+ function crearPerfilNuevo(){
+ let perfil = JSON.parse(`{"idPerfil":1,"email":"alumno@alumno.eventmanager.net","nombre":"alumno","apellido":"alumno","tel":"29914184","fechaNac":"1991-01-27","descripcion":"Test alumno","usuario":{"username":"alumno","password":"$2a$10$Vpu8tP.LUQ5aIBY7.CXn2uUzR5SJeeYYmzcJkX/M8xs6fASJXbxQC","rol":{"idRol":3,"nombreRol":"ALUMNO"}},"fotoURL":"https://i.imgur.com/ykaX36T.jpg"}`);
+console.log(perfil);
+
+ }
+
+
+
+
+   
 }
 
 
-function editarRol(){
-    let bodyReq = {idRol: document.getElementById('formEditRolId').value,
-    nombreRol:document.getElementById('formEditRolnombre').value };
-    bodyReq = JSON.stringify(bodyReq);
-    let url = 'http://localhost:8080/api/roles/modificar'
-    fetch(url,{
-        method:'post', headers:{
-            'Content-Type': 'application/json'
-        }, body:bodyReq
-    }).then(respuesta => respuesta.json()).then(d=>{actualizar();
-        console.log(d);
-        $('#mensaje-notif').html(d.respuesta);
-        $('#notificacion').toast('show');
-    }).catch()
 
-
-}
-
-
-function guardarNuevoRol(){
-    let nombre = document.getElementById('nombre-nuevo-rol').value;
-    let bodyReq = {nombreRol: nombre};
-    bodyReq = JSON.stringify(bodyReq);
-    let url = 'http://localhost:8080/api/roles/crear'
-    fetch(url,{
-        method:'post', headers:{
-            'Content-Type': 'application/json'
-        }, body:bodyReq
-    }).then(respuesta => respuesta.json()).then(d=>{actualizar();
-        $('#mensaje-notif').html(d.respuesta);
-        $('#notificacion').toast('show');
-    }).catch()
-}
-
-function nuevoRol(){
-    $('#editarRol').hide();
-    $('#crearRol').fadeIn();
-    document.getElementById('titulo-form').innerHTML = 'Crear Rol';
-}
-
-function mostrarEditarRol(id, nombre){
-
-    $('#crearRol').hide();
-    $('#editarRol').fadeIn();
-    document.getElementById('titulo-form').innerHTML = 'Modificar Rol';
-     document.getElementById('formEditRolId').value = id;
-     document.getElementById('formEditRolnombre').value = nombre;
-
-}
 
