@@ -21,8 +21,8 @@ public interface EventoRepository extends JpaRepository<Evento,Integer> {
     @Query("SELECT e FROM Evento e WHERE e.subcategoria.idSubcategoria= :idSubcategoria")
     public List<Evento> buscarPorSubcategoria (@Param("idSubcategoria") Integer idSubcategoria);
     
-    @Query("SELECT e FROM Evento e WHERE e.usuario.username= :username")
-    public List<Evento> buscarPorFacilitador (@Param("username") String username);
+    @Query("SELECT e FROM Evento e WHERE e.facilitador.email= :email")
+    public List<Evento> buscarPorFacilitador (@Param("email") String email);
     
     @Query("SELECT e FROM Evento e WHERE e.modalidad= :modalidad")
     public List<Evento> buscarPorModalidad (@Param("modalidad") Modalidad modalidad);

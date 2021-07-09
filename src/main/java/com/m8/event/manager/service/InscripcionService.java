@@ -67,6 +67,11 @@ public class InscripcionService {
         int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
 //        int inscripcionesOnline = inscripcionRepository.cantidadInscripciones(modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));;
 
+        inscripcion.setEstado(cantidadInscripciones < evento.getCupoPresencial()?Estado.PENDIENTE: Estado.ESPERA);
+        if (modalidad.equals(Modalidad.ONLINE)) {
+            inscripcion.setEstado(cantidadInscripciones < evento.getCupoVirtual()?Estado.PENDIENTE: Estado.ESPERA);
+        }
+        
         if (modalidad.equals(Modalidad.PRESENCIAL)) {
             if (cantidadInscripciones < evento.getCupoPresencial()) {
                 inscripcion.setEstado(Estado.PENDIENTE);
@@ -80,6 +85,7 @@ public class InscripcionService {
                 inscripcion.setEstado(Estado.ESPERA);
             }
         }
+        
         inscripcionRepository.save(inscripcion);
 
         //        switch (modalidad) {
@@ -166,22 +172,19 @@ public class InscripcionService {
 
     }
 
-    public void chequearListaDeEspera(Integer idEvento, Modalidad modalidad)
-            throws ErrorServicio {
+    public void chequearListaDeEspera(Integer idEvento, Modalidad modalidad){
 
-        Optional<Evento> respuesta1 = eventoRepository.findById(idEvento);
+//        List<Inscripcion> inscripciones = evento.getInscripciones();
+//        inscripciones.sort((Inscripcion i1, Inscripcion i2)
+//                -> Integer.compare(i1.getIdInscripcion(), i2.getIdInscripcion()));
 
-        if (!respuesta1.isPresent()) {
-            throw new ErrorServicio("No existe ese evento en la base de datos.");
+        Optional<Inscripcion> respuesta = inscripcionRepository.buscarListaDeEspera(idEvento, modalidad);
+        
+        if (!respuesta.isPresent()) {
+            return;
         }
-
-        Evento evento = respuesta1.get();
-
-        List<Inscripcion> inscripciones = evento.getInscripciones();
-        inscripciones.sort((Inscripcion i1, Inscripcion i2)
-                -> Integer.compare(i1.getIdInscripcion(), i2.getIdInscripcion()));
-
-        Inscripcion inscripcion = inscripcionRepository.buscarListaDeEspera(idEvento, modalidad, Estado.ESPERA);
+        Inscripcion inscripcion = respuesta.get();
+        
         inscripcion.setEstado(Estado.PENDIENTE);
         inscripcionRepository.save(inscripcion);
 
