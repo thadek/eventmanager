@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+
 
 <head th:replace="headers :: principal"></head>
+
 
 <body>
 
@@ -21,34 +24,44 @@
     <div class="row p-2" id="containerRol">
       <div class="col-4 ps-0" >
 <div class ="navadm ms-0 col-12">
-    <h5 class="card-header" id="titulo-form">Crear Rol</h5>
-    <div class="card" id="crearRol">
+    <h5 class="card-header" id="titulo-form">Crear Categoria</h5>
+    <div class="card" id="crearCategoria">
       <div class="card-body">
         <form>
           <div class="form-group">
-            <label for="nombre">Nombre del Rol</label>
-            <input class="form-control" id="nombre-nuevo-rol" type="text" name="nombre"/>
+            <label for="nombre-nueva-categoria">Nombre de la Categoría</label>
+            <input class="form-control" id="nombre-nueva-categoria" type="text" name="nombre"/>
           </div>
           <br>
-          <button type="button" id="btn-crear-rol" class="btn btn-outline-dark" onclick=guardarNuevoRol()>Crear Rol</button>
+
+          <label for="nombre-nueva-categoria">Nombre de la Subcategoría</label>
+          <select  id="subcategoria" class="needs-validation" multiple aria-label="subcategoria" placeholder="Seleccione subcategoria" required>
+<!--HACER UN FOR EN JS PARA PINTAR LAS SUBCATEGORÍAS -->
+<!--            se trae el elemento select con el id documentElementById-->
+            <!--            <option th:each="libro : ${libro}" th:text="|${libro.titulo}|"-->
+<!--                    th:value="${libro.isbn}"></option>-->
+          </select>
+
+
+          <button type="button" id="btn-crear-categoria" class="btn btn-outline-dark" onclick=guardarNuevaCategoria()>Crear Categoria</button>
 
         </form>
 
       </div>
     </div>
-    <div class="card" id="editarRol" style="display:none;" >
+    <div class="card" id="editarCategoria" style="display:none;" >
       <div class="card-body">
         <form>
           <div class="form-group">
-            <label for="nombre">ID</label>
-            <input class="form-control" id="formEditRolId" type="text"  readonly />
+            <label for="formEditCategoriaId">ID</label>
+            <input class="form-control" id="formEditCategoriaId" type="text"  readonly />
           </div>
           <div class="form-group">
-            <label for="nombre">Nombre del Rol</label>
-            <input class="form-control" id="formEditRolnombre" type="text" name="nombre_rol"/>
+            <label for="formEditCategoriaNombre">Nombre de la Categoria</label>
+            <input class="form-control" id="formEditCategoriaNombre" type="text" name="nombreCategoria"/>
           </div>
           <br>
-          <button type="button" id="btn-editar-rol" onclick=editarRol() class="btn btn-outline-dark">Guardar</button>
+          <button type="button" id="btn-editar-categoria" onclick=editarCategoria() class="btn btn-outline-dark">Guardar</button>
 
         </form>
 
@@ -63,7 +76,7 @@
 
   <table class="table table-bordered table-striped ">
 
-    <button type="button" class="btn btn-outline-dark btn-rol" onclick=nuevoRol()><div class=" bi bi-plus-circle-fill"><br>Nuevo</div></button>
+    <button type="button" class="btn btn-outline-dark btn-rol" onclick=nuevaCategoria()><div class=" bi bi-plus-circle-fill"><br>Nuevo</div></button>
 
     <button type="button" class="btn btn-outline-dark btn-rol" onclick=actualizar()><div class=" bi bi-arrow-clockwise"><br> Actualizar</div></button>
 
@@ -74,7 +87,8 @@
 
     </div>
         <th>ID</th>
-        <th>Nombre Rol</th>
+        <th>Categoría</th>
+        <th>SubCategorias</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -131,8 +145,8 @@
 
 <div th:replace="headers :: js"></div>
 
-<script th:src="@{/assets/js/rol.js}">
 
+<script th:src="@{/assets/js/catoria.js}">
 
 </script>
 

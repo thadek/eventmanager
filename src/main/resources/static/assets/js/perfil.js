@@ -178,16 +178,9 @@ function modificarDatos(perfil){
         $('#notificacion').toast('show');
     }).catch()
 }
-   
 
-
- 
-
-
-
-
-   
 }
+
 
 function crearPerfilNuevo(username){
 
