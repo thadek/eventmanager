@@ -15,9 +15,10 @@ public class Subcategoria implements Serializable {
    private Integer idSubcategoria;
 
    private String nombre;
-
-   private String descripcion;
-
+   
    @ManyToOne
    private Categoria categoria;
+
+   private String descripcion;
+   
 }
