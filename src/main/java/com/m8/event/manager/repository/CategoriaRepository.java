@@ -13,6 +13,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
     
     
     @Query("SELECT c FROM Categoria c WHERE c.nombre= :nombre")
-    public void buscarPorCategoria (@Param("nombre")String nombre);
+    public Categoria buscarPorCategoria (@Param("nombre")String nombre);
     
 }

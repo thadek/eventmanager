@@ -36,7 +36,7 @@ form label h2{
 }
 
 div#login-desp h4 {
-    padding-bottom: 2rem;
+    /*padding-bottom: 2rem;*/
 }
 
 #submit-boton, a.btn-primary{
@@ -404,7 +404,12 @@ footer {
     /* fin footer */
 }
 
+#desplegableuser .card-img-top {
+    height:70px;
+    width:140px;
+    }
 
+    
 @media screen and (max-width: 892px){
 
     .navbar, li, a, button, #navbarNavAltMarkup, #sesion {
@@ -413,6 +418,12 @@ footer {
         
     }
 
+
+     #desplegableuser .card-img-top {
+      height:100px;
+      width:100%;
+      }
+
     .dropdown-item {
         display: inline-flex;
     }
@@ -420,29 +431,19 @@ footer {
 }
 
 
-#cardPerfil {
-    border-radius: 20px;
-    margin-top: 7rem;
+
+
+#desplegableuser {
+     text-align: center;
 }
 
-
-.card-img-top{
-    height:200px;
-    width:auto;
-}
-
-#cardPerfil img {
-     border-top-right-radius: 20px;
-     border-top-left-radius: 20px;
-}
-
-#cardPerfil .rounded-circle {
-    width: 250px;
-    height: 250px;
-    /*margin: 0 auto;*/
-    border: 2px black;
-    margin-top: -120px;
-    margin-bottom: 30px
+#desplegableuser .rounded-circle {
+    width: 85px;
+    height: 85px;
+    margin: 0 auto;
+    border: 1px rgb(199, 198, 198);
+    margin-top: -50px;
+    /*margin-bottom: 30px*/
 }
 
 
