@@ -116,6 +116,27 @@ body{
    text-align:center;
 }
 
+/* ANIMACION CARGANDO PLACEHOLDER*/
+.loader-anim{
+    padding:0!important;
+    display:none;
+}
+
+.ph-item{
+    background-color:transparent!important;
+    border:0!important;
+}
+.ph-picture{
+    background-color:transparent!important;
+}
+
+.ph-picture h3{
+    font-size: 30px;
+    text-align: center;
+    margin-top:40px;
+}
+/*FIN ANIMACION CARGANDO PLACEHOLDER*/
+
 .circuloprogreso p,.circuloprogreso strong{
 position:relative;
 top:-80px;
@@ -200,6 +221,10 @@ line-height: 13px;
 
 /*Fin barra del costado izquierdo*/
 
+#listaMisEventos{
+    max-height: 240px;
+}
+
 
 .container-lista-eventos ul{   
     max-height: 440px;
@@ -208,6 +233,10 @@ line-height: 13px;
     margin-right:0;
     overflow-x: hidden;
     padding-left:0;
+}
+.container-lista-eventos ul li a:hover{
+    background:transparent;
+    color:white;
 }
 
 

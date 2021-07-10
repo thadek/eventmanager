@@ -10,18 +10,29 @@ function togglers() {
 
 
 const mostrarDatos = (data) => {
-    //console.log(data)
     let body = ''
+
     for (let i = 0; i < data.length; i++) {
-        body += 
-        `<tr>
+        //Muestro la lista de subcategorias ordenadas en un solo String.
+        let listaSubcategorias = '';
+        for (let j = 0; j < data[i].subcategorias.length; j++) {
+            if (j === (data[i].subcategorias.length - 1)) {
+                listaSubcategorias += `${data[i].subcategorias[j].nombre}. `
+            } else {
+                listaSubcategorias += `${data[i].subcategorias[j].nombre}, `
+            }
+
+        }
+
+        body +=
+            `<tr>
             <td>${data[i].idCategoria}</td>
             <td>${data[i].nombre}</td> 
-            <td>${data[i].nombreSubCategoria}</td> 
+            <td>${listaSubcategorias}</td> 
 
             
             <td>
-                <button class="btn btn-outline-success" onclick=mostrarEditarCategoria('${data[i].idCategoria}','${data[i].nombreCategoria}') >
+                <button class="btn btn-outline-success" onclick=mostrarEditarCategoria('${data[i].idCategoria}','${data[i].nombre}') >
                     <i class="bi bi-pencil-square"></i> 
                         Editar
                 </button>

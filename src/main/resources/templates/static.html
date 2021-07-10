@@ -38,11 +38,12 @@
             <div class="navbar navbar-nav ms-auto">
   
   
+              
               <!-- DROP EVENTOS -->
               <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button"
                   data-bs-toggle="dropdown" aria-expanded="false"> Eventos </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Inscripciones</a></li>
+                  <li><a class="dropdown-item" th:href="@{/eventos}">Ver eventos</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
@@ -59,8 +60,6 @@
               <button class="btn btn-outline-dark" id="sesion"  data-bs-toggle="dropdown"><i
                     class="bi-person" aria-label="account"></i> </button>
   <!--boton gestion admin-->
-              <a class="nav-link" sec:authorize="hasRole('ROLE_USER_ADMIN')" th:href="@{/adm}"><button class="btn btn-outline-dark" ><i class="bi-file-check"></i> Gestion</button></a>
-
 
             <div class="dropdown-menu dropleft" id="login-desp">
 
@@ -70,8 +69,10 @@
                     <img src="https://i.imgur.com/IS9Jydi.jpg" class="card-img-top" alt="portada card">        
                     <img src="https://i.imgur.com/tRLkAZB.png" id="photoUser" class= "rounded-circle">
                     <h4 id="usdatos"th:text="${session.usuarioSession.username}"></h4>
+                    <a class="btn btn-primary adm-btn" th:href="@{/adm}" sec:authorize="hasRole('ROLE_ADMIN')" >.evn Admin</a>
                     <a class="btn btn-primary" th:href="@{/perfil}">Perfil</a>
                     <a class="btn btn-primary" th:href="@{/logout}">Cerrar Sesión</a>
+                    
 
                     </div>
                 </div>

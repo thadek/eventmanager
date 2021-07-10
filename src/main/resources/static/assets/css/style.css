@@ -20,7 +20,10 @@ html, body {
 }
 
 body{
-    background-color: var(--back-color); 
+    background:url(/assets/images/wallpaper1.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+   /* background-color: var(--back-color); */
     color: var(--primary-color);
 }
 
@@ -455,6 +458,20 @@ footer {
   position:relative;
   max-width: 400px;
   z-index:1000;
+}
+
+@font-face {
+    font-family: Catamaran;
+    src: url(/assets/fonts/catamaran.ttf);
+}
+.adm-btn{
+   font-family: Catamaran;
+   font-size:15px;
+   font-style: italic;
+   
+}
+.adm-btn:hover{
+    background-color:green!important;
 }
 
 
