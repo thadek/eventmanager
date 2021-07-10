@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
-  integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+
 
 
 <head th:replace="headers :: principal"></head>
@@ -198,8 +197,7 @@
 
 <div th:replace="headers :: js"></div>
 
-<script th:src="@{/assets/js/categoria.js}">
-
+<script type="text/javascript" th:src="@{/assets/js/categoria.js}">
 </script>
 
 </html>

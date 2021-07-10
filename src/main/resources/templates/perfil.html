@@ -19,7 +19,7 @@
 
     <div class="container-flex p-3 m-9">
 <div class="row">
-  <div class="col-lg-0 col-md-0"  ></div>
+  
   <div class="col-lg-6 col-md-12" >
 
       <div class="card mb-3" id="cardPerfil">
@@ -87,9 +87,9 @@
 
 
 
-          <label for="usuario">Usuario: </label>
+          <label for="userEdit">Usuario: </label>
           <div th:if='${session.usuarioSession != null}'>
-            <input  id="usuario" class="form-control"th:value="${session.usuarioSession.username}" readonly>
+            <input  id="userEdit" class="form-control"th:value="${session.usuarioSession.username}" readonly>
             </p>
           </div>
 
@@ -136,10 +136,10 @@
 
 
           <label for="usuario"><strong>Usuario:</strong> </label>
-          <div th:if='${session.usuarioSession != null}'>
+          
             <p th:text="${session.usuarioSession.username}" id="usuario" th:value="${session.usuarioSession.username}">
             </p>
-          </div>
+          
   </div>
 </div>
 
@@ -173,7 +173,18 @@
       </div>
 
   </div>
-  
+  <div class="col-lg-6 col-md-12" >
+ 
+    <div class="row" sec:authorize="hasRole('ROLE_ADMIN')">
+
+      <div class="col-lg-12" style="text-align:center; margin-top: 7rem;">
+        <label for="usernameSearch">Ver perfil de:</label>
+      <input type="text" placeholder="username" class="form-control" id="usernameSearch" ><button class="btn btn-tana" onclick=adminUsers()>Buscar</button>bu>
+      </div>
+      
+    </div>
+
+  </div>
 </div>
 
 

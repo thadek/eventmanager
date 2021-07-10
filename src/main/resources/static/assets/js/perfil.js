@@ -6,6 +6,18 @@ try{
 cargarFotito();
 var usuarioCargado = false;
 
+//revisar
+function adminUsers(){
+let nombre = document.getElementById('usernameSearch').value;
+//let userid = document.getElementById('usuario').value=nombre;
+let useredit =document.getElementById('userEdit').value = nombre;
+$("#contenido").hide();
+$("#contenido").show();
+verPerfil(document.getElementById('usernameSearch').value);
+$("#noPerfil").hide();
+document.getElementById('cardPerfil').style.opacity = 1;
+}
+
 const mostrarDatos = (data) => {
     $('#cargando-card').hide();
     $('#contenido').show();

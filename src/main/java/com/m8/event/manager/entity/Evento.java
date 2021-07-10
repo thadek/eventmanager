@@ -1,5 +1,7 @@
 package com.m8.event.manager.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.m8.event.manager.enumeration.Dia;
 import com.m8.event.manager.enumeration.Modalidad;
 import lombok.Data;
@@ -45,6 +47,7 @@ public class Evento implements Serializable {
 
     private Integer valor;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "evento")
     private List<Inscripcion> inscripciones;
 

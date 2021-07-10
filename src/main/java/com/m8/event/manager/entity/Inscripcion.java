@@ -1,5 +1,6 @@
 package com.m8.event.manager.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.m8.event.manager.enumeration.Modalidad;
 import com.m8.event.manager.enumeration.Estado;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class Inscripcion implements Serializable {
    @GeneratedValue (strategy= GenerationType.IDENTITY)
    private Integer idInscripcion;
 
+   @JsonBackReference
    @ManyToOne
    private Evento evento;
 

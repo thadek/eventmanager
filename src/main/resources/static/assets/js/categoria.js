@@ -12,6 +12,8 @@ function togglers() {
 const mostrarDatos = (data) => {
     let body = ''
 
+    
+
     for (let i = 0; i < data.length; i++) {
         //Muestro la lista de subcategorias ordenadas en un solo String.
         let listaSubcategorias = '';
@@ -24,6 +26,8 @@ const mostrarDatos = (data) => {
 
         }
 
+        
+
         body +=
             `<tr>
             <td>${data[i].idCategoria}</td>
@@ -32,7 +36,7 @@ const mostrarDatos = (data) => {
 
             
             <td>
-                <button class="btn btn-outline-success" onclick=mostrarEditarCategoria('${data[i].idCategoria}','${data[i].nombre}') >
+                <button class="btn btn-outline-success" onclick=mostrarEditarCategoria(${data[i].idCategoria},"${encodeURIComponent(data[i].nombre)}") >
                     <i class="bi bi-pencil-square"></i> 
                         Editar
                 </button>
@@ -44,7 +48,10 @@ const mostrarDatos = (data) => {
                 </button>
             </td>
         </tr>`
+
     }
+
+    console.log(body)
 
     document.getElementById('datos').innerHTML = body;
 }
@@ -136,7 +143,7 @@ function mostrarEditarCategoria(id, nombre) {
     $('#editarCategoria').fadeIn();
     document.getElementById('titulo-form').innerHTML = 'Modificar Categoria';
     document.getElementById('formEditCategoriaId').value = id;
-    document.getElementById('formEditCategoriaNombre').value = nombre;
+    document.getElementById('formEditCategoriaNombre').value = decodeURIComponent(nombre);
 
 }
 
