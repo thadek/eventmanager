@@ -89,7 +89,7 @@ table thead{
 }
 
 
-#btn-rol{
+.btn-rol{
     margin-top: .5rem;
     margin-bottom: .5rem;
 }
@@ -317,7 +317,6 @@ nav{
     padding-left:20px!important;
     padding-right:20px!important;
 }
-
 
 
 /* footer */

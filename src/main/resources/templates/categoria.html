@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
+  integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+
+
+<head th:replace="headers :: principal"></head>
+
+
+<body>
+
+  <!-- header -->
+  <header>
+    <nav th:replace="static :: navbar"></nav>
+  </header>
+
+
+  <main>
+
+    <div class="container-flex p-1 m-3 " id="main">
+
+      <!-- BOTON MOSTRAR/OCULTAR -->
+      <button class="btn btn-outline-primary" id="togglerSeccion">Mostrar/Ocultar</button>
+
+      <!-- FORM CREAR CATEGORIA -->
+      <div class="row p-2" id="containerCategoria">
+        <div class="col-4 ps-0">
+          <div class="navadm ms-0 col-12">
+            <h5 class="card-header" id="titulo-form">Crear Categoria</h5>
+            <div class="card" id="crearCategoria">
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <label for="nombre-nueva-categoria">Nombre de la Categoría</label>
+                    <input type="text" class="form-control" id="nombre-nueva-categoria" name="nombre" />
+                  </div>
+                  <br>
+<!-- 
+                  SELECT SUBCATEGORIAS
+                  <label for="nombre-nueva-subcategoria">Nombre de la Subcategoría</label>
+                  <select id="subcategoria" class="needs-validation" multiple aria-label="subcategoria"
+                    placeholder="Seleccione subcategoria" required>
+                    <!--HACER UN FOR EN JS PARA PINTAR LAS SUBCATEGORÍAS -->
+                    <!--            se trae el elemento select con el id documentElementById-->
+                    <!--            <option th:each="libro : ${libro}" th:text="|${libro.titulo}|"-->
+                    <!--                    th:value="${libro.isbn}"></option>-->
+                  <!-- </select> -->
+ 
+
+
+                  <!-- BOTÓN CREAR CATEGORIA -->
+                  <button type="button" id="btn-crear-categoria" class="btn btn-outline-dark"
+                    onclick=guardarNuevaCategoria()>
+                    Crear Categoria
+                  </button>
+
+                </form>
+                <!-- FIN FORM CREAR CATEGORIA -->
+              </div>
+              <!-- FIN div card-body -->
+            </div>
+            <!-- div class="card" id="crearCategoria" -->
+
+
+            <!-- FORM EDITAR CATEGORIA -->
+            <div class="card" id="editarCategoria" style="display:none;">
+              <div class="card-body">
+                <form>
+
+                  <div class="form-group">
+                    <label for="formEditCategoriaId">ID</label>
+                    <input type="text" class="form-control" id="formEditCategoriaId" readonly />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="formEditCategoriaNombre">Nombre de la Categoria</label>
+                    <input type="text" class="form-control" id="formEditCategoriaNombre" name="nombreCategoria" />
+                  </div>
+
+                  <br>
+
+                  <!-- ??? SELECT SUBCATEGORIAS
+                  <label for="nombre-nueva-subcategoria">Nombre de la Subcategoría</label>
+                  <select id="editSubcategoria" class="needs-validation" multiple aria-label="subcategoria"
+                    placeholder="Seleccione subcategoria" >
+                    <!--HACER UN FOR EN JS PARA PINTAR LAS SUBCATEGORÍAS -->
+                    <!--            se trae el elemento select con el id documentElementById-->
+                    <!--            <option th:each="libro : ${libro}" th:text="|${libro.titulo}|"-->
+                    <!--                    th:value="${libro.isbn}"></option>-->
+                  <!-- </select> -->
+ 
+
+
+                  <button type="button" class="btn btn-outline-dark" id="btn-editar-categoria"
+                    onclick=editarCategoria()>Guardar</button>
+
+                </form>
+                <!-- FIN FORM EDITAR CATEGORIA -->
+              </div>
+              <!-- FIN DIV card-body -->
+            </div>
+            <!-- FIN DIV id=editarCategoria -->
+          </div>
+          <!-- FIN DIV div class="navadm ms-0 col-12" -->
+        </div>
+        <!-- FIN div class="col-4 ps-0" -->
+
+
+        <!-- NAVEGACION SOBRE TABLA de MUESTRA DATOS -->
+        <div class="navadm col-8">
+
+          <table class="table table-bordered table-striped ">
+
+            <!-- BOTON NUEVA Muestra formulario para NUEVA CATEGORÍA-->
+            <button type="button" class="btn btn-outline-dark btn-rol" onclick=nuevaCategoria()>
+              <div class=" bi bi-plus-circle-fill"><br>Nueva</div>
+            </button>
+
+            <!-- BOTON ACTUALIZAR -->
+            <button type="button" class="btn btn-outline-dark btn-rol" onclick=actualizar()>
+              <div class=" bi bi-arrow-clockwise"><br> Actualizar</div>
+            </button>
+
+            <!-- TABLA PARA MOSTRAR DATOS -->
+            <thead>
+              <tr>
+
+                <!-- barra de carga -->
+                <div class="progress" id="cargando" style="margin:0; display:none;">
+                  <div class="indeterminate"></div>
+                </div>
+
+                <th>ID</th>
+                <th>Categoría</th>
+                <th>SubCategorias</th>
+                <th>Acciones</th>
+
+              </tr>
+            </thead>
+
+            <!-- id="datos" relaciona con js para const mostrarDatos-->
+            <tbody id="datos"></tbody>
+
+          </table>
+        </div>
+        <!-- FIN DIV NAVEGACIÓN SOBRE TABLA de MUESTRA DATOS -->
+      </div>
+      <!-- FIN DIV FORM CREAR CATEGORIA -> id= containerCategoria -->
+
+    </div>
+    <!-- FIN DIV id=main -->
+
+
+
+    <!--Modal Eliminar-->
+    <div class="modal fade" tabindex="-1" id="modalEliminar">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Eliminar Categoria </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!--NO TOCAR, tiene vinculación con JS-->
+            <p id="idCategoriaConfirmar" style="display:none;"></p>
+            <p><strong>¿Seguro? No se pueden deshacer los cambios de eliminación.</strong></p>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">ERA MENTIRA, VOLVER!</button>
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+              onclick="eliminar(document.getElementById('idCategoriaConfirmar').innerHTML)">BORRAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Notificacion-->
+    <div style="position: relative; min-height: 300px;">
+      <div class="toast fade align-items-center text-white bg-dark border-0"
+        style="position: absolute; top: 0; right: 0;" id="notificacion" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body" id="mensaje-notif">
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+            aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!--Footer -->
+  <footer th:replace="static :: footer"></footer>
+
+</body>
+
+<div th:replace="headers :: js"></div>
+
+<script th:src="@{/assets/js/categoria.js}">
+
+</script>
+
+</html>

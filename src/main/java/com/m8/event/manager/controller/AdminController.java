@@ -24,6 +24,12 @@ public class AdminController {
         return mav;
     }
 
+    @GetMapping("/categorias")
+    public ModelAndView verCategorias(){
+        ModelAndView mav = new ModelAndView("categoria");
+        mav.addObject("title","Categorias de Evento - EventManager ");
+        return mav;
+    }
 
 
 

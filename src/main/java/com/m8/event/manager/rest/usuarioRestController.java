@@ -48,7 +48,8 @@ public class usuarioRestController {
         public HashMap crearUsuario(@RequestBody Usuario nuevoUser)  {
             HashMap<String, String> respuesta = new HashMap<>();
             try{
-                Usuario user = us.crearUsuario(nuevoUser.getUsername(), nuevoUser.getPassword(), nuevoUser.getPassword(), nuevoUser.getRol().getIdRol());
+                Usuario user = us.crearUsuario(nuevoUser.getUsername(), nuevoUser.getPassword(),
+                      nuevoUser.getPassword(), nuevoUser.getRol().getIdRol());
                 respuesta.put("respuesta","Usuario creado exitosamente.");
                 respuesta.put("username",user.getUsername() );
                 respuesta.put("rol",user.getRol().getNombreRol());
