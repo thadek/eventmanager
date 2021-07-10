@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="headers :: principal"></head>
+<!--IMPORTANTE LA LINEA REFERRER, SIN ESO NO ANDA EL SCRIPT PARA SUBIR IMG DE PERFIL-->
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" th:href="@{/assets/css/placeholder.css}">
+<link rel="stylesheet" th:href="@{/assets/css/evento.css}">
+
+<body>
+
+  <!-- header -->
+  <header>
+    <nav th:replace="static :: navbar"></nav>
+  </header>
+
+
+  <main>
+    <div class="container-flex p-1 ms-3 me-3 evContainer">
+      <div class="row p-2">
+        <div class="col-lg-4">
+
+          <div class="container-flex aside">
+            <div class="row asideTitle">
+              <h3> Menu</h3>
+            </div>
+            <div class="row asideContent">
+              
+              <div class="container-flex">
+                <h3>Filtrar resultados</h3>
+              </div>
+              <div class="col-lg-12 bscdr"><input class="form-control buscador" type="search"
+                placeholder="Buscar eventos, profesores, clases..." id="buscador"></div>
+            
+            </div>
+
+          </div>
+          <div class="container-flex admin" id="adminmenu">
+            <div class="row asideTitle ">
+              <h3>.evn admin</h3>
+            </div>
+            <div class="row asideContent ">
+              
+              <div class="container-flex">
+                <h3>Gestionar Eventos</h3>
+              </div>
+              
+              <div class="col-md-3"><button class="btn btn-tana">Crear Evento</button></div>
+            
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="col-lg-8">
+          <div class="row lineaTitulo" id="miseventos">
+
+            <div class="col-lg-12 cartelevento">
+              <h3>Mis eventos</h3>
+
+
+            </div>
+            <div class="col-lg-12 container-lista-eventos">
+              <ul>
+                <li>
+                  <div class="row descripcionEvento">
+                    <div class="col-lg-2 col-md-4 circuloprogreso"><strong>20%</strong>
+                      <p>Ocupacion</p>
+                    </div>
+                    <div class="col-lg-10 col-md-8">
+                      <h3 class="eventName">Hatha Yoga</h3>
+                      <p class="eventModalidad">Online</p>
+                      <p class="eventProfessor">Profesor: Romina</p>
+                      <h6 class="eventOverview">Lunes y Jueves 20hs - Zoom</h6>
+                    </div>
+
+                  </div>
+
+                </li>
+
+              </ul>
+            </div>
+          </div>
+          <br>
+          <div class="row lineaTitulo">
+
+            <div class="col-lg-12 cartelevento">
+              <div class="row">
+                <div class="col-lg-8">
+                  <h3>Eventos</h3>
+                </div>
+                
+              </div>
+            </div>
+            <div class="col-lg-12 container-lista-eventos">
+              <ul>
+                <li>
+                  <div class="row descripcionEvento">
+                    <div class="col-lg-2 col-md-4 circuloprogreso"><strong>20%</strong>
+                      <p>Ocupacion</p>
+                    </div>
+                    <div class="col-lg-10 col-md-8">
+                      <h3 class="eventName">Hatha Yoga</h3>
+                      <p class="eventModalidad">Online</p>
+                      <p class="eventProfessor">Profesor: Romina</p>
+                      <h6 class="eventOverview">Lunes y Jueves 20hs - Zoom</h6>
+                    </div>
+
+                  </div>
+
+                <li>
+                  <div class="row descripcionEvento">
+                    <div class="col-lg-2 col-md-4 circuloprogreso"><strong>20%</strong>
+                      <p>Ocupacion</p>
+                    </div>
+                    <div class="col-lg-10 col-md-8">
+                      <h3 class="eventName">Hatha Yoga</h3>
+                      <p class="eventModalidad">Online</p>
+                      <p class="eventProfessor">Profesor: Romina</p>
+                      <h6 class="eventOverview">Lunes y Jueves 20hs - Zoom</h6>
+                    </div>
+
+                  </div>
+
+                </li>
+                <li>
+                  <div class="row descripcionEvento">
+                    <div class="col-lg-2 col-md-4 circuloprogreso"><strong>20%</strong>
+                      <p>Ocupacion</p>
+                    </div>
+                    <div class="col-lg-10 col-md-8">
+                      <h3 class="eventName">Hatha Yoga</h3>
+                      <p class="eventModalidad">Online</p>
+                      <p class="eventProfessor">Profesor: Romina</p>
+                      <h6 class="eventOverview">Lunes y Jueves 20hs - Zoom</h6>
+                    </div>
+
+                  </div>
+
+                </li>
+                <li>
+                  <div class="row descripcionEvento">
+                    <div class="col-lg-2 col-md-4 circuloprogreso"><strong>20%</strong>
+                      <p>Ocupacion</p>
+                    </div>
+                    <div class="col-lg-10 col-md-8">
+                      <h3 class="eventName">Hatha Yoga</h3>
+                      <p class="eventModalidad">Online</p>
+                      <p class="eventProfessor">Profesor: Romina</p>
+                      <h6 class="eventOverview">Lunes y Jueves 20hs - Zoom</h6>
+                    </div>
+
+                  </div>
+
+                </li>
+                <li>
+                  <div class="row descripcionEvento">
+                    <div class="col-lg-2 col-md-4 circuloprogreso"><strong>20%</strong>
+                      <p>Ocupacion</p>
+                    </div>
+                    <div class="col-lg-10 col-md-8">
+                      <h3 class="eventName">Hatha Yoga</h3>
+                      <p class="eventModalidad">Online</p>
+                      <p class="eventProfessor">Profesor: Romina</p>
+                      <h6 class="eventOverview">Lunes y Jueves 20hs - Zoom</h6>
+                    </div>
+
+                  </div>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+    <!--Lista de mis eventos suscriptos/de los que soy profesor-->
+
+
+    <!--Lista de ultimos eventos-->
+
+
+
+
+
+
+  </main>
+
+  <!--Footer -->
+  <footer th:replace="static :: footer"></footer>
+
+</body>
+
+
+<div th:replace="headers :: js"></div>
+
+<script th:src="@{/assets/js/circle-progress.js}"></script>
+
+<script>
+  $('.circuloprogreso').circleProgress({
+    value: 0.20,
+    fill: {
+      gradient: ['#3aeabb', '#fdd250'] // or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
+    },
+  });
+
+</script>
+
+
+
+
+
+</script>
+
+</html>

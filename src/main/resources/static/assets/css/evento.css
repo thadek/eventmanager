@@ -1,0 +1,265 @@
+@font-face {
+    font-family: ViceCitySans;
+    src: url(/assets/fonts/ViceCitySans.otf);
+}
+
+@font-face {
+    font-family: Catamaran;
+    src: url(/assets/fonts/catamaran.ttf);
+}
+
+footer{
+    position:relative;
+}
+
+body{
+    background:url(/assets/images/wallpaper1.jpg);
+    background-size: cover;
+}
+
+#navbar-1{
+    position:relative;
+}
+
+.evContainer{
+    background:url(/assets/images/wallpaper1.jpg);
+    background-blend-mode:overlay;
+    border-radius:20px;
+   /* border:1px solid rgba(148, 124, 151, 0.15);*/
+    font-family: Catamaran;
+}
+/*
+.evContainer .row{
+    border-radius:20px;
+}*/
+
+.evContainer .cartelevento{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    text-align:left;
+   /* border-radius:20px;*/
+   background:linear-gradient(rgba(14, 235, 255, 0.3),rgba(116, 116, 235, 0.8));
+   /* background:url(/assets/images/wallpaper1.jpg);
+    background-blend-mode:overlay;*/
+}
+
+
+
+.evContainer .cartelevento h3{
+    font-size: 4vh;
+    margin-top:10px;
+    margin-bottom: 10px;
+   /* margin: 125px 0 125px 0;*/
+    color:rgb(255, 255, 255);
+}
+
+.bscdr{ 
+    text-align: center;
+}
+.buscador{
+    background-image: url(/assets/images/searchicon.png); 
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+   /* width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-top:10px;
+    margin-bottom: 10px;
+    border-radius:20px;
+   
+}
+
+
+
+.evContainer li{
+    border-radius:0px;
+   /* background:linear-gradient(rgb(35, 192, 145,0.7),rgb(97, 97, 173,0.7));*/
+   
+   background:url(/assets/images/yoga.jpg);
+  
+  
+    margin-bottom: 3px;
+    padding:10px;
+    color:white;
+    transition: 0.2s;
+   /* border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;*/
+}
+
+.evContainer li:hover{
+ background:linear-gradient(rgba(126, 244, 255, 0.5),rgba(127, 172, 255, 0.808));
+   /*background-color:rgba(255, 253, 253, 0.1);
+   background:url(/assets/images/yoga.jpg);
+   background-size:cover;*/
+   cursor:pointer;
+    
+}
+
+.evContainer li h3{
+   
+    margin-bottom: 0;
+}
+.evContainer li p{
+    
+    margin-bottom: 0;
+}
+
+.container-lista-eventos{
+    margin-left: 0;
+}
+
+.circuloprogreso{
+    
+   height: 100px;
+   width:120px;
+   text-align:center;
+}
+
+.circuloprogreso p,.circuloprogreso strong{
+position:relative;
+top:-80px;
+line-height: 13px;
+
+}
+
+
+
+/*Barra del costado IZQUIERDO*/
+
+
+.asideTitle{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    text-align:left;
+   /* border-radius:20px;*/
+   background:linear-gradient(rgba(14, 235, 255, 0.3),rgba(116, 116, 235, 0.8));
+   color:white;
+   width:96%;
+  
+
+}
+
+.asideTitle h3{
+    font-size: 4vh;
+    margin-top:10px;
+    margin-bottom: 10px;
+   /* margin: 125px 0 125px 0;*/
+    color:rgb(255, 255, 255);
+}
+
+.asideContent{
+    background:linear-gradient(rgba(66, 164, 255, 0.561),rgba(218, 227, 255,0.2 ));
+    width:92%;
+    text-align:center;
+    
+}
+.asideContent h3{
+    font-size: 3vh;
+    margin-top:10px;
+    margin-bottom: 10px;
+    text-align:left;
+   /* margin: 125px 0 125px 0;*/
+    color:rgb(255, 255, 255);
+}
+
+.admin{
+   
+    width:100%;
+    text-align:center;
+    margin-top:10px;
+    
+}
+.admin h3{
+    font-size: 3vh;
+    margin-top:10px;
+    margin-bottom: 10px;
+    text-align:left;
+   /* margin: 125px 0 125px 0;*/
+    color:rgb(255, 255, 255);
+}
+
+.btn-tana{
+    background: var(--back-color);
+    border-radius: 15px;
+    cursor: pointer;
+    border: 2px var(--primary-color);
+    color: rgba(0,0,0,.55);
+    margin: 3px;
+}
+
+.btn-tana:hover{
+    background: rgb(110, 103, 112);
+    
+    cursor: pointer;
+    transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+    border: 2px var(--back-color);
+    color: white;
+}
+
+
+/*Fin barra del costado izquierdo*/
+
+
+.container-lista-eventos ul{   
+    max-height: 440px;
+    overflow: scroll;
+    margin-bottom: 0;
+    margin-right:0;
+    overflow-x: hidden;
+    padding-left:0;
+}
+
+
+/*SCROLLBAR*/
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+    
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+    border-radius: 90px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: transparent; 
+    border-radius: 90px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    border-radius: 90px;
+  }
+  
+  
+  @media screen and (max-width: 892px){
+    .col-md-8{
+        width:50%
+    }
+
+    .asideContent{
+        display:none;
+        width:100%;
+        --bs-gutter-x:0;
+        margin-bottom:30px;
+    }
+
+    
+    .asideTitle{
+      display:none;
+      border-radius: 20px 0 0 20px;
+      width:100%;
+      margin-right:0;
+      /*--bs-gutter-x:0;
+      padding-left:0;*/
+      
+    }
+    footer{
+        position:relative;
+    }
+}

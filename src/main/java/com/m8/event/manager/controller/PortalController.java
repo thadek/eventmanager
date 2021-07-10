@@ -77,25 +77,13 @@ public class PortalController {
     }
 
 
+    @GetMapping("/eventos")
+    public ModelAndView eventos(){
+        ModelAndView mav = new ModelAndView("eventos");
+        mav.addObject("title","Lista de eventos");
+        return mav;
+    }
 
-
-////    Forma Seba
-//    @GetMapping("/login")
-//    public String login(@RequestParam(required = false) String error, 
-//            @RequestParam(required = false) String logout, ModelMap model){
-//        if (error != null) {
-//            model.put("errorLogin", "Usuario o Password incorrectos");
-//        }
-//        if (logout != null) { 
-//            model.put("logout", "Hasta luego!");
-//        }
-//        return "login.html";
-//    } 
-
-//    @GetMapping("/home")
-//    public ModelAndView home() {
-//        return new ModelAndView("home");
-//    }
     
     @GetMapping("/error-403")
     public ModelAndView error() {

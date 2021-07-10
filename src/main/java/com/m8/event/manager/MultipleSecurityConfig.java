@@ -133,7 +133,7 @@ public class MultipleSecurityConfig {
             http
                     .authorizeRequests()
                     .antMatchers("/adm/**").access("hasRole('ROLE_ADMIN')")
-                    .antMatchers("/assets/css/*", "/assets/images/*", "/assets/media/*", "/assets/js/**", "/*").permitAll()
+                    .antMatchers("/assets/**",  "/*").permitAll()
                     .antMatchers("/**").authenticated()
                     .and()
                     .formLogin()
