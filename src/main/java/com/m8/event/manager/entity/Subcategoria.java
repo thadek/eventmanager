@@ -1,5 +1,6 @@
 package com.m8.event.manager.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,7 +16,8 @@ public class Subcategoria implements Serializable {
    private Integer idSubcategoria;
 
    private String nombre;
-   
+
+   @JsonBackReference
    @ManyToOne
    private Categoria categoria;
 
