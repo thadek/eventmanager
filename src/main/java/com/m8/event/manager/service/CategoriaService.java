@@ -11,9 +11,11 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    
+   /* @Tana: Adapté el service de Rol para manejarlo por REST
+    Cambio retorno de void a Categoria
+    */
    @Transactional
-    public void crearCategoria(String nombre) throws ErrorServicio {
+    public Categoria crearCategoria(String nombre) throws ErrorServicio {
 
         if (nombre == null) {
             throw new ErrorServicio("No se ha ingresado ningun nombre válido");
@@ -23,11 +25,16 @@ public class CategoriaService {
 
         categoria.setNombre(nombre);
 
-        categoriaRepository.save(categoria);
+        return categoriaRepository.save(categoria);
     }  
-    
+
+
+       /* @Tana: Adapté el service de Rol para manejarlo por REST
+         Cambio retorno de void a Categoria
+    */
+
     @Transactional
-    public void modificarCategoria(String nombre) throws ErrorServicio {
+    public Categoria modificarCategoria(String nombre, Integer idCategoria) throws ErrorServicio {
 
         Categoria categoria = categoriaRepository.buscarPorCategoria(nombre);
 
@@ -36,6 +43,8 @@ public class CategoriaService {
             categoria.setNombre(nombre);
 
             categoriaRepository.save(categoria);
+
+            return categoria;
 
         } else {
             throw new ErrorServicio("No se encontró esa categoría en la base de datos.");
