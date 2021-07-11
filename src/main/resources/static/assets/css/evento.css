@@ -45,6 +45,7 @@ body{
 
 
 
+
 .evContainer .cartelevento h3{
     font-size: 4vh;
     margin-top:10px;
@@ -70,7 +71,175 @@ body{
    
 }
 
+/* ------------------------------- DETALLES EVENTO ESPECIFICO-------------------------------------------*/
 
+#detalleEvento{
+    max-height: 100%;
+   /* height:1000px;*/
+}
+
+#detalleEvento:hover{
+    background:transparent;
+    
+}
+
+.profile-card-1 {
+    font-family: Catamaran;
+    position: relative;
+    float: left;
+    overflow: hidden;
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    height:200px;
+    border:none;
+    border-radius:10px;
+    transition: 0.2s;
+  }
+
+  .profile-card-1:hover{
+    transform: scale(1.052);
+  }
+
+  .profile-card-1 .background {
+    width:100%;
+    vertical-align: top;
+    opacity: 0.9;
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+     -webkit-transform: scale(1.8);
+    transform: scale(2.8);
+  }
+  .profile-card-1 .card-content {
+    width: 100%;
+    padding: 10px 25px;
+    position: absolute;
+    left: 0;
+    top: 60%;
+  }
+  .profile-card-1 .profile {
+    border-radius: 50%;
+    position: absolute;
+    bottom: 40%;
+    left: 50%;
+    max-width: 100px;
+    opacity: 1;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+   /* border: 2px solid rgba(255, 255, 255, 1);*/
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+  }
+  .profile-card-1 h2 {
+    margin: 0 0 5px;
+    font-weight: 600;
+    font-size:20px;
+  }
+  .profile-card-1 h2 small {
+    display: block;
+    font-size: 15px;
+   /* margin-top:10px;*/
+  }
+  
+
+.tituloEv h1{
+    font-size:80px;
+    text-align:left;
+    margin-bottom:0;
+    line-height: 1;
+}
+.tituloEv h4{
+    padding:0;
+    font-size:30px;
+    text-align:left;
+    margin:0;
+}
+
+.bodyEvent{
+    background:rgba(255, 230, 230, 0.5);
+    min-height:400px;
+    border-radius: 0 0 20px 20px;
+    border-top: solid 4px rgba(144, 183, 255, 0.808);
+    
+    
+}
+
+
+
+
+.contenidoEvento .backgroundTotal{
+    width:100%;
+    vertical-align: top;
+    opacity: 0.9;
+
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+     -webkit-transform: scale(1.2);
+    transform: scale(1.8);
+}
+
+/*Estas lineas son mucho-muy importantes, no tocar*/
+.contenidoEvento{
+    max-height:300px;
+    overflow: hidden;
+    
+    transition:6s!important;
+    background:url("/assets/images/fondoeventos.jpg")!important;
+    background-position: 84% 38%!important;
+    background-size:100%!important;
+    /*background:transparent!important;*/
+}
+
+.contenidoEvento:hover{ 
+    overflow: hidden;
+    background:url("/assets/images/fondoeventos.jpg")!important;
+    transform:scale(1.01)!important;
+    background-position:58% 57%!important;
+    background-size:150%!important;
+/*Estas lineas son mucho-muy importantes, no tocar*/
+    
+}
+
+
+.descripcionCompletaEv{   
+    color:white;
+    padding:2vh;
+}
+
+.descripcionCompletaEv p{
+    font-size:24px;
+}
+
+.btn-suscribir{
+    margin-top:3px;
+    width:100%;
+    height:55px;
+    font-size:2em;
+}
+
+@media screen and (max-width: 842px){
+.tituloEv h1{
+    font-size:8vh;
+}
+.tituloEv h4{
+    font-size: 3vh;
+    text-align: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+.tituloEv h5{
+    font-size:1em;
+}
+
+.lineaDescriptivaEv{
+    text-align: left;
+}
+
+}
+
+
+
+
+/* -------------------------------  FIN DETALLES EVENTO ESPECIFICO-------------------------------------------*/
 
 .evContainer li{
     border-radius:0px;
@@ -79,7 +248,8 @@ body{
    background:url(/assets/images/yoga.jpg);
   
   
-    margin-bottom: 3px;
+   /* @gabi 11-7-2021 2:52 : al final no me gusto el borde margin-bottom: 3px;*/
+   
     padding:10px;
     color:white;
     transition: 0.2s;
@@ -87,12 +257,20 @@ body{
     border-bottom-right-radius: 20px;*/
 }
 
+
+
+
+
 .evContainer li:hover{
  background:linear-gradient(rgba(126, 244, 255, 0.5),rgba(127, 172, 255, 0.808));
+ vertical-align: top;
+  opacity: 1;
+    /* -webkit-transform: scale(1.07);*/
+  transform: scale(1.012);
    /*background-color:rgba(255, 253, 253, 0.1);
    background:url(/assets/images/yoga.jpg);
    background-size:cover;*/
-   cursor:pointer;
+   
     
 }
 

@@ -10,7 +10,7 @@ function renderizarListaPublica(arrayEventos) {
 
         for (let i = 0; i < 5; i++) {
             body += `<li>
-     <a href="/">
+     <a href="http://localhost:8080/eventos/ver">
      <div class="row descripcionEvento">
        <div class="col-lg-2 col-md-4 circuloprogreso circuloprogreso-${i}"><strong>${Math.round(ejemploPorcentajes[i] * 100)}%</strong>
          <p>Ocupacion</p>
@@ -81,13 +81,22 @@ function renderizarListaPrivada(arrayEventos) {
 
 }
 
+
+function renderizarEvento(){
+    $('.bodyEvent').show();
+    $('.contenidoEvento').show();
+}
+
 function cargandoToggler(tiempo) {
     $('.loader-anim').show();
 
     setTimeout(function () {
         $('.loader-anim').hide();
+        renderizarEvento();
         renderizarListaPublica("1");
         renderizarListaPrivada("");
+
+
     }, tiempo);
 
 }

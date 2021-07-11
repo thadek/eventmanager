@@ -5,9 +5,22 @@ try{
 }
 cargarFotito();
 var usuarioCargado = false;
+var perfilUser;
 
+/*function adminUsers(){
+let nombre = document.getElementById('usernameSearch').value;
+userid = document.querySelector('p[id="usuario"]').innerHTML
+//console.log(userid)
 
+let useredit =document.getElementById('userEdit').value = nombre;
+$("#contenido").hide();
+$("#contenido").show();
+document.querySelector('p[id="usuario"]').innerHTML = nombre;
+verPerfil(document.getElementById('usernameSearch').value);
 
+$("#noPerfil").hide();
+document.getElementById('cardPerfil').style.opacity = 1;
+}*/
 
 const mostrarDatos = (data) => {
     $('#cargando-card').hide();
@@ -51,14 +64,14 @@ $('#cargando-card').show();
 .then(datos=>{
     if(datos){     
         setTimeout(function(){mostrarDatos(datos);},400);
-                
+       perfilUser = datos;         
     } 
 })
 .catch(error=>noExistePerfil())}
 
 function eliminar(id){
-    let url = 'http://localhost:8080/api/roles/eliminar'
-    let bodyReq = {idRol:id};
+    let url = 'http://localhost:8080/api/perfil/eliminar'
+    let bodyReq = {idPerfil:id};
     bodyReq = JSON.stringify(bodyReq);
 
 
@@ -67,7 +80,7 @@ function eliminar(id){
             'Content-Type': 'application/json'
         }, body:bodyReq
     }).then(respuesta => respuesta.json()).then(d=>{actualizar();
-        console.log(d);
+        
         $('#mensaje-notif').html(d.respuesta);
         $('#notificacion').toast('show');
     }).catch()
@@ -187,6 +200,13 @@ function modificarDatos(perfil){
 
 }
 
+
+function eliminarPerfil(){
+    alertify.confirm('Confirmar Eliminación', `¿Eliminar perfil de ${perfilUser.usuario.username} ?`, function(){ eliminar(perfilUser.idPerfil) } 
+                , function(){ alertify.error('Se cancelo la eliminación')});
+    console.log(perfilUser);
+
+}
 
 function crearPerfilNuevo(username){
 

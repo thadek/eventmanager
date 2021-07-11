@@ -487,6 +487,12 @@ footer {
 }
 
 
+
+.evnAdmCard{
+ font-family:Catamaran;
+}
+
+
 /* PÁGINAS DE ERROR */
  body#error {
     background-image: url(/assets/images/error-403.jpg);

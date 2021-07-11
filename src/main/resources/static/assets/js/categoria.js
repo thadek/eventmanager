@@ -11,9 +11,7 @@ function togglers() {
 
 const mostrarDatos = (data) => {
     let body = ''
-
-    
-
+   
     for (let i = 0; i < data.length; i++) {
         //Muestro la lista de subcategorias ordenadas en un solo String.
         let listaSubcategorias = '';
@@ -25,9 +23,7 @@ const mostrarDatos = (data) => {
             }
 
         }
-
-        
-
+      
         body +=
             `<tr>
             <td>${data[i].idCategoria}</td>

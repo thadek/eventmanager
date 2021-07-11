@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="headers :: principal"></head>
+<!--IMPORTANTE LA LINEA REFERRER, SIN ESO NO ANDA EL SCRIPT PARA SUBIR IMG DE PERFIL-->
+<meta name="referrer" content="no-referrer">
+<!--<link rel="stylesheet" th:href="@{/assets/css/placeholder.css}">-->
+<link rel="stylesheet" th:href="@{/assets/css/evento.css}">
+<link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
+
+<body>
+
+  <!-- header -->
+  <header>
+    <nav th:replace="static :: navbar"></nav>
+  </header>
+
+
+  <main>
+    <div class="container-flex p-1 ms-3 me-3 evContainer">
+      <div class="row p-2">
+
+
+        <div class="col-lg-12">
+          <div class="row lineaTitulo">
+
+            <div class="col-lg-12 cartelevento">
+              <h3>Detalle Evento</h3>
+
+
+            </div>
+            <div class="col-lg-12 container-lista-eventos">
+              <ul id="detalleEvento">
+                <li class="loader-anim">
+                  <div class="ph-item">
+                    <div class="ph-col-12">
+                      <div class="ph-picture">
+                        <h3>.evn Cargando...</h3>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+
+                </li>
+
+
+                <li class="contenidoEvento" style="display:none;">
+
+
+
+                  <div class="card-body">
+
+                    <div class="row">
+                      <div class="col-xl-2 col-lg-3 col-sm-4">
+                        <!--Tarjeta Profesor-->
+                        <div class="card profile-card-1">
+                          <img src="https://i.imgur.com/F1YAXlF.png" alt="profile-sample1" class="background" />
+                          <img src="https://i.imgur.com/F1YAXlF.png" alt="profile-image" class="profile" />
+                          <div class="card-content">
+                            <h2>Romina Ahrens<small>Profesor</small></h2>
+
+                          </div>
+                        </div>
+
+                      </div>
+                      <!--Titulo Evento y Dias-->
+                      <div class="col-xl-8 col-lg-6 col-sm-4 tituloEv">
+                        <h1>Hatha Yoga</h1>
+
+                          <h4>Modalidad Online</h4>
+                          <h5>Lunes, Miercoles y Viernes</h5>
+
+
+
+                      </div>
+                      <div class="col-xl-2 col-lg-3 col-md-6">
+
+                      </div>
+
+
+                    </div>
+
+
+
+                  </div>
+
+                </li>
+                <div class="container-flex bodyEvent" style="display:none;">
+                  <div class="row bg-light p-2 lineaDescriptivaEv">
+                    <div class="col-xl-1">
+
+
+                      <label for="ocupacion">
+                        Ocupación:
+                      </label>
+                      <h3 id="ocupacion">9/13</h3>
+
+                    </div>
+
+                    <div class="col-xl-2">
+                      <label for="dias">
+                        Dias
+                      </label>
+                      <h5 id="dias">Lunes, Miercoles y Viernes</h5>
+                    </div>
+
+                    <div class="col-xl-1">
+                      <label for="hora">
+                        Hora
+                      </label>
+                      <h3 id="hora">19hs</h3>
+                    </div>
+                    <div class="col-xl-2">
+                      <label for="duración">
+                        Duración
+                      </label>
+                      <h3 id="hora">3hs</h3>
+
+                    </div>
+
+
+                    <div class="col-xl-2"><label for="duración">
+                        Costo
+                      </label>
+                      <h3 id="precio">$1500</h3>
+                    </div>
+
+                    <div class="col-xl-1"></div>
+                    <div class="col-xl-3">
+                      <button class="btn btn-success btn-suscribir">Inscribirse</button>
+                    </div>
+
+                  </div>
+
+                  <div class="row descripcionCompletaEv">
+
+                    <div class="col-xl-12">
+                      <p>Hatha es un término paraguas para todas las formas físicas del yoga. Este estilo de yoga es un
+                        estilo clásico de posturas y técnicas de respiración. Su objetivo es crear un equilibrio entre
+                        las energías masculinas y femeninas que existen dentro de nosotros mismos. Además, también se
+                        utilizan las posturas de yoga para lograr el equilibrio entre la fuerza y la flexibilidad.</p>
+                      <p>
+                        Para realizar una buena práctica de Hatha yoga, debemos cumplir tres requisitos: posturas
+                        físicas, técnicas de respiración, meditación. Vemos que estos tres elementos son comunes en
+                        muchos tipos de yoga. Eso solo significa que todas las prácticas que contengan estos tres
+                        elementos también se consideran Hatha yoga. Cada uno de estos requisitos tiene su fundamental
+                        función durante la realización del yoga. Las posturas físicas fortalecen el cuerpo, las técnicas
+                        de respiración nos ayudan a controlar la respiración y a manipular la energía vital, y la
+                        meditación nos ayuda a enfocar y a calmar la mente.
+                      </p>
+                    
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+              </ul>
+
+
+            </div>
+          </div>
+        
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+    <!--Lista de mis eventos suscriptos/de los que soy profesor-->
+
+
+    <!--Lista de ultimos eventos-->
+
+
+
+
+
+
+  </main>
+
+  <!--Footer -->
+  <footer th:replace="static :: footer"></footer>
+
+</body>
+
+
+<div th:replace="headers :: js"></div>
+
+<script th:src="@{/assets/js/circle-progress.js}"></script>
+
+
+<script th:src="@{/assets/js/eventovista.js}"></script>
+
+
+
+
+
+
+</html>

@@ -1,7 +1,12 @@
 package com.m8.event.manager.controller;
 
+import com.m8.event.manager.entity.Usuario;
+import com.m8.event.manager.repository.PerfilRepository;
+import com.m8.event.manager.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,6 +33,19 @@ public class AdminController {
     public ModelAndView verCategorias(){
         ModelAndView mav = new ModelAndView("categoria");
         mav.addObject("title","Categorias de Evento - EventManager ");
+        return mav;
+    }
+
+    @Autowired
+    private PerfilRepository pr;
+
+    @GetMapping("/perfil/ver/{username}")
+    public ModelAndView verCategorias(@PathVariable("username") String username){
+        Usuario usuario = new Usuario();
+        usuario.setUsername(username);
+        ModelAndView mav = new ModelAndView("perfil-adm");
+        mav.addObject("title","Gestion de Perfil - EventManager ");
+        mav.addObject("usuario",pr.findByUsuario(usuario));
         return mav;
     }
 
