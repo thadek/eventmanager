@@ -16,7 +16,6 @@ public class AdminController {
         return mav;
     }
 
-
     @GetMapping("/roles")
     public ModelAndView verRoles(){
         ModelAndView mav = new ModelAndView("rol");
@@ -31,6 +30,11 @@ public class AdminController {
         return mav;
     }
 
-
+    @GetMapping("/subcategorias")
+    public ModelAndView verSubcategorias(){
+        ModelAndView mav = new ModelAndView("subcategoria");
+        mav.addObject("title","Subcategorias de Evento - EventManager ");
+        return mav;
+    }
 
 }

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="headers :: principal"></head>
+
+
+<body>
+
+<!-- header -->
+<header>
+    <nav th:replace="static :: navbar"></nav>
+</header>
+
+
+<main>
+
+    <div class="container-flex p-1 m-3 "
+         id="main">
+
+        <!-- BOTON MOSTRAR/OCULTAR -->
+        <button class="btn btn-outline-primary"
+                id="togglerSeccion">SUBCATEGORIAS Mostrar/Ocultar
+        </button>
+
+        <!-- FORM CREAR SUBCATEGORIA -->
+        <div class="row p-2"
+             id="containerSubcategoria">
+            <div class="col-4 ps-0">
+                <div class="navadm ms-0 col-12">
+                    <h5 class="card-header"
+                        id="titulo-form">Crear Subcategoria</h5>
+                    <div class="card"
+                         id="crearSubcategoria">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="nombre-nueva-subcategoria">Nombre de la Subcategoría</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nombre-nueva-subcategoria"
+                                           name="nombre"/>
+                                </div>
+                                <br>
+
+                                <!-- SELECT CATEGORIAS-->
+                                <label for="categorias">Seleccione categoría</label>
+                                <select id="categorias"
+                                        class="needs-validation"
+                                        multiple
+                                        aria-label="categoria"
+                                        placeholder="Seleccione categoria"
+                                        required>
+                                    <option th:each="categoria : ${listaCategorias}"
+                                            th:text="|${categoria.nombre}|"
+                                            th:value="${categoria.idCategoria}"></option>
+                                </select>
+
+
+                                <div class="form-group">
+                                    <label for="descripcion-subcategoria">Descripcion</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="descripcion-subcategoria"
+                                           name="descripcion"/>
+                                </div>
+                                <br>
+
+
+                                <!-- BOTÓN CREAR SUBCATEGORIA -->
+                                <button type="button"
+                                        id="btn-crear-subcategoria"
+                                        class="btn btn-outline-dark"
+                                        onclick=guardarNuevaSubcategoria()>
+                                    Crear Subcategoria
+                                </button>
+
+                            </form>
+                            <!-- FIN FORM CREAR SUBCATEGORIA -->
+                        </div>
+                        <!-- FIN div card-body -->
+                    </div>
+                    <!-- div class="card" id="crearSubcategoria" -->
+
+
+                    <!-- FORM EDITAR SUBCATEGORIA -->
+                    <div class="card"
+                         id="editarSubcategoria"
+                         style="display:none;">
+                        <div class="card-body">
+                            <form>
+
+                                <div class="form-group">
+                                    <label for="formEditSubcategoriaId">ID</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="formEditSubcategoriaId"
+                                           readonly/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="formEditSubcategoriaNombre">Nombre de la Subcategoria</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="formEditSubcategoriaNombre"
+                                           name="nombre"/>
+                                </div>
+
+                                <br>
+
+                                <!-- SELECT CATEGORIAS-->
+                                <label for="formEditCategoria">Seleccione categoría</label>
+                                <select id="formEditCategoria"
+                                        class="needs-validation"
+                                        multiple
+                                        aria-label="categoria"
+                                        placeholder="Seleccione categoria"
+                                        required>
+                                    <option th:each="categoria : ${listaCategorias}"
+                                            th:text="|${categoria.nombre}|"
+                                            th:value="${categoria.idCategoria}"></option>
+                                </select>
+
+                                <div class="form-group">
+                                    <label for="formEditSubcategoriaDescripcion">Descripcion</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="formEditSubcategoriaDescripcion"
+                                           name="descripcion"/>
+                                </div>
+
+
+                                <button type="button"
+                                        class="btn btn-outline-dark"
+                                        id="btn-editar-subcategoria"
+                                        onclick=editarSubcategoria()>Guardar
+                                </button>
+
+                            </form>
+                            <!-- FIN FORM EDITAR SUBCATEGORIA -->
+                        </div>
+                        <!-- FIN DIV card-body -->
+                    </div>
+                    <!-- FIN DIV id=editarSubcategoria -->
+                </div>
+                <!-- FIN DIV div class="navadm ms-0 col-12" -->
+            </div>
+            <!-- FIN div class="col-4 ps-0" -->
+
+
+            <!-- NAVEGACION SOBRE TABLA de MUESTRA DATOS -->
+            <div class="navadm col-8">
+
+                <table class="table table-bordered table-striped ">
+
+                    <!-- BOTON NUEVA Muestra formulario para NUEVA SUBCATEGORÍA-->
+                    <button type="button"
+                            class="btn btn-outline-dark btn-rol"
+                            onclick=nuevaSubcategoria()>
+                        <div class=" bi bi-plus-circle-fill"><br>Nueva</div>
+                    </button>
+
+                    <!-- BOTON ACTUALIZAR -->
+                    <button type="button"
+                            class="btn btn-outline-dark btn-rol"
+                            onclick=actualizar()>
+                        <div class=" bi bi-arrow-clockwise"><br> Actualizar</div>
+                    </button>
+
+                    <!-- TABLA PARA MOSTRAR DATOS -->
+                    <thead>
+                    <tr>
+
+                        <!-- barra de carga -->
+                        <div class="progress"
+                             id="cargando"
+                             style="margin:0; display:none;">
+                            <div class="indeterminate"></div>
+                        </div>
+
+                        <th>ID</th>
+                        <th>SubCategoria</th>
+                        <th>Categoria</th>
+                        <th>Descripcion</th>
+                        <th>Acciones</th>
+
+                    </tr>
+                    </thead>
+
+                    <!-- id="datos" relaciona con js para const mostrarDatos-->
+                    <tbody id="datos"></tbody>
+
+                </table>
+            </div>
+            <!-- FIN DIV NAVEGACIÓN SOBRE TABLA de MUESTRA DATOS -->
+        </div>
+        <!-- FIN DIV FORM CREAR SUBCATEGORIA -> id= containerSubcategoria -->
+
+    </div>
+    <!-- FIN DIV id=main -->
+
+
+    <!--Modal Eliminar-->
+    <div class="modal fade"
+         tabindex="-1"
+         id="modalEliminar">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Eliminar Subategoria </h5>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--NO TOCAR, tiene vinculación con JS-->
+                    <p id="idSubcategoriaConfirmar"
+                       style="display:none;"></p>
+                    <p><strong>¿Seguro? No se pueden deshacer los cambios de eliminación.</strong></p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button"
+                            class="btn btn-outline-dark"
+                            data-bs-dismiss="modal">ERA MENTIRA, VOLVER!
+                    </button>
+                    <button type="button"
+                            class="btn btn-outline-danger"
+                            data-bs-dismiss="modal"
+                            onclick="eliminar(document.getElementById('idSubcategoriaConfirmar').innerHTML)">BORRAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Notificacion-->
+    <div style="position: relative; min-height: 300px;">
+        <div class="toast fade align-items-center text-white bg-dark border-0"
+             style="position: absolute; top: 0; right: 0;"
+             id="notificacion"
+             role="alert"
+             aria-live="assertive"
+             aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body"
+                     id="mensaje-notif">
+                </div>
+                <button type="button"
+                        class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!--Footer -->
+<footer th:replace="static :: footer"></footer>
+
+</body>
+
+<div th:replace="headers :: js"></div>
+
+<script type="text/javascript"
+        th:src="@{/assets/js/subcategoria.js}">
+</script>
+
+</html>
