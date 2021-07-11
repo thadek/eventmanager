@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SubcategoriaService {
 
     @Autowired
@@ -19,8 +21,10 @@ public class SubcategoriaService {
     @Autowired
     private EventoRepository eventoRepository;
 
+
+    /* Modifico return de crear y modificar subcategoría*/
     @Transactional
-    public void crearSubcategoria(String nombre, Categoria categoria, String descripcion)
+    public Subcategoria crearSubcategoria(String nombre, Categoria categoria, String descripcion)
             throws ErrorServicio {
 
         if (nombre == null || nombre.isEmpty()) {
@@ -38,10 +42,11 @@ public class SubcategoriaService {
         subcategoria.setDescripcion(descripcion);
 
         subcategoriaRepository.save(subcategoria);
+        return subcategoria;
     }
 
     @Transactional
-    public void modificarSubcategoria(Integer idSubcategoria, String nombre,
+    public Subcategoria modificarSubcategoria(Integer idSubcategoria, String nombre,
             Categoria categoria, String descripcion) throws ErrorServicio {
 
         if (nombre == null || nombre.isEmpty()) {
@@ -62,6 +67,7 @@ public class SubcategoriaService {
             subcategoria.setDescripcion(descripcion);
 
             subcategoriaRepository.save(subcategoria);
+            return subcategoria;
 
         } else {
             throw new ErrorServicio("No se encontró esa categoría en la base de datos.");
