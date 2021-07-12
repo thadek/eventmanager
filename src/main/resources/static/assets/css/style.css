@@ -261,25 +261,93 @@ table thead{
   /*-------Fin adm bar--------*/
 
 #logon2{
-    font-family:Arial, Helvetica, sans-serif;
-    text-align:center;    
-    background-blend-mode: darken;
-    border-radius:20px;
-    padding-left:2px;
-    padding-right: 2px;
-    padding-bottom: 2px;
-    padding-top:2px;
-    justify-content: right;
-    opacity: 89%;
+    text-align:center;
+
 }
-#login-desp{
-    color: rgba(0,0,0,.55);
-    background-color: #f8f9fa!important;
+
+#logon2 .card-img-top{
+    width:100%!important;
+}
+
+#logon2 h4{
+    /* padding: 1vh; */
+    left: 22%;
     position: absolute;
-    padding:5%;
-    border-radius:20px;
+    top: 16%;
+    font-size: 20px;
+}
+.formulariologin{
+    padding:10px;
+}
+
+
+.menulogin{
+    padding: 5px 5px 5px 0;
+}
+
+#navbarNavAltMarkup{
+    background:#2e2e2e7a!important;
+    padding:10px;
+}
+
+#navbarSecundario{
+    background:transparent!important;
+}
+
+#login-desp{
+   /* color: rgba(0,0,0,.55);
+    background-color: #f8f9fa!important;*/
+    position: absolute;
+    /*padding:0 5% 0 5%;*/
+    border-radius: 20px 20px 6px 6px;
+    padding:0;
     
 }
+
+/* FONDITO DE COLORES DEL INICIO DE SESION */
+#desplegableuser .card-img-top,#logon2 .card-img-top {
+    height: 70px;
+    position: relative;
+    width: 158px;
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    /* background: url("https://i.imgur.com/QDasT72.jpg"); */
+    border-radius: 20px 20px 0 0;
+    /* background-position: 0% 52%; */
+    /* transition: 6s; */
+    opacity: 0.4;
+    z-index: -1;
+    background-size: 1200% 1200%;
+    -webkit-animation: rainbow 28s ease infinite;
+    -z-animation: rainbow 28s ease infinite;
+    -o-animation: rainbow 28s ease infinite;
+    animation: rainbow 28s ease infinite;
+
+
+}
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+
+
+/* FIN FONDITO DE COLORES DEL INICIO DE SESION NAVBAR */
+
 
 #navbar-1{
     display: inline-block;
@@ -385,7 +453,7 @@ nav{
     list-style: none;
     background-color: #2e2e2e;
     background-clip: padding-box;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+ /*   border: 1px solid rgba(255, 255, 255, 0.15);*/
     border-radius: .5rem;
 }
 
@@ -394,7 +462,7 @@ nav{
     transition:.5s;
 }
 .dropdown-item:focus, .dropdown-item:hover{
-    background-color:#8d78ff59;
+    background-color: rgba(141, 141, 141, 0.24);
     color:#FFFFFF;
 }
 
@@ -489,10 +557,7 @@ footer {
     /* fin footer */
 }
 
-#desplegableuser .card-img-top {
-    height:70px;
-    width:140px;
-    }
+
 
     
 @media screen and (max-width: 892px){
@@ -525,9 +590,9 @@ footer {
 #desplegableuser .rounded-circle {
     width: 85px;
     height: 85px;
-    margin: 0 auto;
-    border: 1px rgb(199, 198, 198);
-    margin-top: -50px;
+   /* margin: 0 auto;*/
+   /* border: 1px rgb(199, 198, 198);*/
+    margin-top: -70px;
     /*margin-bottom: 30px*/
 }
 
@@ -546,15 +611,8 @@ footer {
     font-family: Catamaran;
     src: url(/assets/fonts/catamaran.ttf);
 }
-.adm-btn{
-   font-family: Catamaran;
-   font-size:15px;
-   font-style: italic;
-   
-}
-.adm-btn:hover{
-    background-color:green!important;
-}
+
+
 
 
 #noPerfil .centrado {

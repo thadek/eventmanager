@@ -35,7 +35,7 @@
             </div>
   
             <!-- Apartado de cuenta, eventos -->
-            <div class="navbar navbar-nav ms-auto">
+            <div class="navbar navbar-nav ms-auto" id="navbarSecundario">
   
   
               
@@ -66,25 +66,33 @@
 
               <div class="container-flex">
                   <div id="desplegableuser" th:if='${session.usuarioSession!=null}' >
-                    <img src="https://i.imgur.com/IS9Jydi.jpg" class="card-img-top" alt="portada card">        
+                    <div class="card-img-top" alt="portada card"></div>
                     <img src="https://i.imgur.com/tRLkAZB.png" id="photoUser" class= "rounded-circle">
                     <h4 id="usdatos"th:text="${session.usuarioSession.username}"></h4>
-                    <a class="btn btn-primary adm-btn" th:href="@{/adm}" sec:authorize="hasRole('ROLE_ADMIN')" >.evn Admin</a>
-                    <a class="btn btn-primary" th:href="@{/perfil}">Perfil</a>
-                    <a class="btn btn-primary" th:href="@{/logout}">Cerrar Sesión</a>
+                   <div class="menulogin">
+                     <a class="dropdown-item" th:href="@{/adm}" sec:authorize="hasRole('ROLE_ADMIN')" >.evn Admin</a>
+                     <a class="dropdown-item" th:href="@{/perfil}">Perfil</a>
+                     <a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a>
+                   </div>
                     
 
                     </div>
                 </div>
                 <form class="form-horizontal needs-validation" novalidate th:if='${session.usuarioSession==null}' th:action="@{/logincheck}" method="post"
                     accept-charset="UTF-8" id="logon2">
-                    <label>
-                        <h4>Iniciar Sesión</h4>
-                    </label>
+                  <div class="card-img-top" alt="portada card"></div>
+                  <label>
+                    <h4>Iniciar Sesión</h4>
+                  </label>
+                  <div class="formulariologin">
 
                     <input class="form-control login" type="text" name="username" placeholder="Usuario" required><br>
                     <input class="form-control login" type="password" name="password" placeholder="Password" required><br>
-                    <button class="btn btn-primary" type="submit" id="submit-boton">Iniciar Sesión</button>
+                    <button class="dropdown-item" type="submit" >Iniciar Sesión</button>
+                  </div>
+
+
+
                 </form>
             </div>
             </div>

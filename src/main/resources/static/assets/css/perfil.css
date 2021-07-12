@@ -59,6 +59,14 @@ body{
     border: 0;
 }
 
+.card-body .row h2{
+    font-size:3rem;
+
+}
+label{
+    font-size:2.5vh;
+}
+
 
 .card-img-top{
     height:200px;
