@@ -50,7 +50,7 @@ $('#cargando-card').show();
 .then(respuesta=>respuesta.json())
 .then(datos=>{
     if(datos){     
-        setTimeout(function(){mostrarDatos(datos);},400);
+        setTimeout(function(){mostrarDatos(datos);},900);
                 
     } 
 })

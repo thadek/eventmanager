@@ -1,5 +1,9 @@
 /*PERFIL*/
 
+body{
+    background-size:inherit;
+    background-position: right;
+}
 .btn-tana{
     background: var(--back-color);
     width:25%;
@@ -24,17 +28,81 @@
     display:none;
 }
 
+/* ANIMACION CARGANDO PLACEHOLDER*/
+.loader-anim{
+    padding:0!important;
+
+}
+
+.ph-item{
+    background-color:transparent!important;
+    border:0!important;
+}
+.ph-picture{
+    background-color:transparent!important;
+}
+
+.ph-picture h3{
+    font-size: 30px;
+    text-align: center;
+    margin-top:40px;
+}
+/*FIN ANIMACION CARGANDO PLACEHOLDER*/
+
+
+
+
 
 #cardPerfil {
     border-radius: 20px;
-    margin-top: 7rem;
+    background: linear-gradient(58deg, #000000a3, transparent);
+    border: 0;
 }
 
 
 .card-img-top{
     height:200px;
     width:auto;
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    /*background:url("https://i.imgur.com/QDasT72.jpg");*/
+    border-radius: 20px 20px 0 0;
+   /* background-position: 0% 52%;*/
+    /*transition:6s;*/
+    opacity:0.4;
+    z-index:-10;
+    background-size: 1200% 1200%;
+    -webkit-animation: rainbow 28s ease infinite;
+    -z-animation: rainbow 28s ease infinite;
+    -o-animation: rainbow 28s ease infinite;
+    animation: rainbow 28s ease infinite;
 }
+
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+
+
+.card-img-top:hover{
+    /*background-position: 87% 77%;*/
+}
+
 
 #cardPerfil img {
      border-top-right-radius: 20px;
@@ -45,9 +113,13 @@
     width: 250px;
     height: 250px;
     /*margin: 0 auto;*/
-    border: 2px black;
+   /* border: solid 6px linear-gra;*/
     margin-top: -120px;
-    margin-bottom: 30px
+    margin-bottom: 30px;
+    transition:1s;
+}
+#cardPerfil .rounded-circle:hover{
+    transform:scale(1.01);
 }
 
 

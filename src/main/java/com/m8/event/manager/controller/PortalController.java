@@ -77,20 +77,7 @@ public class PortalController {
     }
 
 
-    @GetMapping("/eventos")
-    public ModelAndView eventos(){
-        ModelAndView mav = new ModelAndView("eventos");
-        mav.addObject("title","Lista de eventos");
-        return mav;
-    }
 
-
-    @GetMapping("/eventos/ver")
-    public ModelAndView verEvento(){
-        ModelAndView mav = new ModelAndView("evento-detalle");
-        mav.addObject("title","Detalle Evento");
-        return mav;
-    }
 
     @GetMapping("/error-403")
     public ModelAndView error() {

@@ -27,6 +27,7 @@ body{
     border-radius:20px;
    /* border:1px solid rgba(148, 124, 151, 0.15);*/
     font-family: Catamaran;
+    min-height:800px;
 }
 /*
 .evContainer .row{
@@ -405,7 +406,7 @@ line-height: 13px;
 
 
 .container-lista-eventos ul{   
-    max-height: 440px;
+    max-height: 560px;
     overflow: scroll;
     margin-bottom: 0;
     margin-right:0;

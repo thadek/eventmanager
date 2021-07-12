@@ -15,6 +15,12 @@
         --lightgray: #f1f1f1;
   }
 
+@font-face {
+    font-family: Catamaran;
+    src: url(/assets/fonts/catamaran.ttf);
+}
+
+
 html, body {
     height: 100%;
 }
@@ -25,6 +31,7 @@ body{
     background-repeat: no-repeat;
    /* background-color: var(--back-color); */
     color: var(--primary-color);
+    font-family: Catamaran;
 }
 
 form label h2{
@@ -87,12 +94,17 @@ table thead{
 
 
 .navadm{
-    background-color: #f8f9fa;
+    background:#41464b;
     border-radius: 20px;
 }
 
 
+.table tr{
+    color:white!important;
+}
+
 .btn-rol{
+    margin-right: .5rem;
     margin-top: .5rem;
     margin-bottom: .5rem;
 }
@@ -107,6 +119,13 @@ table thead{
     border-color: white;
 }
 
+.card-header{
+    color:rgb(255,255,255);
+}
+.card{
+    background: linear-gradient(rgba(14, 235, 255, 0.3),rgba(116, 116, 235, 0.8));
+    color:white;
+}
 
 /*
 #submit-boton {
@@ -269,12 +288,37 @@ table thead{
     border: 1px solid rgba(148, 124, 151, 0.15);
     font-size:large;
    /* max-width:500px;*/
-    position:absolute;
+   /* position:absolute;*/
 }
 
+
+.navbar-brand{
+    font-size:25px;
+    color:#FFFFFF;
+
+}
+.navbar-light .navbar-nav .nav-link{
+    color:#FFFFFF!important;
+}
+.navbar-light .navbar-brand {
+    color:#FFFFFF!important;
+}
+.navbar{
+    background:#2e2e2e!important;
+
+}
 #logo{
-    width:70px;
-    height:70px;
+    background: url("/assets/images/logo-dark.png");
+    z-index: 10;
+    width: 115px;
+    height: 70px;
+    background-position: 151% 48%;
+    font-size: 41px;
+    border-radius: 18px 20px 0px 20px;
+    text-align: center;
+    transform: scale(1.3);
+    background-size: 327px 339px;
+    /* box-shadow: 0px 1px 7px 5px #7208ff80; */
 }
 
 nav{
@@ -283,16 +327,49 @@ nav{
 
 
 .btn-outline-dark {
-    color: var(--primary-color);
-    border-color: var(--back-color);
+    color: rgb(231, 231, 231);
+    border-color: rgb(231, 231, 231);
+
+    border-radius:20px;
     width: fit-content;
     align-self: flex-end;
+    transition:.3s;
 }
 
 .btn-outline-dark:hover {
-    background-color: rgba(149, 133, 163, .55);
-    color: var(--back-color);
-    border-color: var(--back-color);
+
+    color: rgb(231, 231, 231);
+    transform:scale(1.07);
+    border-color: rgb(231, 231, 231);
+}
+
+.navadm .btn-outline-dark {
+    color: rgb(231, 231, 231);
+    border-color: rgb(231, 231, 231);
+    background:#41464b;
+    border-radius:20px;
+    width: fit-content;
+    align-self: flex-end;
+    transition:.3s;
+}
+
+.navadm .btn-outline-dark:hover {
+    background:#41464b;
+    color: rgb(231, 231, 231);
+    transform:scale(1.07);
+    border-color: rgb(231, 231, 231);
+}
+
+.navadm .card{
+    border-radius: 0 0 20px 20px;
+    border:0;
+}
+
+#main{
+    padding:14px;
+    border-radius:20px;
+    height:900px;
+    background-color: rgba(35, 35, 35, 0.48);
 }
 
 .dropdown-menu {
@@ -303,17 +380,22 @@ nav{
     padding: .5rem 0;
     margin: 0;
     font-size: 1rem;
-    color: #212529;
+    color: #FFFFFF;
     text-align: left;
     list-style: none;
-    background-color: #fff;
+    background-color: #2e2e2e;
     background-clip: padding-box;
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: .5rem;
 }
 
 .dropdown-item {
-    color: var(--primary-color)!important;
+    color: #ffffff!important;
+    transition:.5s;
+}
+.dropdown-item:focus, .dropdown-item:hover{
+    background-color:#8d78ff59;
+    color:#FFFFFF;
 }
 
 .brand-logo{
@@ -335,8 +417,8 @@ footer {
 .copyright {
   padding: 28px 0;
   margin-top: 10px;
-  border-radius:20px;
-  background-color: #f8f9fa!important;
+  border-radius:20px;color:white;
+  background-color:#2e2e2e!important; /* #f8f9fa!important;*/
 }
 
 .copyright span, .copyright a {

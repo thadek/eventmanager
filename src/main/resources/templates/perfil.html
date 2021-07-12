@@ -6,7 +6,7 @@
 <meta name="referrer" content="no-referrer">
 <link rel="stylesheet" th:href="@{/assets/css/placeholder.css}">
 <link rel="stylesheet" th:href="@{/assets/css/perfil.css}">
-
+<link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
 <body>
 
   <!-- header -->
@@ -27,31 +27,21 @@
 
 
             <!--Portada-->
-            <img src="https://i.imgur.com/mv8oJ9s.jpg" class="card-img-top" alt="fondo portada abstracto">
+            <div  class="card-img-top" alt="fondo portada abstracto"></div>
 
             <div class="card-body needs-validation" id="cargando-card" style="display:none">
-              <div class="ui fluid placeholder">
-                <div class="image header">
-                  <div class="line"></div>
-                  <div class="line"></div>
+              <div class="loader-anim">
+                <div class="ph-item">
+                  <div class="ph-col-12">
+                    <div class="ph-picture" > <h3>.evn Cargando...</h3></div>
+
+                  </div>
                 </div>
-                <div class="paragraph">
-                  <div class="line"></div>
-                  <div class="line"></div>
-                  <div class="line"></div>
-                </div>
+
+
+
               </div>
-              <div class="ui fluid placeholder">
-                <div class="image header">
-                  <div class="line"></div>
-                  <div class="line"></div>
-                </div>
-                <div class="paragraph">
-                  <div class="line"></div>
-                  <div class="line"></div>
-                  <div class="line"></div>
-                </div>
-              </div>
+
             </div>
 
             <div class="card-body" id="formulario-edit">
