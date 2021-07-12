@@ -1,5 +1,6 @@
 package com.m8.event.manager.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.m8.event.manager.entity.Categoria;
 import com.m8.event.manager.error.ErrorServicio;
 import com.m8.event.manager.repository.CategoriaRepository;
@@ -64,6 +65,8 @@ public class CategoriaService {
         */
 
    }
+
+
 
    @Transactional
    public void eliminarCategoria (Integer idCategoria) throws ErrorServicio {

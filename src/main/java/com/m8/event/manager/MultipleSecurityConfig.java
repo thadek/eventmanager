@@ -82,7 +82,7 @@ public class MultipleSecurityConfig {
             http    .antMatcher("/api/**")
                   //SI QUIERO MANEJARME SIN LAS COOKIES DEL NAVEGADOR, AGREGAR ESTA LINEA  .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests()
-                    .antMatchers("/api/iniciarsesion").permitAll()
+                    .antMatchers("/api/iniciarsesion","/api/eventos/vertodos").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .csrf().disable()
@@ -133,7 +133,7 @@ public class MultipleSecurityConfig {
             http
                     .authorizeRequests()
                     .antMatchers("/adm/**").access("hasRole('ROLE_ADMIN')")
-                    .antMatchers("/assets/**",  "/*").permitAll()
+                    .antMatchers("/assets/**",  "/*","/eventos/**").permitAll()
                     .antMatchers("/**").authenticated()
                     .and()
                     .formLogin()

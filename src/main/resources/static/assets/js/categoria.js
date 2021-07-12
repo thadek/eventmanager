@@ -14,7 +14,7 @@ const mostrarDatos = (data) => {
    
     for (let i = 0; i < data.length; i++) {
         //Muestro la lista de subcategorias ordenadas en un solo String.
-        let listaSubcategorias = '';
+       /* let listaSubcategorias = '';
         for (let j = 0; j < data[i].subcategorias.length; j++) {
             if (j === (data[i].subcategorias.length - 1)) {
                 listaSubcategorias += `${data[i].subcategorias[j].nombre}. `
@@ -22,13 +22,13 @@ const mostrarDatos = (data) => {
                 listaSubcategorias += `${data[i].subcategorias[j].nombre}, `
             }
 
-        }
+        }*/
       
         body +=
             `<tr>
             <td>${data[i].idCategoria}</td>
             <td>${data[i].nombre}</td> 
-            <td>${listaSubcategorias}</td> 
+            <td>${data[i].subcategorias.subcategorias}</td> 
 
             
             <td>

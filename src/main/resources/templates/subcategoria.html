@@ -4,7 +4,9 @@
 
 
 <head th:replace="headers :: principal"></head>
-
+<!--SELECTIZE-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 
 <body>
 
@@ -42,13 +44,11 @@
                                            id="nombre-nueva-subcategoria"
                                            name="nombre"/>
                                 </div>
-                                <br>
+                              
 
                                 <!-- SELECT CATEGORIAS-->
                                 <label for="categorias">Seleccione categoría</label>
-                                <select id="categorias"
-                                        class="needs-validation"
-                                        multiple
+                                <select onchange="selectorDeCategoria(value)" id="categorias"
                                         aria-label="categoria"
                                         placeholder="Seleccione categoria"
                                         required>
@@ -110,16 +110,15 @@
                                 <br>
 
                                 <!-- SELECT CATEGORIAS-->
+
+                                
                                 <label for="formEditCategoria">Seleccione categoría</label>
-                                <select id="formEditCategoria"
-                                        class="needs-validation"
-                                        multiple
-                                        aria-label="categoria"
-                                        placeholder="Seleccione categoria"
-                                        required>
-                                    <option th:each="categoria : ${listaCategorias}"
-                                            th:text="|${categoria.nombre}|"
-                                            th:value="${categoria.idCategoria}"></option>
+
+                                <select onchange="selectorDeCategoria(value)" id="formEditCategoria"  
+                                    placeholder="Seleccione categoria"  required>
+                                    
+                                    <option th:each="categoria : ${listaCategorias}" th:text="|${categoria.nombre}|"
+                                        th:value="${categoria.idCategoria}"></option>
                                 </select>
 
                                 <div class="form-group">

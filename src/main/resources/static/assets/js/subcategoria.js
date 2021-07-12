@@ -1,5 +1,19 @@
 verSubcategorias();
 togglers();
+var selectordeCat;
+
+$(document).ready(function () {
+    $('#formEditCategoria').selectize({
+        sortField: 'text'
+
+    });
+
+    $('#categorias').selectize({
+        sortField: 'text'
+
+    });
+
+});
 
 function togglers() {
     $('#togglerSeccion').click(function () {
@@ -11,32 +25,19 @@ function togglers() {
 
 const mostrarDatos = (data) => {
     let body = ''
-
-
-    for (let i = 0; i < data.length; i++) {
-        //Muestro la lista de categorias ordenadas en un solo String.
-        let listaCategorias = '';
-        for (let j = 0; j < data[i].categorias.length; j++) {
-            if (j === (data[i].categorias.length - 1)) {
-                listaCategorias += `${data[i].categorias[j].nombre}. `
-            } else {
-                listaCategorias += `${data[i].categorias[j].nombre}, `
-            }
-
-        }
-
-        
+//console.log(data)
+    for (let i = 0; i < data.length; i++) { 
 
         body +=
             `<tr>
             <td>${data[i].idSubcategoria}</td>
-            <td>${data[i].nombre}</td>
-            <td>${listaCategorias}</td>
+            <td>${data[i].nombre}</td>  
+            <td>${data[i].categoria.nombre}</td>  
             <td>${data[i].descripcion}</td>
 
             
             <td>
-                <button class="btn btn-outline-success" onclick=mostrarEditarSubcategoria(${data[i].idSubcategoria},"${encodeURIComponent(data[i].nombre)}") >
+                <button class="btn btn-outline-success" onclick=mostrarEditarSubcategoria(${data[i].idSubcategoria},"${encodeURIComponent(data[i].nombre)}","${data[i].descripcion}",${data[i].categoria.idCategoria}) >
                     <i class="bi bi-pencil-square"></i> 
                         Editar
                 </button>
@@ -50,18 +51,25 @@ const mostrarDatos = (data) => {
         </tr>`
 
 }
-
-    console.log(body)
-
     document.getElementById('datos').innerHTML = body;
 }
 
 
-function verSubcategorias() {
+function selectorDeCategoria(valor) {
+    selectordeCat=valor;
+    
+}
+
+
+
+async function verSubcategorias() {
     let url = 'http://localhost:8080/api/subcategorias/ver';
-    fetch(url)
+    await fetch(url)
         .then(respuesta => respuesta.json())
-        .then(datos => mostrarDatos(datos))
+        .then(datosSubcategoria => {           
+           mostrarDatos(datosSubcategoria)
+        }
+            )
         .catch(error => console.log(error))
 
 }
@@ -94,11 +102,21 @@ function actualizar() {
 
 
 function editarSubcategoria() {
+
     let bodyReq = {
         idSubcategoria: document.getElementById('formEditSubcategoriaId').value,
-        nombre: document.getElementById('formEditSubcategoriaNombre').value
+        nombre: document.getElementById('formEditSubcategoriaNombre').value,
+        descripcion: document.getElementById('formEditSubcategoriaDescripcion').value,
+        categoria:{
+            idCategoria: selectordeCat
+        }
     };
-    bodyReq = JSON.stringify(bodyReq);
+
+
+    console.log(bodyReq)
+    bodyReq = JSON.stringify(bodyReq); 
+ 
+
     let url = 'http://localhost:8080/api/subcategorias/modificar'
     fetch(url, {
         method: 'post', headers: {
@@ -111,14 +129,21 @@ function editarSubcategoria() {
         $('#notificacion').toast('show');
     }).catch()
 
-
 }
 
 
 function guardarNuevaSubcategoria() {
-    let nombre = document.getElementById('nombre-nueva-subcategoria').value;
+
+
+    let bodyReq = {
+
+        nombre: document.getElementById('nombre-nueva-subcategoria').value,
+        descripcion: document.getElementById('descripcion-subcategoria').value,
+        categoria:{
+            idCategoria: selectordeCat
+        }
+    };
     //{atributoClase : let local}
-    let bodyReq = { nombre: nombre };
     bodyReq = JSON.stringify(bodyReq);
     let url = 'http://localhost:8080/api/subcategorias/crear'
     fetch(url, {
@@ -138,12 +163,14 @@ function nuevaSubcategoria() {
     document.getElementById('titulo-form').innerHTML = 'Crear Subcategoria';
 }
 
-function mostrarEditarSubcategoria(id, nombre) {
+function mostrarEditarSubcategoria(id, nombre, descripcion,categoria) {
     $('#crearSubcategoria').hide();
     $('#editarSubcategoria').fadeIn();
+    selectordeCat=categoria;
     document.getElementById('titulo-form').innerHTML = 'Modificar Subcategoria';
     document.getElementById('formEditSubcategoriaId').value = id;
     document.getElementById('formEditSubcategoriaNombre').value = decodeURIComponent(nombre);
+    document.getElementById('formEditSubcategoriaDescripcion').value = decodeURIComponent(descripcion);
 
 }
 

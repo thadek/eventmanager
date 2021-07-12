@@ -1,7 +1,9 @@
 package com.m8.event.manager.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.m8.event.manager.enumeration.Dia;
 import com.m8.event.manager.enumeration.Modalidad;
 import lombok.Data;
@@ -11,7 +13,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
-
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Data
 public class Evento implements Serializable {
@@ -47,7 +51,7 @@ public class Evento implements Serializable {
 
     private Integer valor;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @OneToMany(mappedBy = "evento")
     private List<Inscripcion> inscripciones;
 

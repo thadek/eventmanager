@@ -22,8 +22,8 @@ public class categoriaRestController {
 
 
     @GetMapping("/ver")
-    public List<Categoria> verCategorias(){
-        return  cr.findAll();
+    public List<Categoria> verCategorias1()  {
+      return cr.findAll();
     }
 
 
