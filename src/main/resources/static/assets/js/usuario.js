@@ -26,13 +26,19 @@ function togglers() {
 const mostrarDatos = (data) => {
     let body = ''
 //console.log(data)
-    for (let i = 0; i < data.length; i++) { 
+    for (let i = 0; i < data.length; i++) {
 
         body +=
             `<tr>
             <td>${data[i].username}</td>
             <td>${data[i].rol.nombreRol}</td>
+            <td>
+                <a class="btn btn-outline-warning" href="/adm/perfil/ver/${data[i].username}" >
+                     <i class="bi bi-person-square"></i>
+                        Perfil
+                </a>
 
+            </td>
             
             <td>
                 <button class="btn btn-outline-success" onclick=mostrarEditarUsuario("${data[i].username}") >
@@ -40,11 +46,12 @@ const mostrarDatos = (data) => {
                         Editar
                 </button>
         
-                <button class="btn btn-outline-danger" onclick="document.getElementById('idUsuarioConfirmar').innerHTML=${data[i].username}"
-                    data-bs-toggle="modal" data-bs-target="#modalEliminar">
+                <button class="btn btn-outline-danger" onclick=confirmarBorrar("${data[i].username}") >
                     <i class="bi bi-trash"></i> 
                     Eliminar
                 </button>
+
+
             </td>
         </tr>`
 
@@ -58,6 +65,9 @@ function selectorDeRoles(valor) {
     
 }
 
+function confirmarBorrar(usuario) {
+    alertify.confirm('Confirmar Eliminación', 'No hay vuelta atrás', function(){eliminar(usuario)}, function(){alertify.error('Cancelado')});
+}
 
 
 async function verUsuarios() {
@@ -72,11 +82,10 @@ async function verUsuarios() {
 
 }
 
-function eliminar(username) {
+function eliminar(id) {
     let url = 'http://localhost:8080/api/usuario/eliminar'
-    let bodyReq = { username: username };
+    let bodyReq = { username: id };
     bodyReq = JSON.stringify(bodyReq);
-
 
     fetch(url, {
         method: 'delete', headers: {
@@ -84,9 +93,10 @@ function eliminar(username) {
         }, body: bodyReq
     }).then(respuesta => respuesta.json()).then(d => {
         actualizar();
-        console.log(d);
-        $('#mensaje-notif').html(d.respuesta);
-        $('#notificacion').toast('show');
+//        console.log(d);
+//        $('#mensaje-notif').html(d.respuesta);
+//        $('#notificacion').toast('show');
+        alertify.success(d.respuesta);
     }).catch()
 }
 
@@ -167,6 +177,7 @@ function mostrarEditarUsuario(username) {
     selectorDeRol=rol;
     document.getElementById('titulo-form').innerHTML = 'Modificar Usuario';
     document.getElementById('formEditUsernameId').value = username;
+    document.getElementById('formEditPassword').value = password;
 
 
 }

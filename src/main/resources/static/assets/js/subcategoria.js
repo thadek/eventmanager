@@ -69,8 +69,8 @@ async function verSubcategorias() {
     await fetch(url)
         .then(respuesta => respuesta.json())
         .then(datosSubcategoria => {
-//           mostrarDatos(datosSubcategoria)
-             console.log(datosSubcategoria)
+          mostrarDatos(datosSubcategoria)
+//             console.log(datosSubcategoria)
         }
             )
         .catch(error => console.log(error))
