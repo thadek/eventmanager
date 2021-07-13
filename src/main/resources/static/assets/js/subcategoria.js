@@ -38,7 +38,9 @@ const mostrarDatos = (data) => {
 
             <td>
                 <button class="btn btn-outline-success" onclick=mostrarEditarSubcategoria(${data[i].idSubcategoria},"${encodeURIComponent(data[i].nombre)}","${encodeURIComponent(data[i].descripcion)}",${data[i].categoria.idCategoria}) >
+
                     <i class="bi bi-pencil-square"></i>
+
                         Editar
                 </button>
 

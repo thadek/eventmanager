@@ -3,6 +3,7 @@ package com.m8.event.manager.controller;
 import com.m8.event.manager.error.ErrorServicio;
 import com.m8.event.manager.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,8 +68,7 @@ public class PortalController {
         return new ModelAndView("login");
     }
 
-
-
+    
     @GetMapping("/perfil")
     public ModelAndView perfil(){
         ModelAndView mav = new ModelAndView("perfil");
