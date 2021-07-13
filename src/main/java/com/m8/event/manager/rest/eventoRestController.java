@@ -78,10 +78,12 @@ public class eventoRestController {
                     ,nuevoEvento.getFacilitador().getEmail()
                     , nuevoEvento.getDescripcion());
             respuesta.put("respuesta","Evento Creado exitosamente.");
+
             return respuesta;
 
         }catch(Exception e ){
             respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
+            respuesta.put("error","true");
             return respuesta;
 
         }

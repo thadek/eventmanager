@@ -133,8 +133,7 @@ function editarUsuario() {
     }).then(respuesta => respuesta.json()).then(d => {
         actualizar();
         console.log(d);
-        $('#mensaje-notif').html(d.respuesta);
-        $('#notificacion').toast('show');
+        alertify.success(d.respuesta);
     }).catch()
 
 }
@@ -160,8 +159,7 @@ function guardarNuevoUsuario() {
         }, body: bodyReq
     }).then(respuesta => respuesta.json()).then(d => {
         actualizar();
-        $('#mensaje-notif').html(d.respuesta);
-        $('#notificacion').toast('show');
+        alertify.success(d.respuesta);
     }).catch()
 }
 
