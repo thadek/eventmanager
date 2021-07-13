@@ -27,7 +27,7 @@ public class Categoria implements Serializable {
 
    @JsonDeserialize(using = SubcategoriaListDeserializer.class)
    @JsonSerialize(using= SubcategoriaListSerializer.class)
-   @OneToMany (mappedBy = "categoria")
+   @OneToMany (mappedBy = "categoria", cascade = {CascadeType.ALL})
    private List<Subcategoria> subcategorias;
 
 }
