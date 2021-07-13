@@ -3,6 +3,7 @@ package com.m8.event.manager.controller;
 import com.m8.event.manager.entity.Usuario;
 import com.m8.event.manager.repository.CategoriaRepository;
 import com.m8.event.manager.repository.PerfilRepository;
+import com.m8.event.manager.repository.RolRepository;
 import com.m8.event.manager.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,6 +59,18 @@ public class AdminController {
         ModelAndView mav = new ModelAndView("subcategoria");
         mav.addObject("title","Subcategorias de Evento - EventManager ");
         mav.addObject("listaCategorias",cr.findAll());
+        return mav;
+    }
+
+
+    @Autowired
+    private RolRepository rr;
+
+    @GetMapping("/usuarios")
+    public ModelAndView verUsuarios(){
+        ModelAndView mav = new ModelAndView("usuario");
+        mav.addObject("title","Usuarios - EventManager ");
+        mav.addObject("roles",rr.findAll());
         return mav;
     }
 

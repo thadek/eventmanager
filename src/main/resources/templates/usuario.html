@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="headers :: principal"></head>
+<!--SELECTIZE-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
+<body>
+
+<!-- header -->
+<header>
+    <nav th:replace="static :: navbar"></nav>
+</header>
+
+
+<main>
+
+    <div class="container-flex p-1 m-3 "
+         id="main">
+
+        <!-- BOTON MOSTRAR/OCULTAR -->
+        <button class="btn btn-outline-primary"
+                id="togglerSeccion">USUARIOS Mostrar/Ocultar
+        </button>
+
+        <!-- FORM CREAR USUARIO DESDE ADM -->
+        <div class="row p-2"
+             id="containerUsuario">
+            <div class="col-4 ps-0">
+                <div class="navadm ms-0 col-12">
+                    <h5 class="card-header"
+                        id="titulo-form">Crear usuario</h5>
+                    <div class="card"
+                         id="crearUsuario">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="username">Usuario</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="username"
+                                           name="username"/>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password"
+                                           class="form-control"
+                                           id="password"
+                                           name="password"/>
+                                </div>
+                                <br>
+
+
+                                <!-- SELECT ROL -->
+                                <label for="rol">Seleccione rol</label>
+                                <select onchange="selectorDeRoles(value)" id="rol"
+                                        aria-label="rol"
+                                        placeholder="Seleccione rol"
+                                        required>
+                                    <option th:each="rol : ${roles}"
+                                            th:text="|${rol.nombreRol}|"
+                                            th:value="${rol.idRol}"></option>
+                                </select>
+
+                                <!-- BOTÓN CREAR USUARIO -->
+                                <button type="button"
+                                        id="btn-crear-usuario"
+                                        class="btn btn-outline-dark"
+                                        onclick=guardarNuevoUsuario()>
+                                    Crear Usuario
+                                </button>
+
+                            </form>
+                            <!-- FIN FORM CREAR USUARIO -->
+                        </div>
+                        <!-- FIN div card-body -->
+                    </div>
+                    <!-- div class="card" id="crearUsuario" -->
+
+
+                    <!-- FORM EDITAR USUARIO desde ADM -->
+                    <div class="card"
+                         id="editarUsuario"
+                         style="display:none;">
+                        <div class="card-body">
+                            <form>
+
+                                <div class="form-group">
+                                    <label for="formEditUsernameId">ID</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="formEditUsernameId"
+                                           readonly/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="formEditPassword">Password</label>
+                                    <input type="password"
+                                           class="form-control"
+                                           id="formEditPassword"
+                                           name="password"/>
+                                </div>
+
+
+                                <br>
+
+                                <!-- SELECT ROL-->
+                                <label for="formEditRol">Seleccione rol</label>
+
+                                <select onchange="selectorDeRoles(value)" id="formEditRol"
+                                    placeholder="Seleccione rol"  required>
+                                    
+                                    <option th:each="rol : ${roles}" th:text="|${rol.nombreRol}|"
+                                        th:value="${rol.idRol}"></option>
+                                </select>
+
+
+
+
+                                <button type="button"
+                                        class="btn btn-outline-dark"
+                                        id="btn-editar-usuario"
+                                        onclick=editarUsuario()>Guardar
+                                </button>
+
+                            </form>
+                            <!-- FIN FORM EDITAR USUARIO -->
+                        </div>
+                        <!-- FIN DIV card-body -->
+                    </div>
+                    <!-- FIN DIV id=editarUsuario -->
+                </div>
+                <!-- FIN DIV div class="navadm ms-0 col-12" -->
+            </div>
+            <!-- FIN div class="col-4 ps-0" -->
+
+
+            <!-- NAVEGACION SOBRE TABLA de MUESTRA DATOS -->
+            <div class="navadm col-8">
+
+                <table class="table table-bordered table-striped ">
+
+                    <!-- BOTON NUEVA Muestra formulario para NUEVO USUARIO-->
+                    <button type="button"
+                            class="btn btn-outline-dark btn-rol"
+                            onclick=nuevoUsuario()>
+                        <div class=" bi bi-plus-circle-fill"><br>Nuevo</div>
+                    </button>
+
+                    <!-- BOTON ACTUALIZAR -->
+                    <button type="button"
+                            class="btn btn-outline-dark btn-rol"
+                            onclick=actualizar()>
+                        <div class=" bi bi-arrow-clockwise"><br>Actualizar</div>
+                    </button>
+
+                    <!-- TABLA PARA MOSTRAR DATOS -->
+                    <thead>
+                    <tr>
+
+                        <!-- barra de carga -->
+                        <div class="progress"
+                             id="cargando"
+                             style="margin:0; display:none;">
+                            <div class="indeterminate"></div>
+                        </div>
+
+                        <th>Usuario</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+
+                    </tr>
+                    </thead>
+
+                    <!-- id="datos" relaciona con js para const mostrarDatos-->
+                    <tbody id="datos"></tbody>
+
+                </table>
+            </div>
+            <!-- FIN DIV NAVEGACIÓN SOBRE TABLA de MUESTRA DATOS -->
+        </div>
+        <!-- FIN DIV FORM CREAR USUARIO -> id= containerUsuario -->
+    </div>
+    <!-- FIN DIV id=main -->
+
+
+    <!--Modal Eliminar-->
+    <div class="modal fade"
+         tabindex="-1"
+         id="modalEliminar">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Eliminar Usuario </h5>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--NO TOCAR, tiene vinculación con JS-->
+                    <p id="idUsuarioConfirmar"
+                       style="display:none;"></p>
+                    <p><strong>¿Seguro? No se pueden deshacer los cambios de eliminación.</strong></p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button"
+                            class="btn btn-outline-dark"
+                            data-bs-dismiss="modal">ERA MENTIRA, VOLVER!
+                    </button>
+                    <button type="button"
+                            class="btn btn-outline-danger"
+                            data-bs-dismiss="modal"
+                            onclick="eliminar(document.getElementById('idUsuarioConfirmar').innerHTML)">BORRAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Notificacion-->
+    <div style="position: relative; min-height: 300px;">
+        <div class="toast fade align-items-center text-white bg-dark border-0"
+             style="position: absolute; top: 0; right: 0;"
+             id="notificacion"
+             role="alert"
+             aria-live="assertive"
+             aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body"
+                     id="mensaje-notif">
+                </div>
+                <button type="button"
+                        class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!--Footer -->
+<footer th:replace="static :: footer"></footer>
+
+</body>
+
+<div th:replace="headers :: js"></div>
+
+<script type="text/javascript"
+        th:src="@{/assets/js/usuario.js}">
+</script>
+
+</html>
