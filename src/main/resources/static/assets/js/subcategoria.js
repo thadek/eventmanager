@@ -26,25 +26,27 @@ function togglers() {
 const mostrarDatos = (data) => {
     let body = ''
 //console.log(data)
-    for (let i = 0; i < data.length; i++) { 
+    for (let i = 0; i < data.length; i++) {
 
         body +=
             `<tr>
             <td>${data[i].idSubcategoria}</td>
-            <td>${data[i].nombre}</td>  
-            <td>${data[i].categoria.nombre}</td>  
+            <td>${data[i].nombre}</td>
+            <td>${data[i].categoria.nombre}</td>
             <td>${data[i].descripcion}</td>
 
-            
+
             <td>
-                <button class="btn btn-outline-success" onclick=mostrarEditarSubcategoria(${data[i].idSubcategoria},"${encodeURIComponent(data[i].nombre)}","${data[i].descripcion}",${data[i].categoria.idCategoria}) >
-                    <i class="bi bi-pencil-square"></i> 
+                <button class="btn btn-outline-success" onclick=mostrarEditarSubcategoria(${data[i].idSubcategoria},"${encodeURIComponent(data[i].nombre)}","${encodeURIComponent(data[i].descripcion)}",${data[i].categoria.idCategoria}) >
+
+                    <i class="bi bi-pencil-square"></i>
+
                         Editar
                 </button>
-        
+
                 <button class="btn btn-outline-danger" onclick="document.getElementById('idSubcategoriaConfirmar').innerHTML=${data[i].idSubcategoria}"
                     data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                    <i class="bi bi-trash"></i> 
+                    <i class="bi bi-trash"></i>
                     Eliminar
                 </button>
             </td>
@@ -57,7 +59,7 @@ const mostrarDatos = (data) => {
 
 function selectorDeCategoria(valor) {
     selectordeCat=valor;
-    
+
 }
 
 
@@ -66,8 +68,9 @@ async function verSubcategorias() {
     let url = 'http://localhost:8080/api/subcategorias/ver';
     await fetch(url)
         .then(respuesta => respuesta.json())
-        .then(datosSubcategoria => {           
-           mostrarDatos(datosSubcategoria)
+        .then(datosSubcategoria => {
+          mostrarDatos(datosSubcategoria)
+//             console.log(datosSubcategoria)
         }
             )
         .catch(error => console.log(error))
@@ -114,8 +117,8 @@ function editarSubcategoria() {
 
 
     console.log(bodyReq)
-    bodyReq = JSON.stringify(bodyReq); 
- 
+    bodyReq = JSON.stringify(bodyReq);
+
 
     let url = 'http://localhost:8080/api/subcategorias/modificar'
     fetch(url, {
@@ -143,7 +146,7 @@ function guardarNuevaSubcategoria() {
             idCategoria: selectordeCat
         }
     };
-    //{atributoClase : let local}
+
     bodyReq = JSON.stringify(bodyReq);
     let url = 'http://localhost:8080/api/subcategorias/crear'
     fetch(url, {
@@ -173,4 +176,3 @@ function mostrarEditarSubcategoria(id, nombre, descripcion,categoria) {
     document.getElementById('formEditSubcategoriaDescripcion').value = decodeURIComponent(descripcion);
 
 }
-

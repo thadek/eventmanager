@@ -133,6 +133,7 @@ public class MultipleSecurityConfig {
             http
                     .authorizeRequests()
                     .antMatchers("/adm/**").access("hasRole('ROLE_ADMIN')")
+                    .antMatchers("/perfil").authenticated()
                     .antMatchers("/assets/**",  "/*","/eventos/**").permitAll()
                     .antMatchers("/**").authenticated()
                     .and()

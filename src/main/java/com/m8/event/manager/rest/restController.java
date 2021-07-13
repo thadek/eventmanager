@@ -2,6 +2,8 @@ package com.m8.event.manager.rest;
 
 
 import com.m8.event.manager.enumeration.Dia;
+import com.m8.event.manager.service.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,21 @@ public class restController {
     public String prueba(@RequestParam(value="name", defaultValue="Usuario") String name){
         return new String(String.format("Event Manager - Mesa 8 EGG - ¡Hola %s!",name));
     }
+
+    @Autowired
+    private EmailService em;
+
+    @GetMapping("/correo")
+    public String mandaremail(@RequestParam(value="body") String cuerpo,@RequestParam(value="user") String user,@RequestParam(value="ev") String ev,@RequestParam(value="destino") String destino){
+        try{
+            em.mandarAlgo(destino,"EventManager M8 - Notificacion",cuerpo,user,ev,"Admin");
+            return "SE MANDO ALGO, FIJATE K PES";
+        }catch(Exception e){
+            return "SE ROMPIO ESTO: "+e.getMessage();
+        }
+
+    }
+
 
 
     @RequestMapping("/test/dias")

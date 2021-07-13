@@ -7,6 +7,10 @@
 <!--<link rel="stylesheet" th:href="@{/assets/css/placeholder.css}">-->
 <link rel="stylesheet" th:href="@{/assets/css/evento.css}">
 <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+<!--SELECTIZE-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 <body>
 
   <!-- header -->
@@ -45,7 +49,7 @@
                 <h3>Gestionar Eventos</h3>
               </div>
               
-              <div class="col-md-3"><button class="btn btn-tana">Crear Evento</button></div>
+              <div class="col-md-3"><button class="btn btn-tana" onclick=crearEvento()>Crear Evento</button></div>
             
             </div>
 
@@ -116,6 +120,26 @@
 
     </div>
 
+
+    <div class="modal fade" id="modaldias" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modaltitulo">Seleccioná los días</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" id="botonmodal" class="btn btn-success" >Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!--Lista de mis eventos suscriptos/de los que soy profesor-->
 
 
@@ -132,6 +156,7 @@
   <footer th:replace="static :: footer"></footer>
 
 </body>
+
 
 
 <div th:replace="headers :: js"></div>

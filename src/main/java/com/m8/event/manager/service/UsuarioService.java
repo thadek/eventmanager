@@ -11,6 +11,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -76,7 +77,7 @@ public class UsuarioService implements UserDetailsService {
             Usuario usuario = respuesta.get();
 
             usuario.setUsername(username);
-
+            System.out.println( password);
             usuario.setPassword(encoder.encode(password));
 
             if (idRol == null) {

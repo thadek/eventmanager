@@ -54,10 +54,12 @@ div#login-desp h4 {
    background: var(--back-color);
 }
 
-
+.table{
+    border-color: #71788c45!important;
+}
 
 table thead{
-    background-color:rgb(116, 106, 91);
+    background-color: #00ceb745;
     color:white;
 }
 
@@ -114,7 +116,7 @@ table thead{
 .btn-outline-primary {
     display: block;
     height: auto;
-    margin-top: 7rem;
+ /*   margin-top: 7rem;*/
     color: white;
     border-color: white;
 }
@@ -123,7 +125,7 @@ table thead{
     color:rgb(255,255,255);
 }
 .card{
-    background: linear-gradient(rgba(14, 235, 255, 0.3),rgba(116, 116, 235, 0.8));
+    background: linear-gradient(rgb(255 46 108 / 30%),#61a0fd38);
     color:white;
 }
 
@@ -436,9 +438,13 @@ nav{
 #main{
     padding:14px;
     border-radius:20px;
-    height:900px;
+    /*height:900px;*/
     background-color: rgba(35, 35, 35, 0.48);
 }
+
+
+
+
 
 .dropdown-menu {
     position: absolute;
@@ -690,3 +696,35 @@ body#error div ul li a:hover{
 /* FIN PAGINAS ERROR */
 
 
+/*TOASTS SWEET ALERT */
+.colored-toast.swal2-icon-success {
+    background-color: #423089 !important;
+}
+
+.colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+    background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+    background-color: #7657e8 !important;
+}
+
+.colored-toast.swal2-icon-question {
+    background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+    color: white;
+}
+
+.colored-toast .swal2-close {
+    color: white;
+}
+
+.colored-toast .swal2-content {
+    color: white;
+}
