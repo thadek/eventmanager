@@ -79,7 +79,7 @@ public class perfilController {
          respuesta.put ("idPerfil", p.getIdPerfil ().toString ());
 
          return respuesta;
-      } catch (ErrorServicio e) {
+      } catch (Exception e) {
          respuesta.put ("respuesta", "Ocurrió un error: " + e.getMessage ());
          return respuesta;
       }
