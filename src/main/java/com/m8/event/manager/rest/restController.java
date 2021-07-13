@@ -23,17 +23,16 @@ public class restController {
     @Autowired
     private EmailService em;
 
-    @GetMapping("/correo")
-    public String mandaremail(@RequestParam(value="body") String cuerpo,@RequestParam(value="user") String user,@RequestParam(value="ev") String ev,@RequestParam(value="destino") String destino){
-        try{
-            em.mandarAlgo(destino,"EventManager M8 - Notificacion",cuerpo,user,ev,"Admin");
-            return "SE MANDO ALGO, FIJATE K PES";
-        }catch(Exception e){
-            return "SE ROMPIO ESTO: "+e.getMessage();
-        }
-
-    }
-
+//    @GetMapping("/correo")
+//    public String mandaremail(@RequestParam(value="body") String cuerpo,@RequestParam(value="user") String user,@RequestParam(value="ev") String ev,@RequestParam(value="destino") String destino){
+//        try{
+//            em.enviarCorreo(destino,"EventManager M8 - Notificacion",cuerpo,user,ev,"Admin");
+//            return "SE MANDO ALGO, FIJATE K PES";
+//        }catch(Exception e){
+//            return "SE ROMPIO ESTO: "+e.getMessage();
+//        }
+//
+//    }
 
 
     @RequestMapping("/test/dias")

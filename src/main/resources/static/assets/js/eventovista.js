@@ -261,7 +261,7 @@ async function crearEvento(){
         nuevoEvento.valor = formValues[7];
         nuevoEvento.descripcion= formValues[8];
         nuevoEvento.dias = formValues[9];
-        nuevoEvento.facilitador = { idPerfil : 2, email:'profe@profe.eventmanager.net'}
+        nuevoEvento.facilitador = { idPerfil : 3, email:'alejandro@enindigo.com.ar'}
 
 
         let bodyReq = JSON.stringify(nuevoEvento);
