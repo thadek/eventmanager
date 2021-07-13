@@ -1,5 +1,7 @@
 package com.m8.event.manager.service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,11 +16,11 @@ public class EmailService {
 
     @Autowired
     private JavaMailSender sender;
-    
+
     @Value("${spring.mail.username}")
     private String from;
 
-    public void mandarAlgo(String para, String asunto, String cuerpo, String usuario, String tituloEvento, String rol) throws MessagingException {
+    public void enviarCorreo(String para, String asunto, String cuerpo, String usuario, String tituloEvento, String rol) throws MessagingException {
 
         new Thread(() -> {
 
@@ -312,12 +314,7 @@ public class EmailService {
             }
 
         }).start();
-
-
-
+  
     }
-
-
-
 
 }

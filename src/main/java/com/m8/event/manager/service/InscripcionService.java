@@ -13,6 +13,7 @@ import com.m8.event.manager.repository.UsuarioRepository;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,9 +33,12 @@ public class InscripcionService {
     @Autowired
     PerfilRepository perfilRepository;
 
+    @Autowired
+    EmailService emailService;
+
     @Transactional
     public void crearInscripcion(Integer idEvento, String emailAlumno, Modalidad modalidad)
-            throws ErrorServicio {
+            throws ErrorServicio, MessagingException {
 
         validarDatos(idEvento, emailAlumno, modalidad);
 
@@ -62,11 +66,11 @@ public class InscripcionService {
         int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
 //        int inscripcionesOnline = inscripcionRepository.cantidadInscripciones(modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));;
 
-        inscripcion.setEstado(cantidadInscripciones < evento.getCupoPresencial()?Estado.PENDIENTE: Estado.ESPERA);
+        inscripcion.setEstado(cantidadInscripciones < evento.getCupoPresencial() ? Estado.PENDIENTE : Estado.ESPERA);
         if (modalidad.equals(Modalidad.ONLINE)) {
-            inscripcion.setEstado(cantidadInscripciones < evento.getCupoVirtual()?Estado.PENDIENTE: Estado.ESPERA);
+            inscripcion.setEstado(cantidadInscripciones < evento.getCupoVirtual() ? Estado.PENDIENTE : Estado.ESPERA);
         }
-        
+
         if (modalidad.equals(Modalidad.PRESENCIAL)) {
             if (cantidadInscripciones < evento.getCupoPresencial()) {
                 inscripcion.setEstado(Estado.PENDIENTE);
@@ -80,8 +84,21 @@ public class InscripcionService {
                 inscripcion.setEstado(Estado.ESPERA);
             }
         }
-        
+
         inscripcionRepository.save(inscripcion);
+
+        String subject = "Nueva Inscripción";
+        String text;
+        if (inscripcion.getEstado().equals(Estado.PENDIENTE)) {
+            text = "Estimad@ " + alumno.getNombre() + ": \n Tenés un lugar reservado "
+                    + " en el evento " + evento.getNombre() + ", que se va se encuentra en . "
+                    + "Para confirmarla, por favor comunicate ";
+        } else {
+            text = "Estimad@ " + alumno.getNombre() + ": \n Tu inscripción "
+                    + "el evento " + evento.getNombre() + "en el cual sos el facilitador.";
+        }
+
+        emailService.enviarCorreo(alumno.getEmail(), subject, text);
 
         //        switch (modalidad) {
 //            case PRESENCIAL:
@@ -144,14 +161,14 @@ public class InscripcionService {
                         throw new ErrorServicio("No hay cupo disponible en la modalidad "
                                 + modalidad.toString().toLowerCase() + ".");
                     }
-                }                
+                }
                 if (modalidad.equals(Modalidad.ONLINE)) {
                     if (cantidadInscripciones < evento.getCupoVirtual()) {
-                            inscripcion.setModalidad(modalidad);
+                        inscripcion.setModalidad(modalidad);
                     } else {
-                            throw new ErrorServicio("No hay cupo disponible en la modalidad "
-                                    + modalidad.toString().toLowerCase() + ".");
-                    }                    
+                        throw new ErrorServicio("No hay cupo disponible en la modalidad "
+                                + modalidad.toString().toLowerCase() + ".");
+                    }
                 }
             }
         }
@@ -167,19 +184,18 @@ public class InscripcionService {
 
     }
 
-    public void chequearListaDeEspera(Integer idEvento, Modalidad modalidad){
+    public void chequearListaDeEspera(Integer idEvento, Modalidad modalidad) {
 
 //        List<Inscripcion> inscripciones = evento.getInscripciones();
 //        inscripciones.sort((Inscripcion i1, Inscripcion i2)
 //                -> Integer.compare(i1.getIdInscripcion(), i2.getIdInscripcion()));
-
         Optional<Inscripcion> respuesta = inscripcionRepository.buscarListaDeEspera(idEvento, modalidad);
-        
+
         if (!respuesta.isPresent()) {
             return;
         }
         Inscripcion inscripcion = respuesta.get();
-        
+
         inscripcion.setEstado(Estado.PENDIENTE);
         inscripcionRepository.save(inscripcion);
 
