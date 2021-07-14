@@ -1,6 +1,25 @@
 cargandoToggler(900);
 
 
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor:'white',
+    customClass:{
+        popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
+
+
+
+
 function renderizarListaPublica(arrayEventos) {
     let body = '';
     let ejemploPorcentajes = [0.44, 0.55, 0.66, 0.70, 0.80];
@@ -228,21 +247,7 @@ async function crearEvento(){
     })
 
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-right',
-        iconColor:'white',
-        customClass:{
-            popup: 'colored-toast'
-        },
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
+
 
 
 
@@ -345,15 +350,31 @@ function filtrarLista()
     //lista publica
     ul = document.getElementById("listaEvn");
     li = ul.getElementsByTagName("li");
+    let contadorOcultos=0;
     for (i = 0; i < li.length; i++) {
         a = li[i].getElementsByTagName("a")[0];
         txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";           
-        } else {            
+            li[i].style.display = "";
+            contadorOcultos--;
+
+        } else {
             li[i].style.display = "none";
+           contadorOcultos++;
+
         }
+
+     if(contadorOcultos==li.length){
+        if(!(Swal.isVisible())){
+            Toast.fire({
+                icon:'info', title: "No hay resultados de tu búsqueda. :("
+            })
+        }
+     }
+
     }
+
+
     //Lista de eventos suscriptos
     ul2 = document.getElementById("listaMisEventos");
     li2 = ul2.getElementsByTagName("li");
@@ -361,9 +382,11 @@ function filtrarLista()
         a = li2[i].getElementsByTagName("a")[0];
         txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li2[i].style.display = "";           
+            li2[i].style.display = "";
+            document.getElementById("listaMisEventos").innerHTML = ""
         } else {            
             li2[i].style.display = "none";
+
         }
     }
 }

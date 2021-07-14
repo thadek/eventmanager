@@ -45,7 +45,7 @@ public class AdminController {
     public ModelAndView verCategorias(@PathVariable("username") String username){
         Usuario usuario = new Usuario();
         usuario.setUsername(username);
-        ModelAndView mav = new ModelAndView("perfil-adm");
+        ModelAndView mav = new ModelAndView("perfiladm");
         mav.addObject("title","Gestion de Perfil - EventManager ");
         mav.addObject("usuario",pr.findByUsuario(usuario));
         return mav;

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="headers :: principal"></head>
+<!--IMPORTANTE LA LINEA REFERRER, SIN ESO NO ANDA EL SCRIPT PARA SUBIR IMG DE PERFIL-->
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" th:href="@{/assets/css/placeholder.css}">
+<link rel="stylesheet" th:href="@{/assets/css/perfil.css}">
+<link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
+<body>
+
+  <!-- header -->
+  <header>
+    <nav th:replace="static :: navbar"></nav>
+  </header>
+
+
+  <main>
+
+
+    <div class="container-flex p-3 m-9">
+      <div class="row">
+
+        <div class="col-lg-6 col-md-12">
+
+          <div class="card mb-3" id="cardPerfil">
+
+
+            <!--Portada-->
+            <div  class="card-img-top" alt="fondo portada abstracto"></div>
+
+            <div class="card-body needs-validation" id="cargando-card" style="display:none">
+              <div class="loader-anim">
+                <div class="ph-item">
+                  <div class="ph-col-12">
+                    <div class="ph-picture" > <h3>.evn Cargando...</h3></div>
+
+                  </div>
+                </div>
+
+
+
+              </div>
+
+            </div>
+
+            <div class="card-body" id="formulario-edit">
+
+              <img src="https://i.imgur.com/tRLkAZB.png" class="rounded-circle" id="fotoPerfilEdit"
+                alt="foto perfil usuario">
+
+              <h5 class="card-title" id="tituloForm">Editar Perfil</h5>
+
+              <label for="nombre">Nombre: </label>
+              <input id="nombreInput" class="form-control" type="text">
+
+              <label for="apellido">Apellido </label>
+              <input id="apellidoInput" class="form-control" type="text">
+
+              <label for="email">Email: </label>
+              <input id="emailInput" class="form-control" type="email">
+
+              <label for="foto">Foto perfil:</label>
+              <input type="file" class="form-control" id="inputFoto">
+              <p>Cargar algo 250x250 de ser posible</p>
+              <div class="progress" id="cargando" style="margin: 0px; display:none;">
+                <div class="indeterminate"></div>
+              </div>
+
+
+
+              <label for="tel">Teléfono: </label>
+              <input id="telInput" class="form-control" type="text">
+
+
+
+              <label for="fechaNac">Fecha de nacimiento: </label>
+              <input id="fechaInput" type="date" class="form-control">
+
+
+
+              <label for="userEdit">Usuario: </label>
+              <div th:if='${session.usuarioSession != null}'>
+                <input id="userEdit" class="form-control" th:value="${username}" readonly>
+                </p>
+              </div>
+
+
+
+              <label for="descripcion">Descripción: </label><br>
+              <input class="card-text form-control" id="descripcionInput" type="text" />
+
+
+              <button class="btn btn-tana" id="btnCancelar" onclick=cancelar()>Cancelar </button>
+              <button class="btn btn-tana" id="btnGuardar">Guardar </button>
+            </div>
+
+
+
+            <div class="card-body" id="contenido" style="display:none; ">
+
+
+              <!--fotoPerfil Circulo-->
+              <img src="https://i.imgur.com/tRLkAZB.png" class="rounded-circle" id="fotoPerfil"
+                alt="foto perfil usuario">
+
+              <div class="row">
+
+                <div class="col-lg-12">
+                  <h2 class="card-title" id="nombrePerfil">Tu nombre</h5>
+                    <p class="card-text" id="descripcionPerfil"></p>
+                    <br>
+                </div>
+
+                <div class="col-lg-6">
+
+                  <label for="email"><strong>Email:</strong> </label>
+                  <p id="email"></p>
+
+
+                  <label for="tel"><strong>Teléfono:</strong> </label>
+                  <p id="tel"></p>
+                </div>
+                <div class="col-lg-6">
+
+                  <label for="fechaNac"><strong>Fecha de nacimiento: </strong></label>
+                  <p id="fechaNac"></p>
+
+
+
+                  <label for="usuario"><strong>Usuario:</strong> </label>
+
+                  <p th:text="${username}" id="usuario">
+                  </p>
+
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <button class="btn btn-tana" id="btnEditar" onclick=actualizarPerfilButton()>Editar Perfil</button>
+              <button class="btn btn-tana" id="btnEditar" onclick=eliminarPerfil()>Eliminar Perfil</button>
+
+
+            </div>
+          </div>
+          <div class="justify-content-center" id="noPerfil">
+            <div class="centrado">
+              <h1>No existe perfil</h1>
+              <button class="btn btn-primary" onclick=nuevoPerfil()>Crear perfil</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-6 col-md-12">    
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+    </div>
+
+
+
+
+
+    <!--Modal Eliminar-->
+    <div class="modal fade" tabindex="-1" id="modalEliminar">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Eliminar Rol </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!--NO TOCAR, tiene vinculación con JS-->
+            <p id="idRolConfirmar" style="display:none;"></p>
+            <p><strong>¿Seguro? No se pueden deshacer los cambios de eliminación.</strong></p>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">ERA MENTIRA, VOLVER!</button>
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+              onclick="eliminar(document.getElementById('idRolConfirmar').innerHTML)">BORRAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Notificacion-->
+    <div style="position: relative; min-height: 150px;">
+      <div class="toast fade align-items-center text-white bg-dark border-0"
+        style="position:absolute; top: 0; right: 0;" id="notificacion" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body" id="mensaje-notif">
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+            aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!--Footer -->
+  <footer th:replace="static :: footer"></footer>
+
+</body>
+
+<div th:replace="headers :: js"></div>
+
+<script th:src="@{/assets/js/perfil.js}">
+
+</script>
+
+</html>
