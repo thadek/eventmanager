@@ -1,8 +1,10 @@
 package com.m8.event.manager.rest;
 
 
+import com.m8.event.manager.entity.Perfil;
 import com.m8.event.manager.enumeration.Dia;
 import com.m8.event.manager.service.EmailService;
+import com.m8.event.manager.service.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +36,7 @@ public class restController {
    }
 
 
-
-
+   
 
     @RequestMapping("/test/dias")
     public List<Dia> listaDias(){
@@ -55,5 +56,13 @@ public class restController {
     }
 
 
+    @Autowired
+    private PerfilService ps;
+
+    /* Tana -> para ver instructores*/
+    @GetMapping("/instructores")
+    public List<Perfil> verInstructores(){
+        return ps.verListaDeProfesores ();
+    }
 
 }

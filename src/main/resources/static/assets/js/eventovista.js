@@ -571,7 +571,7 @@ function cargandoToggler(tiempo) {
 
             if(usernameLogged){
                 $('#miseventos').show();
-                
+
                 cargarListaEventosPrivada();
             }else{
 

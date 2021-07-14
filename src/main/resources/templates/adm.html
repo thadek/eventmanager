@@ -6,32 +6,32 @@
 
 <body>
 
-  <!-- header -->
-  <header>
-    <nav th:replace="static :: navbar"></nav>
-  </header>
+<!-- header -->
+<header>
+  <nav th:replace="static :: navbar"></nav>
+</header>
 
 
-  <main>
+<main>
 
-    <div class="row m-3 adminevn ">
-<div class="row m-0 adm-linea bordeada">
-</div>
-      <div class="row m-0 titulo">
-        <h1>.evn</h1>
-        <h5>Administración</h5>
-      </div>
-
-
-
-      <div class="row contenedor">
-        <a th:href="@{/adm/roles}" class="col-lg-2 col-md-0 inicioBtn">
-          <div class="row separador" ></div>
+  <div class="row m-3 adminevn ">
+    <div class="row m-0 adm-linea bordeada">
+    </div>
+    <div class="row m-0 titulo">
+      <h1>.evn</h1>
+      <h5>Administración</h5>
+    </div>
 
 
-          <h1>Roles</h1>
-          <h5 class="btn-adm-descp">Gestionar Roles de Usuario</h5>
-        </a>
+
+    <div class="row contenedor">
+      <a th:href="@{/adm/roles}" class="col-lg-2 col-md-0 inicioBtn">
+        <div class="row separador" ></div>
+
+
+        <h1>Roles</h1>
+        <h5 class="btn-adm-descp">Gestionar Roles de Usuario</h5>
+      </a>
 
 
       <!--  <div class="col-lg-2 col-md-12">
@@ -76,74 +76,74 @@
         </div> -->
 
 
-        <a th:href="@{/adm/categorias}" class="col-lg-2 col-md-0 centroBtn">
+      <a th:href="@{/adm/categorias}" class="col-lg-2 col-md-0 centroBtn">
 
-          <div class="row separador" ></div>
-          <h1>Categorias</h1>
-          <h5 class="btn-adm-descp">Gestionar Categorías</h5>
-
-
-        </a>
-
-        <a th:href="@{/adm/subcategorias}"class="col-lg-2 col-md-0 centroBtn">
-          <div class="row separador" ></div>
+        <div class="row separador" ></div>
+        <h1>Categorias</h1>
+        <h5 class="btn-adm-descp">Gestionar Categorías</h5>
 
 
-          <h1>Subcategorias</h1>
-          <h5 class="btn-adm-descp">Gestionar Subcategorias</h5>
-        </a>
+      </a>
 
-        <a th:href="@{/adm/usuarios}" class="col-lg-2 col-md-0 centroBtn">
-          <div class="row separador" ></div>
+      <a th:href="@{/adm/subcategorias}"class="col-lg-2 col-md-0 centroBtn">
+        <div class="row separador" ></div>
 
 
-          <h1>Usuarios</h1>
-          <h5 class="btn-adm-descp">Gestionar Usuarios</h5>
-        </a>
+        <h1>Subcategorias</h1>
+        <h5 class="btn-adm-descp">Gestionar Subcategorias</h5>
+      </a>
 
-        <a th:href="@{/adm/eventos}"class="col-lg-2 col-md-0 centroBtn">
-          <div class="row separador" ></div>
-
-
-          <h1>Eventos</h1>
-          <h5 class="btn-adm-descp">Gestionar Eventos</h5>
-        </a>
-
-        <a th:href="@{/adm/inscripciones}" class="col-lg-2 col-md-0 finBtn">
-          <div class="row separador" ></div>
+      <a th:href="@{/adm/usuarios}" class="col-lg-2 col-md-0 centroBtn">
+        <div class="row separador" ></div>
 
 
-          <h1>Inscripciones</h1>
-          <h5 class="btn-adm-descp">Gestionar Inscripciones</h5>
-        </a>
+        <h1>Usuarios</h1>
+        <h5 class="btn-adm-descp">Gestionar Usuarios</h5>
+      </a>
+
+      <a th:href="@{/adm/eventos}"class="col-lg-2 col-md-0 centroBtn">
+        <div class="row separador" ></div>
 
 
+        <h1>Eventos</h1>
+        <h5 class="btn-adm-descp">Gestionar Eventos</h5>
+      </a>
+
+      <a th:href="@{/adm/inscripciones}" class="col-lg-2 col-md-0 finBtn">
+        <div class="row separador" ></div>
+
+
+        <h1>Inscripciones</h1>
+        <h5 class="btn-adm-descp">Gestionar Inscripciones</h5>
+      </a>
 
 
 
 
 
-      </div>
 
-     <!-- <div class="row">
-        <div class="col-lg-3"></div>
-
-
-        <div class="col-lg-6">
-
-
-        </div>
-
-
-
-
-        <div class="col-lg-3"></div>
-
-      </div>  -->
 
     </div>
 
-  </main>
+    <!-- <div class="row">
+       <div class="col-lg-3"></div>
+
+
+       <div class="col-lg-6">
+
+
+       </div>
+
+
+
+
+       <div class="col-lg-3"></div>
+
+     </div>  -->
+
+  </div>
+
+</main>
 
 <style>
 
@@ -310,9 +310,9 @@ footer{
 </style>
 
 
-  
-  <!--Footer -->
-  <footer th:replace="static :: footer"></footer>
+
+<!--Footer -->
+<footer th:replace="static :: footer"></footer>
 
 
 

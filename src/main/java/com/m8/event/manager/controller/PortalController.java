@@ -84,4 +84,15 @@ public class PortalController {
         return new ModelAndView("error-403");
     }
 
+
+
+    /*Tana*/
+    @GetMapping("/instructores")
+    public ModelAndView instructores() {
+        ModelAndView mav = new ModelAndView("instructores");
+        mav.addObject("title","Instructores - EventManager");
+        return mav;
+    }
+
+
 }
