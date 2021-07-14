@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="headers :: principal">
+</head>
+
+<body>
+
+<!-- header -->
+<header>
+  <nav th:replace="static :: navbar"></nav>
+</header>
+
+
+<main>
+
+  <div class="row m-3 adminevn ">
+    <div class="row m-0 adm-linea bordeada">
+    </div>
+    <div class="row m-0 titulo">
+      <h1>.evn</h1>
+      <h5>Administración</h5>
+    </div>
+
+
+
+    <div class="row contenedor">
+      <a th:href="@{/adm/roles}" class="col-lg-2 col-md-0 inicioBtn">
+        <div class="row separador" ></div>
+
+
+        <h1>Roles</h1>
+        <h5 class="btn-adm-descp">Gestionar Roles de Usuario</h5>
+      </a>
+
+
+      <!--  <div class="col-lg-2 col-md-12">
+
+
+          <div class="row">
+            <div class="col-lg-12 adm-navb inicial">
+              inicial
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 adm-navb">
+              HOLA COMO VA
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 adm-navb">
+              HOLA COMO VA
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 adm-navb">
+              HOLA COMO VA
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 adm-navb">
+              HOLA COMO VA
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 adm-navb">
+              HOLA COMO VA
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 adm-navb final">
+              final
+            </div>
+          </div>
+
+        </div> -->
+
+
+      <a th:href="@{/adm/categorias}" class="col-lg-2 col-md-0 centroBtn">
+
+        <div class="row separador" ></div>
+        <h1>Categorias</h1>
+        <h5 class="btn-adm-descp">Gestionar Categorías</h5>
+
+
+      </a>
+
+      <a th:href="@{/adm/subcategorias}"class="col-lg-2 col-md-0 centroBtn">
+        <div class="row separador" ></div>
+
+
+        <h1>Subcategorias</h1>
+        <h5 class="btn-adm-descp">Gestionar Subcategorias</h5>
+      </a>
+
+      <a th:href="@{/adm/usuarios}" class="col-lg-2 col-md-0 centroBtn">
+        <div class="row separador" ></div>
+
+
+        <h1>Usuarios</h1>
+        <h5 class="btn-adm-descp">Gestionar Usuarios</h5>
+      </a>
+
+      <a th:href="@{/adm/eventos}"class="col-lg-2 col-md-0 centroBtn">
+        <div class="row separador" ></div>
+
+
+        <h1>Eventos</h1>
+        <h5 class="btn-adm-descp">Gestionar Eventos</h5>
+      </a>
+
+      <a th:href="@{/adm/inscripciones}" class="col-lg-2 col-md-0 finBtn">
+        <div class="row separador" ></div>
+
+
+        <h1>Inscripciones</h1>
+        <h5 class="btn-adm-descp">Gestionar Inscripciones</h5>
+      </a>
+
+
+
+
+
+
+
+    </div>
+
+    <!-- <div class="row">
+       <div class="col-lg-3"></div>
+
+
+       <div class="col-lg-6">
+
+
+       </div>
+
+
+
+
+       <div class="col-lg-3"></div>
+
+     </div>  -->
+
+  </div>
+
+</main>
+
+<style>
+
+
+  .contenedor{
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .separador{
+    height:40rem;
+  }
+
+  .btn-adm-descp{
+    text-align:center;
+    top:-48%;
+    position:relative;
+  }
+
+  .contenedor h1{
+    position:relative;
+    top:-50%;
+
+  }
+
+
+
+
+  .inicioBtn{
+
+    text-align:center;
+    background: linear-gradient(184deg, #2e2e2e, rgb(0 0 0 / 20%));
+     transition:1s;
+    padding-left:0px!important;
+    border-radius: 0 0 0 20px;
+
+  }
+
+  .inicioBtn:hover{
+    background: linear-gradient(336deg, #4466b9, rgb(0 0 0 / 20%));
+
+  }
+
+  .centroBtn{
+    text-align:center;
+    background: linear-gradient(184deg, #2e2e2e, rgb(0 0 0 / 20%));
+    transition:1s;
+  }
+
+  .centroBtn:hover{
+    background: linear-gradient(336deg, #4466b9, rgb(0 0 0 / 20%));
+  }
+
+  .finBtn{
+    text-align:center;
+    background: linear-gradient(184deg, #2e2e2e, rgb(0 0 0 / 20%));
+    transition:1s;
+    padding-left:0px!important;
+    border-radius: 0 0 20px 0;
+  }
+
+ .finBtn:hover{
+   background: linear-gradient(336deg, #4466b9, rgb(0 0 0 / 20%));
+ }
+
+
+  .bordeada{
+    border-radius: 20px 20px 0 0;
+  }
+
+  body{
+   color:#FFFFFF;
+  }
+.adminevn{
+  min-height:700px;
+  background:#0c0c0c7a;
+  border-radius:20px;
+
+}
+.titulo{
+  padding:0;
+  position:absolute;
+  text-align:center;
+}
+.adm-linea{
+  height: 56px;
+  position: relative;
+  background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+
+  /*border-radius: 20px 20px 0 0;*/
+  opacity: 0.4;
+  z-index: -1;
+  background-size: 1200% 1200%;
+  -webkit-animation: rainbow 12s ease infinite;
+  -z-animation: rainbow 12s ease infinite;
+  -o-animation: rainbow 12s ease infinite;
+  animation: rainbow 12s ease infinite;
+
+}
+
+
+
+.adminevn h1{
+  margin:0;
+}
+  .adminevn h5{
+    font-size: 10px;
+    margin-top: -12px;
+
+  }
+
+
+  @media screen and (max-width:1070px){
+    body{
+      background-size:700%;
+      background-position: 41% 80%;
+    }
+
+    .separador{
+      height:4rem;
+    }
+
+    .contenedor h1{
+      top: -29%;
+      left: 1%;
+      position: relative;
+    }
+    .contenedor h5{
+      top: -14%;
+      left: 1%;
+      position: relative;
+    }
+
+
+
+ .titulo h1{
+   top: 8px;
+   left:-11px;
+   position:absolute;
+
+ }
+
+ .titulo h5{
+   position:absolute;
+   margin-top:-9px;
+   top:50px;
+   left:-10px;
+ }
+
+  }
+
+.adm-navb{
+height:100px;
+  background: #146bad;
+}
+
+
+footer{
+  position:relative!important;
+}
+
+
+</style>
+
+
+
+<!--Footer -->
+<footer th:replace="static :: footer"></footer>
+
+
+
+
+
+
+</body>
+
+<div th:replace="headers :: js"></div>
+
+
+
+</html>
