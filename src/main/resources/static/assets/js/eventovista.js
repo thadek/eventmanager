@@ -148,7 +148,7 @@ async function renderizarListaPrivada(arrayEventos) {
 
 
     if (arrayEventos) {
-        for (let i = 1; i < arrayEventos.length-1; i++) {
+        for (let i = 0; i < arrayEventos.length; i++) {
 
            const porc = await getPorcentajeOcupacionEvento(arrayEventos[i].id,arrayEventos[i].modalidad)
 
