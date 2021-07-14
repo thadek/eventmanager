@@ -95,12 +95,14 @@ public class EventoService {
         evento.setDescripcion(descripcion);
 
         eventoRepository.save(evento);
-        
+
+        //Me parece un tanto rebuscado mandarse un mail a si mismo
+      /*
         String subject = "Nuevo Evento";
         String text = "Estimad@ " + facilitador.getNombre() + ": \n Se ha creado "
                 + "el evento " + evento.getNombre() + "en el cual sos el facilitador.";
 
-        emailService.enviarCorreo(facilitador.getEmail(), subject, text);
+        emailService.enviarCorreo(facilitador.getEmail(), subject, text);*/
 
     }
 
@@ -239,11 +241,11 @@ public class EventoService {
     }
     
     @Transactional
-    public int porcentajeCapacidad(Integer idEvento, Modalidad modalidad) throws ErrorServicio {
+    public Integer porcentajeCapacidad(Integer idEvento, Modalidad modalidad) throws ErrorServicio {
 
-        int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
-        int cupo;
-        int porcentajeCupo;        
+        Integer cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
+        Integer cupo;
+        Double cuenta;
         
         Optional<Evento> respuesta = eventoRepository.findById(idEvento);
         
@@ -257,11 +259,18 @@ public class EventoService {
             cupo = evento.getCupoPresencial();
         } else {
             cupo = evento.getCupoVirtual();
-        }        
-        
-        porcentajeCupo = (int)(Math.round(cantidadInscripciones/cupo*100));
-        
-        return porcentajeCupo;
+        }
+
+        double cupo2 = cupo;
+        double cantInscrip = cantidadInscripciones;
+        double porcentaje = cantInscrip/cupo2;
+
+
+        double porcentajeCupo = porcentaje*100;
+
+
+        return (int) Math.round(porcentajeCupo);
+
     }
     
     @Transactional

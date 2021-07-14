@@ -115,4 +115,15 @@ public class perfilController {
       }
    }
 
+   @PreAuthorize("hasRole('ADMIN')")
+   @GetMapping("/profesores")
+   public List<Perfil> verListaProfesores (){
+      try{
+         return pr.verListaDeProfesores("PROFESOR");
+      }catch(Exception e ){
+         return null;
+      }
+
+   }
+
 }
