@@ -76,7 +76,7 @@ public class eventoRestController {
                     ,nuevoEvento.getCupoVirtual()
                     ,nuevoEvento.getValor()
                     ,nuevoEvento.getFacilitador().getEmail()
-                    , nuevoEvento.getDescripcion());
+                    ,nuevoEvento.getDescripcion());
             respuesta.put("respuesta","Evento Creado exitosamente.");
 
             return respuesta;

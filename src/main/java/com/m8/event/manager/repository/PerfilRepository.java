@@ -21,6 +21,9 @@ public interface PerfilRepository extends JpaRepository<Perfil, Integer>{
     @Query("SELECT per FROM Perfil per WHERE per.apellido=:apellido")
     public List<Perfil> buscarPorApellido (@Param("apellido") String apellido);
     
+    @Query("SELECT per FROM Perfil per WHERE per.usuario.rol.nombreRol=:rol")
+    public List<Perfil> verListaDeProfesores (@Param("rol") String nombreRol);
+    
     public List<Perfil> findByFechaNac (Date fechaNac);
     
     public Perfil findByEmail (String email);   

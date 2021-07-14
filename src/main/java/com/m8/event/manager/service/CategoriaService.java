@@ -66,8 +66,6 @@ public class CategoriaService {
 
    }
 
-
-
    @Transactional
    public void eliminarCategoria (Integer idCategoria) throws ErrorServicio {
 
