@@ -1,11 +1,13 @@
 package com.m8.event.manager.rest;
 
 
+import com.m8.event.manager.entity.Perfil;
 import com.m8.event.manager.entity.Usuario;
 import com.m8.event.manager.error.ErrorServicio;
 
 import com.m8.event.manager.repository.UsuarioRepository;
 
+import com.m8.event.manager.service.PerfilService;
 import com.m8.event.manager.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -89,6 +91,7 @@ public class usuarioRestController {
                 return map;
             }
         }
+
 
     }
 
