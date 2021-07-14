@@ -4,14 +4,17 @@ import com.m8.event.manager.entity.Evento;
 import com.m8.event.manager.entity.Perfil;
 import com.m8.event.manager.entity.Subcategoria;
 import com.m8.event.manager.enumeration.Dia;
+import com.m8.event.manager.enumeration.Estado;
 import com.m8.event.manager.enumeration.Modalidad;
 import com.m8.event.manager.error.ErrorServicio;
 import com.m8.event.manager.repository.EventoRepository;
+import com.m8.event.manager.repository.InscripcionRepository;
 import com.m8.event.manager.repository.PerfilRepository;
 import com.m8.event.manager.repository.SubcategoriaRepository;
 import com.m8.event.manager.repository.UsuarioRepository;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import javax.mail.MessagingException;
@@ -36,6 +39,9 @@ public class EventoService {
 
     @Autowired
     EmailService emailService;
+    
+    @Autowired
+    InscripcionRepository inscripcionRepository;
 
     @Transactional
     public void crearEvento(String nombre, Integer idSubcategoria,
@@ -115,7 +121,7 @@ public class EventoService {
         Optional<Subcategoria> respuesta1 = subcategoriaRepository.findById(idSubcategoria);
         Perfil facilitador = perfilRepository.findByEmail(emailFacilitador);
 
-        if (respuesta.isPresent()) {
+        if (!respuesta.isPresent()) {
             throw new ErrorServicio("No se encontró el evento en la base de datos.");
         }
         if (!respuesta1.isPresent()) {
@@ -232,8 +238,59 @@ public class EventoService {
         return eventoRepository.findByFechaInicio(fechaInicio);
     }
     
-    
+    @Transactional
+    public int porcentajeCapacidad(Integer idEvento, Modalidad modalidad) throws ErrorServicio {
 
+        int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
+        int cupo;
+        int porcentajeCupo;        
+        
+        Optional<Evento> respuesta = eventoRepository.findById(idEvento);
+        
+        if (!respuesta.isPresent()) {
+            throw new ErrorServicio("No se encontró el evento en la base de datos.");
+        }
+        
+        Evento evento = respuesta.get();
+        
+        if (modalidad.equals(Modalidad.PRESENCIAL)) {
+            cupo = evento.getCupoPresencial();
+        } else {
+            cupo = evento.getCupoVirtual();
+        }        
+        
+        porcentajeCupo = (int)(Math.round(cantidadInscripciones/cupo*100));
+        
+        return porcentajeCupo;
+    }
+    
+    @Transactional
+    public String indicadorCapacidad(Integer idEvento, Modalidad modalidad) throws ErrorServicio {
+
+        int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
+        int cupo;
+        String indicadorCupo;        
+        
+        Optional<Evento> respuesta = eventoRepository.findById(idEvento);
+        
+        if (!respuesta.isPresent()) {
+            throw new ErrorServicio("No se encontró el evento en la base de datos.");
+        }
+        
+        Evento evento = respuesta.get();
+        
+        if (modalidad.equals(Modalidad.PRESENCIAL)) {
+            cupo = evento.getCupoPresencial();
+        } else {
+            cupo = evento.getCupoVirtual();
+        }        
+        
+        indicadorCupo = cantidadInscripciones + "/" + cupo;
+        
+        return indicadorCupo;
+    }
+    
+    
     @Transactional
     public void eliminarEventoPorId(Integer id) throws ErrorServicio {
 
@@ -276,7 +333,7 @@ public class EventoService {
             throw new ErrorServicio("Debe indicar la fecha de inicio del evento.");
         }
         if (crear) {
-            if (fechaInicio.isAfter(LocalDate.now())) {
+            if (fechaInicio.isBefore(LocalDate.now())) {
                 throw new ErrorServicio("La fecha de inicio del evento no puede ser "
                         + "anterior a la fecha actual.");
             }

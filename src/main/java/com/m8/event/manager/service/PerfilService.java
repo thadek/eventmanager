@@ -6,6 +6,7 @@ import com.m8.event.manager.error.ErrorServicio;
 import com.m8.event.manager.repository.PerfilRepository;
 import com.m8.event.manager.repository.UsuarioRepository;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
@@ -78,6 +79,16 @@ public class PerfilService {
         } else {
             throw new ErrorServicio("No existe un perfil con el Id solicitado");
         }
+    }
+    
+    public List<Perfil> verTodosLosPerfiles (){
+        
+        return perfilRepository.findAll();
+    }
+    
+    public List<Perfil> verListaDeProfesores (){
+        
+        return perfilRepository.verListaDeProfesores("PROFESOR");
     }
 
     public void validar(String nombre) throws ErrorServicio {

@@ -209,6 +209,11 @@ public class InscripcionService {
 //            }
 //        }
     }
+    
+    public List<Inscripcion> inscripcionesPorAlumno(String email) throws ErrorServicio {
+        
+        return inscripcionRepository.inscripcionesPorAlumno(email);
+    }
 
     public void validarDatos(Integer idEvento, String emailAlumno, Modalidad modalidad)
             throws ErrorServicio {
