@@ -108,5 +108,10 @@ public class PortalController {
         return mav;
     }
 
-
+    @GetMapping("/actividades")
+    public ModelAndView actividades() {
+        ModelAndView mav = new ModelAndView("actividades");
+        mav.addObject("title","Actividades - EventManager");
+        return mav;
+    }
 }

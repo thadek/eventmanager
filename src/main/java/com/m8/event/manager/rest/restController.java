@@ -56,13 +56,13 @@ public class restController {
     }
 
 
-    @Autowired
-    private PerfilService ps;
-
-    /* Tana -> para ver instructores*/
-    @GetMapping("/instructores")
-    public List<Perfil> verInstructores(){
-        return ps.verListaDeProfesores ();
-    }
+//    @Autowired
+//    private PerfilService ps;
+//
+//    /* Tana -> para ver instructores*/
+//    @GetMapping("/instructores")
+//    public List<Perfil> verInstructores(){
+//        return ps.verListaDeProfesores ();
+//    }
 
 }
