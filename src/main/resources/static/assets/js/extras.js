@@ -35,3 +35,13 @@ jQuery(document).ready(function() {
           'info'
       )
   }
+
+
+    function politicaPrivacidad(){
+
+      Swal.fire(
+      'Hola!',
+          'Sólo recolectamos los datos que vos cargas, y los cuidamos un montón. Cuando quieras los borramos.',
+          'info'
+      )
+    }

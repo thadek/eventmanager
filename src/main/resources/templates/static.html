@@ -24,7 +24,7 @@
                   aria-expanded="false"> ¿Quienes Somos? </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="#">Instructores</a></li>
-                  <li><a class="dropdown-item" href="#">Espacio</a></li>
+                  <li><a class="dropdown-item" href="#">Actividades</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
@@ -132,13 +132,16 @@
                 <div class="copyright-menu">
                   <ul>
                     <li>
-                      <a href="#">Inicio</a>
+                      <a th:href="@{/}">Inicio</a>
                     </li>
                     <li>
-                      <a href="#">Política de Privacidad</a>
+                      <a      class="copyFooter"
+                              onclick="politicaPrivacidad()"
+                      >Política de Privacidad</a>
                     </li>
                     <li>
-                      <a href="#">Contactanos</a>
+                      <a      class="copyFooter"
+                              onclick="contactanos()" >Contactanos</a>
                     </li>
                   </ul>
                 </div>

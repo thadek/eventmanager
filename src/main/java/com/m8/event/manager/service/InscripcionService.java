@@ -99,12 +99,15 @@ public class InscripcionService {
         String subject = "Nueva Inscripción";
         String text;
         if (inscripcion.getEstado().equals(Estado.PENDIENTE)) {
-            text = "Estimad@ " + alumno.getNombre() + ": \n Tenés un lugar reservado "
-                    + " en el evento " + evento.getNombre() + ", que se va se encuentra en . "
-                    + "Para confirmarla, por favor comunicate ";
+            text = "Hola " + alumno.getNombre() + "! \n Tenés un lugar reservado "
+                    + " en el evento " + evento.getNombre() + ". Tu inscripción se encuentra "
+                    + "PENDIENTE DE CONFIRMACIÓN. Para confirmarla, por favor envianos "
+                    + "el comprobante de pago.";
         } else {
-            text = "Estimad@ " + alumno.getNombre() + ": \n Tu inscripción "
-                    + "el evento " + evento.getNombre() + "en el cual sos el facilitador.";
+            text = "Hola " + alumno.getNombre() + "! \n El evento " + evento.getNombre()
+                    + " en el cual te inscribiste tiene el cupo completo. Sin embargo, "
+                    + "quedaste inscripto en LISTA DE ESPERA. En caso de que se liberen "
+                    + "lugares, te avisaremos inmediatamente por email.";
         }
 
         emailService.enviarCorreo(alumno.getEmail(), subject, text);
@@ -136,7 +139,10 @@ public class InscripcionService {
 
     @Transactional
     public void modificarInscripcion(Integer idInscripcion, Integer idEvento,
-            String emailAlumno, Modalidad modalidad, Estado estado) throws ErrorServicio {
+            String emailAlumno, Modalidad modalidad, Estado estado) throws ErrorServicio, MessagingException {
+
+        String subject = "";
+        String text = "";
 
         validarDatos(idEvento, emailAlumno, modalidad);
 
@@ -160,12 +166,19 @@ public class InscripcionService {
         inscripcion.setEvento(evento);
         inscripcion.setAlumno(alumno);
 
+        //El alumno podrá cambiar la modalidad siempre que haya cupo en la otra modalidad.
         if (evento.getModalidad().equals(Modalidad.MIXTA)) {
             if (!inscripcion.getModalidad().equals(modalidad)) {
                 int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
                 if (modalidad.equals(Modalidad.PRESENCIAL)) {
                     if (cantidadInscripciones < evento.getCupoPresencial()) {
                         inscripcion.setModalidad(modalidad);
+
+                        subject = "Cambiaste la modalidad de tu inscripción";
+                        text = "Hola " + alumno.getNombre() + "! \n Tu inscripción "
+                                + "en el evento " + evento.getNombre() + " cambió "
+                                + "a modalidad PRESENCIAL.";
+
                     } else {
                         throw new ErrorServicio("No hay cupo disponible en la modalidad "
                                 + modalidad.toString().toLowerCase() + ".");
@@ -174,6 +187,12 @@ public class InscripcionService {
                 if (modalidad.equals(Modalidad.ONLINE)) {
                     if (cantidadInscripciones < evento.getCupoVirtual()) {
                         inscripcion.setModalidad(modalidad);
+
+                        subject = "Cambiaste la modalidad de tu inscripción";
+                        text = "Hola " + alumno.getNombre() + "! \n Tu inscripción "
+                                + "en el evento " + evento.getNombre() + " cambió "
+                                + "a modalidad ONLINE.";
+
                     } else {
                         throw new ErrorServicio("No hay cupo disponible en la modalidad "
                                 + modalidad.toString().toLowerCase() + ".");
@@ -185,15 +204,24 @@ public class InscripcionService {
         //cambiar a Estado CANCELADO.
         inscripcion.setEstado(estado);
 
+        inscripcionRepository.save(inscripcion);
+
         if (estado.equals(Estado.CANCELADO)) {
+
+            subject = "Tu incripción fue cancelada";
+            text = "Hola " + alumno.getNombre() + "! \n Tu inscripción en el evento "
+                    + evento.getNombre() + " fue cancelada. En caso de que hayas "
+                    + "pagado, por favor comunicate con nosotros.";
+
             chequearListaDeEspera(idEvento, modalidad);
+
         }
 
-        inscripcionRepository.save(inscripcion);
+        emailService.enviarCorreo(alumno.getEmail(), subject, text);
 
     }
 
-    public void chequearListaDeEspera(Integer idEvento, Modalidad modalidad) {
+    public void chequearListaDeEspera(Integer idEvento, Modalidad modalidad) throws MessagingException {
 
 //        List<Inscripcion> inscripciones = evento.getInscripciones();
 //        inscripciones.sort((Inscripcion i1, Inscripcion i2)
@@ -208,6 +236,17 @@ public class InscripcionService {
         inscripcion.setEstado(Estado.PENDIENTE);
         inscripcionRepository.save(inscripcion);
 
+        String subject = "Tenés un lugar en el evento!";
+        String text = "Hola " + inscripcion.getAlumno().getNombre() + "! \n "
+                + "Se liberó un lugar en el evento " + inscripcion.getEvento().getNombre() 
+                + ". En caso de que todavía quieras participar, te pedimos que nos "
+                + "confirmes tu inscripción, dentro de las próximas 24 horas, "
+                + "enviándonos el comprobante de pago. En caso de que no puedas "
+                + "o quieras participar, te pedimos que canceles tu inscripción "
+                + "lo antes posible, para que otra persona pueda ocupar tu lugar.";
+
+        emailService.enviarCorreo(inscripcion.getAlumno().getEmail(), subject, text);
+
 //        for (Inscripcion inscrip : inscripciones) {
 //
 //            if (inscrip.getModalidad().equals(modalidad)
@@ -218,9 +257,9 @@ public class InscripcionService {
 //            }
 //        }
     }
-    
+
     public List<Inscripcion> inscripcionesPorAlumno(String email) throws ErrorServicio {
-        
+
         return inscripcionRepository.inscripcionesPorAlumno(email);
     }
 
