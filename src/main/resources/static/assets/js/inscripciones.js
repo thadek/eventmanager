@@ -97,7 +97,7 @@ Swal.fire({
     title:"Un momento.",
     html:logo,
     showConfirmButton: false,
-    //timer:2200
+    timer:2200
 }).then((resolve)=>{
 
     if(!(inscribir.error==="true")){

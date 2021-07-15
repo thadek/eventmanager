@@ -18,7 +18,7 @@ $( document ).ready(function() {
     }
     console.log( usernameLogged )
     porcentajeOcup = 0;
-    cargandoToggler(550)
+    cargandoToggler(1050)
 });
 
 
