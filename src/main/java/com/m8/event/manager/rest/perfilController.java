@@ -120,7 +120,7 @@ public class perfilController {
    @GetMapping("/profesores")
    public List<Perfil> verListaProfesores (){
       try{
-         return pr.verListaDeProfesores("PROFESOR");
+         return pr.verUsuariosPorRol("PROFESOR");
       }catch(Exception e ){
          return null;
       }
