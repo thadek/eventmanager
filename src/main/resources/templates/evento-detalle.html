@@ -15,6 +15,7 @@
   <!-- header -->
   <header>
     <nav th:replace="static :: navbar"></nav>
+    <div style="display:none" id="idEventoUnico" th:text="${evento.id}"></div>
   </header>
 
 
@@ -69,10 +70,10 @@
                       </div>
                       <!--Titulo Evento y Dias-->
                       <div class="col-xl-8 col-lg-6 col-sm-4 tituloEv">
-                        <h1>Hatha Yoga</h1>
+                        <h1 th:text="${evento.nombre}"></h1>
 
-                          <h4>Modalidad Online</h4>
-                          <h5>Lunes, Miercoles y Viernes</h5>
+                          <h4 id="modalidadEvento">Modalidad Online</h4>
+                          <h5 id="diasEvento">Lunes, Miercoles y Viernes</h5>
 
 
 
@@ -91,15 +92,15 @@
                 </li>
                 <div class="container-flex bodyEvent" style="display:none;">
                   <div class="row bg-light p-2 lineaDescriptivaEv">
-                    <div class="col-xl-1">
+                    <div class="col-xl-2">
 
-
-                      <label for="ocupacion">
+                      <label>
                         Ocupación:
                       </label>
-                      <h3 id="ocupacion">9/13</h3>
-
+                      <h6 id="ocupacionOnline">9/13 Online</h6>
+                      <h6 id="ocupacionPresencial">1/13 Presencial</h6>
                     </div>
+
 
                     <div class="col-xl-2">
                       <label for="dias">
@@ -114,16 +115,17 @@
                       </label>
                       <h3 id="hora">19hs</h3>
                     </div>
-                    <div class="col-xl-2">
-                      <label for="duración">
+                    <div class="col-xl-1">
+                      <label for="duracion">
                         Duración
                       </label>
-                      <h3 id="hora">3hs</h3>
+                      <h3 id="duracion">3hs</h3>
 
                     </div>
 
 
-                    <div class="col-xl-2"><label for="duración">
+                    <div class="col-xl-2">
+                      <label for="precio">
                         Costo
                       </label>
                       <h3 id="precio">$1500</h3>

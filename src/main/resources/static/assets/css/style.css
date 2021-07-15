@@ -739,6 +739,24 @@ body#error div ul li a:hover{
 .colored-toast .swal2-content {
     color: white;
 }
+
+
+cartelito-sweetAlert .swal2-container{
+
+}
+
+
+cartelito-sweetAlert .swal2-input{
+    text-align:left!important;
+    display:flex;
+    width:100%;
+
+}
+
+.cartelito-sweetAlert .swal2-content{
+    text-align:left!important;
+}
+
 /*FIN TOASTS SWEET ALERT */
 
 
@@ -837,6 +855,7 @@ main.gallery .card-content:hover {
 .card-content:hover .card-title::after {
     transform: scaleX(1);
 }
+
 
 
 

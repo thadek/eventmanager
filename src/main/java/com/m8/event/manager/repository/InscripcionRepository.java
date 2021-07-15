@@ -26,7 +26,7 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Intege
             + "ORDER BY i.id_inscripcion ASC "
             + "LIMIT 1", nativeQuery = true)
     public Optional<Inscripcion> buscarListaDeEspera (@Param("idEvento") Integer idEvento,
-            @Param("modalidad") Modalidad modalidad);  
+            @Param("modalidad") Modalidad modalidad);
     
     @Query ("SELECT i FROM Inscripcion i WHERE i.alumno.email= :email")
     public List<Inscripcion> inscripcionesPorAlumno (@Param("email") String email);

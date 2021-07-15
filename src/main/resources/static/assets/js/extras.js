@@ -24,3 +24,14 @@ jQuery(document).ready(function() {
     
     fetch(`http://localhost:8080/api/perfil/ver/foto/${username}`).then(r=>r.json()).then(d=>{document.getElementById("photoUser").src=d.foto});
   }
+
+
+
+  function contactanos(){
+
+      Swal.fire(
+      'Contactanos!',
+          'Teléfonos: 261-111-1111 - \nCorreo: contacto@eventmanager.egg',
+          'info'
+      )
+  }

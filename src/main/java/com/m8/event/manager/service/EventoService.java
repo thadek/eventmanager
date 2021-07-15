@@ -39,7 +39,7 @@ public class EventoService {
 
     @Autowired
     EmailService emailService;
-    
+
     @Autowired
     InscripcionRepository inscripcionRepository;
 
@@ -95,10 +95,10 @@ public class EventoService {
         evento.setDescripcion(descripcion);
 
         eventoRepository.save(evento);
-        
-        String subject = "Nuevo Evento";
-        String text = "Estimad@ " + facilitador.getNombre() + ": \n Se ha creado "
-                + "el evento " + evento.getNombre() + "en el cual sos el facilitador.";
+
+        String subject = "Sos Facilitador en un Nuevo Evento";
+        String text = "Hola " + facilitador.getNombre() + ": \n Se ha creado "
+                + "el evento " + evento.getNombre() + ", en el cual sos el/la facilitador/a.";
 
         emailService.enviarCorreo(facilitador.getEmail(), subject, text);
 
@@ -159,10 +159,11 @@ public class EventoService {
         evento.setDescripcion(descripcion);
 
         if (!evento.getFacilitador().equals(facilitador)) {
-            
-            String subject = "Nuevo Evento";
-            String text = "Estimad@ " + facilitador.getNombre() + ": \n Se ha modificado "
-                    + "el evento " + evento.getNombre() + ", en el cual sos el facilitador.";
+
+            String subject = "Sos el nuevo Facilitador de un Evento";
+            String text = "Hola " + facilitador.getNombre() + ": \n Se ha modificado "
+                    + "el evento " + evento.getNombre() + ", en el cual sos el/la nuevo/a "
+                    + "facilitador/a.";
 
             emailService.enviarCorreo(facilitador.getEmail(), subject, text);
         }
@@ -237,62 +238,66 @@ public class EventoService {
 
         return eventoRepository.findByFechaInicio(fechaInicio);
     }
-    
-    @Transactional
-    public int porcentajeCapacidad(Integer idEvento, Modalidad modalidad) throws ErrorServicio {
 
-        int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
-        int cupo;
-        int porcentajeCupo;        
-        
+    @Transactional
+    public Integer porcentajeCapacidad(Integer idEvento, Modalidad modalidad) throws ErrorServicio {
+
+        Integer cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
+        Integer cupo;
+        Double cuenta;
+
         Optional<Evento> respuesta = eventoRepository.findById(idEvento);
-        
+
         if (!respuesta.isPresent()) {
             throw new ErrorServicio("No se encontró el evento en la base de datos.");
         }
-        
+
         Evento evento = respuesta.get();
-        
+
         if (modalidad.equals(Modalidad.PRESENCIAL)) {
             cupo = evento.getCupoPresencial();
         } else {
             cupo = evento.getCupoVirtual();
-        }        
-        
-        porcentajeCupo = (int)(Math.round(cantidadInscripciones/cupo*100));
-        
-        return porcentajeCupo;
+        }
+
+        double cupo2 = cupo;
+        double cantInscrip = cantidadInscripciones;
+        double porcentaje = cantInscrip / cupo2;
+
+        double porcentajeCupo = porcentaje * 100;
+
+        return (int) Math.round(porcentajeCupo);
+
     }
-    
+
     @Transactional
     public String indicadorCapacidad(Integer idEvento, Modalidad modalidad) throws ErrorServicio {
 
         int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
         int cupo;
-        String indicadorCupo;        
-        
+        String indicadorCupo;
+
         Optional<Evento> respuesta = eventoRepository.findById(idEvento);
-        
+
         if (!respuesta.isPresent()) {
             throw new ErrorServicio("No se encontró el evento en la base de datos.");
         }
-        
+
         Evento evento = respuesta.get();
-        
+
         if (modalidad.equals(Modalidad.PRESENCIAL)) {
             cupo = evento.getCupoPresencial();
         } else {
             cupo = evento.getCupoVirtual();
-        }        
-        
+        }
+
         indicadorCupo = cantidadInscripciones + "/" + cupo;
-        
+
         return indicadorCupo;
     }
-    
-    
+
     @Transactional
-    public void eliminarEventoPorId(Integer id) throws ErrorServicio {
+    public void eliminarEventoPorId(Integer id) throws ErrorServicio, MessagingException {
 
         Optional<Evento> respuesta = eventoRepository.findById(id);
         if (respuesta.isPresent()) {
@@ -300,7 +305,15 @@ public class EventoService {
             Evento evento = respuesta.get();
 
             if (evento.getInscripciones().isEmpty()) {
+
+                String subject = "Se ha eliminado un Evento";
+                String text = "Hola " + evento.getFacilitador().getNombre() + ": \n Se ha eliminado "
+                        + "el evento " + evento.getNombre() + ", en el cual eras el/la facilitador/a.";
+
+                emailService.enviarCorreo(evento.getFacilitador().getEmail(), subject, text);
+
                 eventoRepository.deleteById(id);
+                
             } else {
                 throw new ErrorServicio("No se puede eliminar un evento con inscripciones.");
             }

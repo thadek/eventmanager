@@ -2,6 +2,7 @@
 package com.m8.event.manager.repository;
 
 import com.m8.event.manager.entity.Evento;
+import com.m8.event.manager.entity.Inscripcion;
 import com.m8.event.manager.enumeration.Modalidad;
 import java.time.LocalDate;
 import java.util.List;
@@ -29,7 +30,10 @@ public interface EventoRepository extends JpaRepository<Evento,Integer> {
         
 //     List<EventoRepository> findByFecha (Date fecha); 
   
-    public List<Evento> findByFechaInicio (LocalDate fechaInicio);  
+    public List<Evento> findByFechaInicio (LocalDate fechaInicio);
+
+    //PROBANDO METODO NUEVO :>
+
     
     @Query("SELECT e FROM Evento WHERE e.fecha_inicio >=now()")
     public List<Evento> buscarProximosEventos ();

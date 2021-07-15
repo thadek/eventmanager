@@ -34,7 +34,7 @@ public class PerfilService {
 
         Usuario usuario = usuarioRepository.findByUsername(username);
 
-        validar(nombre);
+        validar(email, nombre, apellido, tel);
 
         Perfil perfil = new Perfil();
 
@@ -48,8 +48,9 @@ public class PerfilService {
 
         perfil.setFotoURL(fotoURL);
         
-        String subject = "Nuevo Perfil";
-        String text = "Estimad@ " + nombre + ": \n Se ha creado con éxito su perfil";
+        String subject = "Creaste tu Perfil en EventManager";
+        String text = "Hola " + nombre + ": \n Se ha creado con éxito tu perfil "
+                + "en EventManager.";
 
         emailService.enviarCorreo(email, subject, text);
 
@@ -60,7 +61,7 @@ public class PerfilService {
     @Transactional
     public void modificar(Integer id, String fotoURL, String email, String nombre, String apellido, String tel, LocalDate fechaNac, String descripcion) throws ErrorServicio, MessagingException {
 
-        validar(nombre);
+        validar(email, nombre, apellido, tel);
 
         Optional<Perfil> respuesta = perfilRepository.findById(id);
         if (respuesta.isPresent()) {
@@ -109,12 +110,26 @@ public class PerfilService {
         return perfilRepository.verUsuariosPorRol("ADMIN");
     }
     
-    public void validar(String nombre) throws ErrorServicio {
+    public void validar(String email, String nombre, String apellido, String tel) 
+            throws ErrorServicio {
+        
+        
+        if (email == null || email.isEmpty()) {
+            throw new ErrorServicio("El email no puede ser nulo");
+        }
+        
 
         if (nombre == null || nombre.isEmpty()) {
-
             throw new ErrorServicio("El nombre no puede ser nulo");
-
+        }
+        
+        if (apellido == null || apellido.isEmpty()) {
+            throw new ErrorServicio("El apellido no puede ser nulo");
+        }
+        
+        if (tel == null || tel.isEmpty()) {
+            throw new ErrorServicio("EL número de teléfono es obligatorio."
+                    + " Por este medio te avisaremos sobre las novedades de tus clases");
         }
 
     }

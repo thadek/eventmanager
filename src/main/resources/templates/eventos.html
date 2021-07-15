@@ -21,6 +21,7 @@
 
   <main>
     <div class="container-flex p-1 ms-3 me-3 evContainer">
+      <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
       <div class="row p-2">
         <div class="col-lg-4">
 
@@ -60,7 +61,7 @@
 
 
         <div class="col-lg-8">
-          <div class="row lineaTitulo" id="miseventos">
+          <div class="row lineaTitulo" id="miseventos" style="display:none">
 
             <div class="col-lg-12 cartelevento">
               <h3>Mis eventos</h3>
