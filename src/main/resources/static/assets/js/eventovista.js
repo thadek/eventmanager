@@ -2,6 +2,7 @@
 var idEventoUnico;
 var usernameLogged;
 var porcentajeOcup;
+var evento;
 $( document ).ready(function() {
    try{
        idEventoUnico = document.getElementById("idEventoUnico").innerHTML
@@ -15,11 +16,12 @@ $( document ).ready(function() {
     }catch(error){
 
     }
-
     console.log( usernameLogged )
     porcentajeOcup = 0;
-    cargandoToggler(900);
+    cargandoToggler(550)
 });
+
+
 
 
 
@@ -90,7 +92,7 @@ async function  renderizarListaPublica(arrayEventos) {
      </div>
        </a>
    </li> `
-
+            dias= '';
         }
 
         document.getElementById("listaEvn").innerHTML = body;
@@ -165,7 +167,7 @@ async function renderizarListaPrivada(arrayEventos) {
 
 
             body += `<li>
-         <a href="/">
+         <a href="http://localhost:8080/eventos/ver/${arrayEventos[i].id}">
          <div class="row descripcionEvento">
            <div class="col-lg-2 col-md-4 circuloprogreso circuloprogreso-${i}"><strong>${porc}%</strong>
              <p>Ocupacion</p>
@@ -180,6 +182,8 @@ async function renderizarListaPrivada(arrayEventos) {
          </div>
            </a>
        </li> `
+
+            dias= '';
 
         }
 
@@ -199,9 +203,48 @@ async function renderizarListaPrivada(arrayEventos) {
 }
 
 
-function renderizarEvento(){
+async function renderizarEvento(){
+    //Cargar Evento Individual
+
+    const evento = await fetch(`http://localhost:8080/api/eventos/ver/${idEventoUnico}`).then(res=>res.json());
+
+
+    document.getElementById("modalidadEvento").innerHTML = evento.modalidad;
+    let dias =  "";
+    for(let i=0; i<evento.dias.length;i++){
+        if(i === (evento.dias.length-1)){
+            dias+= `${evento.dias[i]}. `
+        }else{
+            dias+= `${evento.dias[i]}, `
+        }
+    }
+    document.getElementById("diasEvento").innerHTML =  dias;
+    document.getElementById("dias").innerHTML = dias;
+    let ocupacion = await getPorcentajeOcupacionEvento(evento.id,evento.modalidad)
+    if(evento.modalidad=='ONLINE'){
+        document.getElementById("ocupacionOnline").innerHTML = `${ocupacion}%`
+        document.getElementById("ocupacionPresencial").remove();
+    }else if(evento.modalidad=='PRESENCIAL'){
+        document.getElementById("ocupacionPresencial").innerHTML = `${ocupacion}%`
+        document.getElementById("ocupacionOnline").remove();
+    }else{
+        document.getElementById("ocupacionPresencial").innerHTML = `${ocupacion}%`
+        document.getElementById("ocupacionOnline").innerHTML = `${ocupacion}%`
+    }
+    document.getElementById("hora").innerHTML=evento.hora;
+    document.getElementById("duracion").innerHTML= evento.duracion;
+    document.getElementById("precio").innerHTML = evento.valor
+    document.getElementById("descripcionEvento").innerHTML = evento.descripcion;
+    document.getElementById("fotitoProfe").src=evento.facilitador.fotoURL
+    document.getElementById("fotitoProfe2").src=evento.facilitador.fotoURL
+    document.getElementById("nombreProfesor").innerHTML = `${evento.facilitador.nombre} ${evento.facilitador.apellido}`
+
+setTimeout( function(){
+    $('.loader-anim').hide();
     $('.bodyEvent').show();
     $('.contenidoEvento').show();
+},200)
+
 }
 
 
@@ -563,12 +606,13 @@ const { value:diasEv} = await swalQueue.fire({
 function cargandoToggler(tiempo) {
     $('.loader-anim').show();
 
-    setTimeout(function () {
-        $('.loader-anim').hide();
+    setTimeout(async function () {
+
         if(idEventoUnico){
             renderizarEvento();
-        }else{
 
+        }else{
+            $('.loader-anim').hide();
             if(usernameLogged){
                 $('#miseventos').show();
 
@@ -653,4 +697,5 @@ function filtrarLista()
         }
     }
 }
+
 

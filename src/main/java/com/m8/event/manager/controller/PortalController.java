@@ -55,6 +55,20 @@ public class PortalController {
         return new RedirectView("/login?register=ok");
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/eventos/subscribe")
+    public RedirectView redireccionarASuscripcion(RedirectAttributes attributes,@RequestParam(value="ev",required=false) Integer idEvento){
+      if(idEvento!=null){
+          attributes.addAttribute("subscribe","true");
+          String urlEv = "/eventos/ver/"+idEvento;
+          return new RedirectView(urlEv);
+      }else{
+          return new RedirectView("/");
+      }
+
+    }
+
+
 
     @GetMapping("/login")
     public ModelAndView login(@RequestParam(required = false) String error,

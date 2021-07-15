@@ -96,13 +96,13 @@ public class EventoService {
 
         eventoRepository.save(evento);
 
-        //Me parece un tanto rebuscado mandarse un mail a si mismo
-      /*
+
+
         String subject = "Nuevo Evento";
         String text = "Estimad@ " + facilitador.getNombre() + ": \n Se ha creado "
-                + "el evento " + evento.getNombre() + "en el cual sos el facilitador.";
+                + "el evento  <strong>" + evento.getNombre() + "</strong>  en el cual sos el facilitador.";
 
-        emailService.enviarCorreo(facilitador.getEmail(), subject, text);*/
+        emailService.enviarCorreo(facilitador.getEmail(), subject, text);
 
     }
 

@@ -12,6 +12,7 @@ import com.m8.event.manager.repository.InscripcionRepository;
 import com.m8.event.manager.repository.PerfilRepository;
 import com.m8.event.manager.repository.UsuarioRepository;
 import com.m8.event.manager.service.EventoService;
+import com.m8.event.manager.service.InscripcionService;
 import com.m8.event.manager.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,6 +34,9 @@ public class eventoRestController {
     private InscripcionRepository ir;
 
     @Autowired
+    private InscripcionService is;
+
+    @Autowired
     private EventoService es;
 
     @Autowired
@@ -41,10 +45,7 @@ public class eventoRestController {
     @Autowired
     private PerfilRepository pr;
 
-    @GetMapping()
-    public String prueba(@RequestParam(value="name", defaultValue="Usuario") String name){
-        return new String(String.format("Event Manager - Mesa 8 EGG - ¡Hola %s!",name));
-    }
+
 
     @GetMapping("/vertodos")
     public List<Evento> verTodos(){
@@ -56,6 +57,15 @@ public class eventoRestController {
             return null;
         }
     }
+
+    @GetMapping("/ver/{id}")
+    public Evento verEvento(@PathVariable("id")Integer id){
+        return erp.findById(id).get();
+    }
+
+
+
+    /*Controladores para revisar ocupación en eventos */
 
     @GetMapping("/ocupacion/{idevento}/mixta")
     public HashMap getOcupacionMixta(@PathVariable("idevento")Integer idevento){
@@ -106,6 +116,29 @@ public class eventoRestController {
 
 
 
+
+    /* Inscripciones */
+    @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')"  )
+    @GetMapping("/inscripciones/{evento}/{username}")
+    public HashMap verificarInscripcionPorUsername(@PathVariable("evento")Integer idEvento, @PathVariable("username") String username){
+        HashMap<String,String> res = new HashMap<>();
+       try{
+          Evento ev=  erp.findById(idEvento).get();
+           for (Inscripcion i:ev.getInscripciones()) {
+               if(i.getAlumno().getUsuario().getUsername().equals(username)){
+                   res.put("respuesta","true");
+                   break;
+               }
+           }
+           return res;
+       }catch(Exception e){
+
+           res.put("respuesta","false");
+           return res;
+       }
+    }
+
+
     @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')"  )
     @GetMapping("/inscripciones/user/{username}")
     public List<Inscripcion> listaDeInscripcionesPorUserName(@PathVariable("username") String username){
@@ -119,7 +152,7 @@ public class eventoRestController {
 
     @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')"  )
     @GetMapping("/miseventos/{username}")
-    public List<Evento> listaDeEventosConInscripcionPorUserName(@PathVariable("username") String username){
+    public List<Evento> misEventos(@PathVariable("username") String username){
         //Lista de EVENTOS A LOS QUE UN USER ESTA INSCRIPTO.
         List<Evento> listaEventosUsuario = new ArrayList<>();
         try{
@@ -135,20 +168,73 @@ public class eventoRestController {
     }
 
 
-
     @GetMapping("/inscripciones/{idevento}")
     public List<Inscripcion> verListaDeInscripcionesDeUnEvento(@PathVariable("idevento")Integer idevento){
        return erp.findById(idevento).get().getInscripciones();
     }
 
-    /* Lista de eventos a los que estoy inscripto
-    @GetMapping("/miseventos/{username}")
-    public List<Evento> listadeEventosPorUsuario(@PathVariable("username")String username){
-       try { es.listadeEventosporUsuario(usuario)
-       }catch(Exception e){
-        return null  }
+
+
+    /* ABM INSCRIPCIONES */
+
+    @PostMapping("/inscripciones/nueva")
+    public HashMap crearInscripcion (@RequestBody Inscripcion insc){
+        HashMap<String,String> respuesta = new HashMap<>();
+        try{
+/*REVISAR INSCRIPCION SERVICE**/
+           is.crearInscripcion(insc.getEvento().getId(),insc.getAlumno().getEmail(),insc.getModalidad());
+            //ir.save(insc);
+            respuesta.put("respuesta","Inscripcion realizada correctamente.");
+            respuesta.put("error","false");
+            return respuesta;
+        }catch(Exception e){
+            respuesta.put("respuesta",e.getMessage());
+            respuesta.put("error","true");
+            return respuesta;
+        }
+
     }
-    */
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/inscripciones/editar")
+    public HashMap editarInscripcion(@RequestBody Inscripcion insc){
+        HashMap<String,String> respuesta = new HashMap<>();
+        try{
+            is.modificarInscripcion(insc.getIdInscripcion(),insc.getEvento().getId(),insc.getAlumno().getEmail(),insc.getModalidad(),insc.getEstado());
+            respuesta.put("respuesta","Inscripcion modificada correctamente.");
+            respuesta.put("error","false");
+            return respuesta;
+        }catch(Exception e){
+            respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
+            respuesta.put("error","true");
+            return respuesta;
+        }
+
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/inscripciones/eliminar")
+    public HashMap eliminarInscripcion(@RequestBody Inscripcion insc){
+        HashMap<String,String> respuesta = new HashMap<>();
+        try{
+            ir.delete(insc);
+            respuesta.put("respuesta","Inscripción eliminada correctamente.");
+            respuesta.put("error","false");
+            return respuesta;
+        }catch(Exception e){
+            respuesta.put("error","true");
+            respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
+            return respuesta;
+        }
+
+    }
+
+
+
+
+
+
+     /*  ABM EVENTO    */
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/crear")

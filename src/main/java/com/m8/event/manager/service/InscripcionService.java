@@ -40,10 +40,14 @@ public class InscripcionService {
     public void crearInscripcion(Integer idEvento, String emailAlumno, Modalidad modalidad)
             throws ErrorServicio, MessagingException {
 
-        validarDatos(idEvento, emailAlumno, modalidad);
+       // validarDatos(idEvento, emailAlumno, modalidad);
 
         Optional<Evento> respuesta1 = eventoRepository.findById(idEvento);
-        Perfil alumno = perfilRepository.findByEmail(emailAlumno);
+         Perfil alumno = perfilRepository.findByEmail(emailAlumno);
+
+
+
+
 
         if (!respuesta1.isPresent()) {
             throw new ErrorServicio("No existe ese evento en la base de datos.");
@@ -55,6 +59,7 @@ public class InscripcionService {
         Inscripcion inscripcion = new Inscripcion();
         Evento evento = respuesta1.get();
 
+
         inscripcion.setEvento(evento);
         inscripcion.setAlumno(alumno);
         inscripcion.setModalidad(modalidad);
@@ -65,6 +70,9 @@ public class InscripcionService {
 
         int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
 //        int inscripcionesOnline = inscripcionRepository.cantidadInscripciones(modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));;
+
+
+
 
         inscripcion.setEstado(cantidadInscripciones < evento.getCupoPresencial() ? Estado.PENDIENTE : Estado.ESPERA);
         if (modalidad.equals(Modalidad.ONLINE)) {
@@ -84,6 +92,7 @@ public class InscripcionService {
                 inscripcion.setEstado(Estado.ESPERA);
             }
         }
+
 
         inscripcionRepository.save(inscripcion);
 
