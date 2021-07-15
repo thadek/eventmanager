@@ -31,4 +31,10 @@ public interface EventoRepository extends JpaRepository<Evento,Integer> {
   
     public List<Evento> findByFechaInicio (LocalDate fechaInicio);  
     
+    @Query("SELECT e FROM Evento WHERE e.fecha_inicio >=now()")
+    public List<Evento> buscarProximosEventos ();
+    
+    @Query("SELECT e FROM Evento_dias WHERE e.dias = :dia")
+    public List<Evento> buscarPorDiaSemana (@Param("dia") Enum dias);
+    
 }

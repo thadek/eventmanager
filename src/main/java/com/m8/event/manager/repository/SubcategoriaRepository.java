@@ -17,4 +17,6 @@ public interface SubcategoriaRepository extends JpaRepository<Subcategoria, Inte
     @Query("SELECT s FROM Subcategoria s WHERE s.nombre= :nombre")
     public List<Subcategoria> buscarPorNombre (@Param("nombre") String nombre);
     
+    
+    
 }

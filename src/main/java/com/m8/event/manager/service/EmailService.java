@@ -1,7 +1,5 @@
 package com.m8.event.manager.service;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
