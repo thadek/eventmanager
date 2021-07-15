@@ -96,9 +96,11 @@ public class EventoService {
 
         eventoRepository.save(evento);
 
+
         String subject = "Sos Facilitador en un Nuevo Evento";
         String text = "Hola " + facilitador.getNombre() + ": \n Se ha creado "
                 + "el evento " + evento.getNombre() + ", en el cual sos el/la facilitador/a.";
+
 
         emailService.enviarCorreo(facilitador.getEmail(), subject, text);
 

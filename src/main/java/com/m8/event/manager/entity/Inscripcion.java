@@ -16,11 +16,11 @@ public class Inscripcion implements Serializable {
    @GeneratedValue (strategy= GenerationType.IDENTITY)
    private Integer idInscripcion;
 
-   @JsonBackReference
+
    @ManyToOne
    private Evento evento;
 
-   @ManyToOne
+   @ManyToOne(cascade = {CascadeType.ALL})
    private Perfil alumno;
 
    @Enumerated(EnumType.STRING)
