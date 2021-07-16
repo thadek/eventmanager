@@ -278,5 +278,5 @@ public class InscripcionService {
             throw new ErrorServicio("No se asignó ningún alumno al evento.");
         }
     }
-
+    
 }

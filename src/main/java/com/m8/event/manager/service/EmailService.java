@@ -1,5 +1,8 @@
 package com.m8.event.manager.service;
 
+import com.m8.event.manager.entity.Inscripcion;
+import com.m8.event.manager.repository.InscripcionRepository;
+import java.util.List;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class EmailService {
 
     @Value("${spring.mail.username}")
     private String from;
+    
+    @Autowired
+    InscripcionRepository inscripcionRepository;
 
 
 
@@ -615,4 +621,26 @@ public class EmailService {
         }).start();
 
     }
+    
+    public String EnviarEmailmasivo(String asunto, String cuerpo, int id_evento) throws MessagingException {
+        
+        List<Inscripcion> insc = inscripcionRepository.InscripcionesConfirmadas(id_evento);
+        
+      int contador = 0;
+    
+        for (int i = 0; i < insc.size(); i++) {
+               
+            String para = insc.get(i).getAlumno().getEmail();
+                        
+            enviarCorreo(para, asunto, cuerpo);
+            
+            contador++;
+
+  }
+        
+    System.out.println("Correos Enviados Correctamente\n");
+    System.out.println("Total Correos Enviados: " + contador + "\n");
+    return "";
+}
+    
 }
