@@ -632,9 +632,6 @@ function cargandoToggler(tiempo) {
             cargarListaEventosPublica();
         }
 
-
-
-
     }, tiempo);
 
 }
