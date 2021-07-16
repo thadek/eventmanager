@@ -53,17 +53,6 @@ public class CategoriaService {
          return null;
       }
 
-       /*
-        Categoria categoria = categoriaRepository.buscarPorCategoria(nombre);
-        if (categoria != null) {
-            categoria.setNombre(nombre);
-            categoriaRepository.save(categoria);
-            return categoria;
-        } else {
-            throw new ErrorServicio("No se encontró esa categoría en la base de datos.");
-        }
-        */
-
    }
 
    @Transactional

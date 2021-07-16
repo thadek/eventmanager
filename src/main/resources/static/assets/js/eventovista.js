@@ -136,10 +136,7 @@ async function getPorcentajeOcupacionEvento(idEvento,modalidad){
     }
     else{
     const ocup = await fetch(`http://localhost:8080/api/eventos/ocupacion/${idEvento}/mixta`).then(respuesta => respuesta.json())
-
-        return ocup.porcentaje
-
-
+           return ocup.porcentaje;        
 
     }
 
@@ -634,9 +631,6 @@ function cargandoToggler(tiempo) {
             }
             cargarListaEventosPublica();
         }
-
-
-
 
     }, tiempo);
 
