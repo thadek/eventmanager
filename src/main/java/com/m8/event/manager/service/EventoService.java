@@ -286,17 +286,17 @@ public class EventoService {
         }
 
         Evento evento = respuesta.get();
-
+        int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, Modalidad.MIXTA, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
         inscripcionesPresenciales = inscripcionRepository.cantidadInscripciones(idEvento, Modalidad.PRESENCIAL, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
         inscripcionesOnline = inscripcionRepository.cantidadInscripciones(idEvento, Modalidad.ONLINE, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
         inscripcionesTotales = inscripcionesPresenciales + inscripcionesOnline;
-        System.out.println("Inscripciones Totales =" + inscripcionesTotales);
+        System.out.println("Inscripciones Online =" + inscripcionesOnline + "presenciales "+ cantidadInscripciones);
         
         cupoTotal = evento.getCupoPresencial() + evento.getCupoVirtual();
         
         double inscripTotales = inscripcionesTotales;
         double cupTotal = cupoTotal;
-        
+
         porcentajeCupo = (inscripTotales/cupTotal)*100;
         
         return (int) Math.round(porcentajeCupo);        

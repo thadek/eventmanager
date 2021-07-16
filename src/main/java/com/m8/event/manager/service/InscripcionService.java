@@ -45,7 +45,7 @@ public class InscripcionService {
         Optional<Evento> respuesta1 = eventoRepository.findById(idEvento);
          Perfil alumno = perfilRepository.findByEmail(emailAlumno);
 
-        System.out.println("Inscripcion: ID EVENTO:"+idEvento+" EmailAlumno:"+emailAlumno+" Modalidad: "+modalidad);
+      //  System.out.println("Inscripcion: ID EVENTO:"+idEvento+" EmailAlumno:"+emailAlumno+" Modalidad: "+modalidad);
 
         if (!respuesta1.isPresent()) {
             throw new ErrorServicio("No existe ese evento en la base de datos.");

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -126,17 +127,19 @@ public class eventoRestController {
           Evento ev=  erp.findById(idEvento).get();
            for (Inscripcion i:ev.getInscripciones()) {
                if(i.getAlumno().getUsuario().getUsername().equals(username)){
-                   res.put("respuesta","true");
+                   res.put("respuesta","ok");
+                   res.put("estado",i.getEstado().toString());
                    break;
                }
            }
            return res;
        }catch(Exception e){
-
-           res.put("respuesta","false");
+           res.put("respuesta","error");
            return res;
        }
     }
+
+
 
 
     @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')"  )
@@ -156,7 +159,7 @@ public class eventoRestController {
         //Lista de EVENTOS A LOS QUE UN USER ESTA INSCRIPTO.
         List<Evento> listaEventosUsuario = new ArrayList<>();
         try{
-        for (Inscripcion insc: ir.inscripcionesPorAlumno(pr.findByUsuario(ur.findByUsername(username)).getEmail())) {
+        for (Inscripcion insc: ir.inscripcionesPorAlumno(username)){
             listaEventosUsuario.add(insc.getEvento());
         }
 
@@ -182,7 +185,7 @@ public class eventoRestController {
         HashMap<String,String> respuesta = new HashMap<>();
 
 /*REVISAR INSCRIPCION SERVICE**/
-            System.out.println("Inscripcion recibida: "+insc);
+          //  System.out.println("Inscripcion recibida: "+insc);
 
             is.crearInscripcion(insc.getEvento().getId(),insc.getAlumno().getEmail(),insc.getModalidad());
 
@@ -231,6 +234,34 @@ public class eventoRestController {
         }
 
     }
+
+
+    @PreAuthorize("#username==authentication.principal.username")
+    @DeleteMapping("/baja/{idevento}/{username}")
+    public HashMap darDeBajaInscripcion(@PathVariable("username") String username, @PathVariable("idevento") Integer idevento){
+        HashMap<String,String> respuesta = new HashMap<>();
+        try{
+             List<Inscripcion> inscripcionesAlumno = ir.inscripcionesPorAlumno(username);
+             inscripcionesAlumno.forEach(inscripcion -> {
+                 if(inscripcion.getEvento().getId() == idevento){
+                     ir.delete(inscripcion);
+                     respuesta.put("respuesta","Se dio de baja tu inscripción correctamente.");
+
+                 }else{
+                     respuesta.put("respuesta","Ocurrió un error en el sistema.");
+                     respuesta.put("error","true");
+                 }
+             });
+            return respuesta;
+
+        }catch(Exception e){
+            respuesta.put("respuesta", "Ocurrió un error: "+e.getMessage());
+            respuesta.put("error","true");
+            return respuesta;
+        }
+
+    }
+
 
 
 
