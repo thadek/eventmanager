@@ -35,4 +35,10 @@ public interface EventoRepository extends JpaRepository<Evento,Integer> {
     //PROBANDO METODO NUEVO :>
 
     
+//    @Query("SELECT e FROM Evento e WHERE e.fecha_inicio >= CURRENT_DATE()")
+//    public List<Evento> buscarProximosEventos ();
+    
+//    @Query("SELECT e FROM Evento_dias e WHERE e.dias = :dia")
+//    public List<Evento> buscarPorDiaSemana (@Param("dia") Enum dias);
+    
 }

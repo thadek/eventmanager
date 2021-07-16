@@ -3,8 +3,6 @@ package com.m8.event.manager.service;
 import com.m8.event.manager.entity.Inscripcion;
 import com.m8.event.manager.repository.InscripcionRepository;
 import java.util.List;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;

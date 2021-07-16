@@ -53,7 +53,7 @@ public class InscripcionService {
             throw new ErrorServicio("No existe ese evento en la base de datos.");
         }
         if (alumno == null) {
-            throw new ErrorServicio("No existe ese alumno en la base de datos.");
+            throw new ErrorServicio("Debe completar su perfil de usuario antes de poder inscribirse en una clase");
         }
 
         Inscripcion inscripcion = new Inscripcion();

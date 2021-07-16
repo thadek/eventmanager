@@ -59,9 +59,7 @@ public class PerfilService {
     }
 
     @Transactional
-    public void modificar(Integer id, String fotoURL, String email, String nombre, 
-            String apellido, String tel, LocalDate fechaNac, String descripcion) 
-            throws ErrorServicio {
+    public void modificar(Integer id, String fotoURL, String email, String nombre, String apellido, String tel, LocalDate fechaNac, String descripcion) throws ErrorServicio, MessagingException {
 
         validar(email, nombre, apellido, tel);
 
@@ -78,6 +76,14 @@ public class PerfilService {
             perfil.setDescripcion(descripcion);
             perfil.setFotoURL(fotoURL);
 
+            String subject = "Perfil modificado";
+        String text = "Estimad@ " + nombre + ": \n Su perfil ha sido modificado. \n"
+                + "Datos nuevos: \n Nombre: " + nombre + "\n Apellido: " + apellido + "\n"
+                + "Email: " + email + "\n Teléfono: " + tel ;
+
+        emailService.enviarCorreo(email, subject, text);
+
+                  
             perfilRepository.save(perfil);
         } else {
             throw new ErrorServicio("No existe un perfil con el Id solicitado");
@@ -91,18 +97,28 @@ public class PerfilService {
     
     public List<Perfil> verListaDeProfesores (){
         
-        return perfilRepository.verListaDeProfesores("PROFESOR");
+        return perfilRepository.verUsuariosPorRol("PROFESOR");
     }
 
+    public List<Perfil> verListaDeAlumnos (){
+        
+        return perfilRepository.verUsuariosPorRol("ALUMNO");
+    }
+    
+    public List<Perfil> verListaDeAdmin (){
+        
+        return perfilRepository.verUsuariosPorRol("ADMIN");
+    }
+    
     public void validar(String email, String nombre, String apellido, String tel) 
             throws ErrorServicio {
-        
         
         
         if (email == null || email.isEmpty()) {
             throw new ErrorServicio("El email no puede ser nulo");
         }
         
+
         if (nombre == null || nombre.isEmpty()) {
             throw new ErrorServicio("El nombre no puede ser nulo");
         }
@@ -112,7 +128,8 @@ public class PerfilService {
         }
         
         if (tel == null || tel.isEmpty()) {
-            throw new ErrorServicio("El teléfono no puede ser nulo");
+            throw new ErrorServicio("EL número de teléfono es obligatorio."
+                    + " Por este medio te avisaremos sobre las novedades de tus clases");
         }
 
     }

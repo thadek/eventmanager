@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import javax.mail.MessagingException;
 
 @RestController
 @RequestMapping ("/api/perfil")
@@ -88,7 +89,7 @@ public class perfilController {
 
    @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')"  )
    @PostMapping ("/modificar/{username}")
-   public HashMap modificarPerfil (@PathVariable ("username") String username, @RequestBody Perfil p ) {
+   public HashMap modificarPerfil (@PathVariable ("username") String username, @RequestBody Perfil p ) throws MessagingException {
       HashMap<String, String> map = new HashMap<> ();
       try {
          ps.modificar (p.getIdPerfil (), p.getFotoURL (), p.getEmail (), p.getNombre (), p.getApellido (),
@@ -119,7 +120,7 @@ public class perfilController {
    @GetMapping("/profesores")
    public List<Perfil> verListaProfesores (){
       try{
-         return pr.verListaDeProfesores("PROFESOR");
+         return pr.verUsuariosPorRol("PROFESOR");
       }catch(Exception e ){
          return null;
       }
