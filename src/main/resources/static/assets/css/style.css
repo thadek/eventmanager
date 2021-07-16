@@ -303,6 +303,14 @@ table thead{
     border-bottom-right-radius: 20px;
 }
 
+/*hover para los <a> de la navbar*/
+#navbarNavAltMarkup > div.navbar-nav.me-auto > li > a:hover,
+#navbarNavAltMarkup > div.navbar-nav.me-auto > a:hover {
+    color:#FA6742!important;
+}
+
+
+
 #navbarSecundario{
     background:transparent!important;
 }
