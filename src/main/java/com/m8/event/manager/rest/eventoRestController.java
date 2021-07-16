@@ -70,11 +70,8 @@ public class eventoRestController {
     @GetMapping("/ocupacion/{idevento}/mixta")
     public HashMap getOcupacionMixta(@PathVariable("idevento")Integer idevento){
         HashMap<String,String> respuesta = new HashMap<>();
-        try{
-            respuesta.put("indicadorOnline",es.indicadorCapacidad(idevento, Modalidad.ONLINE));
-            respuesta.put("porcentajeOnline", Integer.toString(es.porcentajeCapacidad(idevento,Modalidad.ONLINE)));
-            respuesta.put("indicadorPresencial",es.indicadorCapacidad(idevento, Modalidad.PRESENCIAL));
-            respuesta.put("porcentajePresencial", Integer.toString(es.porcentajeCapacidad(idevento,Modalidad.PRESENCIAL)));
+        try{            
+            respuesta.put("porcentaje", Integer.toString(es.porcentajeCapacidadMixto(idevento)));
             respuesta.put("error","false");
             return respuesta;
         }catch(Exception e ){

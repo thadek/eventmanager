@@ -40,15 +40,12 @@ public class InscripcionService {
     public void crearInscripcion(Integer idEvento, String emailAlumno, Modalidad modalidad)
             throws ErrorServicio, MessagingException {
 
-       // validarDatos(idEvento, emailAlumno, modalidad);
+        validarDatos(idEvento, emailAlumno, modalidad);
 
         Optional<Evento> respuesta1 = eventoRepository.findById(idEvento);
          Perfil alumno = perfilRepository.findByEmail(emailAlumno);
 
-
         System.out.println("Inscripcion: ID EVENTO:"+idEvento+" EmailAlumno:"+emailAlumno+" Modalidad: "+modalidad);
-
-
 
         if (!respuesta1.isPresent()) {
             throw new ErrorServicio("No existe ese evento en la base de datos.");
@@ -70,15 +67,7 @@ public class InscripcionService {
                 -> Integer.compare(i1.getIdInscripcion(), i2.getIdInscripcion()));
 
         int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
-//        int inscripcionesOnline = inscripcionRepository.cantidadInscripciones(modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));;
 
-
-
-
-   //     inscripcion.setEstado(cantidadInscripciones < evento.getCupoPresencial() ? Estado.PENDIENTE : Estado.ESPERA);
-    //   if (modalidad.equals(Modalidad.ONLINE)) {
-    //       inscripcion.setEstado(cantidadInscripciones < evento.getCupoVirtual() ? Estado.PENDIENTE : Estado.ESPERA);
-    //   }
 
         if (modalidad.equals(Modalidad.PRESENCIAL)) {
             if (cantidadInscripciones < evento.getCupoPresencial()) {
@@ -93,7 +82,6 @@ public class InscripcionService {
                 inscripcion.setEstado(Estado.ESPERA);
             }
         }
-
 
         inscripcionRepository.save(inscripcion);
 
@@ -113,29 +101,6 @@ public class InscripcionService {
 
         emailService.enviarCorreo(alumno.getEmail(), subject, text);
 
-        //        switch (modalidad) {
-//            case PRESENCIAL:
-//                inscripcionesPresenciales = (int) inscripciones.stream()
-//                        .filter(i -> Modalidad.PRESENCIAL.equals(i.getModalidad()))
-//                        .count();               
-//                for (Inscripcion inscrip : inscripciones) {
-//
-//                    if (inscrip.getModalidad().equals(modalidad)) {
-//                        if (inscrip.getEstado().equals(Estado.PENDIENTE)
-//                                || inscrip.getEstado().equals(Estado.CONFIRMADO)) {
-//                            inscripcionesPresenciales++;
-//                        }
-//                    }
-//                }    
-////            case ONLINE:
-//        for (Inscripcion inscrip : inscripciones) {
-//            if (inscrip.getModalidad().equals(modalidad)) {
-//                if (inscrip.getEstado().equals(Estado.PENDIENTE)
-//                        || inscrip.getEstado().equals(Estado.CONFIRMADO)) {
-//                    inscripcionesOnline++;
-//                }
-//            }
-//        }       
     }
 
     @Transactional
@@ -263,6 +228,11 @@ public class InscripcionService {
 
         return inscripcionRepository.inscripcionesPorAlumno(email);
     }
+    
+    public List<Inscripcion> inscripcionesPendientes() throws ErrorServicio {
+
+        return inscripcionRepository.inscripcionesPendientes();
+    }    
 
     public void validarDatos(Integer idEvento, String emailAlumno, Modalidad modalidad)
             throws ErrorServicio {

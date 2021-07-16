@@ -135,8 +135,8 @@ async function getPorcentajeOcupacionEvento(idEvento,modalidad){
         return ocup.porcentaje
     }
     else{
-    const ocup = await fetch(`http://localhost:8080/api/eventos/ocupacion/${idEvento}/online`).then(respuesta => respuesta.json())
-           return (ocup.porcentajeOnline+ocup.porcentajePresencial/2); //promedio de ambas GRACIAS POR MANDARME EL PROMEDIO EN PORCENTAJE :>>>>
+    const ocup = await fetch(`http://localhost:8080/api/eventos/ocupacion/${idEvento}/mixta`).then(respuesta => respuesta.json())
+           return ocup.porcentaje;        
 
     }
 

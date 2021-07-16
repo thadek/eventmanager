@@ -13,9 +13,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * @author Agustin
- */
 @Service
 public class PerfilService {
 
@@ -95,9 +92,7 @@ public class PerfilService {
     }
 
     public void validar(String email, String nombre, String apellido, String tel) 
-            throws ErrorServicio {
-        
-        
+            throws ErrorServicio {       
         
         if (email == null || email.isEmpty()) {
             throw new ErrorServicio("El email no puede ser nulo");
