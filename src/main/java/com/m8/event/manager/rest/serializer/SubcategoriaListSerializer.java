@@ -29,20 +29,20 @@ public class SubcategoriaListSerializer extends StdSerializer<List<Subcategoria>
             List<Subcategoria> cat, JsonGenerator jsonGenerator, SerializerProvider serializer) throws IOException {
         jsonGenerator.writeStartObject();
 
-        String listaSubcat="";
+        StringBuilder listaSubcat= new StringBuilder();
 
          //Ordeno la lista de subcategorias en un string
         Iterator<Subcategoria> it = cat.iterator();
         while(it.hasNext()){
             String st =it.next().getNombre();
             if(!it.hasNext()){
-                listaSubcat+= st+".";
+                listaSubcat.append(st).append(".");
             }else{
-                listaSubcat+= st+", ";
+                listaSubcat.append(st).append(",");
             }
         }
 
-        jsonGenerator.writeStringField("subcategorias",listaSubcat );
+        jsonGenerator.writeStringField("subcategorias",listaSubcat.toString() );
         jsonGenerator.writeEndObject();
     }
 

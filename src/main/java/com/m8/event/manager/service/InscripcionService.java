@@ -46,6 +46,7 @@ public class InscripcionService {
          Perfil alumno = perfilRepository.findByEmail(emailAlumno);
 
 
+        System.out.println("Inscripcion: ID EVENTO:"+idEvento+" EmailAlumno:"+emailAlumno+" Modalidad: "+modalidad);
 
 
 
@@ -74,10 +75,10 @@ public class InscripcionService {
 
 
 
-        inscripcion.setEstado(cantidadInscripciones < evento.getCupoPresencial() ? Estado.PENDIENTE : Estado.ESPERA);
-        if (modalidad.equals(Modalidad.ONLINE)) {
-            inscripcion.setEstado(cantidadInscripciones < evento.getCupoVirtual() ? Estado.PENDIENTE : Estado.ESPERA);
-        }
+   //     inscripcion.setEstado(cantidadInscripciones < evento.getCupoPresencial() ? Estado.PENDIENTE : Estado.ESPERA);
+    //   if (modalidad.equals(Modalidad.ONLINE)) {
+    //       inscripcion.setEstado(cantidadInscripciones < evento.getCupoVirtual() ? Estado.PENDIENTE : Estado.ESPERA);
+    //   }
 
         if (modalidad.equals(Modalidad.PRESENCIAL)) {
             if (cantidadInscripciones < evento.getCupoPresencial()) {

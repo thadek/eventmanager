@@ -428,7 +428,8 @@ const { value:diasEv} = await swalQueue.fire({
         '</select>',
     didOpen(){
         $('#diasEvento').selectize({
-            sortField: 'text'})
+            sortField: 'text'});
+        document.getElementById("diasEvento").style.zIndex="1000";
     }
     ,currentProgressStep:5,
     focusConfirm: false,
@@ -449,18 +450,21 @@ const { value:diasEv} = await swalQueue.fire({
         title: ' Ya casi! solo faltan estos detalles:',
         html:
 
-            '<input id="fechaInicio" class="swal2-input" type="date">' +
-            '<p>Fecha Inicio</p>' +
-            '<input id="fechaFin" class="swal2-input"type="date">' +
-            '<p>Fecha Fin</p>' +
-            '<input id="hora" class="swal2-input" type="time">' +
-            '<p>Hora</p>' +
-            '<input id="duracionEvento" class="swal2-input" type="number">' +
-            '<p>Duracion en minutos</p>'+
-            '<input id="valorNuevoEvento" class="swal2-input" type="number">' +
-            '<p>Valor</p>'+
-            '<input id="descripcionNuevoEvento" class="swal2-input" type="text">'+
-            '<p>Descripción</p>'
+            `
+            <input id="fechaInicio" class="form-control"  type="date">
+            <p>Fecha Inicio</p>
+            <input id="fechaFin" class="form-control" type="date"> 
+            <p>Fecha Fin</p>
+                <input id="hora" class="form-control" type="time"> 
+            <p>Hora</p>
+            <input id="duracionEvento"  class="form-control"type="number">
+            <p>Duracion en minutos</p>
+            <input id="valorNuevoEvento" class="form-control" type="number">
+            <p>Valor</p>                                                   
+            <div class="form-floating">
+              <textarea class="form-control"  id="descripcionNuevoEvento"></textarea>
+              <label for="descripcionNuevoEvento">Descripción</label>
+            </div>  `
 
         ,currentProgressStep:6,
         focusConfirm: false,
@@ -542,7 +546,7 @@ const { value:diasEv} = await swalQueue.fire({
                     clearInterval(timerInterval)
                 }
             }).then((result) => {
-                /* Read more about handling dismissals below */
+
 
             })
 

@@ -79,10 +79,11 @@ async function cargarSuscripcion(perfil,evento){
 </div><br>
 
 `
-    let inscripcion= { evento: evento, alumno:perfil,modalidad: evento.modalidad };
-//let inscripcion= { evento: {id:evento.id}, alumno:{id:perfil.idPerfil,email:perfil.email},modalidad: evento.modalidad };
+    console.log(perfil)
+    //let inscripcion= { evento: evento, alumno:,modalidad: evento.modalidad };
+let inscripcion= { evento: {id:evento.id}, alumno:{id:perfil.idPerfil,email:perfil.email},modalidad: evento.modalidad };
 
-
+console.log("inscripcion predata",inscripcion)
 inscripcion = JSON.stringify(inscripcion);
 console.log(inscripcion)
 

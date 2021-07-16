@@ -3,6 +3,7 @@ package com.m8.event.manager.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public class Subcategoria implements Serializable {
 
    private String nombre;
 
-
+   @ToString.Exclude
    @ManyToOne
    private Categoria categoria;
 

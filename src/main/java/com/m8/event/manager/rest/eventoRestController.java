@@ -178,20 +178,23 @@ public class eventoRestController {
     /* ABM INSCRIPCIONES */
 
     @PostMapping("/inscripciones/nueva")
-    public HashMap crearInscripcion (@RequestBody Inscripcion insc){
+    public HashMap crearInscripcion (@RequestBody Inscripcion insc) throws Exception{
         HashMap<String,String> respuesta = new HashMap<>();
-        try{
+
 /*REVISAR INSCRIPCION SERVICE**/
-           is.crearInscripcion(insc.getEvento().getId(),insc.getAlumno().getEmail(),insc.getModalidad());
-            //ir.save(insc);
+            System.out.println("Inscripcion recibida: "+insc);
+
+            is.crearInscripcion(insc.getEvento().getId(),insc.getAlumno().getEmail(),insc.getModalidad());
+
             respuesta.put("respuesta","Inscripcion realizada correctamente.");
             respuesta.put("error","false");
             return respuesta;
-        }catch(Exception e){
-            respuesta.put("respuesta",e.getMessage());
-            respuesta.put("error","true");
-            return respuesta;
-        }
+
+
+          //  respuesta.put("respuesta");
+            //respuesta.put("error","true");
+            //return respuesta;
+
 
     }
 
@@ -294,12 +297,12 @@ public class eventoRestController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/eliminar")
+    @DeleteMapping("/eliminar")
     public HashMap eliminarEvento(@RequestBody Evento ev){
         HashMap<String,String> respuesta = new HashMap<>();
         try{
             es.eliminarEventoPorId(ev.getId());
-            respuesta.put("respuesta","Evento Eliminado exitosamente");
+            respuesta.put("respuesta","Evento Eliminado exitosamente. Se envió un correo electrónico al facilitador.");
             return respuesta;
         }catch(Exception e){
             respuesta.put("respuesta","Ocurrio un error: "+e.getMessage());

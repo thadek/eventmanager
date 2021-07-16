@@ -37,6 +37,14 @@ public class AdminController {
         return mav;
     }
 
+    @GetMapping("/eventos")
+    public ModelAndView verEventos(){
+        ModelAndView mav = new ModelAndView("eventoadm");
+        mav.addObject("title","Gestion de Eventos - EventManager ");
+        return mav;
+    }
+
+
 
     @Autowired
     private PerfilRepository pr;
