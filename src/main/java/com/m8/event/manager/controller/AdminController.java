@@ -43,6 +43,13 @@ public class AdminController {
         mav.addObject("title","Gestion de Eventos - EventManager ");
         return mav;
     }
+    @GetMapping("/inscripciones")
+    public ModelAndView verInscripciones(){
+        ModelAndView mav = new ModelAndView("inscripcionesadm");
+        mav.addObject("title","Gestion de Inscripciones - EventManager ");
+        return mav;
+    }
+
 
 
 

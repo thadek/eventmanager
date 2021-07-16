@@ -298,6 +298,9 @@ public class EventoService {
         return indicadorCupo;
     }
 
+
+
+
     @Transactional
     public void eliminarEventoPorId(Integer id) throws ErrorServicio, MessagingException {
 

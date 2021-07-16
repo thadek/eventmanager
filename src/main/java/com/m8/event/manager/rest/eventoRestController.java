@@ -72,7 +72,7 @@ public class eventoRestController {
         HashMap<String,String> respuesta = new HashMap<>();
         try{
             respuesta.put("indicadorOnline",es.indicadorCapacidad(idevento, Modalidad.ONLINE));
-            respuesta.put("porcentajeOnline", Integer.toString(es.porcentajeCapacidad(idevento,Modalidad.ONLINE)));
+            respuesta.put("porcentaje", Integer.toString(es.porcentajeCapacidad(idevento,Modalidad.ONLINE)));
             respuesta.put("indicadorPresencial",es.indicadorCapacidad(idevento, Modalidad.PRESENCIAL));
             respuesta.put("porcentajePresencial", Integer.toString(es.porcentajeCapacidad(idevento,Modalidad.PRESENCIAL)));
             respuesta.put("error","false");
