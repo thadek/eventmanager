@@ -96,11 +96,9 @@ public class EventoService {
 
         eventoRepository.save(evento);
 
-
         String subject = "Sos Facilitador en un Nuevo Evento";
         String text = "Hola " + facilitador.getNombre() + ": \n Se ha creado "
                 + "el evento " + evento.getNombre() + ", en el cual sos el/la facilitador/a.";
-
 
         emailService.enviarCorreo(facilitador.getEmail(), subject, text);
 
@@ -273,6 +271,39 @@ public class EventoService {
     }
 
     @Transactional
+    public Integer porcentajeCapacidadMixto(Integer idEvento) throws ErrorServicio {
+        
+        int inscripcionesPresenciales;
+        int inscripcionesOnline;
+        int inscripcionesTotales;
+        int cupoTotal;
+        double porcentajeCupo;
+
+        Optional<Evento> respuesta = eventoRepository.findById(idEvento);
+
+        if (!respuesta.isPresent()) {
+            throw new ErrorServicio("No se encontró el evento en la base de datos.");
+        }
+
+        Evento evento = respuesta.get();
+
+        inscripcionesPresenciales = inscripcionRepository.cantidadInscripciones(idEvento, Modalidad.PRESENCIAL, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
+        inscripcionesOnline = inscripcionRepository.cantidadInscripciones(idEvento, Modalidad.ONLINE, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
+        inscripcionesTotales = inscripcionesPresenciales + inscripcionesOnline;
+        System.out.println("Inscripciones Totales =" + inscripcionesTotales);
+        
+        cupoTotal = evento.getCupoPresencial() + evento.getCupoVirtual();
+        
+        double inscripTotales = inscripcionesTotales;
+        double cupTotal = cupoTotal;
+        
+        porcentajeCupo = (inscripTotales/cupTotal)*100;
+        
+        return (int) Math.round(porcentajeCupo);        
+
+    }
+
+    @Transactional
     public String indicadorCapacidad(Integer idEvento, Modalidad modalidad) throws ErrorServicio {
 
         int cantidadInscripciones = inscripcionRepository.cantidadInscripciones(idEvento, modalidad, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
@@ -315,7 +346,7 @@ public class EventoService {
                 emailService.enviarCorreo(evento.getFacilitador().getEmail(), subject, text);
 
                 eventoRepository.deleteById(id);
-                
+
             } else {
                 throw new ErrorServicio("No se puede eliminar un evento con inscripciones.");
             }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.m8.event.manager.rest.serializer.SubcategoriaListDeserializer;
 import com.m8.event.manager.rest.serializer.SubcategoriaListSerializer;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,10 +25,10 @@ public class Categoria implements Serializable {
    @Column(unique = true)
    private String nombre;
 
-
+   @ToString.Exclude
    @JsonDeserialize(using = SubcategoriaListDeserializer.class)
    @JsonSerialize(using= SubcategoriaListSerializer.class)
-   @OneToMany (mappedBy = "categoria", cascade = {CascadeType.ALL})
+   @OneToMany (mappedBy = "categoria", cascade = CascadeType.ALL)
    private List<Subcategoria> subcategorias;
 
 }

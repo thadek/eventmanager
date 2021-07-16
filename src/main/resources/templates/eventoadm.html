@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="headers :: principal"></head>
+<!--SELECTIZE-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
+<body>
+
+<!-- header -->
+<header>
+    <nav th:replace="static :: navbar"></nav>
+</header>
+
+
+<main>
+
+    <div class="container-flex p-1 m-3 "
+         id="main">
+
+      <h1 style="color:white; text-align:center; font-family:Catamaran;">Gestion Eventos</h1>
+
+        <!-- FORM CREAR USUARIO DESDE ADM -->
+        <div class="row p-2"
+             id="containerUsuario">
+
+
+
+            <!-- NAVEGACION SOBRE TABLA de MUESTRA DATOS -->
+            <div class="navadm col-12">
+
+                <table class="table table-bordered table-striped ">
+
+                    <!-- BOTON NUEVA Muestra formulario para NUEVO USUARIO-->
+                    <button type="button"
+                            class="btn btn-outline-dark btn-rol"
+                            onclick=crearEvento()>
+                        <div class=" bi bi-plus-circle-fill"><br>Nuevo</div>
+                    </button>
+
+                    <!-- BOTON ACTUALIZAR -->
+                    <button type="button"
+                            class="btn btn-outline-dark btn-rol"
+                            onclick=actualizar()>
+                        <div class=" bi bi-arrow-clockwise"><br>Actualizar</div>
+                    </button>
+
+                    <!-- TABLA PARA MOSTRAR DATOS -->
+                    <thead>
+                    <tr>
+
+                        <!-- barra de carga -->
+                        <div class="progress"
+                             id="cargando"
+                             style="margin:0; display:none;">
+                            <div class="indeterminate"></div>
+                        </div>
+
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Subcategoria</th>
+                        <th>Categoria</th>
+                        <th>Facilitador</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Hora</th>
+                        <th>Duracion</th>
+                        <th>Modalidad</th>
+                        <th>Dias</th>
+                        <th>Cupo Presencial</th>
+                        <th>Cupo Virtual</th>
+                        <th>Valor</th>
+                        <th>Acciones</th>
+
+                    </tr>
+                    </thead>
+
+                    <!-- id="datos" relaciona con js para const mostrarDatos-->
+                    <tbody id="datos"></tbody>
+
+                </table>
+            </div>
+            <!-- FIN DIV NAVEGACIÓN SOBRE TABLA de MUESTRA DATOS -->
+        </div>
+        <!-- FIN DIV FORM CREAR USUARIO -> id= containerUsuario -->
+    </div>
+    <!-- FIN DIV id=main -->
+
+
+
+</main>
+
+<!--Footer -->
+<footer th:replace="static :: footer"></footer>
+
+</body>
+
+<div th:replace="headers :: js"></div>
+
+<script type="text/javascript"
+        th:src="@{/assets/js/eventoadm.js}">
+</script>
+
+</html>

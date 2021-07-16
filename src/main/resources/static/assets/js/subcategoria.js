@@ -176,3 +176,5 @@ function mostrarEditarSubcategoria(id, nombre, descripcion,categoria) {
     document.getElementById('formEditSubcategoriaDescripcion').value = decodeURIComponent(descripcion);
 
 }
+
+$('#categorias').change();

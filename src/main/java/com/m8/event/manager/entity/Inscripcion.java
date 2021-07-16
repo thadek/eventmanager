@@ -20,7 +20,7 @@ public class Inscripcion implements Serializable {
    @ManyToOne
    private Evento evento;
 
-   @ManyToOne(cascade = {CascadeType.ALL})
+   @ManyToOne
    private Perfil alumno;
 
    @Enumerated(EnumType.STRING)
