@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:insert="headers :: principal"></head>
+<!--<link rel="stylesheet" th:href="@{/assets/css/style.css}" type="text/css">-->
+
+<body class="quienesSomos">
+
+  <!-- header -->
+  <header>
+    <nav th:replace="static :: navbar"></nav>
+  </header>
+
+
+
+  <main class="gallery">
+    <div class="cards">
+      <div class="card-content">
+        <h2 class="card-title">Hatha Yoga</h2>
+        <p class="card-body"> El Hatha Yoga es un tipo de yoga conocido por su práctica de
+          ásanas o posturas corporales, que aportan a los músculos firmeza y elasticidad.
+          Te va llevando fluidamente al estado meditativo a través de ásanas, en las que
+          traes continuamente la atención al momento presente: observando el lenguaje del
+          cuerpo. Y es por medio de él – como vehículo físico – , que descubres tu dimensión
+          espiritual: tu consciencia se eleva y te orienta hacia el encuentro con tu Ser.
+          En ese encuentro trasciendes la polaridad básica humana: espíritu- materia.
+        </p>
+<!--        <a href="#" class="button">-->
+<!--          Ver Perfil-->
+<!--        </a>-->
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card-content">
+        <h2 class="card-title">Ashtanga Yoga</h2>
+        <p class="card-body"> El término ashtanga, que significa “ocho ramas”, fue
+          impuesto alrededor del año 200 a.C. por el gran sabio indio Patanjali,
+          el primer yogui que sistematizó un enfoque del yoga.<br><br>
+          El rasgo que verdaderamente distingue el Ashtanga Yoga de otras
+          variantes practicadas en la actualidad es su sistema único de movimiento y
+          respiración, llamado vinyasa. El movimiento realizado en las secuencias de
+          posturas (asana) genera calor y ello, a su vez, produce sudor.
+          <br><br>
+        </p>
+<!--        <a href="#" class="button">-->
+<!--          Ver Perfil-->
+<!--        </a>-->
+      </div>
+    </div>
+
+
+    <div class="cards">
+      <div class="card-content">
+        <h2 class="card-title">Kundalini Yoga</h2>
+        <p class="card-body"> Es el Yoga que expande la Conciencia.
+          Dejas de vivir en base a realidades imaginarias, para vivir
+          Tu Realidad. Sus tecnologías sagradas transmitidas de
+          maestro a discípulo durante siglos, son kriyas:  series que
+          involucran asanas (posturas), pranayamas (respiraciones),
+          mudra/bandha (sellos corporales), música (cánticos), mantra
+          (poderosas vibraciones sonoras) y una gran variedad de meditaciones.
+          Es un yoga dinámico,
+          vital, altamente desintoxicante, que despierta tu potencial:
+          la energía creativa, sanadora, plena de sabiduría.
+        </p>
+<!--        <a href="#" class="button">-->
+<!--          Ver Perfil-->
+<!--        </a>-->
+      </div>
+    </div>
+
+
+    <div class="cards">
+      <div class="card-content">
+        <h2 class="card-title">Vinyasa Yoga</h2>
+        <p class="card-body"> Vinyasa es un término sánscrito que significa
+          sincronización del movimiento y la respiración. Deriva del yoga
+          ashtanga, una modalidad del yoga que consiste en
+          una serie de posturas en un orden bien específico. Esta modalidad
+          no contiene ninguna serie de posturas, las secuencias de
+          movimientos son creadas por la persona que acompaña la práctica
+          y pueden ser adaptadas según las necesidades de cada uno.
+          En la práctica, el cuerpo y la respiración son el vehículo y
+          la herramienta de acceso a estados más profundos de autoconocimiento
+          y conciencia.
+          <br><br><br>
+        </p>
+<!--        <a href="#" class="button">-->
+<!--          Ver Perfil-->
+<!--        </a>-->
+      </div>
+    </div>
+
+
+    <div class="cards">
+      <div class="card-content">
+        <h2 class="card-title">Yoga Pilates Terapeutico</h2>
+        <p class="card-body"> Esta disciplina sirve para mejorar tanto el
+          bienestar físico como el mental. Además de tonificar nuestra
+          musculatura, perder calorías y ganar flexibilidad, se consigue
+          un estado mental y una relajación inmejorables. Está demostrado,
+          además, que el pilates sirve para aliviar dolores crónicos y luchar
+          contra el estrés y estados mentales como la depresión y la fatiga
+          ocasionada por tratamientos para el cáncer. Además las clases cuentan
+          con espacios de meditación y práctica de pranayamas (técnicas de control
+          del proceso respiratorio).
+          <br><br>
+        </p>
+<!--        <a href="#" class="button">-->
+<!--          Ver Perfil-->
+<!--        </a>-->
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card-content">
+        <h2 class="card-title">Reiki</h2>
+        <p class="card-body"> El Reiki es, en primera instancia, amor, o dicho
+          de otra manera, energía de la más alta frecuencia vibratoria.
+          Fue redescubierto y sistematizado por Mikao Usui en Japón, quien lo
+          definió como el método para invitar a la felicidad y como la medicina
+          espiritual para muchas enfermedades.
+          Es luego una técnica de canalización y transmisión de energía vital
+          a través de las manos, que se utiliza para sanar y armonizar todos
+          nuestros cuerpos: físico, mental, emocional, áurico y otros.
+          Y es también una muy poderosa herramienta, que nos ayuda al
+          crecimiento personal, acompañando y potenciando el proceso de
+          expansión de la conciencia.
+          <br><br>
+        </p>
+        <a href="#" class="button">
+          Ver Perfil
+        </a>
+      </div>
+    </div>
+
+
+
+  </main>
+
+
+
+  <!--Footer -->
+  <footer th:replace="static :: footer"></footer>
+
+
+
+
+
+
+</body>
+
+<div th:replace="headers :: js"></div>
+
+
+
+</html>

@@ -486,3 +486,8 @@ line-height: 13px;
         position:relative;
     }
 }
+
+/*Form eventos*/
+.botonDias {
+    margin-top: 10rem;
+}

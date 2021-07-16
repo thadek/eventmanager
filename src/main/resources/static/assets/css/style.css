@@ -841,11 +841,21 @@ main.gallery .card-content {
         );
     border-radius: 20px;
     margin: 1em;
-
+    border: 3px transparent;
     transition: transform 500ms ease;
 }
 
 main.gallery .card-content:hover {
+
+    background: linear-gradient(
+         /*hsl(360 100% 99% / 0.8),*/
+                hsl(0 0% 0% / 0.7),
+                hsl(0 0% 0% / 0.9) 40%,
+                hsl(0 0% 0% / 0.7)
+            );
+    /*border-color: white;*/
+    border: 3px solid white;
+
     transform: scale(1.05);
 }
 
@@ -1121,7 +1131,4 @@ main.gallery .card-content:hover {
         background-position: 0 -50px;
     }
 }
-
-
-
 

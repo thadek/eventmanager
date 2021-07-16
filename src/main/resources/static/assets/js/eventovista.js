@@ -422,8 +422,8 @@ const { value:diasEv} = await swalQueue.fire({
         '   <option value="MARTES">Martes</option>' +
         '  <option value="MIERCOLES">Miercoles</option>' +
         '  <option value="JUEVES">Jueves</option>' +
-        '<option value="VIERNES">Viernes</option>' +
-        ' <option value="SABADO">Sabado</option>'+
+        ' <option value="VIERNES">Viernes</option>' +
+        ' <option value="SABADO">Sabado</option>' +
         ' <option value="DOMINGO">Domingo</option>'+
         '</select>',
     didOpen(){
@@ -431,8 +431,12 @@ const { value:diasEv} = await swalQueue.fire({
             sortField: 'text'});
         document.getElementById("diasEvento").style.zIndex="1000";
     }
-    ,currentProgressStep:5,
+    , currentProgressStep:5,
     focusConfirm: false,
+    customClass:{
+        confirmButton:'botonDias'
+    },
+    buttonsStyling: false,
     preConfirm: () => {
         return[
             [...document.getElementById('diasEvento').options].filter(option => option.selected).map(option => option.value)
