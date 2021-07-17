@@ -718,7 +718,7 @@ body#error div ul li a:hover{
 /* FIN PAGINAS ERROR */
 
 
-/*TOASTS SWEET ALERT */
+/* TOASTS SWEET ALERT */
 .colored-toast.swal2-icon-success {
     background-color: #423089 !important;
 }
@@ -779,6 +779,7 @@ body.quienesSomos {
 
 /*Tiene las cards dentro de article*/
 main.gallery {
+    text-align: left;
     display: grid;
     gap: 1rem;
     /*grid-auto-rows: 22rem;*/
@@ -798,7 +799,9 @@ main.gallery.cards {
     font-weight: bolder;
 }
 
-
+main.gallery .cards:last-child {
+    padding-bottom: 100px;
+}
 
 main.gallery .card-content h2 {
     margin-left: .8rem;
@@ -809,6 +812,7 @@ main.gallery .card-content h2 {
 main.gallery .card-content .card-body {
     font-weight: bolder;
     font-size: 1.2rem;
+    text-align: right;
 }
 
 main.gallery div.card-content a.button {
@@ -874,13 +878,21 @@ main.gallery .card-content:hover {
     width: calc(100% + var(--padding));
     background: var(--clr-neutral-400);
 
-    transform-origin: left;
+    transform-origin: right;
     transform: scaleX(0);
     transition: transform 500ms ease;
 }
 
 .card-content:hover .card-title::after {
     transform: scaleX(1);
+}
+
+main.gallery .card-content img.rounded-circle {
+    
+    border: 1px solid var(--clr-neutral-400);;
+    margin-bottom: 2rem;
+    box-shadow: 0px 0px 16px 13px rgb(191 188 191 / 30%);
+
 }
 
 /* ANIMACIÓN LOGO */
