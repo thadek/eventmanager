@@ -844,7 +844,9 @@ main.gallery.cards {
     font-weight: bolder;
 }
 
-
+main.gallery .cards:last-child {
+    padding-bottom: 100px;
+}
 
 main.gallery .card-content h2 {
     margin-left: .8rem;
