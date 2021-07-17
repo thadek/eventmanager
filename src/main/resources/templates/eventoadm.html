@@ -14,7 +14,12 @@
 <header>
     <nav th:replace="static :: navbar"></nav>
 </header>
-
+<!-- barra de carga -->
+<div class="progress"
+     id="cargando"
+     style="margin:0; display:none;">
+    <div class="indeterminate"></div>
+</div>
 
 <main>
 
@@ -52,12 +57,7 @@
                     <thead>
                     <tr>
 
-                        <!-- barra de carga -->
-                        <div class="progress"
-                             id="cargando"
-                             style="margin:0; display:none;">
-                            <div class="indeterminate"></div>
-                        </div>
+
 
                         <th>ID</th>
                         <th>Nombre</th>

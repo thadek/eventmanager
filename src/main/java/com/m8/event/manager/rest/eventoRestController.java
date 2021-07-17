@@ -66,209 +66,7 @@ public class eventoRestController {
 
 
 
-    /*Controladores para revisar ocupación en eventos */
-
-    @GetMapping("/ocupacion/{idevento}/mixta")
-    public HashMap getOcupacionMixta(@PathVariable("idevento")Integer idevento){
-        HashMap<String,String> respuesta = new HashMap<>();
-
-        try{
-            respuesta.put("indicadorOnline",es.indicadorCapacidad(idevento, Modalidad.ONLINE));
-            respuesta.put("indicadorPresencial",es.indicadorCapacidad(idevento, Modalidad.PRESENCIAL));
-            respuesta.put("porcentaje", Integer.toString(es.porcentajeCapacidadMixto(idevento)));
-            respuesta.put("error","false");
-            return respuesta;
-        }catch(Exception e ){
-            respuesta.put("error","true");
-            respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
-            return respuesta;
-        }
-    }
-
-    @GetMapping("/ocupacion/{idevento}/presencial")
-    public HashMap getOcupacionPresencial(@PathVariable("idevento")Integer idevento){
-            HashMap<String,String> respuesta = new HashMap<>();
-            try{
-               respuesta.put("indicador",es.indicadorCapacidad(idevento, Modalidad.PRESENCIAL));
-               respuesta.put("porcentaje", Integer.toString(es.porcentajeCapacidad(idevento,Modalidad.PRESENCIAL)));
-               respuesta.put("error","false");
-               return respuesta;
-            }catch(Exception e ){
-                respuesta.put("error","true");
-                respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
-                return respuesta;
-            }
-    }
-
-    @GetMapping("/ocupacion/{idevento}/online")
-    public HashMap getOcupacionOnline(@PathVariable("idevento")Integer idevento){
-            HashMap<String,String> respuesta = new HashMap<>();
-            try{
-                respuesta.put("indicador",es.indicadorCapacidad(idevento, Modalidad.ONLINE));
-                respuesta.put("porcentaje", Integer.toString(es.porcentajeCapacidad(idevento,Modalidad.ONLINE)));
-                respuesta.put("error","false");
-                return respuesta;
-            }catch(Exception e ){
-                respuesta.put("error","true");
-                respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
-                return respuesta;
-            }
-        }
-
-
-
-
-    /* Inscripciones */
-    @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')"  )
-    @GetMapping("/inscripciones/{evento}/{username}")
-    public HashMap verificarInscripcionPorUsername(@PathVariable("evento")Integer idEvento, @PathVariable("username") String username){
-        HashMap<String,String> res = new HashMap<>();
-       try{
-          Evento ev=  erp.findById(idEvento).get();
-           for (Inscripcion i:ev.getInscripciones()) {
-               if(i.getAlumno().getUsuario().getUsername().equals(username)){
-                   res.put("respuesta","ok");
-                   res.put("estado",i.getEstado().toString());
-                   break;
-               }
-           }
-           return res;
-       }catch(Exception e){
-           res.put("respuesta","error");
-           return res;
-       }
-    }
-
-
-
-
-    @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')"  )
-    @GetMapping("/inscripciones/user/{username}")
-    public List<Inscripcion> listaDeInscripcionesPorUserName(@PathVariable("username") String username){
-    //Lista de inscripciones de un usuario específico
-        try{
-            return ir.inscripcionesPorAlumno(pr.findByUsuario(ur.findByUsername(username)).getEmail());
-        }catch(Exception e){
-            return null;
-        }
-    }
-
-    @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')"  )
-    @GetMapping("/miseventos/{username}")
-    public List<Evento> misEventos(@PathVariable("username") String username){
-        //Lista de EVENTOS A LOS QUE UN USER ESTA INSCRIPTO.
-        List<Evento> listaEventosUsuario = new ArrayList<>();
-        try{
-        for (Inscripcion insc: ir.inscripcionesPorAlumno(username)){
-            listaEventosUsuario.add(insc.getEvento());
-        }
-
-        return listaEventosUsuario;
-
-        }catch(Exception e){
-            return null;
-        }
-    }
-
-
-    @GetMapping("/inscripciones/{idevento}")
-    public List<Inscripcion> verListaDeInscripcionesDeUnEvento(@PathVariable("idevento")Integer idevento){
-       return erp.findById(idevento).get().getInscripciones();
-    }
-
-
-
-    /* ABM INSCRIPCIONES */
-
-    @PostMapping("/inscripciones/nueva")
-    public HashMap crearInscripcion (@RequestBody Inscripcion insc) throws Exception{
-        HashMap<String,String> respuesta = new HashMap<>();
-
-/*REVISAR INSCRIPCION SERVICE**/
-          //  System.out.println("Inscripcion recibida: "+insc);
-
-            is.crearInscripcion(insc.getEvento().getId(),insc.getAlumno().getEmail(),insc.getModalidad());
-
-            respuesta.put("respuesta","Inscripcion realizada correctamente.");
-            respuesta.put("error","false");
-            return respuesta;
-
-
-          //  respuesta.put("respuesta");
-            //respuesta.put("error","true");
-            //return respuesta;
-
-
-    }
-
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/inscripciones/editar")
-    public HashMap editarInscripcion(@RequestBody Inscripcion insc){
-        HashMap<String,String> respuesta = new HashMap<>();
-        try{
-            is.modificarInscripcion(insc.getIdInscripcion(),insc.getEvento().getId(),insc.getAlumno().getEmail(),insc.getModalidad(),insc.getEstado());
-            respuesta.put("respuesta","Inscripcion modificada correctamente.");
-            respuesta.put("error","false");
-            return respuesta;
-        }catch(Exception e){
-            respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
-            respuesta.put("error","true");
-            return respuesta;
-        }
-
-    }
-
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/inscripciones/eliminar")
-    public HashMap eliminarInscripcion(@RequestBody Inscripcion insc){
-        HashMap<String,String> respuesta = new HashMap<>();
-        try{
-            ir.delete(insc);
-            respuesta.put("respuesta","Inscripción eliminada correctamente.");
-            respuesta.put("error","false");
-            return respuesta;
-        }catch(Exception e){
-            respuesta.put("error","true");
-            respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
-            return respuesta;
-        }
-
-    }
-
-
-    @PreAuthorize("#username==authentication.principal.username")
-    @DeleteMapping("/baja/{idevento}/{username}")
-    public HashMap darDeBajaInscripcion(@PathVariable("username") String username, @PathVariable("idevento") Integer idevento){
-        HashMap<String,String> respuesta = new HashMap<>();
-        try{
-             List<Inscripcion> inscripcionesAlumno = ir.inscripcionesPorAlumno(username);
-             inscripcionesAlumno.forEach(inscripcion -> {
-                 if(inscripcion.getEvento().getId() == idevento){
-                     ir.delete(inscripcion);
-                     respuesta.put("respuesta","Se dio de baja tu inscripción correctamente.");
-
-                 }else{
-                     respuesta.put("respuesta","Ocurrió un error en el sistema.");
-                     respuesta.put("error","true");
-                 }
-             });
-            return respuesta;
-
-        }catch(Exception e){
-            respuesta.put("respuesta", "Ocurrió un error: "+e.getMessage());
-            respuesta.put("error","true");
-            return respuesta;
-        }
-
-    }
-
-
-
-
-
-
-
-     /*  ABM EVENTO    */
+    /*  ABM EVENTO    */
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/crear")
@@ -342,6 +140,85 @@ public class eventoRestController {
 
 
     }
+
+
+
+
+    /*Controladores para revisar ocupación en eventos */
+
+    @GetMapping("/ocupacion/{idevento}/mixta")
+    public HashMap getOcupacionMixta(@PathVariable("idevento")Integer idevento){
+        HashMap<String,String> respuesta = new HashMap<>();
+
+        try{
+            respuesta.put("indicadorOnline",es.indicadorCapacidad(idevento, Modalidad.ONLINE));
+            respuesta.put("indicadorPresencial",es.indicadorCapacidad(idevento, Modalidad.PRESENCIAL));
+            respuesta.put("porcentaje", Integer.toString(es.porcentajeCapacidadMixto(idevento)));
+            respuesta.put("error","false");
+            return respuesta;
+        }catch(Exception e ){
+            respuesta.put("error","true");
+            respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
+            return respuesta;
+        }
+    }
+
+    @GetMapping("/ocupacion/{idevento}/presencial")
+    public HashMap getOcupacionPresencial(@PathVariable("idevento")Integer idevento){
+            HashMap<String,String> respuesta = new HashMap<>();
+            try{
+               respuesta.put("indicador",es.indicadorCapacidad(idevento, Modalidad.PRESENCIAL));
+               respuesta.put("porcentaje", Integer.toString(es.porcentajeCapacidad(idevento,Modalidad.PRESENCIAL)));
+               respuesta.put("error","false");
+               return respuesta;
+            }catch(Exception e ){
+                respuesta.put("error","true");
+                respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
+                return respuesta;
+            }
+    }
+
+    @GetMapping("/ocupacion/{idevento}/online")
+    public HashMap getOcupacionOnline(@PathVariable("idevento")Integer idevento){
+            HashMap<String,String> respuesta = new HashMap<>();
+            try{
+                respuesta.put("indicador",es.indicadorCapacidad(idevento, Modalidad.ONLINE));
+                respuesta.put("porcentaje", Integer.toString(es.porcentajeCapacidad(idevento,Modalidad.ONLINE)));
+                respuesta.put("error","false");
+                return respuesta;
+            }catch(Exception e ){
+                respuesta.put("error","true");
+                respuesta.put("respuesta","Ocurrió un error: "+e.getMessage());
+                return respuesta;
+            }
+        }
+
+
+
+
+    /* Inscripciones */
+
+
+
+    @PreAuthorize ("#username==authentication.principal.username or hasRole('ROLE_ADMIN')"  )
+    @GetMapping("/miseventos/{username}")
+    public List<Evento> misEventos(@PathVariable("username") String username){
+        //Lista de EVENTOS A LOS QUE UN USER ESTA INSCRIPTO.
+        List<Evento> listaEventosUsuario = new ArrayList<>();
+        try{
+        for (Inscripcion insc: ir.inscripcionesPorAlumno(username)){
+            listaEventosUsuario.add(insc.getEvento());
+        }
+
+        return listaEventosUsuario;
+
+        }catch(Exception e){
+            return null;
+        }
+    }
+
+
+
 
 
 

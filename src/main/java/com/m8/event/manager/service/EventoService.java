@@ -290,7 +290,7 @@ public class EventoService {
         inscripcionesPresenciales = inscripcionRepository.cantidadInscripciones(idEvento, Modalidad.PRESENCIAL, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
         inscripcionesOnline = inscripcionRepository.cantidadInscripciones(idEvento, Modalidad.ONLINE, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
         inscripcionesTotales = inscripcionesPresenciales + inscripcionesOnline;
-        System.out.println("Inscripciones Online =" + inscripcionesOnline + "presenciales "+ cantidadInscripciones);
+      //  System.out.println("Inscripciones Online =" + inscripcionesOnline + "presenciales "+ cantidadInscripciones);
         
         cupoTotal = evento.getCupoPresencial() + evento.getCupoVirtual();
         

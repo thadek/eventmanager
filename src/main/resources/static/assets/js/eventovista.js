@@ -16,20 +16,10 @@ $( document ).ready(function() {
     }catch(error){
 
     }
-    console.log( usernameLogged )
+
     porcentajeOcup = 0;
     cargandoToggler(1050)
 });
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -79,7 +69,7 @@ async function  renderizarListaPublica(arrayEventos) {
             body += `<li>
      <a href="http://localhost:8080/eventos/ver/${arrayEventos[i].id}">
      <div class="row descripcionEvento">
-       <div class="col-lg-2 col-md-4 circuloprogreso circuloprogreso-${i}"><strong>${await getPorcentajeOcupacionEvento(arrayEventos[i].id,arrayEventos[i].modalidad)}%</strong>
+       <div class="col-lg-2 col-md-4 circuloprogreso circuloprogreso-${arrayEventos[i].id}"><strong>${await getPorcentajeOcupacionEvento(arrayEventos[i].id,arrayEventos[i].modalidad)}%</strong>
          <p>Ocupacion</p>
        </div>
        <div class="col-lg-10 col-md-8">
@@ -98,7 +88,15 @@ async function  renderizarListaPublica(arrayEventos) {
         document.getElementById("listaEvn").innerHTML = body;
 
       for (let i = 0; i < arrayEventos.length; i++) {
-            dibujarCirculito((await getPorcentajeOcupacionEvento(arrayEventos[i].id,arrayEventos[i].modalidad)/100), i)
+
+         let ocupacion = await getPorcentajeOcupacionEvento(arrayEventos[i].id,arrayEventos[i].modalidad)
+
+          if(ocupacion===0){
+              dibujarCirculito( 0,arrayEventos[i].id)
+          }else{
+              dibujarCirculito( ocupacion/100,arrayEventos[i].id)
+          }
+
 
         }
 
@@ -164,13 +162,13 @@ async function renderizarListaPrivada(arrayEventos) {
             }
 
             //console.log("LOG LISTA PRIVADA",porcentajeOcup)
-            dibujarCirculito(i)
+           // dibujarCirculito(i)
 
 
             body += `<li>
          <a href="http://localhost:8080/eventos/ver/${arrayEventos[i].id}">
          <div class="row descripcionEvento">
-           <div class="col-lg-2 col-md-4 circuloprogreso circuloprogreso-${i}"><strong>${porc}%</strong>
+           <div class="col-lg-2 col-md-4 circuloprogreso circuloprogreso-${arrayEventos[i].id}"><strong>${porc}%</strong>
              <p>Ocupacion</p>
            </div>
            <div class="col-lg-10 col-md-8">
@@ -191,7 +189,15 @@ async function renderizarListaPrivada(arrayEventos) {
         document.getElementById("listaMisEventos").innerHTML = body;
 
         for (let i = 0; i < arrayEventos.length; i++) {
-            dibujarCirculito((await getPorcentajeOcupacionEvento(arrayEventos[i].id,arrayEventos[i].modalidad)/100), i)
+
+            let ocupacion = await getPorcentajeOcupacionEvento(arrayEventos[i].id,arrayEventos[i].modalidad)
+
+            if(ocupacion===0){
+                dibujarCirculito( 0,arrayEventos[i].id)
+            }else{
+                dibujarCirculito( ocupacion/100,arrayEventos[i].id)
+            }
+
 
         }
 
@@ -213,8 +219,10 @@ function formatearHora(hora){
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-    console.log(string)
+
 }
+
+
 
 
 
@@ -261,8 +269,6 @@ setTimeout( function(){
 },200)
 
 }
-
-
 
 
 var listaSubcategorias = {}
@@ -396,7 +402,7 @@ const swalQueue = Swal.mixin({
 
     }
 
-    console.log(nuevoEvento)
+
 
     //Cupo Modalidad
 
@@ -625,9 +631,6 @@ const { value:diasEv} = await swalQueue.fire({
 
 
 
-
-
-
 function cargandoToggler(tiempo) {
     $('.loader-anim').show();
 
@@ -658,9 +661,7 @@ function cargandoToggler(tiempo) {
 
 
 function dibujarCirculito(valor,clase) {
-   /* if(porcentajeOcup>0){
-        porcentajeOcup = porcentajeOcup/100
-    }*/
+
 
     $(`.circuloprogreso-${clase}`)
         .circleProgress({

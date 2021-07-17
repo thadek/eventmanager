@@ -10,13 +10,26 @@
 <header>
   <nav th:replace="static :: navbar"></nav>
 </header>
-
-
+<div class="progress" id="cargando" style="margin:0; display:none;">
+  <div class="indeterminate"></div>
+</div>
 <main>
 
   <div class="row adminevn ">
     <div class="row m-0 adm-linea ">
     </div>
+    <!-- barra de carga -->
+
+
+    <div class="row alert alert-evn" id="notificacionadm" style="display:none;">
+      <div class="col-lg-11 ">
+        <h4 id="mensajenotif">  </h4>
+      </div>
+      <div class="col-lg-1">
+        <button type="button" class="btn-close btn-close-white" onclick=cerrarNotif()></button>
+      </div>
+    </div>
+
   <!--  <div class="row m-0 titulo">
       <h1>.evn</h1>
       <h5>Administración</h5>
@@ -170,8 +183,25 @@
 
   }
 
+ .alert{
+   padding: 1rem 0rem 0rem 2rem;
+   margin-bottom:0;
+   border:0;
+   border-radius:0;
+ }
+ .alert .col-lg-11 h4{
+   margin-bottom:0;
+   font-weight: 100;
 
+ }
 
+.alert-evn{
+  background: rgba(116, 30, 255, 0.49);
+}
+
+.alert-evn .col-lg-1{
+  text-align:right;
+}
 
   .inicioBtn{
 
@@ -278,6 +308,10 @@
       position: relative;
     }
 
+    .alert-evn .col-lg-1{
+      text-align:center;
+    }
+
 
 
  .titulo h1{
@@ -309,6 +343,9 @@ footer{
 
 </style>
 
+<script type="text/javascript"
+        th:src="@{/assets/js/inscripcionesadm.js}">
+</script>
 
 
 <!--Footer -->

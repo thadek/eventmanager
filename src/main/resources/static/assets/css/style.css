@@ -498,7 +498,13 @@ nav{
     background-color: rgba(35, 35, 35, 0.48);
 }
 
+#eventosPorId{
+    padding:14px;
+    border-radius:20px;
+    /*height:900px;*/
+    background-color: rgba(35, 35, 35, 0.48);
 
+}
 
 
 

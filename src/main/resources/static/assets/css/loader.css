@@ -3,7 +3,7 @@
     height: 4px;
     display: block;
     width: 100%;
-    background-color: rgb(214, 207, 207);
+    background-color: rgb(213 160 178);
     border-radius: 2px;
     margin: .5rem 0 1rem 0;
     overflow: hidden
@@ -20,13 +20,13 @@
 }
 
 .progress .indeterminate {
-    background-color: #fda56a;
+    background: linear-gradient(45deg, #6d28bb, #f3284df7);
 }
 
 .progress .indeterminate:before {
     content: '';
     position: absolute;
-    background-color: inherit;
+    background: inherit;
     top: 0;
     left: 0;
     bottom: 0;
@@ -38,7 +38,7 @@
 .progress .indeterminate:after {
     content: '';
     position: absolute;
-    background-color: inherit;
+    background: inherit;
     top: 0;
     left: 0;
     bottom: 0;

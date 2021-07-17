@@ -14,7 +14,10 @@
 <header>
     <nav th:replace="static :: navbar"></nav>
 </header>
-
+<!-- barra de carga -->
+<div class="progress" id="cargando" style="margin:0; display:none;">
+    <div class="indeterminate"></div>
+</div>
 
 <main>
 
@@ -22,7 +25,7 @@
          id="main">
 
         <!-- BOTON MOSTRAR/OCULTAR -->
-        <button class="btn btn-outline-primary"
+        <button class="btn btn-outline-dark btn-rol"
                 id="togglerSeccion">USUARIOS Mostrar/Ocultar
         </button>
 
@@ -165,12 +168,6 @@
                     <thead>
                     <tr>
 
-                        <!-- barra de carga -->
-                        <div class="progress"
-                             id="cargando"
-                             style="margin:0; display:none;">
-                            <div class="indeterminate"></div>
-                        </div>
 
                         <th>Usuario</th>
                         <th>Rol</th>

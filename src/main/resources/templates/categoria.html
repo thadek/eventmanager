@@ -12,14 +12,17 @@
   <header>
     <nav th:replace="static :: navbar"></nav>
   </header>
-
+  <!-- barra de carga -->
+  <div class="progress" id="cargando" style="margin:0; display:none;">
+    <div class="indeterminate"></div>
+  </div>
 
   <main>
 
     <div class="container-flex p-1 m-3 " id="main">
 
       <!-- BOTON MOSTRAR/OCULTAR -->
-      <button class="btn btn-outline-primary" id="togglerSeccion">CATEGORIAS Mostrar/Ocultar</button>
+      <button class="btn btn-outline-dark btn-rol" id="togglerSeccion">CATEGORIAS Mostrar/Ocultar</button>
 
       <!-- FORM CREAR CATEGORIA -->
       <div class="row p-2" id="containerCategoria">
@@ -124,10 +127,7 @@
             <thead>
               <tr>
 
-                <!-- barra de carga -->
-                <div class="progress" id="cargando" style="margin:0; display:none;">
-                  <div class="indeterminate"></div>
-                </div>
+
 
                 <th>ID</th>
                 <th>Categoría</th>

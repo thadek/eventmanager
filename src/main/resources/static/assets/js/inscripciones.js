@@ -58,7 +58,7 @@ async function verificarPerfil(){
         }
 }
 
-async function cargarSuscripcion(perfil,evento){
+async function cargarSuscripcion(perfil,evento,modalidad){
    //Procesar datos
 
     let logo=`<div class="contenedor-logo">
@@ -82,7 +82,7 @@ async function cargarSuscripcion(perfil,evento){
 `
     console.log(perfil)
     //let inscripcion= { evento: evento, alumno:,modalidad: evento.modalidad };
-let inscripcion= { evento: {id:evento.id}, alumno:{id:perfil.idPerfil,email:perfil.email},modalidad: evento.modalidad };
+let inscripcion= { evento: {id:evento.id}, alumno:{id:perfil.idPerfil,email:perfil.email},modalidad: modalidad };
 
 console.log("inscripcion predata",inscripcion)
 inscripcion = JSON.stringify(inscripcion);
@@ -135,31 +135,58 @@ Swal.fire({
 
 async function dardeBaja(){
 
-    if(usernameLogged){
-        const evento = await fetch(`http://localhost:8080/api/eventos/ver/${idEventoUnico}`).then(res=>res.json());
-        const verInsc= await fetch(`http://localhost:8080/api/eventos/inscripciones/${idEventoUnico}/${usernameLogged}`).then(res=>res.json());
+    const evento = await fetch(`http://localhost:8080/api/eventos/ver/${idEventoUnico}`).then(res=>res.json());
+    const verInsc= await fetch(`http://localhost:8080/api/eventos/inscripciones/${idEventoUnico}`).then(res=>res.json());
 
-        for(let i=0; i<verInsc.length;i++){
-            if(evento.id===verInsc[i].id){
-                const borrarInscripcion = await fetch(`http://localhost:8080/api/eventos/baja/${idEventoUnico}/${usernameLogged}`,{
-                    method:'delete'
-                }).then(data=>data.json());
 
-                if(error){
-                    Toast.fire({
-                        icon:'error', title: borrarInscripcion.respuesta
-                    })
-                }else{
-                    Toast.fire({
-                        icon:'success', title: borrarInscripcion.respuesta
-                    })
+    const btnBaja = document.getElementById("btnBaja")
+    btnBaja.innerHTML=`<i class="spinner-border text-light"> </i>`;
+
+    await Swal.fire({
+        title: `¿Confirmar Baja?`,
+        text: `Te vas a dar de baja de ${evento.nombre}.`,
+        showCancelButton:true,
+        confirmButtonText:"Confirmar",
+        cancelButtonText:"Cancelar"}).then((resultado) => {
+        if(resultado.isConfirmed){
+            enviarBaja()
+        }
+    })
+
+    async function enviarBaja(){
+        if(usernameLogged){
+            for(let i=0; i<verInsc.length;i++){
+                if(verInsc[i].alumno.usuario.username===usernameLogged){
+                    const borrarInscripcion = await fetch(`http://localhost:8080/api/eventos/baja/${idEventoUnico}/${usernameLogged}`,{
+                        method:'delete'
+                    }).then(data=>data.json());
+console.log(borrarInscripcion);
+                    if(borrarInscripcion.error==="true"){
+                        Toast.fire({
+                            icon:'error', title: borrarInscripcion.respuesta
+                        })
+                    }else{
+                        Swal.fire({
+                            title:"Nos vemos",
+                            imageUrl:"https://i.imgur.com/orim1C3.gif",
+                            imageHeight:112,
+                            text:borrarInscripcion.respuesta,
+                            icon:'success',
+                            confirmButtonText: `Ok`
+
+                        }).then((result)=>{
+                            location.reload();
+                        })
+                    }
+
                 }
 
             }
 
         }
-
     }
+
+
 
 }
 
@@ -217,6 +244,7 @@ async function iniciarSubscripcion(){
                         showCancelButton:true
                     }).then((result)=>{
                         if(result.isConfirmed){
+                            console.log(modalidad)
                             cargarSuscripcion(perfil,evento,modalidad)
                         }else{
                             togglerBotonLoad()
@@ -279,7 +307,6 @@ async function verificarSubscripcion(){
                    return new bootstrap.Tooltip(tooltipTriggerEl)
                })
                btnBaja.style.display="";
-               btnBaja.addEventListener()
            }else if(verInsc.estado==="CONFIRMADO"){
                document.getElementById("mensajitobtn").setAttribute("title","Tu inscripción esta confirmada!")
                let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
