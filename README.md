@@ -14,19 +14,12 @@ Modificar el permiso desde la db una vez creado para obtener rango de admin. Hec
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-
 * Java, Spring Boot.
 * [Maven](https://maven.apache.org/) - Manejador de dependencias
 * JavaScript para el FrontEnd.
 
 
-
-
-
 ## Autores ✒️
-
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
 *FrontEnd*
 * **Gabriel Pamich** - [thadek](https://github.com/thadek)
