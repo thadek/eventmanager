@@ -27,7 +27,7 @@ public class EmailService {
     @Autowired
     private InscripcionRepository inscripcionRepository;
 
-    public void enviarCorreo(String para, String asunto, String cuerpo) throws MessagingException,ErrorServicio{
+    public void enviarCorreo(String para, String asunto, String cuerpo) throws MessagingException, ErrorServicio {
 
         new Thread(() -> {
 
@@ -314,15 +314,12 @@ public class EmailService {
                 sender.send(message);
 
             } catch (Exception e) {
-                
-               System.out.println("SE ROMPIO EL MAILSENDER. DETALLES:" + e.getMessage());
-                              
-            }
-              
 
-        }).start(); 
-        
-        
+                System.out.println("SE ROMPIO EL MAILSENDER. DETALLES:" + e.getMessage());
+
+            }
+
+        }).start();
 
     }
 
@@ -622,7 +619,7 @@ public class EmailService {
 
     }
 
-    public String EnviarEmailmasivo(String asunto, String cuerpo, int id_evento) throws MessagingException {
+    public void EnviarEmailmasivo(String asunto, String cuerpo, int id_evento) throws MessagingException {
 
         List<Inscripcion> insc = inscripcionRepository.InscripcionesConfirmadas(id_evento);
 
@@ -924,13 +921,12 @@ public class EmailService {
 
                 System.out.println("Correos Enviados Correctamente\n");
                 System.out.println("Total Correos Enviados: " + contador + "\n");
-                
 
             } catch (Exception e) {
                 System.out.println("SE ROMPIO EL MAILSENDER. DETALLES:" + e.getMessage());
             }
         }).start();
 
-   return ""; }
+    }
 
 }

@@ -35,7 +35,7 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Intege
     public List<Inscripcion> inscripcionesPorAlumno (@Param("email") String email);
     
     @Query ("SELECT i FROM Inscripcion i WHERE i.evento.id= :idEvento "
-            + "AND i.estado= CONFIRMADO")
+            + "AND i.estado= 'CONFIRMADO' ")
     public List<Inscripcion> InscripcionesConfirmadas (@Param("idEvento") Integer idEvento);
             
     

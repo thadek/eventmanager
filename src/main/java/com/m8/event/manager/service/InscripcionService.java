@@ -187,11 +187,11 @@ public class InscripcionService {
 
             subject = "Tu incripción fue confirmada";
             text = "Hola " + alumno.getNombre() + "! \n Tu inscripción en el evento "
-                    + evento.getNombre() + " fue confirmada. Te esperamos día " 
+                    + evento.getNombre() + " fue confirmada. Te esperamos el día " 
                     + evento.getFechaInicio() + " a las " + evento.getHora() + ". "
             + "¡NO FALTES!";
 
-            chequearListaDeEspera(idEvento, modalidad);
+            
 
         }
 

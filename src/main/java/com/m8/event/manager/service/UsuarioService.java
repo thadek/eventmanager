@@ -42,7 +42,9 @@ public class UsuarioService implements UserDetailsService {
     public Usuario crearUsuario(String username, String password, String password2,
             Integer idRol) throws ErrorServicio {
 
-        validarDatos(username, password, password2);
+        boolean crear = true;
+
+        validarDatos(crear, username, password, password2);
 
         Usuario usuario = new Usuario();
 
@@ -66,10 +68,12 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Transactional
-    public void modificarUsuario(String username, String password, String password2, 
+    public void modificarUsuario(String username, String password, String password2,
             Integer idRol) throws ErrorServicio {
 
-        validarDatos(username, password, password2);
+        boolean crear = false;
+
+        validarDatos(crear, username, password, password2);
 
         Optional<Usuario> respuesta = usuarioRepository.findById(username);
 
@@ -77,7 +81,7 @@ public class UsuarioService implements UserDetailsService {
             Usuario usuario = respuesta.get();
 
             usuario.setUsername(username);
-            System.out.println( password);
+            System.out.println(password);
             usuario.setPassword(encoder.encode(password));
 
             if (idRol == null) {
@@ -100,11 +104,20 @@ public class UsuarioService implements UserDetailsService {
 
     }
 
-
-    private void validarDatos(String username, String password, String password2) throws ErrorServicio {
+    private void validarDatos(boolean crear, String username, String password, String password2) throws ErrorServicio {
 
         if (username == null || username.isEmpty()) {
             throw new ErrorServicio("Debe ingresar su username");
+        }
+
+        if (crear) {
+
+            Optional<Usuario> respuesta = usuarioRepository.findById(username);
+
+            if (respuesta.isPresent()) {
+
+                throw new ErrorServicio("Ya existe una cuenta con ese nombre de usuario. Por favor elija uno distinto");
+            }
         }
 
         if (password == null || password.isEmpty() || password.length() < 6) {

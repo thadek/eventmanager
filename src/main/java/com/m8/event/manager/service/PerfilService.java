@@ -31,7 +31,10 @@ public class PerfilService {
 
         Usuario usuario = usuarioRepository.findByUsername(username);
 
-        validar(email, nombre, apellido, tel);
+        boolean crear = true;
+        boolean modificaEmail = false;
+
+        validar(crear, modificaEmail, email, nombre, apellido, tel);
 
         Perfil perfil = new Perfil();
 
@@ -60,25 +63,41 @@ public class PerfilService {
             String apellido, String tel, LocalDate fechaNac, String descripcion)
             throws ErrorServicio {
 
-        validar(email, nombre, apellido, tel);
+        boolean crear = false;
+
+        boolean modificaEmail;
 
         Optional<Perfil> respuesta = perfilRepository.findById(id);
-        if (respuesta.isPresent()) {
+        if (!respuesta.isPresent()) {
 
-            Perfil perfil = respuesta.get();
-
-            perfil.setEmail(email);
-            perfil.setNombre(nombre);
-            perfil.setApellido(apellido);
-            perfil.setTel(tel);
-            perfil.setFechaNac(fechaNac);
-            perfil.setDescripcion(descripcion);
-            perfil.setFotoURL(fotoURL);
-
-            perfilRepository.save(perfil);
-        } else {
             throw new ErrorServicio("No existe un perfil con el Id solicitado");
+
         }
+
+        Perfil perfil = respuesta.get();
+
+        if (perfil.getEmail().equals(email)) {
+
+            modificaEmail = false;
+
+        } else {
+
+            modificaEmail = true;
+
+        }
+
+        validar(crear, modificaEmail, email, nombre, apellido, tel);
+
+        perfil.setEmail(email);
+        perfil.setNombre(nombre);
+        perfil.setApellido(apellido);
+        perfil.setTel(tel);
+        perfil.setFechaNac(fechaNac);
+        perfil.setDescripcion(descripcion);
+        perfil.setFotoURL(fotoURL);
+
+        perfilRepository.save(perfil);
+
     }
 
     public List<Perfil> verTodosLosPerfiles() {
@@ -101,19 +120,22 @@ public class PerfilService {
         return perfilRepository.verUsuariosPorRol("ADMIN");
     }
 
-    public void validar(String email, String nombre, String apellido, String tel)
+    public void validar(boolean crear, boolean modificaEmail, String email, String nombre, String apellido, String tel)
             throws ErrorServicio {
 
         if (email == null || email.isEmpty()) {
             throw new ErrorServicio("El email no puede ser nulo");
         }
 
-        
-//        Optional <Perfil> respuesta = perfilRepository.findById(perfilRepository.buscarPorEmail(email).getIdPerfil());
-//        if (respuesta.isPresent()){
-//            throw new ErrorServicio("Ya existe un perfil con ese email."
-//                    + "Por favor ingrese otra dirección de correo");
-//        }
+        if (crear || modificaEmail) {
+
+            Optional<Perfil> respuesta = perfilRepository.findById(perfilRepository.findByEmail(email).getIdPerfil());
+            if (respuesta.isPresent()) {
+                throw new ErrorServicio("Ya existe un perfil con ese email."
+                        + "Por favor ingrese otra dirección de correo");
+            }
+
+        }
 
         if (nombre == null || nombre.isEmpty()) {
             throw new ErrorServicio("El nombre no puede ser nulo");
