@@ -20,15 +20,18 @@
 
 
   <main>
-    <div class="container-flex eventoUnico">
-      <div class="row p-1 cartelevento"></div>
-      <div class="row">
+    <div class="container-flex p-1 ms-3 me-3 evContainer">
+      <div class="row p-2">
 
 
         <div class="col-lg-12">
-          <div class="row">
+          <div class="row lineaTitulo">
+
+            <div class="col-lg-12 cartelevento">
+              <h3>Detalle Evento</h3>
 
 
+            </div>
             <div class="col-lg-12 container-lista-eventos">
               <ul id="detalleEvento">
                 <li class="loader-anim">
@@ -85,7 +88,10 @@
 
 
                   </div>
-                  <div class="row lineaDescriptivaEv">
+
+                </li>
+                <div class="container-flex bodyEvent" style="display:none;">
+                  <div class="row bg-light p-2 lineaDescriptivaEv">
                     <div class="col-xl-2">
 
                       <label>
@@ -125,29 +131,28 @@
                       <h3 id="precio">$1500</h3>
                     </div>
 
-                    <div class="col-xl-1"><button class="btn btn-suscribir" style="display:none" id="btnBaja">Baja</button></div>
+                    <div class="col-xl-1"></div>
                     <div class="col-xl-2>" style="display:none" id="colBtnHidden"></div>
                     <div class="col-xl-3" id="colBtnSub">
-                      <span tabindex="0" data-bs-toggle="tooltip" id="mensajitobtn">
-                      <button class="btn btn-suscribir" id="btnsuscribir">Inscribirse</button>
-                      </span>
+                      <button class="btn btn-success btn-suscribir" id="btnsuscribir">Inscribirse</button>
                     </div>
 
                   </div>
 
-                </li>
-
                   <div class="row descripcionCompletaEv">
 
                     <div class="col-xl-12">
-                      <p id="descripcionEvento">Cargando Recursos</p>
+                      <p id="descripcionEvento">Hatha es un término paraguas para todas las formas físicas del yoga. Este estilo de yoga es un
+                        estilo clásico de posturas y técnicas de respiración. Su objetivo es crear un equilibrio entre
+                        las energías masculinas y femeninas que existen dentro de nosotros mismos. Además, también se
+                        utilizan las posturas de yoga para lograr el equilibrio entre la fuerza y la flexibilidad.</p>
 
                     
                     </div>
                   </div>
 
 
-
+                </div>
 
 
               </ul>

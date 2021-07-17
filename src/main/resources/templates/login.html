@@ -21,7 +21,7 @@
 
 <div class="cuadrito">
      <div class="button-container">
-        <button class="button" id="botonlogin" onclick="materialClick(event)">
+        <button class="button" onclick="materialClick(event)">
             <div class="circle animate"></div><span class="sign-in">Iniciar Sesión</span>
             <div class="loader"></div>
         </button>
@@ -51,7 +51,7 @@
                         <path d="M37.073 994.83s-1.39-18.398 12.97-18.398c14.36 0 12.207 18.397 12.207 18.397" />
                     </g>
                 </svg>
-                <input class="input" type="password" name="password" id="contra" placeholder="Contraseña">
+                <input class="input" type="password" name="password" placeholder="Contraseña">
                 <a class="subtitulo" th:href="@{/register}">
                     <p>¿Sin cuenta? Registrate</p>
                 </a>
@@ -101,17 +101,6 @@ var signIn;
 var loader;
 var x;
 var y;
-
-
-    var input = document.getElementById("contra");
-    input.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            document.getElementById("botonlogin").click();
-        }
-    });
-
-
 
 function materialClick(event) {
   bg = document.querySelector('.bg');

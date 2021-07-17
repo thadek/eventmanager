@@ -29,12 +29,6 @@
 
 html, body {
     height: 100%;
-    overflow-x: hidden;
-
-}
-
-body::-webkit-scrollbar{
-    display:none;
 }
 
 body{
@@ -74,18 +68,6 @@ table thead{
     background-color: #00ceb745;
     color:white;
 }
-
-
-.cartelevento{
-    /*border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;*/
-    text-align:left;
-    /* border-radius:20px;*/
-    background:linear-gradient(235deg,rgb(255 0 167 / 29%),rgb(47 47 140));
-    /* background:url(/assets/images/wallpaper1.jpg);
-     background-blend-mode:overlay;*/
-}
-
 
 
 /*@tana*/
@@ -137,31 +119,12 @@ table thead{
 
 
 /*Botón mostrar/ocultar -> arreglo posición*/
-.btn-evn-primary {
+.btn-outline-primary {
     display: block;
     height: auto;
-    width:100%;
  /*   margin-top: 7rem;*/
     color: white;
-    border-color: #808080;
-}
-
-.btn-evn-primary:hover{
-
-    color:white;
-    border-color:white;
-    background-color:rgba(141, 141, 141, 0.24);
-    box-shadow: 0 0 0 .25rem rgba(78, 78, 78, 0.05);
-    border-color:transparent;
-
-}
-.btn-evn-primary:focus+.btn-evn-primary:active{
-  box-shadow: 0 0 0 .25rem rgba(145, 152, 172, 0.5);
-}
-
-.btn-evn-primary:active{
-    background-color:rgba(141, 141, 141, 0.24);
-    border-color: #808080;
+    border-color: white;
 }
 
 .card-header{
@@ -318,9 +281,9 @@ table thead{
 
 #logon2 h4{
     /* padding: 1vh; */
-    left: 19%;
+    left: 22%;
     position: absolute;
-    top: 8%;
+    top: 16%;
     font-size: 20px;
 }
 .formulariologin{
@@ -340,14 +303,6 @@ table thead{
     border-bottom-right-radius: 20px;
 }
 
-/*hover para los <a> de la navbar*/
-#navbarNavAltMarkup > div.navbar-nav.me-auto > li > a:hover,
-#navbarNavAltMarkup > div.navbar-nav.me-auto > a:hover {
-    color:#FA6742!important;
-}
-
-
-
 #navbarSecundario{
     background:transparent!important;
 }
@@ -366,7 +321,7 @@ table thead{
 #desplegableuser .card-img-top,#logon2 .card-img-top {
     height: 70px;
     position: relative;
-    width: 187px;
+    width: 158px;
     background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     /* background: url("https://i.imgur.com/QDasT72.jpg"); */
     border-radius: 20px 20px 0 0;
@@ -410,7 +365,7 @@ table thead{
 #navbar-1{
     display: inline-block;
     width: -webkit-fill-available;
-   /* border-radius:20px;*/
+    border-radius:20px;
     border: 1px solid rgba(148, 124, 151, 0.15);
     font-size:large;
    /* max-width:500px;*/
@@ -540,15 +495,14 @@ footer {
     position: fixed;
     width: -webkit-fill-available;
     bottom: 0;
-    /*padding: 0.5em;
-    border-radius:20px;*/
+    padding: 0.5em;
+    border-radius:20px;
 }
 
 .copyright {
   padding: 28px 0;
   margin-top: 10px;
- /* border-radius:20px;*/
- :white;
+  border-radius:20px;color:white;
   background-color:#2e2e2e!important; /* #f8f9fa!important;*/
 }
 

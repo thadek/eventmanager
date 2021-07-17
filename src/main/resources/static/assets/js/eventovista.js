@@ -68,9 +68,9 @@ async function  renderizarListaPublica(arrayEventos) {
 
             for(let j=0; j<arrayEventos[i].dias.length;j++){
                 if(j === (arrayEventos[i].dias.length-1)){
-                    dias+= `${capitalizeFirstLetter(arrayEventos[i].dias[j].toLowerCase())}. `
+                    dias+= `${arrayEventos[i].dias[j]}. `
                 }else{
-                    dias+= `${capitalizeFirstLetter(arrayEventos[i].dias[j].toLowerCase())}, `
+                    dias+= `${arrayEventos[i].dias[j]}, `
                 }
             }
 
@@ -84,9 +84,9 @@ async function  renderizarListaPublica(arrayEventos) {
        </div>
        <div class="col-lg-10 col-md-8">
          <h3 class="eventName">${arrayEventos[i].nombre}</h3>
-         <p class="eventModalidad">${capitalizeFirstLetter(arrayEventos[i].modalidad.toLowerCase())}</p>
+         <p class="eventModalidad">${arrayEventos[i].modalidad}</p>
          <p class="eventProfessor">${arrayEventos[i].facilitador.nombre} ${arrayEventos[i].facilitador.apellido}</p>
-         <h6 class="eventOverview">${dias} - ${formatearHora(arrayEventos[i].hora)}</h6>
+         <h6 class="eventOverview">${dias} - ${arrayEventos[i].hora}</h6>
        </div>
 
      </div>
@@ -156,14 +156,13 @@ async function renderizarListaPrivada(arrayEventos) {
 
             for(let j=0; j<arrayEventos[i].dias.length;j++){
                 if(j === (arrayEventos[i].dias.length-1)){
-
-                    dias+= `${capitalizeFirstLetter(arrayEventos[i].dias[j].toLowerCase())}. `
+                    dias+= `${arrayEventos[i].dias[j]}. `
                 }else{
-                    dias+= `${capitalizeFirstLetter(arrayEventos[i].dias[j].toLowerCase())}, `
+                    dias+= `${arrayEventos[i].dias[j]}, `
                 }
             }
 
-            //console.log("LOG LISTA PRIVADA",porcentajeOcup)
+            console.log("LOG LISTA PRIVADA",porcentajeOcup)
             dibujarCirculito(i)
 
 
@@ -175,9 +174,9 @@ async function renderizarListaPrivada(arrayEventos) {
            </div>
            <div class="col-lg-10 col-md-8">
              <h3 class="eventName">${arrayEventos[i].nombre}</h3>
-             <p class="eventModalidad">${capitalizeFirstLetter(arrayEventos[i].modalidad.toLowerCase())}</p>
+             <p class="eventModalidad">${arrayEventos[i].modalidad}</p>
              <p class="eventProfessor">${arrayEventos[i].facilitador.nombre} ${arrayEventos[i].facilitador.apellido}</p>
-             <h6 class="eventOverview">${dias} - ${formatearHora(arrayEventos[i].hora)}</h6>
+             <h6 class="eventOverview">${dias} - ${arrayEventos[i].hora}</h6>
            </div>
     
          </div>
@@ -203,20 +202,6 @@ async function renderizarListaPrivada(arrayEventos) {
 
 }
 
-function formatearHora(hora){
-   const fecha = `1990/05/05 ${hora}`
-   const f = new Date(fecha);
-   const nuevaHora = `${f.getHours()}:${f.getMinutes()}`;
-   return nuevaHora
-}
-
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-    console.log(string)
-}
-
-
 
 async function renderizarEvento(){
     //Cargar Evento Individual
@@ -224,13 +209,13 @@ async function renderizarEvento(){
     const evento = await fetch(`http://localhost:8080/api/eventos/ver/${idEventoUnico}`).then(res=>res.json());
 
 
-    document.getElementById("modalidadEvento").innerHTML = capitalizeFirstLetter(evento.modalidad.toLowerCase());
+    document.getElementById("modalidadEvento").innerHTML = evento.modalidad;
     let dias =  "";
     for(let i=0; i<evento.dias.length;i++){
         if(i === (evento.dias.length-1)){
-            dias+= `${capitalizeFirstLetter(evento.dias[i].toLowerCase())}. `
+            dias+= `${evento.dias[i]}. `
         }else{
-            dias+= `${capitalizeFirstLetter(evento.dias[i].toLowerCase())}, `
+            dias+= `${evento.dias[i]}, `
         }
     }
     document.getElementById("diasEvento").innerHTML =  dias;
@@ -246,9 +231,9 @@ async function renderizarEvento(){
         document.getElementById("ocupacionPresencial").innerHTML = `${ocupacion}%`
         document.getElementById("ocupacionOnline").innerHTML = `${ocupacion}%`
     }
-    document.getElementById("hora").innerHTML=`${formatearHora(evento.hora)}hs`
-    document.getElementById("duracion").innerHTML= `${evento.duracion} mins`;
-    document.getElementById("precio").innerHTML = `$${evento.valor}`
+    document.getElementById("hora").innerHTML=evento.hora;
+    document.getElementById("duracion").innerHTML= evento.duracion;
+    document.getElementById("precio").innerHTML = evento.valor
     document.getElementById("descripcionEvento").innerHTML = evento.descripcion;
     document.getElementById("fotitoProfe").src=evento.facilitador.fotoURL
     document.getElementById("fotitoProfe2").src=evento.facilitador.fotoURL
@@ -261,8 +246,6 @@ setTimeout( function(){
 },200)
 
 }
-
-
 
 
 var listaSubcategorias = {}
@@ -634,9 +617,7 @@ function cargandoToggler(tiempo) {
     setTimeout(async function () {
 
         if(idEventoUnico){
-//Ralentizar carga de evento?
-            renderizarEvento()
-
+            renderizarEvento();
 
         }else{
             $('.loader-anim').hide();
@@ -658,15 +639,15 @@ function cargandoToggler(tiempo) {
 
 
 function dibujarCirculito(valor,clase) {
-   /* if(porcentajeOcup>0){
+    if(porcentajeOcup>0){
         porcentajeOcup = porcentajeOcup/100
-    }*/
+    }
 
     $(`.circuloprogreso-${clase}`)
         .circleProgress({
             value:valor ,
             fill: {
-                gradient: ['#13FCFC95', '#8919C695'] // or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
+                gradient: ['#3aeabb', '#fdd250'] // or color: '#3aeabb', or image: 'http://i.imgur.com/pT0i89v.png'
             },
         });
 

@@ -4,13 +4,12 @@ window.onload = function(){
 }
 
 
+
 const btnInscribir=document.getElementById("btnsuscribir");
 
 btnInscribir.addEventListener('click',function(){
     verificarSesionDesdeBoton()
 })
-
-
 
 
 function subscribeFromRedirect(){
@@ -127,59 +126,20 @@ Swal.fire({
 })
 
 
-}
 
 
 
-
-
-async function dardeBaja(){
-
-    if(usernameLogged){
-        const evento = await fetch(`http://localhost:8080/api/eventos/ver/${idEventoUnico}`).then(res=>res.json());
-        const verInsc= await fetch(`http://localhost:8080/api/eventos/inscripciones/${idEventoUnico}/${usernameLogged}`).then(res=>res.json());
-
-        for(let i=0; i<verInsc.length;i++){
-            if(evento.id===verInsc[i].id){
-                const borrarInscripcion = await fetch(`http://localhost:8080/api/eventos/baja/${idEventoUnico}/${usernameLogged}`,{
-                    method:'delete'
-                }).then(data=>data.json());
-
-                if(error){
-                    Toast.fire({
-                        icon:'error', title: borrarInscripcion.respuesta
-                    })
-                }else{
-                    Toast.fire({
-                        icon:'success', title: borrarInscripcion.respuesta
-                    })
-                }
-
-            }
-
-        }
-
-    }
 
 }
 
-
-var listaModalidades = ['ONLINE','MIXTA','PRESENCIAL'];
 
 async function iniciarSubscripcion(){
-
-    const listaModalidades = ['ONLINE','PRESENCIAL'];
-
     if(usernameLogged){
-
 
     const evento = await fetch(`http://localhost:8080/api/eventos/ver/${idEventoUnico}`).then(res=>res.json());
     if(evento) {
 
         const perfil = await verificarPerfil();
-
-        let modalidad = ""
-
         Swal.fire({
             title: `Suscribirse a ${evento.nombre}`,
             text: "Verificando datos",
@@ -188,28 +148,13 @@ async function iniciarSubscripcion(){
             willOpen: () => {
                 Swal.showLoading()
                 if (perfil) {
-                    setTimeout(async function(){
-
-                        if(evento.modalidad==="MIXTA"){
-                            const {value:modalidadCasoMixto} = await Swal.fire({
-                                input:'select',
-                                title:`Elegir modalidad`,
-                                inputOptions:listaModalidades,
-                                inputPlaceholder:'Elegí la modalidad'
-                            })
-                            modalidad = listaModalidades[modalidadCasoMixto]
-
-                        }else{
-                            modalidad  = evento.modalidad;
-                        }
-
-
-                       await Swal.fire({
+                    setTimeout(function(){
+                    Swal.fire({
                         title:"Confirmar Inscripción",
 
                         html:
                         ` Te vas a inscribir a <br> <h3>${evento.nombre}</h3> dictado por <br>
-                         <h4>${evento.facilitador.nombre} ${evento.facilitador.apellido}</h4> en modalidad <h4>${modalidad}</h4> 
+                         <h4>${evento.facilitador.nombre} ${evento.facilitador.apellido}</h4> en modalidad <h4>${evento.modalidad}</h4> 
                         con tus datos de Perfil: <br> <h5>${perfil.nombre} ${perfil.apellido} - ${perfil.email} - ${perfil.tel}</h5> 
                         ¿Confirmar?`,
                         confirmButtonText:"Confirmar Inscripcion",
@@ -217,7 +162,7 @@ async function iniciarSubscripcion(){
                         showCancelButton:true
                     }).then((result)=>{
                         if(result.isConfirmed){
-                            cargarSuscripcion(perfil,evento,modalidad)
+                            cargarSuscripcion(perfil,evento)
                         }else{
                             togglerBotonLoad()
                         }
@@ -261,34 +206,16 @@ async function iniciarSubscripcion(){
 }
 
 async function verificarSubscripcion(){
+    const columnaBtn = document.getElementById("colBtnSub");
     const columnaBtnHidden = document.getElementById("colBtnHidden");
-    const btnBaja = document.getElementById("btnBaja")
     if(usernameLogged){
        //Verifico Suscripcion
 
        const verInsc= await fetch(`http://localhost:8080/api/eventos/inscripciones/${idEventoUnico}/${usernameLogged}`).then(res=>res.json());
-     //  console.log(verInsc)
-       if(verInsc.respuesta==="ok"){
+       console.log(verInsc)
+       if(verInsc.respuesta){
            btnInscribir.disabled = true;
-           btnInscribir.innerHTML =`${capitalizeFirstLetter(verInsc.estado.toLowerCase())}`;
-
-           if(verInsc.estado==="PENDIENTE"){
-             document.getElementById("mensajitobtn").setAttribute("title","Tu inscripción esta pendiente de confirmacion por un admin. Te avisaremos por mail cuando este confirmada.")
-               let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-               let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                   return new bootstrap.Tooltip(tooltipTriggerEl)
-               })
-               btnBaja.style.display="";
-               btnBaja.addEventListener()
-           }else if(verInsc.estado==="CONFIRMADO"){
-               document.getElementById("mensajitobtn").setAttribute("title","Tu inscripción esta confirmada!")
-               let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-               let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                   return new bootstrap.Tooltip(tooltipTriggerEl)
-               })
-               btnBaja.style.display="";
-           }
-
+           btnInscribir.innerHTML ="Inscripto";
        }
     }
 
