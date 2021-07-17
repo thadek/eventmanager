@@ -88,7 +88,7 @@ public class PerfilService {
     
     public List<Perfil> verListaDeProfesores (){
         
-        return perfilRepository.verListaDeProfesores("PROFESOR");
+        return perfilRepository.verUsuariosPorRol("PROFESOR");
     }
 
     public void validar(String email, String nombre, String apellido, String tel) 
