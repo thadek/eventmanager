@@ -6,7 +6,7 @@ try{
 cargarFotito();
 var usuarioCargado = false;
 
-
+var listenerGuardarActivo = false;
 
 
 const mostrarDatos = (data) => {
@@ -14,7 +14,9 @@ const mostrarDatos = (data) => {
     $('#contenido').show();
     let perfil = data; 
     usuarioCargado=true;
-    listenerGuardar(perfil);
+    //listenerGuardar(perfil);
+    if(!listenerGuardarActivo){
+        listenerGuardar(perfil);}
     //Mostrar datos normal
     document.getElementById('nombrePerfil').innerHTML = perfil.nombre + " " + perfil.apellido;
     document.getElementById('email').innerHTML = perfil.email;
@@ -146,8 +148,9 @@ function listenerGuardar(perfil){
  
 
    const btnGuardar = document.getElementById('btnGuardar');
+   listenerGuardarActivo = true;
    btnGuardar.addEventListener('click',function(){
-       console.log("entro en eventlistener")
+       console.log("entro en eventlistener");
        if (usuarioCargado){
            perfilModificado.nombre = document.getElementById('nombreInput').value;
            perfilModificado.apellido = document.getElementById('apellidoInput').value;
