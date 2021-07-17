@@ -182,12 +182,24 @@ public class InscripcionService {
             chequearListaDeEspera(idEvento, modalidad);
 
         }
+        
+        if (estado.equals(Estado.CONFIRMADO)) {
+
+            subject = "Tu incripción fue confirmada";
+            text = "Hola " + alumno.getNombre() + "! \n Tu inscripción en el evento "
+                    + evento.getNombre() + " fue confirmada. Te esperamos día " 
+                    + evento.getFechaInicio() + " a las " + evento.getHora() + ". "
+            + "¡NO FALTES!";
+
+            chequearListaDeEspera(idEvento, modalidad);
+
+        }
 
         emailService.enviarCorreo(alumno.getEmail(), subject, text);
 
     }
 
-    public void chequearListaDeEspera(Integer idEvento, Modalidad modalidad) throws MessagingException {
+    public void chequearListaDeEspera(Integer idEvento, Modalidad modalidad) throws MessagingException, ErrorServicio {
 
 //        List<Inscripcion> inscripciones = evento.getInscripciones();
 //        inscripciones.sort((Inscripcion i1, Inscripcion i2)

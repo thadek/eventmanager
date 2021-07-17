@@ -44,7 +44,7 @@ public class PerfilService {
         perfil.setDescripcion(descripcion);
 
         perfil.setFotoURL(fotoURL);
-        
+
         String subject = "Creaste tu Perfil en EventManager";
         String text = "Hola " + nombre + ": \n Se ha creado con éxito tu perfil "
                 + "en EventManager.";
@@ -56,8 +56,8 @@ public class PerfilService {
     }
 
     @Transactional
-    public void modificar(Integer id, String fotoURL, String email, String nombre, 
-            String apellido, String tel, LocalDate fechaNac, String descripcion) 
+    public void modificar(Integer id, String fotoURL, String email, String nombre,
+            String apellido, String tel, LocalDate fechaNac, String descripcion)
             throws ErrorServicio {
 
         validar(email, nombre, apellido, tel);
@@ -80,34 +80,52 @@ public class PerfilService {
             throw new ErrorServicio("No existe un perfil con el Id solicitado");
         }
     }
-    
-    public List<Perfil> verTodosLosPerfiles (){
-        
+
+    public List<Perfil> verTodosLosPerfiles() {
+
         return perfilRepository.findAll();
     }
-    
-    public List<Perfil> verListaDeProfesores (){
-        
+
+    public List<Perfil> verListaDeProfesores() {
+
         return perfilRepository.verUsuariosPorRol("PROFESOR");
     }
 
-    public void validar(String email, String nombre, String apellido, String tel) 
-            throws ErrorServicio {       
-        
+    public List<Perfil> verListaDeAlumnos() {
+
+        return perfilRepository.verUsuariosPorRol("ALUMNO");
+    }
+
+    public List<Perfil> verListaDeAdmin() {
+
+        return perfilRepository.verUsuariosPorRol("ADMIN");
+    }
+
+    public void validar(String email, String nombre, String apellido, String tel)
+            throws ErrorServicio {
+
         if (email == null || email.isEmpty()) {
             throw new ErrorServicio("El email no puede ser nulo");
         }
+
         
+//        Optional <Perfil> respuesta = perfilRepository.findById(perfilRepository.buscarPorEmail(email).getIdPerfil());
+//        if (respuesta.isPresent()){
+//            throw new ErrorServicio("Ya existe un perfil con ese email."
+//                    + "Por favor ingrese otra dirección de correo");
+//        }
+
         if (nombre == null || nombre.isEmpty()) {
             throw new ErrorServicio("El nombre no puede ser nulo");
         }
-        
+
         if (apellido == null || apellido.isEmpty()) {
             throw new ErrorServicio("El apellido no puede ser nulo");
         }
-        
+
         if (tel == null || tel.isEmpty()) {
-            throw new ErrorServicio("El teléfono no puede ser nulo");
+            throw new ErrorServicio("EL número de teléfono es obligatorio."
+                    + " Por este medio te avisaremos sobre las novedades de tus clases");
         }
 
     }

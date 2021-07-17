@@ -26,8 +26,11 @@ public interface PerfilRepository extends JpaRepository<Perfil, Integer>{
     
     public List<Perfil> findByFechaNac (Date fechaNac);
     
-    public Perfil findByEmail (String email);   
+//    @Query("SELECT per FROM Perfil per WHERE per.email= :email")
+//    public Perfil buscarPorEmail(@Param("email") String email);   
     
     public Perfil findByUsuario(Usuario usuario);
+    
+    public Perfil findByEmail(String email);
     
     }
