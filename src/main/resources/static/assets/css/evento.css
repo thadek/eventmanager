@@ -13,8 +13,10 @@ footer{
 }
 
 body{
-    background:url(/assets/images/wallpaper1.jpg);
-    background-size: cover;
+    background: url("https://i.imgur.com/Vi29J4P.jpg");
+   /* background:url(/assets/images/wallpaper1.jpg);*/
+    background-size: 300%;
+    background-position: 91% 61%;
 }
 
 #navbar-1{
@@ -22,9 +24,9 @@ body{
 }
 
 .evContainer{
-    background:url(/assets/images/wallpaper1.jpg);
+    background:linear-gradient(184deg, #2e2e2e, rgb(0 0 0 / 20%));
     background-blend-mode:overlay;
-    border-radius:20px;
+    /*border-radius:20px;*/
    /* border:1px solid rgba(148, 124, 151, 0.15);*/
     font-family: Catamaran;
     min-height:800px;
@@ -35,11 +37,11 @@ body{
 }*/
 
 .evContainer .cartelevento{
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    /*border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;*/
     text-align:left;
    /* border-radius:20px;*/
-   background:linear-gradient(rgba(14, 235, 255, 0.3),rgba(116, 116, 235, 0.8));
+   background:linear-gradient(235deg,rgb(255 0 167 / 29%),rgb(47 47 140));
    /* background:url(/assets/images/wallpaper1.jpg);
     background-blend-mode:overlay;*/
 }
@@ -143,6 +145,7 @@ body{
   
 
 .tituloEv h1{
+    z-index:1;
     font-size:50px;
     text-align:left;
     margin-bottom:0;
@@ -156,12 +159,22 @@ body{
 }
 
 .bodyEvent{
-    background:rgba(255, 230, 230, 0.5);
-    min-height:400px;
-    border-radius: 0 0 20px 20px;
-    border-top: solid 4px rgba(144, 183, 255, 0.808);
+  /*  background:rgba(255, 230, 230, 0.5);
+    min-height:400px;*/
+    /*border-radius: 0 0 20px 20px;*/
+
     
     
+}
+
+.predegrade{
+background:linear-gradient(1deg,black,transparent)!important;
+    z-index:0;
+    position:absolute;
+    width:100%;
+    height:26%;
+
+    opacity:0.5;
 }
 
 
@@ -180,9 +193,9 @@ body{
 
 /*Estas lineas son mucho-muy importantes, no tocar*/
 .contenidoEvento{
-    max-height:300px;
+  /*  max-height:300px;*/
     overflow: hidden;
-    
+    border-bottom: solid 9px rgba(74, 88, 208, 0.81);
     transition:6s!important;
     background:url("/assets/images/fondoeventos.jpg")!important;
     background-position: 84% 38%!important;
@@ -190,6 +203,8 @@ body{
     /*background:transparent!important;*/
 }
 
+
+/*
 .contenidoEvento:hover{ 
     overflow: hidden;
     background:url("/assets/images/fondoeventos.jpg")!important;
@@ -198,7 +213,7 @@ body{
     background-size:150%!important;
 /*Estas lineas son mucho-muy importantes, no tocar*/
     
-}
+}*/
 
 
 .descripcionCompletaEv{   
@@ -207,6 +222,7 @@ body{
 }
 
 .descripcionCompletaEv p{
+    padding:2vh;
     font-size:24px;
 }
 
@@ -218,18 +234,28 @@ body{
     height:55px;
     font-size:2em;
     transition:0.5s;
+    color:white;
 }
 
 .btn-suscribir:hover{
     transform: scale(1.02);
+    color:white;
 }
 
 .btn-suscribir:focus{
     transform: scale(0.96);
     background: linear-gradient(185deg, #e59cd8, #415bc3bf);
     border-color:transparent;
-    box-shadow: 0 0 0 .25rem rgba(60, 105, 153, 0.5);
+    box-shadow: 0 0 0 .25rem rgba(157, 100, 203, 0.27);
 }
+
+.lineaDescriptivaEv{
+    text-align: left;
+    background: #0e04047a;
+    padding: 5px;
+}
+
+
 
 @media screen and (max-width: 842px){
 .tituloEv h1{
@@ -248,7 +274,16 @@ body{
 
 .lineaDescriptivaEv{
     text-align: left;
+    background: #0e04047a;
+    padding: 5px;
 }
+
+}
+
+.eventoUnico{
+min-height:1000px;
+    color:white;
+    background:linear-gradient(184deg, #2e2e2e, rgb(0 0 0 / 20%));
 
 }
 
@@ -257,11 +292,13 @@ body{
 
 /* -------------------------------  FIN DETALLES EVENTO ESPECIFICO-------------------------------------------*/
 
+
+
 .evContainer li{
     border-radius:0px;
    /* background:linear-gradient(rgb(35, 192, 145,0.7),rgb(97, 97, 173,0.7));*/
-   
-   background:url(/assets/images/yoga.jpg);
+
+    background: linear-gradient(336deg, rgb(41 78 124 / 0%) 0%, rgb(41 78 122) 100%, rgb(108 203 222 / 79%) 100%);
   
   
    /* @gabi 11-7-2021 2:52 : al final no me gusto el borde margin-bottom: 3px;*/
@@ -278,11 +315,11 @@ body{
 
 
 .evContainer li:hover{
- background:linear-gradient(rgba(126, 244, 255, 0.5),rgba(127, 172, 255, 0.808));
+ background:linear-gradient(15deg, #332e88ab, #69296178);
  vertical-align: top;
   opacity: 1;
     /* -webkit-transform: scale(1.07);*/
-  transform: scale(1.012);
+ /* transform: scale(1.012);*/
    /*background-color:rgba(255, 253, 253, 0.1);
    background:url(/assets/images/yoga.jpg);
    background-size:cover;*/
@@ -348,10 +385,10 @@ line-height: 13px;
     border-bottom-right-radius: 20px;
     text-align:left;
    /* border-radius:20px;*/
-   background:linear-gradient(rgba(14, 235, 255, 0.3),rgba(116, 116, 235, 0.8));
+   background:linear-gradient(235deg,rgb(255 9 170 / 23%),rgb(47 47 140));
    color:white;
    width:96%;
-  
+
 
 }
 
@@ -364,9 +401,12 @@ line-height: 13px;
 }
 
 .asideContent{
-    background:linear-gradient(rgba(66, 164, 255, 0.561),rgba(218, 227, 255,0.2 ));
-    width:92%;
-    text-align:center;
+    background: linear-gradient(333deg, rgb(13 110 253 / 29%), transparent);
+    border-radius: 0 0 20px 0;
+    width: 93%;
+    padding: 4px;
+    text-align: center;
+    box-shadow: 1px 2px 4px 0px rgb(0 0 0 / 20%);
     
 }
 .asideContent h3{
@@ -395,20 +435,21 @@ line-height: 13px;
 }
 
 .btn-tana{
-    background: var(--back-color);
-    border-radius: 15px;
+    background: transparent;
+    border-radius: 17px;
     cursor: pointer;
-    border: 2px var(--primary-color);
-    color: rgba(0,0,0,.55);
+    border: solid 2px rgb(255 255 255);
+    color: rgb(255 255 255);
     margin: 3px;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 .btn-tana:hover{
-    background: rgb(110, 103, 112);
-    
+    background: linear-gradient(45deg, #372f87, #622964);
     cursor: pointer;
     transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
-    border: 2px var(--back-color);
+    /* border: 2px var(--back-color); */
     color: white;
 }
 
@@ -416,13 +457,13 @@ line-height: 13px;
 /*Fin barra del costado izquierdo*/
 
 #listaMisEventos{
-    max-height: 240px;
+    max-height: 440px;
 }
 
 
 .container-lista-eventos ul{   
     max-height: 560px;
-    overflow: scroll;
+  /*  overflow: scroll;*/
     margin-bottom: 0;
     margin-right:0;
     overflow-x: hidden;
@@ -483,11 +524,26 @@ line-height: 13px;
       
     }
     footer{
-        position:relative;
+       /* position:relative;*/
     }
 }
 
 /*Form eventos*/
 .botonDias {
+    margin:0;
+    padding: 1rem;
+    background-color:#7367f0;
+    border-radius: .25em;
+    font-size:1em;
     margin-top: 10rem;
+    color:#fff;
+    border:0;
+}
+.botonDias:hover{
+    background-image: linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1));
+}
+
+.botonDias:focus {
+    box-shadow: 0 0 0 3px rgba(115,103,240,.5);
+
 }

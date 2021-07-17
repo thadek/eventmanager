@@ -5,7 +5,7 @@
 </head>
 
 <body>
-    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light m-3 p-1 sticky-top" id="navbar-1">
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light p-1 sticky-top" id="navbar-1">
 
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
@@ -90,7 +90,7 @@
 
                     <input class="form-control login" type="text" name="username" placeholder="Usuario" required><br>
                     <input class="form-control login" type="password" name="password" placeholder="Password" required><br>
-                    <button class="dropdown-item" type="submit" >Iniciar Sesión</button>
+                    <button class="btn btn-evn-primary" type="submit" >Iniciar Sesión</button>
                   </div>
 
                   <a class="dropdown-item" th:href="@{/register}">Registrarme</a>

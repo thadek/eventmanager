@@ -43,6 +43,13 @@ public class AdminController {
         mav.addObject("title","Gestion de Eventos - EventManager ");
         return mav;
     }
+    @GetMapping("/inscripciones")
+    public ModelAndView verInscripciones(){
+        ModelAndView mav = new ModelAndView("inscripcionesadm");
+        mav.addObject("title","Gestion de Inscripciones - EventManager ");
+        return mav;
+    }
+
 
 
 
@@ -53,7 +60,7 @@ public class AdminController {
     public ModelAndView verCategorias(@PathVariable("username") String username){
         Usuario usuario = new Usuario();
         usuario.setUsername(username);
-        ModelAndView mav = new ModelAndView("perfiladm");
+        ModelAndView mav = new ModelAndView("perfil-adm");
         mav.addObject("title","Gestion de Perfil - EventManager ");
         mav.addObject("usuario",pr.findByUsuario(usuario));
         return mav;
