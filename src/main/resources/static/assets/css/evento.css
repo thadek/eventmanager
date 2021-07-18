@@ -199,7 +199,7 @@ background:linear-gradient(1deg,black,transparent)!important;
     transition:6s!important;
     background:url("/assets/images/fondoeventos.jpg")!important;
     background-position: 84% 38%!important;
-    background-size:100%!important;
+   /* background-size:100%!important;
     /*background:transparent!important;*/
 }
 

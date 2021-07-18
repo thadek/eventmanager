@@ -61,6 +61,7 @@ public class Evento implements Serializable {
     @ManyToOne
     private Perfil facilitador;
 
+   //@Column(columnDefinition="TEXT")
     private String descripcion;
 
 }
