@@ -212,7 +212,13 @@ async function renderizarListaPrivada(arrayEventos) {
 function formatearHora(hora){
    const fecha = `1990/05/05 ${hora}`
    const f = new Date(fecha);
-   const nuevaHora = `${f.getHours()}:${f.getMinutes()}`;
+   //correccion los primeros 10 min de la hora al parsear
+   if(f.getMinutes()<10){
+       minutos="0"+f.getMinutes();
+   }else{
+       minutos=f.getMinutes()
+   }
+   const nuevaHora = `${f.getHours()}:${minutos}`;
    return nuevaHora
 }
 
