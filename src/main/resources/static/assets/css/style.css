@@ -423,10 +423,10 @@ table thead{
     color:#FFFFFF;
 
 }
-.navbar-light .navbar-nav .nav-link{
+.navbar-dark .navbar-nav .nav-link{
     color:#FFFFFF!important;
 }
-.navbar-light .navbar-brand {
+.navbar-dark .navbar-brand {
     color:#FFFFFF!important;
 }
 .navbar{
@@ -554,7 +554,6 @@ footer {
   padding: 28px 0;
   margin-top: 10px;
  /* border-radius:20px;*/
- :white;
   background-color:#2e2e2e!important; /* #f8f9fa!important;*/
 }
 
@@ -579,8 +578,6 @@ div.copyright a.copyFooter {
 div.copyright a.copyFooter:hover {
     color:#FA6742;
 }
-
-
 
 .copyright-menu ul {
   text-align: right;
@@ -622,6 +619,12 @@ div.copyright a.copyFooter:hover {
 /* fin footer */
 
 
+/* LAST-CHILD -> CORRECCIÓN ESPACIO ENTRE CONTENIDO Y FOOTER*/
+div#eventosPorId.container-flex.p-1.m-3{
+    padding-bottom: 100px;
+}
+
+
 /* media query */
 @media screen and (max-width: 1070px){
     
@@ -637,8 +640,6 @@ div.copyright a.copyFooter:hover {
     /* fin footer */
 }
 
-
-
     
 @media screen and (max-width: 892px){
 
@@ -647,7 +648,6 @@ div.copyright a.copyFooter:hover {
         align-items: unset;
         
     }
-
 
      #desplegableuser .card-img-top {
       height:100px;
@@ -659,8 +659,6 @@ div.copyright a.copyFooter:hover {
     }
  
 }
-
-
 
 
 #desplegableuser {
@@ -1196,3 +1194,23 @@ main.gallery .card-content img.rounded-circle {
     }
 }
 
+/* cuac */
+/*Form eventos*/
+.botonDias {
+    margin:0;
+    padding: 1rem;
+    background-color:#7367f0;
+    border-radius: .25em;
+    font-size:1em;
+    margin-top: 10rem;
+    color:#fff;
+    border:0;
+}
+.botonDias:hover{
+    background-image: linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1));
+}
+
+.botonDias:focus {
+    box-shadow: 0 0 0 3px rgba(115,103,240,.5);
+
+}

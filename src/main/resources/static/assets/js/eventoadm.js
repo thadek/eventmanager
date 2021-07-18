@@ -273,10 +273,15 @@ async function crearEvento(){
             '</select>',
         didOpen(){
             $('#diasEvento').selectize({
-                sortField: 'text'})
+                sortField: 'text'});
+                document.getElementById("diasEvento").style.zIndex="1000";
         }
         ,currentProgressStep:5,
         focusConfirm: false,
+            customClass:{
+                confirmButton:'botonDias'
+            },
+            buttonsStyling: false,
         preConfirm: () => {
             return[
                 [...document.getElementById('diasEvento').options].filter(option => option.selected).map(option => option.value)
