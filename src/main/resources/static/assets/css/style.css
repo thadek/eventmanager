@@ -348,6 +348,11 @@ table thead{
 
 
 
+
+
+
+
+
 #navbarSecundario{
     background:transparent!important;
 }
@@ -433,6 +438,32 @@ table thead{
     background:#2e2e2e!important;
 
 }
+.ramiro{
+    background: url("https://i.imgur.com/dV0oZkR.png");
+    z-index: 0;
+    /* text-align: right; */
+    /* width: 101px; */
+    height: 217rem;
+    opacity: 0.4;
+    background-position: 305% -8%;
+    font-size: 41px;
+    /* border-radius: 18px 20px 0px 20px; */
+    /* text-align: center; */
+    /* transform: rotate(162deg); */
+    background-size: 1800px;
+    /* margin-right: 5vh; */
+    /* position: absolute; */
+    /* right: -46vh; */
+    /* top: -123.5vh; */
+    border-radius: 0% 25% 55% 4%;
+    margin-top: -159vh;
+    margin-left: -48vh;
+    /* margin-left: 283vh; */
+    /* transition: 4s; */
+}
+
+
+
 #logo{
     background: url("/assets/images/logo-dark.png");
     z-index: 10;
@@ -690,6 +721,46 @@ div#eventosPorId.container-flex.p-1.m-3{
     src: url(/assets/fonts/catamaran.ttf);
 }
 
+/* Slider */
+.mati{
+    margin-top: 11vh;
+}
+
+
+
+
+
+
+.splide__slide h1{
+
+    position: relative;
+    font-size: 11vh;
+    text-align: right;
+    padding: 1em;
+    color: rgb(255 255 255);
+    z-index: 1;
+}
+.splide__slide h3{
+    color: white;
+    text-align: right;
+    /* margin-top: 5em; */
+    padding-right: 4em;
+    margin-top: -5em;
+    position: relative;
+    z-index: 1;
+}
+
+.splide__slide h2{
+    margin-top: -1vh;
+    font-size: 2vh;
+    color: white;
+    /* position: absolute; */
+    text-align: right;
+    padding-right: 13vh;
+    /* left: 111vh; */
+    position: relative;
+    z-index: 1;
+}
 
 
 

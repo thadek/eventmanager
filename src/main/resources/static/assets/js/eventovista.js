@@ -249,10 +249,10 @@ async function renderizarEvento(){
         document.getElementById("ocupacionPresencial").remove();
     }else if(evento.modalidad=='PRESENCIAL'){
         document.getElementById("ocupacionPresencial").innerHTML = `${ocupacion}%`
-        document.getElementById("ocupacionOnline").remove();
+
     }else{
         document.getElementById("ocupacionPresencial").innerHTML = `${ocupacion}%`
-        document.getElementById("ocupacionOnline").innerHTML = `${ocupacion}%`
+        document.getElementById("ocupacionOnline").remove();
     }
     document.getElementById("hora").innerHTML=`${formatearHora(evento.hora)}hs`
     document.getElementById("duracion").innerHTML= `${evento.duracion} mins`;
@@ -264,6 +264,8 @@ async function renderizarEvento(){
 
 setTimeout( function(){
     $('.loader-anim').hide();
+    $('.descripcionCompletaEv').show();
+    $('.informacionContainer').show();
     $('.bodyEvent').show();
     $('.contenidoEvento').show();
 },200)
@@ -633,6 +635,7 @@ const { value:diasEv} = await swalQueue.fire({
 
 function cargandoToggler(tiempo) {
     $('.loader-anim').show();
+
 
     setTimeout(async function () {
 

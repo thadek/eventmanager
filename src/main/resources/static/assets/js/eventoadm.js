@@ -53,7 +53,7 @@ const mostrarDatos = (data) => {
            
             
             <td>
-                <button class="btn btn-outline-success" onclick=editarEvento(${data[i].id}) >
+                <button class="btn btn-outline-success"  onclick=editarEvento(${data[i].id}) >
                     <i class="bi bi-pencil-square"></i> 
                         Editar
                 </button>
@@ -449,8 +449,10 @@ async function editarEvento(id){
 
     const evento = await fetch(`http://localhost:8080/api/eventos/ver/${id}`).then(res=>res.json());
 
-    selectProfesores=''
-    selectSubcategorias=''
+    let eventoModificado = new Object();
+   let selectProfesores=''
+   let selectSubcategorias=''
+   let selectlistaModalidades =   `<option value="ONLINE">Online</option> <option value="MIXTA">Mixta</option> <option value="PRESENCIAL">Presencial</option>`
     await fetch('http://localhost:8080/api/subcategorias/ver').then(respuesta=> respuesta.json()).then(data=>{
             for(let i=0; i<data.length;i++){
 
@@ -477,44 +479,74 @@ async function editarEvento(id){
     })
 
 
+
     const { value: formValues } = await Swal.fire({
         title: ' Edición del evento ',
         html:
-            `<p>Nombre Evento</p>
-            <input id="nombreEvento" class="form-control" type="text">
-            <p>Dias del Evento</p>
-            
-            
-      
-             <select id="diasEvento" multiple="multiple" type="text">
-            <option value="LUNES">Lunes</option>
-               <option value="MARTES">Martes</option>
+            ` <p>Nombre Evento</p>
+            <input id="nombreEventoEdit" class="form-control" type="text">
+           <br>
+                  <p>Dias del Evento</p>   
+             <select id="diasEventoEdit" class="form-control" multiple="multiple" type="text">
+             <option value="LUNES">Lunes</option>
+              <option value="MARTES">Martes</option>
               <option value="MIERCOLES">Miercoles</option>
               <option value="JUEVES">Jueves</option>
-            <option value="VIERNES">Viernes</option>
+             <option value="VIERNES">Viernes</option>
              <option value="SABADO">Sabado</option>
              <option value="DOMINGO">Domingo</option>
             </select>
-            
-            <select id="profesor">${selectProfesores}</select>
-
-            <input id="fechaInicio" class="form-control"  type="date">
-            <p>Fecha Inicio</p>
-            <input id="fechaFin" class="form-control" type="date"> 
+            <br>
+             <p>Subcategorias</p>
+            <select id="subcategoriasEdit" class="form-control">${selectSubcategorias}</select>
+            <br>
+            <p>Profesor</p>
+            <select id="profesorEdit" class="form-control">${selectProfesores}</select><br>
+            <p>Modalidad</p>
+            <select id="modalidadEdit" class="form-control">${selectlistaModalidades}</select><br>
+             <p>Fecha Inicio</p>
+            <input id="fechaInicioEdit" class="form-control"  type="date"><br>
             <p>Fecha Fin</p>
-                <input id="hora" class="form-control" type="time"> 
+            <input id="fechaFinEdit" class="form-control" type="date"> <br>
             <p>Hora</p>
-            <input id="duracionEvento"  class="form-control"type="number">
+                <input id="horaEdit" class="form-control" type="time"> <br>
+            <p>Cupo Presencial</p>
+                <input id="cupoPresencial" class="form-control" type="number"> 
+            <p>Cupo Online</p>      
+                <input id="cupoOnline" class="form-control" type="number"> 
+                   
             <p>Duracion en minutos</p>
-            <input id="valorNuevoEvento" class="form-control" type="number">
-            <p>Valor</p>                                                   
+            <input id="duracionEventoEdit"  class="form-control"type="number"><br>
+            <p>Valor</p>  
+            <input id="valorEventoEdit" class="form-control" type="number"><br>
+                                                             
             <div class="form-floating">
-              <textarea class="form-control"  id="descripcionNuevoEvento"></textarea>
-              <label for="descripcionNuevoEvento">Descripción</label>
+              <textarea class="form-control"  id="descripcionEventoEdit"></textarea>
+              <label for="descripcionEventoEdit">Descripción</label>
             </div>
 `
 
         ,
+        didOpen(){
+
+            document.getElementById("nombreEventoEdit").value = evento.nombre
+            $("#diasEventoEdit").val(evento.dias);
+            $('#diasEventoEdit').selectize({
+                sortField: 'text'});
+
+            document.getElementById("subcategoriasEdit").value = evento.subcategoria.idSubcategoria
+            document.getElementById("profesorEdit").value = evento.facilitador.email
+            document.getElementById("modalidadEdit").value = evento.modalidad
+            document.getElementById("fechaInicioEdit").value = evento.fechaInicio
+            document.getElementById("fechaFinEdit").value = evento.fechaFin
+            document.getElementById("horaEdit").value = evento.hora
+            document.getElementById('cupoPresencial').value = evento.cupoPresencial
+            document.getElementById('cupoOnline').value = evento.cupoVirtual
+            document.getElementById("duracionEventoEdit").value = evento.duracion
+            document.getElementById("valorEventoEdit").value = evento.valor
+            document.getElementById("descripcionEventoEdit").value = evento.descripcion
+
+        },
         focusConfirm: false,
         customClass:{
             content:'cartelito-sweetAlert',
@@ -523,18 +555,55 @@ async function editarEvento(id){
         },
         preConfirm: () => {
             return [
-
-                document.getElementById('fechaInicio').value,
-                document.getElementById('fechaFin').value,
-                document.getElementById('hora').value,
-                document.getElementById('duracionEvento').value,
-                document.getElementById('valorNuevoEvento').value,
-                document.getElementById('descripcionNuevoEvento').value
-
-
+            document.getElementById("nombreEventoEdit").value,
+            [...document.getElementById('diasEventoEdit').options].filter(option => option.selected).map(option => option.value),
+            document.getElementById("subcategoriasEdit").value,
+            document.getElementById("profesorEdit").value,
+            document.getElementById("modalidadEdit").value,
+            document.getElementById("fechaInicioEdit").value,
+            document.getElementById("fechaFinEdit").value,
+            document.getElementById("horaEdit").value,
+            document.getElementById('cupoPresencial').value,
+            document.getElementById('cupoOnline').value,
+            document.getElementById("duracionEventoEdit").value,
+            document.getElementById("valorEventoEdit").value,
+            document.getElementById("descripcionEventoEdit").value
             ]
         }
     })
+
+if(formValues){
+    eventoModificado.id=evento.id;
+    eventoModificado.nombre=formValues[0];
+    eventoModificado.dias = formValues[1];
+    eventoModificado.subcategoria={idSubcategoria:formValues[2]};
+    eventoModificado.facilitador={email:formValues[3]};
+    eventoModificado.modalidad=formValues[4];
+    eventoModificado.fechaInicio=formValues[5];
+    eventoModificado.fechaFin=formValues[6];
+    eventoModificado.hora=formValues[7];
+    eventoModificado.cupoPresencial=formValues[8];
+    eventoModificado.cupoVirtual=formValues[9];
+    eventoModificado.duracion=formValues[10]
+    eventoModificado.valor=formValues[11];
+    eventoModificado.descripcion=formValues[12];
+
+    eventoModificado = JSON.stringify(eventoModificado);
+await fetch("http://localhost:8080/api/eventos/modificar",{method:'post', headers: {
+        'Content-Type': 'application/json'
+    }, body: eventoModificado}).then(respuesta => respuesta.json()).then(d=>{
+        actualizar();
+    if(!d.error){
+        Toast.fire({
+            icon:'success', title:d.respuesta
+        })
+    }else{
+        Toast.fire({
+            icon:'error', title:d.respuesta
+        })
+}})
+
+}
 
 
 }
@@ -550,10 +619,16 @@ function eliminar(eventId) {
         }, body: bodyReq
     }).then(respuesta => respuesta.json()).then(d => {
         actualizar();
+if(!d.error){
+    Toast.fire({
+        icon:'success', title:d.respuesta
+    })
+}else{
+    Toast.fire({
+        icon:'error', title:d.respuesta
+    })
+}
 
-        Toast.fire({
-            icon:'success', title:d.respuesta
-        })
     }).catch()
 }
 

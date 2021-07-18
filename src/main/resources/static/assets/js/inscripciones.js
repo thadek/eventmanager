@@ -291,11 +291,12 @@ async function iniciarSubscripcion(){
 async function verificarSubscripcion(){
     const columnaBtnHidden = document.getElementById("colBtnHidden");
     const btnBaja = document.getElementById("btnBaja")
+    //Verifico el login
     if(usernameLogged){
-       //Verifico Suscripcion
+
 
        const verInsc= await fetch(`http://localhost:8080/api/eventos/inscripciones/${idEventoUnico}/${usernameLogged}`).then(res=>res.json());
-     //  console.log(verInsc)
+        //Verifico Suscripcion
        if(verInsc.respuesta==="ok"){
            btnInscribir.disabled = true;
            btnInscribir.innerHTML =`${capitalizeFirstLetter(verInsc.estado.toLowerCase())}`;
@@ -314,9 +315,34 @@ async function verificarSubscripcion(){
                    return new bootstrap.Tooltip(tooltipTriggerEl)
                })
                btnBaja.style.display="";
+           }else if(verInsc.estado==="ESPERA"){
+               document.getElementById("mensajitobtn").setAttribute("title","Estas en lista de espera, cuando se desocupe un lugar te avisamos automaticamente!")
+               let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+               let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                   return new bootstrap.Tooltip(tooltipTriggerEl)
+               })
+               btnBaja.style.display="";
            }
 
        }
+
+        //Verifico si es profesor del evento.
+        const eventoVerif= await fetch(`http://localhost:8080/api/eventos/ver/${idEventoUnico}`).then(res=>res.json());
+
+        if(eventoVerif.facilitador.usuario.username === usernameLogged){
+            btnInscribir.disabled = true;
+            btnInscribir.innerHTML =`Profesor`;
+            document.getElementById("mensajitobtn").setAttribute("title","Sos el profesor de este evento.")
+            let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+
+        }
+
     }
+
+
+
 
 }

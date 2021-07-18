@@ -9,16 +9,7 @@
 
 
 
-  <!--Slider-->
-  <div class="splide">
-    <div class="splide__track">
-      <ul class="splide__list">
-        <li class="splide__slide"><img th:src="@{/assets/images/s1.jpg}"></li>
-        <li class="splide__slide"><img th:src="@{/assets/images/s2.jpg}"></li>
-       
-      </ul>
-    </div>
-  </div>
+
   <!-- header -->
   <header> 
     <nav th:replace="static :: navbar"></nav>
@@ -26,7 +17,16 @@
 
   <main>
 
+    <!--Slider-->
+    <div class="splide">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <li class="splide__slide"><img th:src="@{/assets/images/s1.jpg}"> <div class="mati"></div> <h1>Bienvenidos</h1> <h3>¿A que evento vamos hoy?</h3><h2>.evn</h2><div class="ramiro"></div></li>
+          <li class="splide__slide"><img th:src="@{/assets/images/s2.jpg}"></li>
 
+        </ul>
+      </div>
+    </div>
 
 
 
@@ -48,8 +48,11 @@
   document.addEventListener( 'DOMContentLoaded', function () {
 		new Splide( '.splide',{
       'cover'      : true,
-		'height': '100rem',
-    arrows:false,
+		'height': '40rem',
+          'arrows':false,
+
+
+
     } ).mount();
 	} );
 

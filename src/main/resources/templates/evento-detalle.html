@@ -19,7 +19,7 @@
   </header>
 
 
-  <main>
+  <section>
     <div class="container-flex eventoUnico">
       <div class="row p-1 cartelevento"></div>
       <div class="row">
@@ -142,9 +142,109 @@
                     <div class="col-xl-12">
                       <p id="descripcionEvento">Cargando Recursos</p>
 
+
+
                     
                     </div>
                   </div>
+
+              <div class="informacionContainer">
+                <section class="tarjetitasInfo">
+
+
+
+                  <div class="cards">
+                    <div class="card-content">
+                      <h2 class="card-title">¿Consultas?</h2><br>
+                      <h1 class="bi bi-telephone-outbound bordecirculo" >
+                      </h1>
+
+                      <div class="card-body">
+                        <h2>Linea dedicada Eventos</h2>
+                        <h3>261-111-1144</h3>
+                      </div>
+                      <!--        <a href="#" class="button">-->
+                      <!--          Ver Perfil-->
+                      <!--        </a>-->
+                    </div>
+                  </div>
+
+
+                  <div class="cards">
+                    <div class="card-content mpago">
+                      <h2 class="card-title ">Medios de pago</h2><br>
+                      <img class="mercadopago" th:src="@{/assets/images/mercadopago.png}" style="width:10em;" >
+
+                      <h2 class="card-body ">
+                        ¡Hasta 12 cuotas sin interés!
+                      </h2>
+                      <h4>Consultanos y te generamos el link!</h4>
+                    </div>
+                  </div>
+
+                  <div class="cards">
+                    <div class="card-content">
+                      <h2 class="card-title">Sugerencias</h2><br>
+                      <h1 class="bi bi-chat bordecirculo" >
+                      </h1>
+
+                      <div class="card-body">
+
+                        <h2>¿Tenes alguna sugerencia?</h2>
+                        <h4>sugerencias@eventmanager.egg</h4>
+                      </div>
+                    </div>
+
+
+                </section>
+
+                <section class="Faqs">
+                  <div class="row faq">
+
+                    <h1 class="titleFaqs"><div class="bi bi-question-circle " ></div>Preguntas Frecuentes</h1>
+                    <div class="accordion" id="accordionFaq">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h5>Si ya me inscribi, ¿Cuanto tardan en confirmar la inscripción?</h5>
+                          </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionFaq">
+                          <div class="accordion-body">
+                            2-4 dias hábiles.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                           <h5>¿Hay que llevar algo el dia del evento?  </h5>
+                          </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionFaq">
+                          <div class="accordion-body">
+                            Generalmente no, sin embargo, si el profe especifica que hay que llevar algo, se te va a informar con al menos 4 días de anticipación.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <h5>Ya hice el pago, no veo la inscripción actualizada ¿Tengo que hacer algo más?</h5>
+                          </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionFaq">
+                          <div class="accordion-body">
+                            Las inscripciones se revisan manualmente, por lo que la demora varía segun la carga de eventos que haya, si tenes consultas podés consultar al 261-111-1144.
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                </section>
+              </div>
 
 
 

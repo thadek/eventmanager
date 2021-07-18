@@ -120,6 +120,7 @@ public class eventoRestController {
             respuesta.put("respuesta","Evento modificado exitosamente.");
             return respuesta;
         }catch(Exception e){
+            respuesta.put("error","true");
             respuesta.put("respuesta","Ocurrio un error:"+e.getMessage());
             return respuesta;
         }
@@ -134,6 +135,7 @@ public class eventoRestController {
             respuesta.put("respuesta","Evento Eliminado exitosamente. Se envió un correo electrónico al facilitador.");
             return respuesta;
         }catch(Exception e){
+            respuesta.put("error","true");
             respuesta.put("respuesta","Ocurrio un error: "+e.getMessage());
             return respuesta;
         }
