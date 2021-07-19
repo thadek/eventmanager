@@ -30,8 +30,11 @@ public class PerfilService {
             String apellido, String tel, LocalDate fechaNac, String descripcion) throws ErrorServicio, MessagingException {
 
         Usuario usuario = usuarioRepository.findByUsername(username);
+        
+        boolean crear = true;
+        boolean modificaEmail = false;
 
-        validar(email, nombre, apellido, tel);
+        validar(crear, modificaEmail, email, nombre, apellido, tel);
 
         Perfil perfil = new Perfil();
 
@@ -60,25 +63,31 @@ public class PerfilService {
             String apellido, String tel, LocalDate fechaNac, String descripcion) 
             throws ErrorServicio {
 
-        validar(email, nombre, apellido, tel);
+        boolean crear = false;
+
+        boolean modificaEmail;
 
         Optional<Perfil> respuesta = perfilRepository.findById(id);
-        if (respuesta.isPresent()) {
-
-            Perfil perfil = respuesta.get();
-
-            perfil.setEmail(email);
-            perfil.setNombre(nombre);
-            perfil.setApellido(apellido);
-            perfil.setTel(tel);
-            perfil.setFechaNac(fechaNac);
-            perfil.setDescripcion(descripcion);
-            perfil.setFotoURL(fotoURL);
-
-            perfilRepository.save(perfil);
-        } else {
-            throw new ErrorServicio("No existe un perfil con el Id solicitado");
+        if (!respuesta.isPresent()) {
+            throw new ErrorServicio("No existe ese perfil en la base de datos");
         }
+
+        Perfil perfil = respuesta.get();
+
+        modificaEmail = !perfil.getEmail().equals(email);
+
+        validar(crear, modificaEmail, email, nombre, apellido, tel);
+
+        perfil.setEmail(email);
+        perfil.setNombre(nombre);
+        perfil.setApellido(apellido);
+        perfil.setTel(tel);
+        perfil.setFechaNac(fechaNac);
+        perfil.setDescripcion(descripcion);
+        perfil.setFotoURL(fotoURL);
+
+        perfilRepository.save(perfil);
+
     }
     
     public List<Perfil> verTodosLosPerfiles (){
@@ -91,23 +100,32 @@ public class PerfilService {
         return perfilRepository.verListaDeProfesores("PROFESOR");
     }
 
-    public void validar(String email, String nombre, String apellido, String tel) 
-            throws ErrorServicio {       
+    public void validar(boolean crear, boolean modificaEmail, String email, 
+            String nombre, String apellido, String tel) throws ErrorServicio {       
         
         if (email == null || email.isEmpty()) {
-            throw new ErrorServicio("El email no puede ser nulo");
+            throw new ErrorServicio(" El email no puede ser nulo");
+        }
+        
+        if (crear || modificaEmail) {
+
+            Perfil perfil = perfilRepository.findByEmail(email);
+            if (perfil != null) {
+                throw new ErrorServicio(" Ya existe un perfil con ese email. "
+                        + "Por favor ingrese otra dirección de correo.");
+            }
         }
         
         if (nombre == null || nombre.isEmpty()) {
-            throw new ErrorServicio("El nombre no puede ser nulo");
+            throw new ErrorServicio(" El nombre no puede ser nulo");
         }
         
         if (apellido == null || apellido.isEmpty()) {
-            throw new ErrorServicio("El apellido no puede ser nulo");
+            throw new ErrorServicio(" El apellido no puede ser nulo");
         }
         
         if (tel == null || tel.isEmpty()) {
-            throw new ErrorServicio("El teléfono no puede ser nulo");
+            throw new ErrorServicio(" El teléfono no puede ser nulo");
         }
 
     }
