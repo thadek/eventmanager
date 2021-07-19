@@ -119,12 +119,12 @@ body{
     padding: 10px 25px;
     position: absolute;
     left: 0;
-    top: 60%;
+    top: 80%;
   }
   .profile-card-1 .profile {
     border-radius: 50%;
     position: absolute;
-    bottom: 40%;
+    bottom: 25%;
     left: 50%;
     max-width: 100px;
     opacity: 1;
@@ -331,22 +331,30 @@ background:linear-gradient(45deg, #7037e0, #a5626200);
 
 
 @media screen and (max-width: 842px){
+#detalleEvento > li.contenidoEvento > div.card-body > div > div.col-xl-8.col-lg-6.col-sm-4.tituloEv {
+        color: var(--primary-color);
+}
+
 .tituloEv h1{
+    margin-top: 1em;
     text-align:center;
     font-size:5vh;
+
 }
 .tituloEv h4{
     font-size: 3vh;
     text-align: center;
     margin-top: 1vh;
     margin-bottom: 1vh;
+
 }
 .tituloEv h5{
     font-size:1em;
+
 }
 
 .lineaDescriptivaEv{
-    text-align: left;
+    text-align: center;
     background: #0e04047a;
     padding: 5px;
 }
