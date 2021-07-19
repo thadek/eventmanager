@@ -171,6 +171,16 @@ public class InscripcionService {
         inscripcion.setEstado(estado);
 
         inscripcionRepository.save(inscripcion);
+        
+        if (estado.equals(Estado.CONFIRMADO)) {
+
+            subject = "Tu incripción fue confirmada";
+            text = "Hola " + alumno.getNombre() + "! \n Tu inscripción en el evento "
+                    + evento.getNombre() + " fue confirmada. Te esperamos el día " 
+                    + evento.getFechaInicio() + " a las " + evento.getHora() + ". "
+            + "¡Nos encontramos ahí! :)";            
+
+        }
 
         if (estado.equals(Estado.CANCELADO)) {
 

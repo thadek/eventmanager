@@ -42,7 +42,9 @@ public class UsuarioService implements UserDetailsService {
     public Usuario crearUsuario(String username, String password, String password2,
             Integer idRol) throws ErrorServicio {
 
-        validarDatos(username, password, password2);
+        boolean crear = true;
+
+        validarDatos(crear, username, password, password2);
 
         Usuario usuario = new Usuario();
 
@@ -68,8 +70,10 @@ public class UsuarioService implements UserDetailsService {
     @Transactional
     public void modificarUsuario(String username, String password, String password2, 
             Integer idRol) throws ErrorServicio {
+        
+        boolean crear = false;
 
-        validarDatos(username, password, password2);
+        validarDatos(crear, username, password, password2);
 
         Optional<Usuario> respuesta = usuarioRepository.findById(username);
 
@@ -101,11 +105,14 @@ public class UsuarioService implements UserDetailsService {
     }
 
 
-    private void validarDatos(String username, String password, String password2) throws ErrorServicio {
+    private void validarDatos(boolean crear, String username, String password, String password2) throws ErrorServicio {
 
         if (username == null || username.isEmpty()) {
             throw new ErrorServicio("Debe ingresar su username");
         }
+        
+        
+        
 
         if (password == null || password.isEmpty() || password.length() < 6) {
             throw new ErrorServicio("La contraseña no puede ser nula ni tener menos "
