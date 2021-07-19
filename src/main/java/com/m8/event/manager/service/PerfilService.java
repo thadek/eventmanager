@@ -122,10 +122,11 @@ public class PerfilService {
             throw new ErrorServicio(" El nombre no puede ser nulo");
         }
 
-        if (ValidarMail(email) == false) {
+
+     /*  if (ValidarMail(email) == false) {
 
             throw new ErrorServicio(" El email NO es válido. Ingrese un email con el formato usuario@servidor.com");
-        }
+        }*/
 
         
         if (apellido == null || apellido.isEmpty()) {
@@ -149,13 +150,13 @@ public class PerfilService {
 
     }
 
-    public static boolean ValidarMail(String email) {
+  /* public static boolean ValidarMail(String email) {
         // Patron para validar el email
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)(\\.[A-Za-z]{2,})$");
 
         Matcher mather = pattern.matcher(email);
         return mather.find();
-    }
+    }*/
 
 }
 
