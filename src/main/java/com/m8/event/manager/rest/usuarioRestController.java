@@ -87,7 +87,7 @@ public class usuarioRestController {
                 map.put("respuesta","Usuario eliminado correctamente.");
                 return map;
             }catch(Exception e){
-                map.put("respuesta","Error al eliminar");
+                map.put("respuesta","¿El usuario tiene un perfil asociado? Elimine primero el perfil e intente nuevamente.");
                 return map;
             }
         }

@@ -8,6 +8,8 @@ import com.m8.event.manager.repository.UsuarioRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,6 +121,12 @@ public class PerfilService {
         if (nombre == null || nombre.isEmpty()) {
             throw new ErrorServicio(" El nombre no puede ser nulo");
         }
+
+        if (ValidarMail(email) == false) {
+
+            throw new ErrorServicio(" El email NO es válido. Ingrese un email con el formato usuario@servidor.com");
+        }
+
         
         if (apellido == null || apellido.isEmpty()) {
             throw new ErrorServicio(" El apellido no puede ser nulo");
@@ -141,4 +149,13 @@ public class PerfilService {
 
     }
 
+    public static boolean ValidarMail(String email) {
+        // Patron para validar el email
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)(\\.[A-Za-z]{2,})$");
+
+        Matcher mather = pattern.matcher(email);
+        return mather.find();
+    }
+
 }
+
