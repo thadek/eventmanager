@@ -193,12 +193,6 @@ public class inscripcionRestController {
 
             inscripcionesAlumno.forEach(inscripcion -> {
                 if(inscripcion.getEvento().getId() == idevento){
-
-                    try {
-                        is.chequearListaDeEspera(inscripcion.getEvento().getId(),inscripcion.getEvento().getModalidad());
-                    } catch (MessagingException e) {
-                        respuesta.put("error","true");
-                    }
                     ir.delete(inscripcion);
                     respuesta.put("respuesta","Se dio de baja tu inscripción correctamente.");
 

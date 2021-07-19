@@ -247,7 +247,14 @@ async function renderizarEvento(){
             dias+= `${capitalizeFirstLetter(evento.dias[i].toLowerCase())}, `
         }
     }
-    document.getElementById("diasEvento").innerHTML =  dias;
+    let fechasEvento = '';
+    if (!evento.fechaFin){
+        fechasEvento=evento.fechaInicio
+    }else{
+        fechasEvento= `${evento.fechaInicio} - ${evento.fechaFin}`
+    }
+
+    document.getElementById("diasEvento").innerHTML =  fechasEvento;
     document.getElementById("dias").innerHTML = dias;
     let ocupacion = await getPorcentajeOcupacionEvento(evento.id,evento.modalidad)
     if(evento.modalidad=='ONLINE'){
