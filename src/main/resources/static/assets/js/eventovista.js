@@ -1,8 +1,8 @@
 
-var idEventoUnico;
-var usernameLogged;
-var porcentajeOcup;
-var evento;
+let idEventoUnico;
+let usernameLogged;
+let porcentajeOcup;
+let evento;
 $( document ).ready(function() {
    try{
        idEventoUnico = document.getElementById("idEventoUnico").innerHTML
@@ -530,7 +530,7 @@ const { value:diasEv} = await swalQueue.fire({
         }
     })
 
-  console.log(profesores[nuevoEvento.facilitador.email])
+ // console.log(profesores[nuevoEvento.facilitador.email])
 
     if (formValues) {
 
@@ -598,7 +598,7 @@ const { value:diasEv} = await swalQueue.fire({
 
 //MANDAR EVENTO
             let bodyReq = JSON.stringify(nuevoEvento);
-            console.log(bodyReq)
+        //    console.log(bodyReq)
 
             let url = 'http://localhost:8080/api/eventos/crear'
             fetch(url, {
@@ -633,7 +633,7 @@ const { value:diasEv} = await swalQueue.fire({
 
 
 
-    console.log(nuevoEvento)
+   // console.log(nuevoEvento)
 
 
 

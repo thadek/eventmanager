@@ -1,6 +1,6 @@
 window.onload = function(){
     verificarSubscripcion()
-    subscribeFromRedirect()
+
 }
 
 
@@ -17,6 +17,7 @@ function subscribeFromRedirect(){
     const parametrosUrl = new URLSearchParams(window.location.search);
     const suscribirParam = parametrosUrl.get('subscribe')
     if(suscribirParam!=null){
+
         iniciarSubscripcion()
     }
 }
@@ -175,7 +176,7 @@ console.log(borrarInscripcion);
                             confirmButtonText: `Ok`
 
                         }).then((result)=>{
-                            location.reload();
+                            location.replace(`http://localhost:8080/eventos/ver/${idEventoUnico}`);
                         })
                     }
 
@@ -324,6 +325,10 @@ async function verificarSubscripcion(){
                btnBaja.style.display="";
            }
 
+       }else{
+           //Verifico si tiene el parametro para suscribirse
+           subscribeFromRedirect()
+
        }
 
         //Verifico si es profesor del evento.
@@ -340,7 +345,14 @@ async function verificarSubscripcion(){
 
         }
 
+
+
+
+
     }
+
+
+
 
 
 

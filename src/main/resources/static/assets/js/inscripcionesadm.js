@@ -176,8 +176,14 @@ function cerrarNotif(){
 
 function notificacionAdm(datos){
     if(datos.length>0){
-        document.getElementById("mensajenotif").innerHTML=`Hola ${capitalizeFirstLetter(usernameLogged.toLowerCase())}! Hay ${datos.length} inscripciones por confirmar!`
-        $('#notificacionadm').fadeIn();
+        if(datos.length===1){
+            document.getElementById("mensajenotif").innerHTML=`Hola ${capitalizeFirstLetter(usernameLogged.toLowerCase())}! Hay ${datos.length} inscripción por confirmar!`
+            $('#notificacionadm').fadeIn();
+        }else{
+            document.getElementById("mensajenotif").innerHTML=`Hola ${capitalizeFirstLetter(usernameLogged.toLowerCase())}! Hay ${datos.length} inscripciones por confirmar!`
+            $('#notificacionadm').fadeIn();
+        }
+
        // console.log(`hay ${datos.length} inscripciones sin confirmar`)
     }
 

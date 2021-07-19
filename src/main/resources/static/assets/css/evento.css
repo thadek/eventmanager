@@ -119,13 +119,14 @@ body{
     padding: 10px 25px;
     position: absolute;
     left: 0;
-    top: 80%;
+    top: 65%;
   }
   .profile-card-1 .profile {
     border-radius: 50%;
     position: absolute;
-    bottom: 25%;
+    bottom: 40%;
     left: 50%;
+    height: 6em;
     max-width: 100px;
     opacity: 1;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
@@ -143,14 +144,15 @@ body{
     font-size: 15px;
    /* margin-top:10px;*/
   }
-  
 
-.tituloEv h1{
-    z-index:1;
-    font-size:50px;
-    text-align:left;
-    margin-bottom:0;
+
+.tituloEv h1 {
+    z-index: 1;
+    font-size: 50px;
+    text-align: left;
+    margin-bottom: 0;
     line-height: 1;
+    text-shadow: -1px 0px 8px #2e2e2e8c;
 }
 .tituloEv h4{
     padding:0;
@@ -325,7 +327,7 @@ background:linear-gradient(45deg, #7037e0, #a5626200);
 .lineaDescriptivaEv{
     text-align: left;
     background: #0e04047a;
-    padding: 5px;
+    padding: 3px 15px;
 }
 
 
@@ -335,21 +337,30 @@ background:linear-gradient(45deg, #7037e0, #a5626200);
         color: var(--primary-color);
 }
 
+
+
+
 .tituloEv h1{
     margin-top: 1em;
     text-align:center;
     font-size:5vh;
-
+    color:white;
+    text-shadow: -1px 0px 8px #2e2e2e8c;
 }
 .tituloEv h4{
+    color:white;
     font-size: 3vh;
     text-align: center;
     margin-top: 1vh;
     margin-bottom: 1vh;
+    text-shadow: -1px 0px 8px #2e2e2e8c;
 
 }
 .tituloEv h5{
-    font-size:1em;
+    color:white;
+    font-size:2em;
+    text-shadow: -1px 0px 8px #2e2e2e8c;
+
 
 }
 
