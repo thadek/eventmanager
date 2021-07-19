@@ -189,9 +189,6 @@ public class InscripcionService {
 
     public void chequearListaDeEspera(Integer idEvento, Modalidad modalidad) throws MessagingException {
 
-//        List<Inscripcion> inscripciones = evento.getInscripciones();
-//        inscripciones.sort((Inscripcion i1, Inscripcion i2)
-//                -> Integer.compare(i1.getIdInscripcion(), i2.getIdInscripcion()));
         Optional<Inscripcion> respuesta = inscripcionRepository.buscarListaDeEspera(idEvento, modalidad);
 
         if (!respuesta.isPresent()) {
@@ -213,15 +210,6 @@ public class InscripcionService {
 
         emailService.enviarCorreo(inscripcion.getAlumno().getEmail(), subject, text);
 
-//        for (Inscripcion inscrip : inscripciones) {
-//
-//            if (inscrip.getModalidad().equals(modalidad)
-//                    && inscrip.getEstado().equals(Estado.ESPERA)) {
-//                inscrip.setEstado(Estado.PENDIENTE);
-//                inscripcionRepository.save(inscrip);
-//                break;
-//            }
-//        }
     }
 
     public List<Inscripcion> inscripcionesPorAlumno(String email) throws ErrorServicio {

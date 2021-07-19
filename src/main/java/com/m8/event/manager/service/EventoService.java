@@ -272,7 +272,7 @@ public class EventoService {
 
     @Transactional
     public Integer porcentajeCapacidadMixto(Integer idEvento) throws ErrorServicio {
-        
+
         int inscripcionesPresenciales;
         int inscripcionesOnline;
         int inscripcionesTotales;
@@ -290,16 +290,16 @@ public class EventoService {
         inscripcionesPresenciales = inscripcionRepository.cantidadInscripciones(idEvento, Modalidad.PRESENCIAL, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
         inscripcionesOnline = inscripcionRepository.cantidadInscripciones(idEvento, Modalidad.ONLINE, Arrays.asList(Estado.PENDIENTE, Estado.CONFIRMADO));
         inscripcionesTotales = inscripcionesPresenciales + inscripcionesOnline;
-      //  System.out.println("Inscripciones Online =" + inscripcionesOnline + "presenciales "+ cantidadInscripciones);
-        
+        //  System.out.println("Inscripciones Online =" + inscripcionesOnline + "presenciales "+ cantidadInscripciones);
+
         cupoTotal = evento.getCupoPresencial() + evento.getCupoVirtual();
-        
+
         double inscripTotales = inscripcionesTotales;
         double cupTotal = cupoTotal;
 
-        porcentajeCupo = (inscripTotales/cupTotal)*100;
-        
-        return (int) Math.round(porcentajeCupo);        
+        porcentajeCupo = (inscripTotales / cupTotal) * 100;
+
+        return (int) Math.round(porcentajeCupo);
 
     }
 
@@ -328,9 +328,6 @@ public class EventoService {
 
         return indicadorCupo;
     }
-
-
-
 
     @Transactional
     public void eliminarEventoPorId(Integer id) throws ErrorServicio, MessagingException {
@@ -386,9 +383,11 @@ public class EventoService {
                 throw new ErrorServicio("La fecha de inicio del evento no puede ser "
                         + "anterior a la fecha actual.");
             }
-            if (fechaFin.isBefore(LocalDate.now())) {
-                throw new ErrorServicio("La fecha de finalización del evento no puede ser "
-                        + "anterior a la fecha actual.");
+            if (fechaFin != null) {
+                if (fechaFin.isBefore(LocalDate.now())) {
+                    throw new ErrorServicio("La fecha de finalización del evento no puede ser "
+                            + "anterior a la fecha actual.");
+                }
             }
         }
         if (fechaFin != null) {
