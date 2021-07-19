@@ -656,6 +656,8 @@ div#eventosPorId.container-flex.p-1.m-3{
 }
 
 
+
+
 /* media query */
 @media screen and (max-width: 1070px){
     
@@ -669,7 +671,16 @@ div#eventosPorId.container-flex.p-1.m-3{
         padding-left: 0;
     }
     /* fin footer */
+
+
+
+
+
 }
+
+
+
+
 
     
 @media screen and (max-width: 892px){
@@ -745,10 +756,20 @@ div#eventosPorId.container-flex.p-1.m-3{
     text-align: right;
     /* margin-top: 5em; */
     padding-right: 4em;
-    margin-top: -5em;
+    margin-top: -4em;
     position: relative;
     z-index: 1;
 }
+
+/*@media screen and (min-width: 1200px) {
+    .splide__slide h3{
+        margin-top: -3em;
+    }
+}*/
+
+
+
+
 
 .splide__slide h2{
     margin-top: -1vh;

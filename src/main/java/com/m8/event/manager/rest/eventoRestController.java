@@ -70,7 +70,7 @@ public class eventoRestController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/crear")
-    public HashMap crearEvento(@RequestBody Evento nuevoEvento){
+    public HashMap crearEvento(@RequestBody Evento nuevoEvento) throws Exception{
         HashMap<String,String> respuesta = new HashMap<>();
         try{
             es.crearEvento(nuevoEvento.getNombre(),nuevoEvento.getSubcategoria().getIdSubcategoria()

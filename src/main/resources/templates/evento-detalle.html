@@ -17,7 +17,12 @@
     <nav th:replace="static :: navbar"></nav>
     <div style="display:none" id="idEventoUnico" th:text="${evento.id}"></div>
   </header>
-
+  <!-- barra de carga -->
+  <div class="progress"
+       id="cargando"
+       style="margin:0; display:none;">
+    <div class="indeterminate"></div>
+  </div>
 
   <section>
     <div class="container-flex eventoUnico">
@@ -69,8 +74,8 @@
                       <div class="col-xl-8 col-lg-6 col-sm-4 tituloEv">
                         <h1 th:text="${evento.nombre}"></h1>
 
-                          <h4 id="modalidadEvento">Modalidad Online</h4>
-                          <h5 id="diasEvento">Lunes, Miercoles y Viernes</h5>
+                          <h4 id="modalidadEvento"></h4>
+                          <h5 id="diasEvento"></h5>
 
 
 
@@ -91,8 +96,8 @@
                       <label>
                         Ocupación:
                       </label>
-                      <h6 id="ocupacionOnline">9/13 Online</h6>
-                      <h6 id="ocupacionPresencial">1/13 Presencial</h6>
+                      <h6 id="ocupacionOnline"></h6>
+                      <h6 id="ocupacionPresencial"></h6>
                     </div>
 
 
@@ -100,20 +105,20 @@
                       <label for="dias">
                         Dias
                       </label>
-                      <h5 id="dias">Lunes, Miercoles y Viernes</h5>
+                      <h5 id="dias"></h5>
                     </div>
 
                     <div class="col-xl-1">
                       <label for="hora">
                         Hora
                       </label>
-                      <h3 id="hora">19hs</h3>
+                      <h3 id="hora"></h3>
                     </div>
                     <div class="col-xl-1">
                       <label for="duracion">
                         Duración
                       </label>
-                      <h3 id="duracion">3hs</h3>
+                      <h3 id="duracion"></h3>
 
                     </div>
 
@@ -122,7 +127,7 @@
                       <label for="precio">
                         Costo
                       </label>
-                      <h3 id="precio">$1500</h3>
+                      <h3 id="precio"></h3>
                     </div>
 
                     <div class="col-xl-1"><button class="btn btn-suscribir" style="display:none" id="btnBaja" onclick="dardeBaja()">Baja</button></div>

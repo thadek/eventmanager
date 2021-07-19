@@ -20,8 +20,8 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Intege
     public int cantidadInscripciones (@Param("idEvento") Integer idEvento,
             @Param("modalidad") Modalidad modalidad, 
             @Param("estados") List<Estado> estados);
-    
-    @Query (value= "SELECT i FROM inscripcion i WHERE i.evento_id= :idEvento "
+
+    @Query (value= "SELECT * FROM Inscripcion i WHERE i.evento_id= :idEvento "
             + "AND i.modalidad= :modalidad AND i.estado = 'ESPERA' "
             + "ORDER BY i.id_inscripcion ASC "
             + "LIMIT 1", nativeQuery = true)

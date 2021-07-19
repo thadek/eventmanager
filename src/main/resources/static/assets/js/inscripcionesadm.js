@@ -250,6 +250,7 @@ async function confirmarEliminacion(id){
 
     const data = await fetch(`http://localhost:8080/api/eventos/inscripciones/buscarporid/${id}`).then(res=>res.json())
 
+
     await Swal.fire({
         title: `¿Eliminar la Inscripción de  ${data.alumno.nombre} ${data.alumno.apellido} a ${data.evento.nombre}?`,
         showCancelButton:true,

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -189,8 +190,15 @@ public class inscripcionRestController {
         HashMap<String,String> respuesta = new HashMap<>();
         try{
             List<Inscripcion> inscripcionesAlumno = ir.inscripcionesPorAlumno(username);
+
             inscripcionesAlumno.forEach(inscripcion -> {
                 if(inscripcion.getEvento().getId() == idevento){
+
+                    try {
+                        is.chequearListaDeEspera(inscripcion.getEvento().getId(),inscripcion.getEvento().getModalidad());
+                    } catch (MessagingException e) {
+                        respuesta.put("error","true");
+                    }
                     ir.delete(inscripcion);
                     respuesta.put("respuesta","Se dio de baja tu inscripción correctamente.");
 
