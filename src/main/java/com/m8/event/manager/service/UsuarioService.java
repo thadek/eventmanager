@@ -111,8 +111,15 @@ public class UsuarioService implements UserDetailsService {
             throw new ErrorServicio("Debe ingresar su username");
         }
         
-        
-        
+        if (crear) {
+
+            Optional<Usuario> respuesta = usuarioRepository.findById(username);
+
+            if (respuesta.isPresent()) {
+
+                throw new ErrorServicio("Ya existe una cuenta con ese nombre de usuario. Por favor elija uno distinto");
+            }
+        }        
 
         if (password == null || password.isEmpty() || password.length() < 6) {
             throw new ErrorServicio("La contraseña no puede ser nula ni tener menos "
