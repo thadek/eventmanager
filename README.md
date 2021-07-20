@@ -32,6 +32,6 @@ Modificar el permiso desde la db una vez creado para obtener rango de admin. Hec
 
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia (MIT)
+Este proyecto está bajo la Licencia (MIT).
 
 
