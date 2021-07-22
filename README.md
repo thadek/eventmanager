@@ -19,6 +19,9 @@ Modificar el permiso desde la db una vez creado para obtener rango de admin. Hec
 * JavaScript para el FrontEnd.
 
 
+## Preview 
+[![Alt text](https://img.youtube.com/vi/QRBPQf7_TgE/0.jpg)](https://www.youtube.com/watch?v=QRBPQf7_TgE)
+
 ## Autores ✒️
 
 *FrontEnd*
